@@ -1,0 +1,32 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-vertical',
+  templateUrl: './vertical.component.html',
+  styleUrls: ['./vertical.component.scss']
+})
+export class VerticalComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+    document.body.classList.add('sidebar-enable');
+    document.body.classList.add('vertical-collpsed');
+    document.body.setAttribute('data-sidebar', 'dark');
+    document.body.removeAttribute('data-layout-size');
+    document.body.removeAttribute('data-keep-enlarged');
+    document.body.removeAttribute('data-topbar');
+  }
+  /**
+   * On mobile toggle button clicked
+   */
+  onToggleMobileMenu() {
+    document.body.classList.toggle('sidebar-enable');
+    document.body.classList.toggle('vertical-collpsed');
+
+    if (window.screen.width <= 768) {
+      document.body.classList.remove('vertical-collpsed');
+    }
+  }
+
+}
