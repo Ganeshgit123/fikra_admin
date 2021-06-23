@@ -6,11 +6,14 @@ import { UiModule } from '../../shared/ui/ui.module';
 import { NgbPaginationModule, NgbTypeaheadModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { TablesRoutingModule } from './tables-routing.module';
-import { AdvancedSortableDirective } from './advancedtable/advanced-sortable.directive';
+import { AdvancedSortableDirective } from './advanced-sortable.directive';
 import { AdvancedtableComponent } from './advancedtable/advancedtable.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { InvestorsComponent } from './investors/investors.component';
+import { CreatorsComponent } from './creators/creators.component';
 
 @NgModule({
-  declarations: [AdvancedtableComponent, AdvancedSortableDirective],
+  declarations: [AdvancedtableComponent, AdvancedSortableDirective, ProjectsComponent, InvestorsComponent, CreatorsComponent],
   imports: [
     CommonModule,
     TablesRoutingModule,

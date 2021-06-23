@@ -3,12 +3,12 @@ import { DecimalPipe } from '@angular/common';
 
 import { Observable } from 'rxjs';
 
-import { Table } from './advanced.model';
+import { Table } from '../advanced.model';
 
-import { tableData } from './data';
+import { tableData } from '../data';
 
-import { AdvancedService } from './advanced.service';
-import { AdvancedSortableDirective, SortEvent } from './advanced-sortable.directive';
+import { AdvancedService } from '../advanced.service';
+import { AdvancedSortableDirective, SortEvent } from '../advanced-sortable.directive';
 
 @Component({
   selector: 'app-advancedtable',

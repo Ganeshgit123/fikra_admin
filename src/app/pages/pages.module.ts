@@ -21,9 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { FormModule } from './form/form.module';
 import { TablesModule } from './tables/tables.module';
-import { ProjectsComponent } from './projects/projects.component';
-import { InvestorsComponent } from './investors/investors.component';
-import { CreatorsComponent } from './creators/creators.component';
+
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -32,7 +30,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-  declarations: [DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     FormsModule,

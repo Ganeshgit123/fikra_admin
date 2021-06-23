@@ -13,6 +13,12 @@ export const MENU: MenuItem[] = [
         link: '/'
     },
     {
+        id: 3,
+        label: 'MENUITEMS.INVESTORS.TEXT',
+        icon: 'ri-dashboard-line',
+        link: '/tables/investors'
+    },
+    {
         id: 49,
         label: 'MENUITEMS.FORMS.TEXT',
         icon: 'ri-eraser-fill',
@@ -35,13 +41,6 @@ export const MENU: MenuItem[] = [
         id: 57,
         label: 'MENUITEMS.TABLES.TEXT',
         icon: 'ri-table-2',
-        subItems: [
-            {
-                id: 59,
-                label: 'MENUITEMS.TABLES.LIST.ADVANCED',
-                link: '/tables/advanced',
-                parentId: 57
-            }
-        ]
+        link: '/tables/advanced'
     }
 ];
