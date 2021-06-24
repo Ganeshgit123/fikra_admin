@@ -69,17 +69,10 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <ngb-highlight [result]="table.salary" [term]="service.searchTerm"></ngb-highlight>
 </td>
 <td>
-<div ngbDropdown placement="bottom-left">
-<i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
-aria-expanded="true"></i>
-<div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-<a class="dropdown-item" href="javascript: void(0);"><i class="mdi mdi-plus"></i>Add</a>
-<a class="dropdown-item" href="javascript: void(0);"><i
-class="mdi mdi-account-edit"></i>Edit</a>
-</div>
-</div>
+    <a class="dropdown-item" href="javascript: void(0);"><i
+    class="mdi mdi-account-edit"></i>Edit</a>
 </td>
-</tr>
+<!-- </tr>
 <tr *ngIf="!hideme[i]" class="sub-table no-bg">
 <td align="center"> </td>
 <td colspan="15" class="p-0">
@@ -102,7 +95,7 @@ class="mdi mdi-account-edit"></i>Edit</a>
 </tbody>
 </table>
 </td>
-</tr>
+</tr> -->
 </tbody>
 </table>
 </div>
