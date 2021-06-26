@@ -11,7 +11,7 @@ import { UiSwitchModule } from 'ngx-ui-switch';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 
-import { UiModule } from '../../shared/ui/ui.module';
+import { UiModule } from '../shared/ui/ui.module';
 import { FormRoutingModule } from './form-routing.module';
 import { ElementsComponent } from './elements/elements.component';
 import { AdvancedformComponent } from './advancedform/advancedform.component';

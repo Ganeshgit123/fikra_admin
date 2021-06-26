@@ -10,13 +10,13 @@ export const MENU: MenuItem[] = [
         id: 2,
         label: 'MENUITEMS.DASHBOARDS.TEXT',
         icon: 'ri-dashboard-line',
-        link: '/'
+        link: '/dashboard'
     },
     {
         id: 3,
         label: 'MENUITEMS.INVESTORS.TEXT',
         icon: 'ri-dashboard-line',
-        link: '/tables/investors'
+        link: '/investors'
     },
     {
         id: 49,

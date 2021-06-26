@@ -1,19 +1,39 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './core/guards/auth.guard';
-
+import { CommonModule, } from '@angular/common';
+import { AuthGuard } from './auth/auth.guard';
+import { RoleGuardService } from './auth/role-guard.service';
+import { BrowserModule  } from '@angular/platform-browser';
 import { LayoutComponent } from './layouts/layout/layout.component';
+
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { InvestorsComponent } from './investors/investors.component';
+import { CreatorsComponent } from './creators/creators.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
-  { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
-  // tslint:disable-next-line: max-line-length
-  { path: '', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule), canActivate: [AuthGuard] },
-
+  {
+      path: '',
+      component: LoginComponent
+    },
+    { path: '', 
+    component: LayoutComponent, 
+    children: [
+      { path: 'dashboard', component: DashboardComponent ,canActivate: [AuthGuard]},
+      {path: 'investors',component: InvestorsComponent, canActivate: [AuthGuard,RoleGuardService]},
+      {path: 'projects',component: ProjectsComponent, canActivate: [AuthGuard,RoleGuardService],},
+      {path: 'creators',component: CreatorsComponent, canActivate: [AuthGuard,RoleGuardService],},
+      { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
+      { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
+    ],
+    canActivate: [AuthGuard]
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
+  imports: [CommonModule, BrowserModule, RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

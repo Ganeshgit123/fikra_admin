@@ -1,0 +1,210 @@
+<div class="container-fluid">
+<app-pagetitle title="Investors" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+
+<div class="row">
+<div class="col-12">
+<div class="card">
+<div class="card-body">
+<div class="row mb-md-2">
+<div class="col-sm-12 col-md-2">
+<div class="dataTables_length" id="tickets-table_length"><label
+class="d-inline-flex align-items-center">Show
+<select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+[(ngModel)]="pageSize"
+class="custom-select custom-select-sm form-control form-control-sm mx-2">
+<option [ngValue]="10">10</option>
+<option [ngValue]="25">25</option>
+<option [ngValue]="50">50</option>
+<option [ngValue]="100">100</option>
+</select> entries</label></div>
+</div>
+<div class="col-sm-12 col-md-6">
+    <div class="form-group row">
+        <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
+        <div class="col-md-4">
+          <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
+        </div>
+        <label for="example-date-input1" class="col-md-2 col-form-label text-center">End Date</label>
+        <div class="col-md-4">
+          <input class="form-control" type="date" value="2019-08-19" id="example-date-input1">
+        </div>
+      </div>
+</div>
+<!-- Search -->
+<div class="col-sm-12 col-md-4">
+<div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+class="d-inline-flex align-items-center">Search:
+<input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+</div>
+<!-- End search -->
+</div>
+<!-- Table -->
+<div class="table-responsive">
+<table id="basic-datatable"
+class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
+<thead>
+<tr>
+<!-- <th></th> -->
+<th sortable="name" (sort)="onSort($event)">Full Name</th>
+<th sortable="address" (sort)="onSort($event)">Address</th>
+<th sortable="country" (sort)="onSort($event)">Country</th>
+<th sortable="city" (sort)="onSort($event)">City</th>
+<th sortable="mobile" (sort)="onSort($event)">Mobile Number</th>
+<th sortable="dob" (sort)="onSort($event)">Date of Birth</th>
+<th sortable="email" (sort)="onSort($event)">Email</th>
+<th sortable="password" (sort)="onSort($event)">Password</th>
+<th sortable="newsletters" (sort)="onSort($event)">Newsletters</th>
+<th sortable="research" (sort)="onSort($event)">Research</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody *ngFor="let table of tables$ | async;let i=index">
+<tr>
+<!-- <td align="center">
+<a class="expand-row" (click)="changeValue(i)">
++
+</a>
+</td> -->
+<td>
+<div *ngIf = "!table.isEdit">
+<ngb-highlight [result]="table.name" [term]="searchTerm"></ngb-highlight>
+</div>
+<div *ngIf = "table.isEdit">
+<input type="text" class="form-control" [(ngModel)]="table.name">
+</div>
+</td>
+<td>
+<div *ngIf = "!table.isEdit">
+<ngb-highlight [result]="table.address" [term]="searchTerm"></ngb-highlight>
+</div>
+<div *ngIf = "table.isEdit">
+<input type="text" class="form-control" [(ngModel)]="table.address">
+</div>
+</td>
+<td>
+<div *ngIf = "!table.isEdit">
+<ngb-highlight [result]="table.country" [term]="searchTerm"></ngb-highlight>
+</div>
+<div *ngIf = "table.isEdit">
+<input type="text" class="form-control" [(ngModel)]="table.country">
+</div>
+</td>
+<td>
+<div *ngIf = "!table.isEdit">
+<ngb-highlight [result]="table.city" [term]="searchTerm"></ngb-highlight>
+</div>
+<div *ngIf = "table.isEdit">
+<input type="text" class="form-control" [(ngModel)]="table.city">
+</div>
+</td>
+<td>
+<div *ngIf = "!table.isEdit">
+<ngb-highlight [result]="table.mobile" [term]="searchTerm"></ngb-highlight>
+</div>
+<div *ngIf = "table.isEdit">
+<input type="text" class="form-control" [(ngModel)]="table.mobile">
+</div>
+</td>
+<td>
+<div *ngIf = "!table.isEdit">
+<ngb-highlight [result]="table.dob" [term]="searchTerm"></ngb-highlight>
+</div>
+<div *ngIf = "table.isEdit">
+<input type="text" class="form-control" [(ngModel)]="table.dob">
+</div>
+</td>
+<td>
+<div *ngIf = "!table.isEdit">
+<ngb-highlight [result]="table.email" [term]="searchTerm"></ngb-highlight>
+</div>
+<div *ngIf = "table.isEdit">
+<input type="text" class="form-control" [(ngModel)]="table.email">
+</div>
+</td>
+<td>
+<div *ngIf = "!table.isEdit">
+<ngb-highlight [result]="table.password" [term]="searchTerm"></ngb-highlight>
+</div>
+<div *ngIf = "table.isEdit">
+<input type="text" class="form-control" [(ngModel)]="table.password">
+</div>
+</td>
+<td>
+<div *ngIf = "!table.isEdit">
+<ngb-highlight [result]="table.newsletters" [term]="searchTerm"></ngb-highlight>
+</div>
+<div *ngIf = "table.isEdit">
+<input type="text" class="form-control" [(ngModel)]="table.newsletters">
+</div>
+</td>
+<td>
+<div *ngIf = "!table.isEdit">
+<ngb-highlight [result]="table.research" [term]="searchTerm"></ngb-highlight>
+</div>
+<div *ngIf = "table.isEdit">
+<input type="text" class="form-control" [(ngModel)]="table.research">
+</div>
+</td>
+<td class="text-center">
+<div *ngIf = "!table.isEdit">
+<a class="editbutton" (click)="getTableData(table)" ><i
+class="fas fa-edit"></i></a>
+</div>
+<div *ngIf = "table.isEdit">
+<a class="editbutton" (click)="getTableData(table)"><i
+class="fa fa-save"></i></a>
+<a class="editbutton" (click)="close(table)"><i
+class="fa fa-times"></i></a>
+</div>
+</td>
+</tr>
+<!-- <tr *ngIf="!hideme[i]" class="sub-table no-bg">
+<td align="center"> </td>
+<td colspan="15" class="p-0">
+<table class="table mb-0 table-striped">
+<thead>
+<tr>
+<th>End date</th>
+<th>Unit</th>
+<th>Sales Account</th>
+<th>Buy Account</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{table.enddate}}</td>
+<td>{{table.unit}}</td>
+<td>{{table.name}}</td>
+<td>{{table.name}}</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr> -->
+</tbody>
+</table>
+</div>
+<!-- End table -->
+<div class="row justify-content-md-between align-items-md-center mt-2">
+<div class="col-sm-12 col-md-5">
+<div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
+{{startIndex}} to
+{{endIndex}} of {{totalRecords}}
+entries
+</div>
+</div>
+<!-- Pagination -->
+<div class="col-sm-12 col-md-5">
+<div class="text-md-right float-md-right pagination-rounded">
+<ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
+</ngb-pagination>
+</div>
+</div>
+<!-- End Pagination -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
