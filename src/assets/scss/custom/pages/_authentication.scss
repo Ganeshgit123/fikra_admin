@@ -2,18 +2,18 @@
 // authentication.scss
 //
 
-.auth-body-bg{
-    background-color: $card-bg;
-}
+// .auth-body-bg{
+//     background-color: $card-bg;
+// }
 
 .authentication-bg{
-    background-image: url("../../../images/authentication-bg.jpg");
+    background-image: url("../../../images/login.svg");
     height: 100vh;
     background-size: cover;
     background-position: center;
-    .bg-overlay{
-        background-color: #292626;
-    }
+    // .bg-overlay{
+    //     background-color: #292626;
+    // }
 
     @media (max-width: 991px) {
             display: none;

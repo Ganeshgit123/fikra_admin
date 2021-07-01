@@ -13,15 +13,17 @@ export class ApiCallService {
   
   accToken = sessionStorage.getItem('access_token');
 
+  updatedby = sessionStorage.getItem('adminId');
+
   constructor(private http: HttpClient, public toastr: ToastrManager) { }
 
   adminLogin(apiData) {
-    console.log("sfe",apiData);
 
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.post(this.baseUrl + 'admin/adminLogin', apiData, {
+   
+    return this.http.post(this.baseUrl + 'admin/adminLogin', apiData, {      
       headers: httpHeaders,
       observe: 'response'
     });
@@ -31,9 +33,7 @@ export class ApiCallService {
     this.accToken = sessionStorage.getItem('access_token');
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.accToken,
-      'role': 'admin',
-      'lang': 'en'
+      'auth': this.accToken,
     });
     return this.http.get(this.baseUrl + params.url, {
       headers: httpHeaders,
@@ -47,9 +47,7 @@ export class ApiCallService {
     this.accToken = sessionStorage.getItem('access_token');
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.accToken,
-      'role': 'admin',
-      'lang': 'en'
+      'auth': this.accToken,
     });
     return this.http.post(this.baseUrl + params.url, params.data , {
       headers: httpHeaders,

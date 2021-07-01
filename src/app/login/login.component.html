@@ -1,22 +1,20 @@
-<div class="home-btn d-none d-sm-block">
+<!-- <div class="home-btn d-none d-sm-block">
   <a routerLink=""><i class="mdi mdi-home-variant h2 text-white"></i></a>
-</div>
+</div> -->
 <div>
-  <div class="container-fluid p-0">
+  <div class="container-fluid p-0" style="background-color: #fff;">
     <div class="row no-gutters">
-      <div class="col-lg-4">
+      <div class="col-lg-2">
+        <img src="../assets/images/left_design.svg" class="img-fluid left_image">
+      </div>
+      <div class="col-lg-5">
         <div class="authentication-page-content p-4 d-flex align-items-center min-vh-100">
           <div class="w-100">
             <div class="row justify-content-center">
               <div class="col-lg-9">
                 <div>
                   <div class="text-center">
-                    <div>
-                      <a routerLink="" class="logo"><h2 class="side_header">Fikra</h2></a>
-                    </div>
-
-                    <h4 class="font-size-18 mt-4">Welcome Back !</h4>
-                    <p class="text-muted">Sign in to continue to Fikra.</p>
+                    <h2 class="font-size-30 mt-4">Login</h2>
                   </div>
 
                   <div class="p-2 mt-5">
@@ -24,16 +22,17 @@
                       <div class="form-group auth-form-group-custom mb-4">
                         <i class="ri-user-2-line auti-custom-input-icon"></i>
                         <label for="email">Email</label>
-                        <input type="email" formControlName="adminName" (keydown)="changeText()" class="form-control" id="email" placeholder="Email" />
-                        <p *ngIf="!loginForm.controls.adminName.valid && submitted" class="text_error">Please enter a valid email or mobile number</p>
+                        <input type="email" formControlName="adminName" (keydown)="changeText()" class="form-control" id="email" placeholder="email@email.com" />
+                        <p *ngIf="!loginForm.controls.adminName.valid && submitted" class="text_error">Please enter a valid email id</p>
                       </div>
 
                       <div class="form-group auth-form-group-custom mb-4">
                         <i class="ri-lock-2-line auti-custom-input-icon"></i>
                         <label for="password">Password</label>
-                        <input type="password" formControlName="password"  (keydown)="changeText()" class="form-control" id="password" />
+                        <input type="password" formControlName="password"  (keydown)="changeText()" class="form-control" placeholder="******" id="password" />
                         <p *ngIf="!loginForm.controls.password.valid && submitted" class="text_error">Please enter a  valid password</p>
                       </div>
+
                       <p class="text-center text_error pv10" *ngIf = "isShow"><span>{{errorMessge}}</span></p>
 
                       <div class="mt-4 text-center">
@@ -49,7 +48,8 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-4">
         <div class="authentication-bg">
           <div class="bg-overlay"></div>
         </div>
