@@ -3,22 +3,24 @@ import { DecimalPipe } from '@angular/common';
 
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
+import { ApiCallService } from '../services/api-call.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AdvancedSortableDirective, SortEvent,SortDirection } from '../tables/advanced-sortable.directive';
 
 interface Table {
-  name: any;
-  address: any;
+  fullName: any;
+  userName: any;
   country: any;
   city: any;
-  mobile: any;
-  dob: any;
-  email: any;
-  password: any;
-  newsletters: any;
-  research: any;
+  street: any;
+  mobileNumber: any;
+  _send_me_newsletter_: any;
+  _userRole_: any;
+  _is_mobile_verified_: any;
+  _is_admin_arroved_: any;
+  _id:any;
 }
-
 interface SearchResult {
   tables: Table[];
   total: number;
@@ -62,12 +64,12 @@ function sort(tables: Table[], column: string, direction: string): Table[] {
 * @param term Search the value
 */
 function matches(tables: Table, term: string, pipe: PipeTransform) {
-  return tables.name.toLowerCase().includes(term)
-      || tables.address.toLowerCase().includes(term)
+  return tables.fullName.toLowerCase().includes(term)
+      || tables.userName.toLowerCase().includes(term)
       || tables.country.toLowerCase().includes(term)
-      || pipe.transform(tables.dob).includes(term)
-      || tables.mobile.toLowerCase().includes(term)
-      || tables.email.toLowerCase().includes(term);
+      || pipe.transform(tables.city).includes(term)
+      || tables.street.toLowerCase().includes(term)
+      || tables.mobileNumber.toLowerCase().includes(term);
 }
 
 @Component({
@@ -80,9 +82,16 @@ function matches(tables: Table, term: string, pipe: PipeTransform) {
 export class InvestorsComponent implements OnInit {
  // bread crum data
  breadCrumbItems: Array<{}>;
-
+ addUserSetting: FormGroup;
  // Table data
- tableData: Table[];
+//  tableData: Table[];
+
+ getuserList: any=[];
+
+ accToken = sessionStorage.getItem('access_token');
+
+  updatedby = sessionStorage.getItem('adminId');
+  role = sessionStorage.getItem('adminRole');
 
  private _loading$ = new BehaviorSubject<boolean>(true);
     // tslint:disable-next-line: variable-name
@@ -107,7 +116,9 @@ export class InvestorsComponent implements OnInit {
       
  @ViewChildren(AdvancedSortableDirective) headers: QueryList<AdvancedSortableDirective>;
 
- constructor(private pipe: DecimalPipe) {
+ constructor(private pipe: DecimalPipe,
+  private apiCall: ApiCallService,
+  private formBuilder: FormBuilder,) {
   //  this.tables$ = service.tables$;
   //  this.total$ = service.total$;
    this._search$.pipe(
@@ -167,27 +178,27 @@ this._search$.next();
 
 
  _fetchData() {
-   
-const tableData = [
-  {
-    name: 'Ganesh kumar',
-    address: '121, Sample street, chennai -600057',
-    country: 'India',
-    city: 'chennai',
-    mobile: '9009090900',
-    dob: '2020/12/06',
-    email: 'sample@gmail.com',
-    password: 'somepassword',
-    newsletters: 'true',
-    research: 'true'
-  }
-];
 
-   this.tableData = tableData;
+  let params = {
+    url: "admin/getUserListWithFilter",
+  }  
+  this.apiCall.userGetService(params).subscribe((result:any)=>{
+    let resu = result.body;
+    if(resu.error == false)
+    {
+         this.getuserList = resu.data;
+   this.getuserList.forEach(element => {
+    element['isEdit'] = false;
+  });
+         console.log("list",this.getuserList)
+    }else{
+      this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+    }
+  },(error)=>{
+     console.error(error);
+     
+  });
 
-   this.tableData.forEach(element => {
-     element['isEdit'] = false;
-   });
 
  }
 
@@ -227,8 +238,7 @@ const tableData = [
   const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
   // 1. sort
-  let tables = sort(this.tableData, sortColumn, sortDirection);
-
+  let tables = sort(this.getuserList, sortColumn, sortDirection);
   // 2. filter
   tables = tables.filter(table => matches(table, searchTerm, this.pipe));
   const total = tables.length;

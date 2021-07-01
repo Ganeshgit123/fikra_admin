@@ -89,8 +89,8 @@ export class LoginComponent implements OnInit {
      res => {
        if(res.body['error'] == false){
          sessionStorage.setItem('access_token', (res.body['token']));
-         sessionStorage.setItem('adminRole', (res.body['role']))
-         sessionStorage.setItem('adminId', (res.body['adminId']))
+         sessionStorage.setItem('adminRole', (res.body['role']));
+         sessionStorage.setItem('adminId', (res.body['adminId']));
          this.router.navigateByUrl('/dashboard');
        } else {
          this.isShow = true;

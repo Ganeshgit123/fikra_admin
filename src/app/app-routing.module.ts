@@ -22,9 +22,9 @@ const routes: Routes = [
     component: LayoutComponent, 
     children: [
       { path: 'dashboard', component: DashboardComponent ,canActivate: [AuthGuard]},
-      {path: 'investors',component: InvestorsComponent, canActivate: [AuthGuard,RoleGuardService]},
-      {path: 'projects',component: ProjectsComponent, canActivate: [AuthGuard,RoleGuardService],},
-      {path: 'creators',component: CreatorsComponent, canActivate: [AuthGuard,RoleGuardService],},
+      {path: 'investors',component: InvestorsComponent, canActivate: [AuthGuard]},
+      {path: 'projects',component: ProjectsComponent, canActivate: [AuthGuard],},
+      {path: 'creators',component: CreatorsComponent, canActivate: [AuthGuard],},
       { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
       { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     ],

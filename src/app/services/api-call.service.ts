@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { BehaviorSubject } from 'rxjs';
@@ -14,6 +14,8 @@ export class ApiCallService {
   accToken = sessionStorage.getItem('access_token');
 
   updatedby = sessionStorage.getItem('adminId');
+  
+  role = sessionStorage.getItem('adminRole');
 
   constructor(private http: HttpClient, public toastr: ToastrManager) { }
 
@@ -31,16 +33,55 @@ export class ApiCallService {
 
   commonGetService(params) {
     this.accToken = sessionStorage.getItem('access_token');
+    this.updatedby = sessionStorage.getItem('adminId');
+    this.role = sessionStorage.getItem('adminRole');
+
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'auth': this.accToken,
     });
-    return this.http.get(this.baseUrl + params.url, {
+    return this.http.get(this.baseUrl + params.url,  {
+      params: new HttpParams()
+      .set('role',this.role )
+      .set('updatedby', this.updatedby)
+      .set('userType', 'admin'),
       headers: httpHeaders,
       observe: 'response'
     });
   }
 
+  userGetService(params) {
+    this.accToken = sessionStorage.getItem('access_token');
+    this.updatedby = sessionStorage.getItem('adminId');
+    this.role = sessionStorage.getItem('adminRole');
+
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'auth': this.accToken,
+    });
+    return this.http.get(this.baseUrl + params.url,  {
+      params: new HttpParams()
+      .set('role',this.role )
+      .set('updatedby', this.updatedby)
+      .set('userType', 'admin')
+      .set('_user_scope_', 'investor'),
+
+      headers: httpHeaders,
+      observe: 'response'
+    });
+  }
+
+  commonPutService(params) {
+    this.accToken = sessionStorage.getItem('access_token');
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'auth': this.accToken,
+    });
+    return this.http.put(this.baseUrl + params.url, params.data , {
+      headers: httpHeaders,
+      observe: 'response'
+    });
+  }
 
 
   commonPostService(params) {
