@@ -6,7 +6,7 @@ import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 import { ApiCallService } from '../services/api-call.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { AdvancedSortableDirective, SortEvent,SortDirection } from '../tables/advanced-sortable.directive';
+import { AdvancedSortableDirective, SortEvent,SortDirection } from '../services/advanced-sortable.directive';
 
 interface Table {
   fullName: any;
@@ -82,9 +82,8 @@ function matches(tables: Table, term: string, pipe: PipeTransform) {
 export class InvestorsComponent implements OnInit {
  // bread crum data
  breadCrumbItems: Array<{}>;
- addUserSetting: FormGroup;
- // Table data
-//  tableData: Table[];
+ updateInvestor: FormGroup;
+ _user_ID_ : any;
 
  getuserList: any=[];
 
@@ -174,6 +173,19 @@ this._search$.next();
    this.breadCrumbItems = [{ label: 'Invesors List', active: true }];
 
    this._fetchData();
+
+   this.updateInvestor = this.formBuilder.group({
+    fullName: ['',  []],
+    userName: ['',  []],
+    country: ['',  []],
+    city: ['',  []],
+    street: ['',  []],
+    mobileNumber: ['',  []],
+    _is_admin_arroved_: ['',  []],
+    _is_mobile_verified_: ['',  []],
+    _send_me_newsletter_: ['',  []],
+    _userRole_: ['',  []],
+  });
  }
 
 
@@ -190,7 +202,7 @@ this._search$.next();
    this.getuserList.forEach(element => {
     element['isEdit'] = false;
   });
-         console.log("list",this.getuserList)
+        //  console.log("list",this.getuserList)
     }else{
       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
     }
@@ -203,12 +215,35 @@ this._search$.next();
  }
 
  getTableData(data){
+   console.log("fef",data)
    data.isEdit = true;
+
+  //  var dob = new Date(data['dob']);
+
+    this._user_ID_ = data['_id'] 
+
+   this.updateInvestor   = this.formBuilder.group({
+    fullName: [data['fullName'],  [ Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
+    userName: [data['userName'],  [ Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
+    country: [data['country'],  [ Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
+    city: [data['city'],  [ Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
+    street: [data['street'],  [ Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
+    mobileNumber: [data['mobileNumber'],  [ Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
+    // dob: [dob, [ Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
+    _send_me_newsletter_: [data['_send_me_newsletter_'],  [ Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
+    _is_admin_arroved_: [data['_is_admin_arroved_'],  [ Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
+    _userRole_: [data['_userRole_'],  [ Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
+  })
  }
 
  close(data){
   data.isEdit = false;
  }
+
+ onSubmit(){
+
+ }
+
 
  /**
   * Sort table data

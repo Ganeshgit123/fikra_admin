@@ -70,8 +70,16 @@
       "TEXT": "Menu"
     },
     "DASHBOARDS": {
-      "TEXT": "Dashboard",
-      "BADGE": "03"
+      "TEXT": "Dashboard"
+    },
+    "CREATORS": {
+      "TEXT": "Creators"
+    },
+    "INVESTORS": {
+      "TEXT": "Investors"
+    },
+    "PROJECTS": {
+      "TEXT": "Projects"
     },
     "LAYOUTS": {
       "TEXT": "Layouts",

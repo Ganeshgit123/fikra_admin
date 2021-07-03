@@ -41,6 +41,8 @@ aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
 </div>
 <!-- Table -->
 <div class="table-responsive">
+  <form [formGroup]="updateInvestor" (ngSubmit)="onSubmit()">
+
 <table id="basic-datatable"
 class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
 <thead>
@@ -70,7 +72,7 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 <ngb-highlight [result]="table.fullName" [term]="searchTerm"></ngb-highlight>
 </div>
 <div *ngIf = "table.isEdit">
-<input type="text" class="form-control" [(ngModel)]="table.fullName">
+<input type="text" class="form-control"  formControlName="fullName"  [(ngModel)]="table.fullName">
 </div>
 </td>
 <td>
@@ -78,7 +80,7 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 <ngb-highlight [result]="table.userName" [term]="searchTerm"></ngb-highlight>
 </div>
 <div *ngIf = "table.isEdit">
-<input type="text" class="form-control" [(ngModel)]="table.userName">
+<input type="text" class="form-control"  formControlName="userName" [(ngModel)]="table.userName">
 </div>
 </td>
 <td>
@@ -86,7 +88,7 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 <ngb-highlight [result]="table.country" [term]="searchTerm"></ngb-highlight>
 </div>
 <div *ngIf = "table.isEdit">
-<input type="text" class="form-control" [(ngModel)]="table.country">
+<input type="text" class="form-control"  formControlName="country" [(ngModel)]="table.country">
 </div>
 </td>
 <td>
@@ -94,7 +96,7 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 <ngb-highlight [result]="table.city" [term]="searchTerm"></ngb-highlight>
 </div>
 <div *ngIf = "table.isEdit">
-<input type="text" class="form-control" [(ngModel)]="table.city">
+<input type="text" class="form-control"  formControlName="city"  [(ngModel)]="table.city">
 </div>
 </td>
 <td>
@@ -102,7 +104,7 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 <ngb-highlight [result]="table.street" [term]="searchTerm"></ngb-highlight>
 </div>
 <div *ngIf = "table.isEdit">
-<input type="text" class="form-control" [(ngModel)]="table.street">
+<input type="text" class="form-control" formControlName="street"  [(ngModel)]="table.street">
 </div>
 </td>
 <td>
@@ -110,7 +112,7 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 <ngb-highlight [result]="table.mobileNumber" [term]="searchTerm"></ngb-highlight>
 </div>
 <div *ngIf = "table.isEdit">
-<input type="text" class="form-control" [(ngModel)]="table.mobileNumber">
+<input type="text" class="form-control" formControlName="mobileNumber" [(ngModel)]="table.mobileNumber">
 </div>
 </td>
 <td>
@@ -118,7 +120,10 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 <ngb-highlight [result]="table._send_me_newsletter_" [term]="searchTerm"></ngb-highlight>
 </div>
 <div *ngIf = "table.isEdit">
-<input type="text" class="form-control" [(ngModel)]="table._send_me_newsletter_">
+<select class="form-control" formControlName="_send_me_newsletter_" [(ngModel)]="table._send_me_newsletter_">
+<option value="true">true</option>
+<option value="false">false</option>
+</select>
 </div>
 </td>
 <td>
@@ -126,16 +131,19 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
   <ngb-highlight [result]="table._is_admin_arroved_" [term]="searchTerm"></ngb-highlight>
   </div>
   <div *ngIf = "table.isEdit">
-  <input type="text" class="form-control" [(ngModel)]="table._is_admin_arroved_">
+    <select class="form-control" formControlName="_is_admin_arroved_" [(ngModel)]="table._is_admin_arroved_">
+      <option value="true">true</option>
+      <option value="false">false</option>
+      </select>
   </div>
   </td>
   <td>
     <div *ngIf = "!table.isEdit">
     <ngb-highlight [result]="table._is_mobile_verified_" [term]="searchTerm"></ngb-highlight>
     </div>
-    <div *ngIf = "table.isEdit">
-    <input type="text" class="form-control" [(ngModel)]="table._is_mobile_verified_">
-    </div>
+    <!-- <div *ngIf = "table.isEdit">
+    <input type="text" class="form-control" formControlName="_is_mobile_verified_" [(ngModel)]="table._is_mobile_verified_">
+    </div> -->
     </td>
 <td class="text-center">
 <div *ngIf = "!table.isEdit">
@@ -150,31 +158,10 @@ class="fa fa-times"></i></a>
 </div>
 </td>
 </tr>
-<!-- <tr *ngIf="!hideme[i]" class="sub-table no-bg">
-<td align="center"> </td>
-<td colspan="15" class="p-0">
-<table class="table mb-0 table-striped">
-<thead>
-<tr>
-<th>End date</th>
-<th>Unit</th>
-<th>Sales Account</th>
-<th>Buy Account</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{{table.enddate}}</td>
-<td>{{table.unit}}</td>
-<td>{{table.name}}</td>
-<td>{{table.name}}</td>
-</tr>
 </tbody>
 </table>
-</td>
-</tr> -->
-</tbody>
-</table>
+</form>
+
 </div>
 <!-- End table -->
 <div class="row justify-content-md-between align-items-md-center mt-2">

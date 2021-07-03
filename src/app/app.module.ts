@@ -35,6 +35,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { InvestorsComponent } from './investors/investors.component';
 import { CreatorsComponent } from './creators/creators.component';
 import { LoginComponent } from './login/login.component';
+import { FieldeditComponent } from './fieldedit/fieldedit.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -49,7 +50,7 @@ export function createTranslateLoader(http: HttpClient): any {
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent
+    DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, FieldeditComponent,
   ],
   imports: [
     BrowserModule,
