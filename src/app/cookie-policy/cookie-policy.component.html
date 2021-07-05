@@ -1,0 +1,29 @@
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <app-pagetitle title="Cookie Policy Editor"  [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    <!-- end page title -->
+  
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div *ngFor = "let item of cookieList">
+              <p class="text-right"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "editCookie(item)">Edit</button></p>
+              <form  [formGroup]="addCookie" (ngSubmit)="onSubmit()">
+              <ckeditor [editor]="Editor" formControlName="cookieContent" (ready)="onReady($event)"></ckeditor>
+              <br>
+              <!-- <div  *ngIf = " isEdit === false ">
+              <p class="text-center"><button type="submit" class="btn btn-primary w-md waves-effect waves-light">Submit</button></p>
+            </div> -->
+              <div  *ngIf = " isEdit === true ">
+              <p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+            </div>
+            </form>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

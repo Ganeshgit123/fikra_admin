@@ -11,7 +11,7 @@
 
 .ck.ck-editor__main>.ck-editor__editable {
   border-color: $gray-300 !important;
-  box-shadow: none !important;
+  box-shadow: none !important;  
 }
 
 .ck.ck-dropdown__panel,
@@ -21,7 +21,17 @@
 }
 
 .ck-editor__editable {
-  min-height: 245px !important;
+  height: 400px !important;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1366px) { 
+ .ck-editor__editable {
+  height: 290px !important;
+  }
+}
+@media only screen and (min-width: 1367px) and (max-width: 1499px) { 
+ .ck-editor__editable {
+  height: 350px !important;
+  }
 }
 
 .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {

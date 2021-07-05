@@ -1,0 +1,30 @@
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <app-pagetitle title="Privacy Policy Editor" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    <!-- end page title -->
+  
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div *ngFor = "let item of privacyList">
+              <p class="text-right"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "editPrivacy(item)">Edit</button></p>
+
+              <form  [formGroup]="addPrivacy" (ngSubmit)="onSubmit()">
+              <ckeditor [editor]="Editor" formControlName="privacyContent" (ready)="onReady($event)"></ckeditor>
+              <br>
+               <!-- <div  *ngIf = " isEdit === false ">
+              <p class="text-center"><button type="submit" class="btn btn-primary w-md waves-effect waves-light">Submit</button></p>
+            </div> -->
+            <div  *ngIf = " isEdit === true ">
+              <p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+            </div>
+            </form>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

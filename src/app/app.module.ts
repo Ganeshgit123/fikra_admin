@@ -15,6 +15,7 @@ import { WidgetModule } from './shared/widget/widget.module';
 
 import { NgbNavModule, NgbDropdownModule, NgbTooltipModule, NgbPaginationModule, NgbTypeaheadModule,
   NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -36,6 +37,12 @@ import { InvestorsComponent } from './investors/investors.component';
 import { CreatorsComponent } from './creators/creators.component';
 import { LoginComponent } from './login/login.component';
 import { FieldeditComponent } from './fieldedit/fieldedit.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
+import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
+import { UserHomePageComponent } from './user-home-page/user-home-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -50,7 +57,7 @@ export function createTranslateLoader(http: HttpClient): any {
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, FieldeditComponent,
+    DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, FieldeditComponent, PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent, UserHomePageComponent, AboutPageComponent, SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +69,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ReactiveFormsModule,
     LayoutsModule,
     UiModule,
+    CKEditorModule,
     Ng2SearchPipeModule,
     NgbNavModule,
     NgbDropdownModule,

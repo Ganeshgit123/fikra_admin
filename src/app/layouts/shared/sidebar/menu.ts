@@ -30,6 +30,49 @@ export const MENU: MenuItem[] = [
         icon: 'mdi mdi-account-cog',
         link: '/creators'
     },
+    {
+        id: 6,
+        label: 'MENUITEMS.CMS.TEXT',
+        icon: 'mdi mdi-file-document-edit',
+        subItems: [
+            {
+                id: 7,
+                label: 'MENUITEMS.HOMEPAGE.TEXT',
+                link: '/home_page',
+                parentId: 6
+            },
+            {
+                id: 8,
+                label: 'MENUITEMS.ABOUTPAGE.TEXT',
+                link: '/about_page',
+                parentId: 6
+            },
+            {
+                id: 9,
+                label: 'MENUITEMS.PRIVACYPOLICY.TEXT',
+                link: '/privacy',
+                parentId: 6
+            },
+            {
+                id: 10,
+                label: 'MENUITEMS.COOKIEPOLICY.TEXT',
+                link: '/cookie_policy',
+                parentId: 6
+            },
+            {
+                id: 11,
+                label: 'MENUITEMS.TERMSOFUSE.TEXT',
+                link: '/terms_of_use',
+                parentId: 6
+            },
+        ]
+    },
+    {
+        id: 12,
+        label: 'MENUITEMS.SETTINGS.TEXT',
+        icon: 'ri-settings-5-line',
+        link: '/settings'
+    },
  
     {
         id: 49,

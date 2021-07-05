@@ -81,6 +81,27 @@
     "PROJECTS": {
       "TEXT": "Projects"
     },
+    "CMS": {
+      "TEXT": "Content Editor"
+    },
+    "PRIVACYPOLICY": {
+      "TEXT": "Privacy Policy"
+    },
+    "COOKIEPOLICY": {
+      "TEXT": "Cookie Policy"
+    },
+    "TERMSOFUSE": {
+      "TEXT": "Terms of Use"
+    },
+    "HOMEPAGE": {
+      "TEXT": "Home page"
+    },
+    "ABOUTPAGE": {
+      "TEXT":"About Page"
+    },
+    "SETTINGS": {
+      "TEXT": "Settings"
+    },
     "LAYOUTS": {
       "TEXT": "Layouts",
       "LIST": {

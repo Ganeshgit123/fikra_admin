@@ -1,5 +1,5 @@
 {
-  "name": "Fikra",
+  "name": "fikra",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -24,6 +24,9 @@
     "@asymmetrik/ngx-leaflet": "^7.0.1",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^19.0.2",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^28.0.0",
+    "@ckeditor/ckeditor5-editor-decoupled": "^28.0.0",
+    "@ckeditor/ckeditor5-watchdog": "^28.0.0",
     "@fullcalendar/angular": "^4.4.5-beta",
     "@fullcalendar/bootstrap": "^4.4.2",
     "@fullcalendar/core": "^4.4.2",

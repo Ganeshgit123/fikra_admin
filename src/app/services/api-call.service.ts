@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpParams,	} from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { BehaviorSubject } from 'rxjs';
@@ -42,9 +42,9 @@ export class ApiCallService {
     });
     return this.http.get(this.baseUrl + params.url,  {
       params: new HttpParams()
-      .set('role',this.role )
-      .set('updatedby', this.updatedby)
-      .set('userType', 'admin'),
+      .set('createdBy', this.updatedby)
+      .set('userType', 'admin')
+      .set('role',this.role ),
       headers: httpHeaders,
       observe: 'response'
     });
@@ -85,12 +85,15 @@ export class ApiCallService {
 
 
   commonPostService(params) {
+    
     this.accToken = sessionStorage.getItem('access_token');
+   
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'auth': this.accToken,
     });
-    return this.http.post(this.baseUrl + params.url, params.data , {
+    
+    return this.http.post(this.baseUrl + params.url, params.data , {      
       headers: httpHeaders,
       observe: 'response'
     });
