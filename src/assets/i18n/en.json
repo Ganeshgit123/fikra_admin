@@ -102,6 +102,9 @@
     "SETTINGS": {
       "TEXT": "Settings"
     },
+    "FORMFIELDEDIT": {
+      "TEXT": "Form Field Edit"
+    },
     "LAYOUTS": {
       "TEXT": "Layouts",
       "LIST": {

@@ -73,6 +73,12 @@ export const MENU: MenuItem[] = [
         icon: 'ri-settings-5-line',
         link: '/settings'
     },
+    {
+        id: 13,
+        label: 'MENUITEMS.FORMFIELDEDIT.TEXT',
+        icon: 'ri-eraser-fill',
+        link: '/form-field-edit'
+    },
  
     {
         id: 49,

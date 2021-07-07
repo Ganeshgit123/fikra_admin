@@ -43,6 +43,7 @@ import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { SettingsComponent } from './settings/settings.component';
+import { DynamicFormComponent } from './fieldedit/dynamic-form/dynamic-form.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -57,7 +58,7 @@ export function createTranslateLoader(http: HttpClient): any {
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, FieldeditComponent, PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent, UserHomePageComponent, AboutPageComponent, SettingsComponent,
+    DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, FieldeditComponent, PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent, UserHomePageComponent, AboutPageComponent, SettingsComponent, DynamicFormComponent,
   ],
   imports: [
     BrowserModule,

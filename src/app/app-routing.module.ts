@@ -16,6 +16,7 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
+import { FieldeditComponent } from './fieldedit/fieldedit.component';
 import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
       {path: 'home_page',component: UserHomePageComponent, canActivate: [AuthGuard],},
       {path: 'about_page',component: AboutPageComponent, canActivate: [AuthGuard],},
       {path: 'settings',component: SettingsComponent, canActivate: [AuthGuard],},
+      {path: 'form-field-edit',component: FieldeditComponent, canActivate: [AuthGuard],},
       { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
       { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     ],

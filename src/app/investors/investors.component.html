@@ -62,11 +62,6 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 </thead>
 <tbody *ngFor="let table of tables$ | async;let i=index">
 <tr>
-<!-- <td align="center">
-<a class="expand-row" (click)="changeValue(i)">
-+
-</a>
-</td> -->
 <td>
 <div *ngIf = "!table.isEdit">
 <ngb-highlight [result]="table.fullName" [term]="searchTerm"></ngb-highlight>
