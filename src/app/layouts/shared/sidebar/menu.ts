@@ -49,18 +49,24 @@ export const MENU: MenuItem[] = [
             },
             {
                 id: 9,
+                label: 'MENUITEMS.STARTPROJECT.TEXT',
+                link: '/start_project_page',
+                parentId: 6
+            },
+            {
+                id: 10,
                 label: 'MENUITEMS.PRIVACYPOLICY.TEXT',
                 link: '/privacy',
                 parentId: 6
             },
             {
-                id: 10,
+                id: 11,
                 label: 'MENUITEMS.COOKIEPOLICY.TEXT',
                 link: '/cookie_policy',
                 parentId: 6
             },
             {
-                id: 11,
+                id: 12,
                 label: 'MENUITEMS.TERMSOFUSE.TEXT',
                 link: '/terms_of_use',
                 parentId: 6
@@ -68,10 +74,17 @@ export const MENU: MenuItem[] = [
         ]
     },
     {
-        id: 12,
+        id: 13,
         label: 'MENUITEMS.SETTINGS.TEXT',
         icon: 'ri-settings-5-line',
-        link: '/settings'
+        subItems: [
+            {
+                id: 14,
+                label: 'MENUITEMS.CATEGORY_SUB_CATEGORY.TEXT',
+                link: '/category_sub_category',
+                parentId: 13
+            },
+        ]
     },
     {
         id: 13,

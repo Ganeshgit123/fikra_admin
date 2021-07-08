@@ -1,16 +1,15 @@
 export interface FormData {
-  controlName: string;
-  controlType: string;
-  valueType?: string;
-  currentValue?: string;
+    fieldId: string;
+    fieldName: string;
+    fieldType: string;
+    fieldInputType: string;
+    defauldValue?: string;
   placeholder?: string;
-  options?: Array<{
-    optionName: string;
+  _is_visible_?: boolean;
+    _is_Mandatory_?: boolean;
+  dropDown?: Array<{
+    displayName: string;
     value: string;
   }>;
-  validators?: {
-    required?: boolean;
-    minlength?: number;
-    maxlength?: number;
-  };
+  
 }

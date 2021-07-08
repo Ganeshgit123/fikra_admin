@@ -105,6 +105,14 @@
     "FORMFIELDEDIT": {
       "TEXT": "Form Field Edit"
     },
+    "CATEGORY_SUB_CATEGORY": {
+      "TEXT": "Category & Subcategory"
+    },
+    "STARTPROJECT": {
+      "TEXT": "Stat a project page"
+    },
+
+    
     "LAYOUTS": {
       "TEXT": "Layouts",
       "LIST": {

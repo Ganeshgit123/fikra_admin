@@ -18,6 +18,8 @@ import { UserHomePageComponent } from './user-home-page/user-home-page.component
 import { AboutPageComponent } from './about-page/about-page.component';
 import { FieldeditComponent } from './fieldedit/fieldedit.component';
 import { SettingsComponent } from './settings/settings.component';
+import { CategorySubCategoryComponent } from './settings/category-sub-category/category-sub-category.component';
+import { StartAProjectComponent } from './start-a-project/start-a-project.component';
 
 const routes: Routes = [
   {
@@ -38,6 +40,8 @@ const routes: Routes = [
       {path: 'about_page',component: AboutPageComponent, canActivate: [AuthGuard],},
       {path: 'settings',component: SettingsComponent, canActivate: [AuthGuard],},
       {path: 'form-field-edit',component: FieldeditComponent, canActivate: [AuthGuard],},
+      {path: 'start_project_page',component: StartAProjectComponent, canActivate: [AuthGuard],},
+      {path: 'category_sub_category',component: CategorySubCategoryComponent, canActivate: [AuthGuard],},
       { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
       { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     ],

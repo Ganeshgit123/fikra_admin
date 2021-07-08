@@ -1,0 +1,240 @@
+    <div class="container-fluid">
+    <app-pagetitle title="Category Page" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    <div class="row">
+    <div class="col-lg-12">
+    <div class="row">
+    <div class="col-md-2">
+    <div class="card">
+    <div class="card-body">
+    <ul ngbNav #verticalNav="ngbNav" [activeId]="1" class="nav-pills flex-column">
+    <li [ngbNavItem]="1">
+    <a ngbNavLink class="mb-2">
+    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+    <span class="d-none d-sm-block">Category</span>
+    </a>
+    <ng-template ngbNavContent>
+    <div class="card">
+    <div class="card-body">
+    <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCategory(centerDataModal)">Add New</button></p>
+    <ng-template #centerDataModal let-modal>
+    <div class="modal-header">
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="addNewCategory" (ngSubmit)="onSubmit()">
+    <label>Category Name</label>
+    <input type="text" class="form-control" formControlName="categoryName">
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+    </form>
+    </div>
+    </ng-template>
+    <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+    <thead>
+    <tr>
+    <th>Category Name</th>
+    <th>Status</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+    <a ngbNavLink class="mb-2">
+    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+    <span class="d-none d-sm-block">Sub-Category</span>
+    </a>
+    <ng-template ngbNavContent>
+    <div class="card">
+    <div class="card-body">
+    <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addSubCategory(subCategoryModal)">Add New</button></p>
+    <ng-template #subCategoryModal let-modal>
+    <div class="modal-header">
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="addNewSubCategory" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    <label>Category Name</label>
+    <select class="form-control" formControlName="selectCategoryName">
+    <option>Category 1</option>
+    <option>Category 2</option>
+    </select>
+    </div>
+    <div class="form-group">
+    <label>Sub Category Name</label>
+    <input type="text" class="form-control" formControlName="subCategoryName">
+    </div>
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+    </form>
+    </div>
+    </ng-template>
+    <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+    <thead>
+    <tr>
+    <th>Category Name</th>
+    <th>Sub-Category Name</th>
+    <th>Status</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+    <a ngbNavLink class="mb-2">
+    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+    <span class="d-none d-sm-block">Add Country</span>
+    </a>
+    <ng-template ngbNavContent>
+    <div class="card">
+    <div class="card-body">
+    <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCountry(countryModal)">Add New</button></p>
+    <ng-template #countryModal let-modal>
+    <div class="modal-header">
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="addNewCountry" (ngSubmit)="onSubmit()">
+    <label>Category Name</label>
+    <input type="text" class="form-control" formControlName="countryName">
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+    </form>
+    </div>
+    </ng-template>
+    <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+    <thead>
+    <tr>
+    <th>Country Name</th>
+    <th>Status</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </ng-template>
+    </li>
+    <li [ngbNavItem]="4">
+    <a ngbNavLink class="mb-2">
+    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+    <span class="d-none d-sm-block">Add City</span>
+    </a>
+    <ng-template ngbNavContent>
+    <div class="card">
+    <div class="card-body">
+    <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCity(cityModal)">Add New</button></p>
+    <ng-template #cityModal let-modal>
+    <div class="modal-header">
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="addNewCity" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+    <label>Country Name</label>
+    <select class="form-control" formControlName="selectCountry">
+    <option>Country 1</option>
+    <option>Country 2</option>
+    </select>
+    </div>
+    <div class="form-group">
+    <label>City Name</label>
+    <input type="text" class="form-control" formControlName="cityName">
+    </div>
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+    </form>
+    </div>
+    </ng-template>
+    <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+    <thead>
+    <tr>
+    <th>Country Name</th>
+    <th>City Name</th>
+    <th>Status</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </ng-template>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-10">
+
+    <div [ngbNavOutlet]="verticalNav"></div>
+
+    </div>
+    </div>
+
+    </div><!-- End vertical nav tab -->
+
+    </div>
+    </div>
