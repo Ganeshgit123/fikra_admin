@@ -6,7 +6,7 @@
 <div class="card">
 <div class="card-body">
 <div class="row mb-md-2">
-<div class="col-sm-12 col-md-2">
+<!-- <div class="col-sm-12 col-md-2">
 <div class="dataTables_length" id="tickets-table_length"><label
 class="d-inline-flex align-items-center">Show
 <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
@@ -17,7 +17,7 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
 <option [ngValue]="50">50</option>
 <option [ngValue]="100">100</option>
 </select> entries</label></div>
-</div>
+</div> -->
 <div class="col-sm-12 col-md-6">
     <div class="form-group row">
         <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
@@ -41,137 +41,36 @@ aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
 </div>
 <!-- Table -->
 <div class="table-responsive">
-  <form [formGroup]="updateInvestor" (ngSubmit)="onSubmit()">
 
 <table id="basic-datatable"
 class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
 <thead>
 <tr>
-<!-- <th></th> -->
-<th sortable="fullName" (sort)="onSort($event)">Full Name</th>
-<th sortable="userName" (sort)="onSort($event)">User Name</th>
-<th sortable="country" (sort)="onSort($event)">Country</th>
-<th sortable="city" (sort)="onSort($event)">City</th>
-<th sortable="street" (sort)="onSort($event)">Street</th>
-<th sortable="mobileNumber" (sort)="onSort($event)">Mobile</th>
-<th sortable="_send_me_newsletter_" (sort)="onSort($event)">Newsletters</th>
-<th>Approval</th>
-<th>Mobile Verified</th>
-<th>Actions</th>
+  <th *ngFor="let item of getfieldList;let i = index">{{item.fieldName}}</th>
 </tr>
 </thead>
-<tbody *ngFor="let table of tables$ | async;let i=index">
-<tr>
-<td>
-<div *ngIf = "!table.isEdit">
-<ngb-highlight [result]="table.fullName" [term]="searchTerm"></ngb-highlight>
-</div>
-<div *ngIf = "table.isEdit">
-<input type="text" class="form-control"  formControlName="fullName"  [(ngModel)]="table.fullName">
-</div>
-</td>
-<td>
-<div *ngIf = "!table.isEdit">
-<ngb-highlight [result]="table.userName" [term]="searchTerm"></ngb-highlight>
-</div>
-<div *ngIf = "table.isEdit">
-<input type="text" class="form-control"  formControlName="userName" [(ngModel)]="table.userName">
-</div>
-</td>
-<td>
-<div *ngIf = "!table.isEdit">
-<ngb-highlight [result]="table.country" [term]="searchTerm"></ngb-highlight>
-</div>
-<div *ngIf = "table.isEdit">
-<input type="text" class="form-control"  formControlName="country" [(ngModel)]="table.country">
-</div>
-</td>
-<td>
-<div *ngIf = "!table.isEdit">
-<ngb-highlight [result]="table.city" [term]="searchTerm"></ngb-highlight>
-</div>
-<div *ngIf = "table.isEdit">
-<input type="text" class="form-control"  formControlName="city"  [(ngModel)]="table.city">
-</div>
-</td>
-<td>
-<div *ngIf = "!table.isEdit">
-<ngb-highlight [result]="table.street" [term]="searchTerm"></ngb-highlight>
-</div>
-<div *ngIf = "table.isEdit">
-<input type="text" class="form-control" formControlName="street"  [(ngModel)]="table.street">
-</div>
-</td>
-<td>
-<div *ngIf = "!table.isEdit">
-<ngb-highlight [result]="table.mobileNumber" [term]="searchTerm"></ngb-highlight>
-</div>
-<div *ngIf = "table.isEdit">
-<input type="text" class="form-control" formControlName="mobileNumber" [(ngModel)]="table.mobileNumber">
-</div>
-</td>
-<td>
-<div *ngIf = "!table.isEdit">
-<ngb-highlight [result]="table._send_me_newsletter_" [term]="searchTerm"></ngb-highlight>
-</div>
-<div *ngIf = "table.isEdit">
-<select class="form-control" formControlName="_send_me_newsletter_" [(ngModel)]="table._send_me_newsletter_">
-<option value="true">true</option>
-<option value="false">false</option>
-</select>
-</div>
-</td>
-<td>
-  <div *ngIf = "!table.isEdit">
-  <ngb-highlight [result]="table._is_admin_arroved_" [term]="searchTerm"></ngb-highlight>
-  </div>
-  <div *ngIf = "table.isEdit">
-    <select class="form-control" formControlName="_is_admin_arroved_" [(ngModel)]="table._is_admin_arroved_">
-      <option value="true">true</option>
-      <option value="false">false</option>
-      </select>
-  </div>
-  </td>
-  <td>
-    <div *ngIf = "!table.isEdit">
-    <ngb-highlight [result]="table._is_mobile_verified_" [term]="searchTerm"></ngb-highlight>
-    </div>
-    <!-- <div *ngIf = "table.isEdit">
-    <input type="text" class="form-control" formControlName="_is_mobile_verified_" [(ngModel)]="table._is_mobile_verified_">
-    </div> -->
-    </td>
-<td class="text-center">
-<div *ngIf = "!table.isEdit">
-<a class="editbutton" (click)="getTableData(table)" ><i
-class="fas fa-edit"></i></a>
-</div>
-<div *ngIf = "table.isEdit">
-<a class="editbutton" (click)="getTableData(table)"><i
-class="fa fa-save"></i></a>
-<a class="editbutton" (click)="close(table)"><i
-class="fa fa-times"></i></a>
-</div>
+<tbody>
+<tr *ngFor="let user of abc  | filter:searchTerm">
+<td *ngFor="let data of getData(user)">{{user[data]}}
 </td>
 </tr>
 </tbody>
 </table>
-</form>
-
 </div>
 <!-- End table -->
 <div class="row justify-content-md-between align-items-md-center mt-2">
-<div class="col-sm-12 col-md-5">
+<!-- <div class="col-sm-12 col-md-5">
 <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
 {{startIndex}} to
 {{endIndex}} of {{totalRecords}}
 entries
 </div>
-</div>
+</div> -->
 <!-- Pagination -->
 <div class="col-sm-12 col-md-5">
 <div class="text-md-right float-md-right pagination-rounded">
-<ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
-</ngb-pagination>
+<!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
+</ngb-pagination> -->
 </div>
 </div>
 <!-- End Pagination -->
