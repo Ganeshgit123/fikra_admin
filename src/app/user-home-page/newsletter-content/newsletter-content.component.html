@@ -1,18 +1,34 @@
 <div class="card">
     <div class="card-body">
-    <form [formGroup]="addNewsLetter" (ngSubmit)="onSubmit()">
+    <form [formGroup]="addNewsLetter">
     <div class="row">
     <div class="col-md-6">
-    <label>Newsletter Head Part</label>
-    <input type="text" class="form-control" formControlName="newsHeading">
+    <label>Newsletter Heading (EN)</label>
+    <div class="form-group">
+    <input type="text" class="form-control" formControlName="subcribeHead">
     </div>
+</div>
     <div class="col-md-6">
-    <label>Newsletter Content Part</label>
-    <input type="text" class="form-control" formControlName="newsPara">
+    <label>Newsletter Heading (AR)</label>
+    <div class="form-group">
+    <input type="text" class="form-control" formControlName="subcribeHead_ar">
+    </div>
+</div>
+    <div class="col-md-6">
+        <label>Newsletter Content (EN)</label>
+        <div class="form-group">
+        <input type="text" class="form-control" formControlName="subcribeBody">
+        </div>
+    </div>
+        <div class="col-md-6">
+            <div class="form-group">
+        <label>Newsletter Content (AR)</label>
+        <input type="text" class="form-control" formControlName="subcribeBody_ar">
+        </div>  
     </div>
     </div>
     <br>
-    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>    
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="contentUpdate()">Save</button></p>    
     </form>
     </div>
     </div>

@@ -1,87 +1,41 @@
 <div class="container-fluid">
     <app-pagetitle title="Field Edit" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
     
-    <div class="row">
-    <div class="col-12">
     <div class="card">
-    <div class="card-body">
-    <div class="row mb-md-2">
-    <div class="col-sm-12 col-md-8">
-    <!-- <div class="dataTables_length" id="tickets-table_length"><label
-    class="d-inline-flex align-items-center">Show
-    <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
-    [(ngModel)]="pageSize"
-    class="custom-select custom-select-sm form-control  form-control-sm mx-2">
-    <option [ngValue]="10">10</option>
-    <option [ngValue]="25">25</option>
-    <option [ngValue]="50">50</option>
-    <option [ngValue]="100">100</option>
-    </select> entries</label></div> -->
-    </div>
-    <!-- Search -->
-    <div class="col-sm-12 col-md-4">
-    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
-    class="d-inline-flex align-items-center">Search:
-    <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
-    aria-controls="tickets-table"></label></div>
-    </div>
-    <!-- End search -->
-    </div>
-    <!-- Table -->
-    <div class="table-responsive">
-    
-    <table id="basic-datatable"
-    class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
-    <thead>
-    <tr>
-        <th>Label</th>
-        <th>Input Type</th>
-        <th>Placeholder</th>
-        <th>Form ControlName</th>
-        <th>Value</th>
-        <th>Required</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of getfieldData;">
-    <td>{{item.fieldName}}</td>
-    <td *ngIf = "item.fieldType !== 'select'">{{item.fieldType}}
-        <span></span>
-    </td>
-    <td  *ngIf = "item.fieldType == 'select'">{{item.fieldType}}
-       <tr *ngFor="let items of item.dropDown;let ii = index">
-           <span>options - {{items.displayName}} (value - {{items.value}})</span>
-       </tr>
-    </td>
-    <td>{{item.placeholder}}</td>
-    <td>{{item.fieldId}}</td>
-    <td>{{item.defauldValue}}</td>
-    <td>{{item._is_Mandatory_}}</td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
-    <!-- End table -->
-    <div class="row justify-content-md-between align-items-md-center mt-2">
-    <!-- <div class="col-sm-12 col-md-5">
-    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
-    {{startIndex}} to
-    {{endIndex}} of {{totalRecords}}
-    entries
-    </div>
-    </div> -->
-    <!-- Pagination -->
-    <div class="col-sm-12 col-md-5">
-    <div class="text-md-right float-md-right pagination-rounded">
-    <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
-    </ngb-pagination> -->
-    </div>
-    </div>
-    <!-- End Pagination -->
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+        <div class="card-body">
+          <ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>
+                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                <span class="d-none d-sm-block">Investors Form</span>
+              </a>
+              <ng-template ngbNavContent>
+                  <app-investor-field></app-investor-field>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+              <a ngbNavLink>
+                <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                <span class="d-none d-sm-block">Creators Form</span>
+              </a>
+              <ng-template ngbNavContent>
+                <app-creator-field></app-creator-field>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+              <a ngbNavLink>
+                <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                <span class="d-none d-sm-block">Projects Form</span>
+              </a>
+              <ng-template ngbNavContent>
+                <app-projects-field></app-projects-field>
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="justifiednav"></div>
+        </div>
+      </div>
+
+  
     </div>
     

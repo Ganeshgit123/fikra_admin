@@ -77,7 +77,7 @@
 <form [formGroup]="addBannerImg">
 <div class="img_upload">
 <label for="customFile">
-<img class="upload-img" *ngIf="!imagePreview"  src="../assets/images/upload_img.png"/>
+<img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
 <img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
 </label>
 <input formControlName="bannerImage" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">

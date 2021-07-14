@@ -132,7 +132,7 @@ console.log("fewfe")
     // formData.append('uploaded_file', this.fileUpload); 
 
     const postData = this.addBannerImg.value
-    postData['bannerImage'] = this.fileUpload.name
+    postData['bannerImage'] = this.fileUpload
     postData['createdBy'] = this.updatedby;
     postData['userType'] = "admin";
     postData['role'] = this.role;

@@ -1,20 +1,34 @@
 <div class="card">
     <div class="card-body">
-    <form [formGroup]="addFeatured" (ngSubmit)="onSubmit()">
+    <form [formGroup]="addFeatured">
     <div class="row">
-    <div class="col-md-12">
-    <label>Featured Project Right-side Part</label>
-    <textarea class="form-control" formControlName="featureContent"></textarea>
+    <div class="col-md-6">
+    <label>Featured Project Right-side Part(EN)</label>
+    <div class="form-group">
+    <textarea class="form-control" formControlName="featurecontent"></textarea>
     </div>
-    <div class="col-md-12">
-    <div class="top_space">
-    <label>Taking Off Right-side Part</label>
-    <textarea class="form-control" formControlName="takingOffContent"></textarea>
+</div>
+<div class="col-md-6">
+    <label>Featured Project Right-side Part(AR)</label>
+    <div class="form-group">
+    <textarea class="form-control" formControlName="featurecontent_ar"></textarea>
     </div>
+</div>
+    <div class="col-md-6">
+    <label>Taking Off Right-side Part(EN)</label>
+    <div class="form-group">
+    <textarea class="form-control" formControlName="takingOfContent"></textarea>
+</div>
     </div>
+    <div class="col-md-6">
+        <label>Taking Off Right-side Part(AR)</label>
+        <div class="form-group">
+        <textarea class="form-control" formControlName="takingOfContent_ar"></textarea>
+    </div>
+        </div>
     </div>
     <br>
-    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>    
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click) ="onSubmit()">Save</button></p>    
     </form>
     </div>
     </div>
