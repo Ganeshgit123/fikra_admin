@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-body">
+    <form [formGroup]="addFooterCont" (ngSubmit)="onSubmit()">
+    <div class="row">
+    <div class="col-md-12">
+    <div class="form-group">
+    <label>Heading</label>
+    <input type="text" class="form-control" formControlName="footerHead">
+    </div>
+    <div class="form-group">
+    <label>Description</label>
+    <textarea class="form-control" formControlName="footerDesc"></textarea>
+    </div>
+    <div class="form-group">
+    <label>Link</label>
+    <input type="text" class="form-control" formControlName="footerLink">
+    </div>
+    </div>
+    </div>
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>    
+    </form>
+    </div>
+    </div>

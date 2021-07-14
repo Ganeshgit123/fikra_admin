@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="card-body">
+    <form [formGroup]="addFeatured" (ngSubmit)="onSubmit()">
+    <div class="row">
+    <div class="col-md-12">
+    <label>Featured Project Right-side Part</label>
+    <textarea class="form-control" formControlName="featureContent"></textarea>
+    </div>
+    <div class="col-md-12">
+    <div class="top_space">
+    <label>Taking Off Right-side Part</label>
+    <textarea class="form-control" formControlName="takingOffContent"></textarea>
+    </div>
+    </div>
+    </div>
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>    
+    </form>
+    </div>
+    </div>

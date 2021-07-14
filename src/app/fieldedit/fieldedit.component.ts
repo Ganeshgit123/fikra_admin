@@ -1,7 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { FormGroup, FormBuilder,FormControl  } from '@angular/forms';
 import { ApiCallService } from '../services/api-call.service';
-import { FormData } from 'form-data';
 
 @Component({
   selector: 'app-fieldedit',
@@ -9,13 +8,14 @@ import { FormData } from 'form-data';
   styleUrls: ['./fieldedit.component.scss']
 })
 export class FieldeditComponent implements OnInit {
-  @Input()formData: FormData[];
-  submitted: boolean;
 
-  editForm: FormGroup;
-  updatedby:any;
-  role:any;
-  formList:any;
+  accToken = sessionStorage.getItem('access_token');
+
+  updatedby = sessionStorage.getItem('adminId');
+  role = sessionStorage.getItem('adminRole');
+
+  breadCrumbItems: Array<{}>;
+  getfieldData:any=[];
 
   constructor(
     private apiCall: ApiCallService,
@@ -24,50 +24,28 @@ export class FieldeditComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const formGroup = {};
+    this.breadCrumbItems = [{ label: 'Invesors List', active: true }];
 
-    this.formData.forEach(formControl => {
-      formGroup[formControl.fieldId] = new FormControl('');
-    });
+    this.fetchFieldData();
+  }
 
-    console.log("few",this.formData)
-
-    this.updatedby = sessionStorage.getItem('adminId');
-    this.role = sessionStorage.getItem('adminRole');
-
-    this.editForm   = this.formBuilder.group(
-      formGroup
-    )
-    console.log("data",this.editForm)
-
-
-    var params = {
-      url: 'admin/getUserProfileCreationField',
-      data: {}
+  fetchFieldData(){
+ let params = {
+    url: "admin/getUserProfileCreationField",
+  }  
+  this.apiCall.commonGetService(params).subscribe((result:any)=>{
+    let resu = result.body;
+    if(resu.error == false)
+    {
+      this.getfieldData = resu.data;
+      console.log("dafa",this.getfieldData)
+    }else{
+      this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
     }
-
-    this.apiCall.commonGetService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          // Success
-          // console.log(response.body)
-          this.formList = response.body.data
-                    console.log("data",this.formList)
-
-          this.editForm  = this.formBuilder.group({
-            formGroup: [response.body.data,[]],
-          })
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-        }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
-      }
-    )
-    
+  },(error)=>{
+     console.error(error);
+     
+  });
   }
 
   submitForm(){

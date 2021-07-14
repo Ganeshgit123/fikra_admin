@@ -135,14 +135,14 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   /**
    * Light sidebar
    */
-  // lightSidebar() {
-  //   document.body.setAttribute('data-sidebar', 'light');
-  //   document.body.setAttribute('data-topbar', 'dark');
-  //   document.body.removeAttribute('data-sidebar-size');
-  //   document.body.removeAttribute('data-layout-size');
-  //   document.body.removeAttribute('data-keep-enlarged');
-  //   document.body.classList.remove('vertical-collpsed');
-  // }
+  lightSidebar() {
+    document.body.setAttribute('data-sidebar', 'light');
+    document.body.setAttribute('data-topbar', 'dark');
+    document.body.removeAttribute('data-sidebar-size');
+    document.body.removeAttribute('data-layout-size');
+    document.body.removeAttribute('data-keep-enlarged');
+    document.body.classList.remove('vertical-collpsed');
+  }
 
   // /**
   //  * Compact sidebar
@@ -160,14 +160,14 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   /**
    * Icon sidebar
    */
-  iconSidebar() {
-    document.body.classList.add('sidebar-enable');
-    document.body.classList.add('vertical-collpsed');
-    document.body.setAttribute('data-sidebar', 'dark');
-    document.body.removeAttribute('data-layout-size');
-    document.body.removeAttribute('data-keep-enlarged');
-    document.body.removeAttribute('data-topbar');
-  }
+  // iconSidebar() {
+  //   document.body.classList.add('sidebar-enable');
+  //   document.body.classList.add('vertical-collpsed');
+  //   document.body.setAttribute('data-sidebar', 'dark');
+  //   document.body.removeAttribute('data-layout-size');
+  //   document.body.removeAttribute('data-keep-enlarged');
+  //   document.body.removeAttribute('data-topbar');
+  // }
 
   /**
    * Boxed layout

@@ -10,12 +10,12 @@ export class VerticalComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    document.body.classList.add('sidebar-enable');
-    document.body.classList.add('vertical-collpsed');
-    document.body.setAttribute('data-sidebar', 'dark');
+    document.body.setAttribute('data-sidebar', 'light');
+    document.body.setAttribute('data-topbar', 'light');
+    document.body.removeAttribute('data-sidebar-size');
     document.body.removeAttribute('data-layout-size');
     document.body.removeAttribute('data-keep-enlarged');
-    document.body.removeAttribute('data-topbar');
+    document.body.classList.remove('vertical-collpsed');
   }
   /**
    * On mobile toggle button clicked

@@ -4,7 +4,7 @@ import { DecimalPipe } from '@angular/common';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 import { ApiCallService } from '../services/api-call.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 
 import { AdvancedSortableDirective, SortEvent,SortDirection } from '../services/advanced-sortable.directive';
 
@@ -31,9 +31,9 @@ export class InvestorsComponent implements OnInit {
  datalist:any;
  new_arr: any=[];
  values:any;
- sorting: any=[];
  abc: any=[];
  searchTerm;
+ controlName: string;
 
  accToken = sessionStorage.getItem('access_token');
 
@@ -55,20 +55,17 @@ export class InvestorsComponent implements OnInit {
 
    this.breadCrumbItems = [{ label: 'Invesors List', active: true }];
 
+   const formGroup = {};
+
+    this.abc.forEach(formControl => {
+      formGroup[formControl.controlName] = new FormControl('');
+   });
+
+   this.updateInvestor = new FormGroup(formGroup);
+
+
    this._fetchData();
 
-   this.updateInvestor = this.formBuilder.group({
-    fullName: ['',  []],
-    userName: ['',  []],
-    country: ['',  []],
-    city: ['',  []],
-    street: ['',  []],
-    mobileNumber: ['',  []],
-    _is_admin_arroved_: ['',  []],
-    _is_mobile_verified_: ['',  []],
-    _send_me_newsletter_: ['',  []],
-    _userRole_: ['',  []],
-  });
  }
 
  
@@ -84,50 +81,14 @@ export class InvestorsComponent implements OnInit {
     {
       this.getfieldList = resu.fields;
       this.getuserList = resu.data;
-
-      function arr_diff (a1, a2) {
-
-        var a = [], diff = [];
-      
-        for (var i = 0; i < a1.length; i++) {
-            a[a1[i]] = true;
-        }
-      
-        for (var i = 0; i < a2.length; i++) {
-            if (a[a2[i]]) {
-                delete a[a2[i]];
-            } else {
-                a[a2[i]] = true;
-            }
-        }
-      
-        for (var k in a) {
-            diff.push(k);
-        }
-      
-        return diff;
-      }
-      
+      this.getuserList.forEach(element => {
+        element['isEdit'] = false;
+      });
       const field_name = this.getfieldList.map((it)=>{
         return it.fieldId
       })
-      
-      const det = this.getuserList.filter((dt,idx)=>{
-        return idx === 0
-      })
-      
-       this.values = Object.keys(det[0]);
-      
-      let diff_ele = arr_diff(this.values, field_name)
-      
-      this.new_arr = this.getuserList.filter((item, idx)=>{
-        return diff_ele.map((e)=>{
-          delete item[e]
-        })
-        
-      })
 
-      this.abc = this.new_arr.map((item)=>{
+      this.abc = this.getuserList.map((item)=>{
         const a = {}
         field_name.forEach((f)=>{
           a[f] = item[f]
@@ -135,6 +96,7 @@ export class InvestorsComponent implements OnInit {
         })
         return item = a
       })
+
 
     }else{
       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -150,5 +112,69 @@ export class InvestorsComponent implements OnInit {
   return Object.keys(item);
 }
 
+getTableData(data){
+  console.log("fef",data)
+  data.isEdit = true;
+
+
+  //  this._user_ID_ = data['_id'] 
+
+  this.updateInvestor   = this.formBuilder.group({
+   fullName: [data['fullName']],
+   userName: [data['userName']],
+   email: [data['email']],
+   mobileNumber: [data['mobileNumber']],
+   country: [data['country']],
+   city: [data['city']],
+   street: [data['street']],
+   dob: [data['dob'], ],
+   _send_me_newsletter_: [data['_send_me_newsletter_']],
+   _is_admin_arroved_: [data['_is_admin_arroved_']],
+   _is_mobile_verified_: [data['_is_mobile_verified_']],
+   _userRole_: [data['_userRole_']],
+   _user_ID_: [data['_id']],
+ })
+
+
+}
+
+close(data){
+  data.isEdit = false;
+ }
+
+ onSubmit(){
+   
+
+
+  const postData = this.updateInvestor.value
+  postData['updatedby'] = this.updatedby;
+  postData['userType'] = "admin";
+  postData['role'] = this.role;
+  // postData['_user_ID_'] = '60daa9b4547aa766315e0857';
+
+  var params = {
+    url: 'admin/updateUserDetails',
+    data: postData
+  }
+console.log("daa",params)
+
+this.apiCall.commonPutService(params).subscribe(
+  (response: any) => {
+    if (response.body.error == false) {
+      // Success
+      this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+      this.ngOnInit();
+    } else {
+      // Query Error
+      this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+    }
+  },
+  (error) => {
+    this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+    console.log('Error', error)
+  }
+)
+
+ }
 }
 

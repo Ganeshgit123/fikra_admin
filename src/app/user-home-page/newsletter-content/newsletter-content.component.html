@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-body">
+    <form [formGroup]="addNewsLetter" (ngSubmit)="onSubmit()">
+    <div class="row">
+    <div class="col-md-6">
+    <label>Newsletter Head Part</label>
+    <input type="text" class="form-control" formControlName="newsHeading">
+    </div>
+    <div class="col-md-6">
+    <label>Newsletter Content Part</label>
+    <input type="text" class="form-control" formControlName="newsPara">
+    </div>
+    </div>
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>    
+    </form>
+    </div>
+    </div>

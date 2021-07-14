@@ -50,6 +50,8 @@ export class ApiCallService {
     });
   }
 
+  
+
   userGetService(params) {
     this.accToken = sessionStorage.getItem('access_token');
     this.updatedby = sessionStorage.getItem('adminId');

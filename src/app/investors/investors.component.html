@@ -41,21 +41,42 @@ aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
 </div>
 <!-- Table -->
 <div class="table-responsive">
-
+  <form [formGroup]="updateInvestor" (ngSubmit)="onSubmit()">
 <table id="basic-datatable"
 class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
 <thead>
 <tr>
   <th *ngFor="let item of getfieldList;let i = index">{{item.fieldName}}</th>
+  <th>Actions</th>
 </tr>
 </thead>
-<tbody>
+<tbody *ngFor="let edit of getuserList">
 <tr *ngFor="let user of abc  | filter:searchTerm">
-<td *ngFor="let data of getData(user)">{{user[data]}}
+<td *ngFor="let data of getData(user)">
+<div *ngIf = "!edit.isEdit">  
+  {{user[data]}}
+</div>
+<div *ngIf = "edit.isEdit"> 
+  <input type="text" class="form-control" [formControlName]="data">
+</div>
+
+</td>
+<td class="text-center">
+  <div *ngIf = "!edit.isEdit">
+  <a class="editbutton" (click)="getTableData(edit)" ><i
+  class="fas fa-edit"></i></a>
+  </div>
+  <div *ngIf = "edit.isEdit">
+  <a class="editbutton" (click)="onSubmit()"><i
+  class="fa fa-save"></i></a>
+  <a class="editbutton" (click)="close(edit)"><i
+  class="fa fa-times"></i></a>
+  </div>
 </td>
 </tr>
 </tbody>
 </table>
+</form>
 </div>
 <!-- End table -->
 <div class="row justify-content-md-between align-items-md-center mt-2">

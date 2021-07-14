@@ -13,72 +13,7 @@
 <span class="d-none d-sm-block">Banner Section</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-<label>Banner Left Side Content</label>
-<div class="row">
-<div class="col-md-10">
-<form [formGroup]="bannerLeftCont" (ngSubmit)="bannerCont()">
-<div class="form-group">
-<input type="text" class="form-control" formControlName="fistContent">
-</div>
-</form>
-</div>
-<div class="col-md-2">
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-</div>
-</div>
-</div>
-</div>
-<div class="card">
-<div class="card-body">
-<h5 class="text-center">Banner Images</h5>
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addBannner(centerDataModal)">Add New</button></p>
-<!-- Center Modal -->
-<ng-template #centerDataModal let-modal>
-<div class="modal-header">
-<h5 class="modal-title mt-0">Upload Banner Image</h5>
-<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-</div>
-<div class="modal-body">
-<form [formGroup]="addBannerImg" (ngSubmit)="onSubmit()">
-<div class="img_upload">
-<label for="customFile">
-<img class="upload-img" *ngIf="!imagePreview"  src="../assets/images/upload_img.png"/>
-<img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
-</label>
-<input formControlName="bannerPic" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
-</div>
-<br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-</form>
-</div>
-</ng-template>
-
-<div class="table-responsive">
-<table id="basic-datatable"
-class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
-<thead>
-<tr>
-<th>Image</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
+    <app-banner></app-banner>
 </ng-template>
 </li>
 <li [ngbNavItem]="2">
@@ -87,24 +22,7 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <span class="d-none d-sm-block">Newsletter Content</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-<form [formGroup]="addNewsLetter" (ngSubmit)="onSubmit()">
-<div class="row">
-<div class="col-md-6">
-<label>Newsletter Head Part</label>
-<input type="text" class="form-control" formControlName="newsHeading">
-</div>
-<div class="col-md-6">
-<label>Newsletter Content Part</label>
-<input type="text" class="form-control" formControlName="newsPara">
-</div>
-</div>
-<br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>    
-</form>
-</div>
-</div>
+    <app-newsletter-content></app-newsletter-content>
 </ng-template>
 </li>
 <li [ngbNavItem]="3">
@@ -113,26 +31,7 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <span class="d-none d-sm-block">Featured and Taking off</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-<form [formGroup]="addFeatured" (ngSubmit)="onSubmit()">
-<div class="row">
-<div class="col-md-12">
-<label>Featured Project Right-side Part</label>
-<textarea class="form-control" formControlName="featureContent"></textarea>
-</div>
-<div class="col-md-12">
-<div class="top_space">
-<label>Taking Off Right-side Part</label>
-<textarea class="form-control" formControlName="takingOffContent"></textarea>
-</div>
-</div>
-</div>
-<br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>    
-</form>
-</div>
-</div>
+    <app-featured-takingoff></app-featured-takingoff>
 </ng-template>
 </li>
 <li [ngbNavItem]="4">
@@ -141,160 +40,27 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <span class="d-none d-sm-block">Creators Corner</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCreators(creatorCorner)">Add New</button></p>
-<!-- Center Modal -->
-<ng-template #creatorCorner let-modal>
-<div class="modal-header">
-<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-</div>
-<div class="modal-body">
-<form [formGroup]="addCreatorData" (ngSubmit)="onSubmit()">
-<div class="img_upload">
-<label for="customFile">
-<img class="upload-img1" *ngIf="!imagePreview"  src="../assets/images/upload_img.png"/>
-<img class="upload-img1" *ngIf="imagePreview" src="{{imagePreview}}"/>
-</label>
-<input formControlName="creatorImg" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
-</div>
-<div class="form-group">
-<label>Heading</label>
-<input type="text" class="form-control" formControlName="creatHead">
-</div>
-<div class="form-group">
-    <label>Description</label>
-    <input type="text" class="form-control" formControlName="creatDesc">
-</div>
-<div class="form-group">
-    <label>Link</label>
-    <input type="text" class="form-control" formControlName="creatLink">
-</div>
-<br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-</form>
-</div>
-</ng-template>
-
-<div class="table-responsive">
-<table id="basic-datatable"
-class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
-<thead>
-<tr>
-<th>Image</th>
-<th>Heading</th>
-<th>Description</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
+    <app-creators-corner></app-creators-corner>
 </ng-template>
 </li>
 <li [ngbNavItem]="5">
-    <a ngbNavLink class="mb-2">
-    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-    <span class="d-none d-sm-block">Client Logos</span>
-    </a>
-    <ng-template ngbNavContent>
-    <div class="card">
-    <div class="card-body">
-    <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCreators(creatorCorner)">Add New</button></p>
-    <!-- Center Modal -->
-    <ng-template #creatorCorner let-modal>
-    <div class="modal-header">
-    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-    </div>
-    <div class="modal-body">
-    <form [formGroup]="addClientLogo" (ngSubmit)="onSubmit()">
-    <div class="img_upload">
-    <label for="customFile">
-    <img class="upload-img1" *ngIf="!imagePreview"  src="../assets/images/upload_img.png"/>
-    <img class="upload-img1" *ngIf="imagePreview" src="{{imagePreview}}"/>
-    </label>
-    <input formControlName="clientImg" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
-    </div>
-    <br>
-    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-    </form>
-    </div>
-    </ng-template>
-    
-    <div class="table-responsive">
-    <table id="basic-datatable"
-    class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
-    <thead>
-    <tr>
-    <th>Image</th>
-    <th>Status</th>
-    <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
-    </div>
-    </div>
-    </ng-template>
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Client Logos</span>
+</a>
+<ng-template ngbNavContent>
+    <app-client-logos></app-client-logos>
+</ng-template>
 </li>
 <li [ngbNavItem]="6">
-    <a ngbNavLink class="mb-2">
-    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-    <span class="d-none d-sm-block">Footer Content</span>
-    </a>
-    <ng-template ngbNavContent>
-    <div class="card">
-    <div class="card-body">
-    <form [formGroup]="addFooterCont" (ngSubmit)="onSubmit()">
-    <div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <label>Heading</label>
-            <input type="text" class="form-control" formControlName="footerHead">
-            </div>
-    <div class="form-group">
-    <label>Description</label>
-    <textarea class="form-control" formControlName="footerDesc"></textarea>
-    </div>
-    <div class="form-group">
-        <label>Link</label>
-        <input type="text" class="form-control" formControlName="footerLink">
-        </div>
-</div>
-    </div>
-    <br>
-    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>    
-    </form>
-    </div>
-    </div>
-    </ng-template>
-    </li>
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Footer Content</span>
+</a>
+<ng-template ngbNavContent>
+    <app-footer-content></app-footer-content>
+</ng-template>
+</li>
 </ul>
 </div>
 </div>

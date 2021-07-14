@@ -1,0 +1,118 @@
+<div class="card">
+<div class="card-body">
+<form [formGroup]="bannerLeftCont" (ngSubmit)="bannerCont()">
+<div class="row">
+<div class="col-md-6">
+<div class="form-group">
+<label>Company Name (EN)</label>
+<input type="text" class="form-control" formControlName="companyName">
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>Company Name (AR)</label>
+<input type="text" class="form-control" formControlName="companyName_ar">
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>Heading Name (EN)</label>
+<input type="text" class="form-control" formControlName="headName">
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>Heading Name (AR)</label>
+<input type="text" class="form-control" formControlName="headName_ar">
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>Banner Left Side Content (EN)</label>
+<textarea class="form-control" formControlName="bannerLeftContents"></textarea>
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>Banner Left Side Content (AR)</label>
+<textarea class="form-control" formControlName="bannerLeftContents_ar"></textarea>
+</div>
+</div>
+<div class="col-md-4">
+<div class="form-group">
+<label>Button Name(EN)</label>
+<input type="text" class="form-control" formControlName="buttonName">
+</div>
+</div>
+<div class="col-md-4">
+<div class="form-group">
+<label>Button Name (AR)</label>
+<input type="text" class="form-control" formControlName="buttonName_ar">
+</div>
+</div>
+<div class="col-md-4">
+<div class="form-group">
+<label>Button URL</label>
+<input type="text" class="form-control" formControlName="buttonURL">
+</div>
+</div>
+<div class="col-md-12">
+<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light ban_con_btn">Save</button></p>
+</div>
+</div>
+</form>
+</div>
+</div>
+<div class="card">
+<div class="card-body">
+<h5 class="text-center">Banner Images</h5>
+<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addBannner(centerDataModal)">Add New</button></p>
+<!-- Center Modal -->
+<ng-template #centerDataModal let-modal>
+<div class="modal-header">
+<h5 class="modal-title mt-0">Upload Banner Image</h5>
+<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form [formGroup]="addBannerImg">
+<div class="img_upload">
+<label for="customFile">
+<img class="upload-img" *ngIf="!imagePreview"  src="../assets/images/upload_img.png"/>
+<img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
+</label>
+<input formControlName="bannerImage" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+</div>
+<div class="form-group">
+    <label>Image ALT text</label>
+    <input type="text" class="form-control" formControlName="imageAlt">
+</div>
+<br>
+<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="bannerImgUpload()">Save</button></p>
+</form>
+</div>
+</ng-template>
+
+<div class="table-responsive">
+<table id="basic-datatable"
+class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+<thead>
+<tr>
+<th>Image</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
