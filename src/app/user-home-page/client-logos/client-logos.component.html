@@ -7,16 +7,24 @@
 <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">
-<form [formGroup]="addClientLogo" (ngSubmit)="onSubmit()">
+<form [formGroup]="addClientLogo">
+    <div class="form-group">
+        <label>Image Name</label>
+        <input type="text" class="form-control" formControlName="logoName">
+    </div>
 <div class="img_upload">
 <label for="customFile">
 <img class="upload-img1" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
 <img class="upload-img1" *ngIf="imagePreview" src="{{imagePreview}}"/>
 </label>
-<input formControlName="clientImg" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+<input formControlName="clientLogo" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+</div>
+<div class="form-group">
+    <label>Image AlT tag</label>
+    <input type="text" class="form-control" formControlName="logoAlt">
 </div>
 <br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
 </form>
 </div>
 </ng-template>
@@ -26,18 +34,23 @@
 class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
 <thead>
 <tr>
+<th>Name</th>
 <th>Image</th>
+<th>Alt tag</th>
 <th>Status</th>
 <th>Action</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>
-</td>
-<td>
-</td>
-<td>
+<tr  *ngFor="let item of clientData">
+<td>{{item.logoName}}</td>
+<td><p class="text-center"><img src="{{item.logoUrl}}" class="img_size"></p></td>
+<td>{{item.logoAlt}}</td>
+<td>{{item._isLogoOn_}}</td>
+<td> <a href="javascript:void(0);" class="mr-3 text-info" ngbTooltip="Edit"><i
+    class="mdi mdi-pencil font-size-18"></i></a>
+<a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete"><i
+    class="mdi mdi-trash-can font-size-18"></i></a>
 </td>
 </tr>
 </tbody>

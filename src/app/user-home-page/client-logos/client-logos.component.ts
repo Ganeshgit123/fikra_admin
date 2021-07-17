@@ -15,6 +15,7 @@ export class ClientLogosComponent implements OnInit {
   addClientLogo: FormGroup;
   imagePreview = null;
   fileUpload: any;
+  clientData:any = [];
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -27,7 +28,31 @@ export class ClientLogosComponent implements OnInit {
 
 
     this.addClientLogo = this.formBuilder.group({
-      clientImg: [''],
+      logoName: [''],
+      clientLogo: [''],
+      logoAlt: [''],
+    });
+
+    this.fetchclientData();
+  }
+
+  fetchclientData(){
+    let params = {
+      url: "admin/getHomeClientCorner",
+    }  
+    this.apiCall.commonGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+
+        this.clientData = resu.data.clientLogo;
+
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
     });
   }
 
@@ -48,6 +73,47 @@ export class ClientLogosComponent implements OnInit {
 
   onSubmit(){
 
+    var postData = new FormData();
+
+    postData.append('logoName', this.addClientLogo.get('logoName').value);
+    postData.append('logoAlt', this.addClientLogo.get('logoAlt').value);
+    postData.append('clientLogo', this.fileUpload);
+    postData.append('createdBy', this.updatedby);
+    postData.append('userType', 'admin');
+    postData.append('role', this.role);
+
+    var params = {
+      url: 'admin/postclientLogo',
+      data: postData
+    }
+  
+     console.log("img",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        console.log("res",response)
+
+        if (response.body.error == false) {
+     
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.modalService.dismissAll();
+          this.imagePreview = null;
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+  }
+
+  ngOnDestroy() {
+    this.imagePreview = null;
+    this.addClientLogo.reset();
+    this.modalService.dismissAll();
   }
 
 }

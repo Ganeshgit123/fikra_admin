@@ -17,6 +17,8 @@ export class BannerComponent implements OnInit {
   addBannerImg: FormGroup;
   imagePreview = null;
   fileUpload: any;
+
+  bannerImage: any =[];
  
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -69,6 +71,8 @@ export class BannerComponent implements OnInit {
           buttonName_ar: [resu.data.buttonName_ar,[]],
           buttonURL: [resu.data.buttonURL,[]],
         });
+
+        this.bannerImage = resu.data.bannerImage;
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -128,14 +132,12 @@ console.log("ddd",params)
 
  bannerImgUpload(){
 console.log("fewfe")
-    // const formData = new FormData();
-    // formData.append('uploaded_file', this.fileUpload); 
 
-    const postData = this.addBannerImg.value
-    postData['bannerImage'] = this.fileUpload
-    postData['createdBy'] = this.updatedby;
-    postData['userType'] = "admin";
-    postData['role'] = this.role;
+    var postData = new FormData();
+    postData.append('bannerImage', this.fileUpload);
+    postData.append('createdBy', this.updatedby);
+    postData.append('userType', 'admin');
+    postData.append('role', this.role);
 
     var params = {
       url: 'admin/postBannerImage',

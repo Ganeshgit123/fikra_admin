@@ -91,7 +91,7 @@ export class ApiCallService {
     this.accToken = sessionStorage.getItem('access_token');
    
     const httpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
       'auth': this.accToken,
     });
     

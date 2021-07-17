@@ -97,6 +97,7 @@ export class InvestorsComponent implements OnInit {
         return item = a
       })
 
+      // console.log("abc",this.abc)
 
     }else{
       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -105,6 +106,7 @@ export class InvestorsComponent implements OnInit {
      console.error(error);
      
   });
+
 
  }
 

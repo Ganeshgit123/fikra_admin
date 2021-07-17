@@ -50,27 +50,12 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
   <th>Actions</th>
 </tr>
 </thead>
-<tbody *ngFor="let edit of getuserList">
+<tbody>
 <tr *ngFor="let user of abc  | filter:searchTerm">
-<td *ngFor="let data of getData(user)">
-<div *ngIf = "!edit.isEdit">  
-  {{user[data]}}
-</div>
-<div *ngIf = "edit.isEdit"> 
-  <input type="text" class="form-control" [formControlName]="data">
-</div>
-
-</td>
+<td *ngFor="let data of getData(user)">  {{user[data]}}</td>
 <td class="text-center">
-  <div *ngIf = "!edit.isEdit">
-  <a class="editbutton" (click)="getTableData(edit)" ><i
-  class="fas fa-edit"></i></a>
-  </div>
-  <div *ngIf = "edit.isEdit">
-  <a class="editbutton" (click)="onSubmit()"><i
-  class="fa fa-save"></i></a>
-  <a class="editbutton" (click)="close(edit)"><i
-  class="fa fa-times"></i></a>
+  <div>
+  <a class="editbutton" routerLink="/view-investors/{{ user.email }}"><i class="fas fa-edit"></i></a>
   </div>
 </td>
 </tr>

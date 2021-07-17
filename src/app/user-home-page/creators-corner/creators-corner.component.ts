@@ -15,6 +15,7 @@ export class CreatorsCornerComponent implements OnInit {
   addCreatorData: FormGroup;
   imagePreview = null;
   fileUpload: any;
+  creatorData : any =[];
 
  constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -31,6 +32,29 @@ export class CreatorsCornerComponent implements OnInit {
       creatHead: [''],
       creatDesc: [''],
       creatLink: [''],
+    });
+
+    this.fetchCratorsData();
+
+  }
+  
+  fetchCratorsData(){
+    let params = {
+      url: "admin/getHomeCreatorCorner",
+    }  
+    this.apiCall.commonGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+
+        this.creatorData = resu.data;
+// console.log("dd",this.creatorData)
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
     });
   }
 

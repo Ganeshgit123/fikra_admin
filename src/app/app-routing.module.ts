@@ -20,6 +20,7 @@ import { FieldeditComponent } from './fieldedit/fieldedit.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CategorySubCategoryComponent } from './settings/category-sub-category/category-sub-category.component';
 import { StartAProjectComponent } from './start-a-project/start-a-project.component';
+import { ViewInvestorsComponent } from './view-investors/view-investors.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent ,canActivate: [AuthGuard]},
       {path: 'investors',component: InvestorsComponent, canActivate: [AuthGuard]},
+      {path: 'view-investors/:id',component: ViewInvestorsComponent, canActivate: [AuthGuard]},
       {path: 'projects',component: ProjectsComponent, canActivate: [AuthGuard],},
       {path: 'creators',component: CreatorsComponent, canActivate: [AuthGuard],},
       {path: 'privacy',component: PrivacyPolicyComponent, canActivate: [AuthGuard],},
