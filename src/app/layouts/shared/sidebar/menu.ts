@@ -55,18 +55,24 @@ export const MENU: MenuItem[] = [
             },
             {
                 id: 10,
+                label: 'MENUITEMS.FAQ.TEXT',
+                link: '/faq',
+                parentId: 6
+            },
+            {
+                id: 11,
                 label: 'MENUITEMS.PRIVACYPOLICY.TEXT',
                 link: '/privacy',
                 parentId: 6
             },
             {
-                id: 11,
+                id: 12,
                 label: 'MENUITEMS.COOKIEPOLICY.TEXT',
                 link: '/cookie_policy',
                 parentId: 6
             },
             {
-                id: 12,
+                id: 13,
                 label: 'MENUITEMS.TERMSOFUSE.TEXT',
                 link: '/terms_of_use',
                 parentId: 6
@@ -74,12 +80,12 @@ export const MENU: MenuItem[] = [
         ]
     },
     {
-        id: 13,
+        id: 14,
         label: 'MENUITEMS.SETTINGS.TEXT',
         icon: 'ri-settings-5-line',
         subItems: [
             {
-                id: 14,
+                id: 15,
                 label: 'MENUITEMS.CATEGORY_SUB_CATEGORY.TEXT',
                 link: '/category_sub_category',
                 parentId: 13
@@ -87,7 +93,7 @@ export const MENU: MenuItem[] = [
         ]
     },
     {
-        id: 13,
+        id: 16,
         label: 'MENUITEMS.FORMFIELDEDIT.TEXT',
         icon: 'ri-eraser-fill',
         link: '/form-field-edit'

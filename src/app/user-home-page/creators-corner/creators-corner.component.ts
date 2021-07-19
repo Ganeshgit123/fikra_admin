@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder,Validators} from '@angular/forms';
+import { FormGroup, FormBuilder} from '@angular/forms';
 import { ApiCallService } from '../../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $:any;
@@ -15,7 +15,7 @@ export class CreatorsCornerComponent implements OnInit {
   addCreatorData: FormGroup;
   imagePreview = null;
   fileUpload: any;
-  creatorData : any =[];
+  createCornerData : any;
 
  constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -42,15 +42,14 @@ export class CreatorsCornerComponent implements OnInit {
     let params = {
       url: "admin/getHomeCreatorCorner",
     }  
-    this.apiCall.commonGetService(params).subscribe((result:any)=>{
-      let resu = result.body;
-      if(resu.error == false)
-      {
+    this.apiCall.commonGetService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
 
-        this.creatorData = resu.data;
-// console.log("dd",this.creatorData)
+        this.createCornerData = response.body.data;
+// console.log("dd",this.createCornerData)
       }else{
-        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+        this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
       }
     },(error)=>{
        console.error(error);

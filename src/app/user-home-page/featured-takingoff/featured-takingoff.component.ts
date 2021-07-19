@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 import { ApiCallService } from '../../services/api-call.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $:any;
 
 @Component({
@@ -15,9 +14,7 @@ export class FeaturedTakingoffComponent implements OnInit {
   addFeatured: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-    private apiCall: ApiCallService,
-    private modalService: NgbModal
-    ) { }
+    private apiCall: ApiCallService    ) { }
 
 
   ngOnInit(): void {

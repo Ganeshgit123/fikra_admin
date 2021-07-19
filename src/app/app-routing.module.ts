@@ -21,6 +21,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { CategorySubCategoryComponent } from './settings/category-sub-category/category-sub-category.component';
 import { StartAProjectComponent } from './start-a-project/start-a-project.component';
 import { ViewInvestorsComponent } from './view-investors/view-investors.component';
+import { FaqComponent } from './faq/faq.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
       {path: 'about_page',component: AboutPageComponent, canActivate: [AuthGuard],},
       {path: 'settings',component: SettingsComponent, canActivate: [AuthGuard],},
       {path: 'form-field-edit',component: FieldeditComponent, canActivate: [AuthGuard],},
+      {path: 'faq',component: FaqComponent, canActivate: [AuthGuard],},
       {path: 'start_project_page',component: StartAProjectComponent, canActivate: [AuthGuard],},
       {path: 'category_sub_category',component: CategorySubCategoryComponent, canActivate: [AuthGuard],},
       { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
