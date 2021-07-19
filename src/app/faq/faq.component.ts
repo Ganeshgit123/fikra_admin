@@ -162,10 +162,9 @@ export class FaqComponent implements OnInit {
     object['role'] = this.role;
 
      var params = {
-      url: 'admin/updateFAQContent',
+      url: 'admin/updateFAQStatus',
       data: object
     }
-    console.log("da",params)
     this.apiCall.commonPutService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {
@@ -182,5 +181,38 @@ export class FaqComponent implements OnInit {
         console.log('Error', error)
       }
     )
+  }
+
+  onDeleteFaqStatus(val,id,visible){
+    const object = {}
+
+    object['faqId'] = id;
+    object['_is_visible_'] = visible;
+    object['_is_Deleted_'] = val;
+    object['createdBy'] = this.updatedby;
+   object['userType'] = "admin";
+   object['role'] = this.role;
+
+    var params = {
+     url: 'admin/updateFAQStatus',
+     data: object
+   }
+   console.log("da",params)
+   this.apiCall.commonPutService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
   }
 }

@@ -41,27 +41,42 @@ aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
 </div>
 <!-- Table -->
 <div class="table-responsive">
-  <form [formGroup]="updateInvestor" (ngSubmit)="onSubmit()">
 <table id="basic-datatable"
 class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
 <thead>
 <tr>
-  <th *ngFor="let item of getfieldList;let i = index">{{item.fieldName}}</th>
-  <th>Actions</th>
+  <th>User Id</th>
+  <th>Full Name</th>
+  <th>Display Name</th>
+  <th>Email Id</th>
+  <th>Phone Number</th>
+  <th>Admin Approval</th>
+  <th>Mobile Approval</th>
 </tr>
 </thead>
 <tbody>
 <tr *ngFor="let user of abc  | filter:searchTerm">
-<td *ngFor="let data of getData(user)">  {{user[data]}}</td>
-<td class="text-center">
-  <div>
-  <a class="editbutton" routerLink="/view-investors/{{ user.email }}"><i class="fas fa-edit"></i></a>
-  </div>
+  <td><a routerLink="/view-investors/{{ user._id}}">{{user._id}}</a></td>
+  <td>{{user.fullName}}</td>
+  <td>{{user.userName}}</td>
+  <td>{{user.email}}</td>
+  <td>{{user.mobileNumber}}</td>
+  <td>
+    <select class="pend_btn" *ngIf="user._is_admin_arroved_ === false" (change)="onChangeStatus(user._id,user._send_me_newsletter_,$event.target.value)">
+      <option>Pending</option>
+      <option value="true">Approved</option>
+   </select>
+   <select class="apprve_btn" *ngIf="user._is_admin_arroved_ === true" (change)="onChangeStatus(user._id,user._send_me_newsletter_,$event.target.value)">
+    <option>Approved</option>
+    <option value="false">Pending</option>
+ </select>
 </td>
+  <td>
+    <span *ngIf="user._is_mobile_verified_ === true" class="approve_btn">Verified</span>
+    <span *ngIf="user._is_mobile_verified_ === false" class="not_verify_btn">Not Verified</span>
 </tr>
 </tbody>
 </table>
-</form>
 </div>
 <!-- End table -->
 <div class="row justify-content-md-between align-items-md-center mt-2">

@@ -1,1 +1,46 @@
-<p>view-investors works!</p>
+<div class="container-fluid">    
+ <a routerLink="/investors"><app-pagetitle title="Investors" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
+<div class="card">
+<div class="card-body">
+<ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
+<li [ngbNavItem]="1">
+<a ngbNavLink>
+<span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+<span class="d-none d-sm-block">Investors Details</span>
+</a>
+<br>
+<ng-template ngbNavContent>
+  <div class="card">
+    <div class="card-body">
+<div class="row">
+<div class="col-md-4">
+
+</div>
+</div>
+</div>
+</div>
+</ng-template>
+</li>
+<li [ngbNavItem]="2">
+<a ngbNavLink>
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Login History</span>
+</a>
+<ng-template ngbNavContent>
+</ng-template>
+</li>
+<!-- <li [ngbNavItem]="3">
+<a ngbNavLink>
+<span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+<span class="d-none d-sm-block">Login History</span>
+</a>
+<ng-template ngbNavContent>
+</ng-template>
+</li> -->
+</ul>
+<div [ngbNavOutlet]="justifiednav"></div>
+</div>
+</div>
+
+
+</div>

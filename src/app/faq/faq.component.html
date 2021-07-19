@@ -60,7 +60,7 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <td>
     <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewFaq(item,creatorCorner)"><i
         class="mdi mdi-pencil font-size-18"></i></a>  
-    <a class="text-danger" ngbTooltip="Delete"><i
+    <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteFaqStatus(true,item._id,item._is_visible_)"><i
             class="mdi mdi-trash-can font-size-18"></i></a>     
 </td>
 </tr>

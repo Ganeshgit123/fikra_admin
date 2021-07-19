@@ -65,8 +65,7 @@ export class ApiCallService {
       params: new HttpParams()
       .set('role',this.role )
       .set('updatedby', this.updatedby)
-      .set('userType', 'admin')
-      .set('_user_scope_', 'investor'),
+      .set('userType', 'admin'),
 
       headers: httpHeaders,
       observe: 'response'

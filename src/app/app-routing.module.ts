@@ -22,6 +22,8 @@ import { CategorySubCategoryComponent } from './settings/category-sub-category/c
 import { StartAProjectComponent } from './start-a-project/start-a-project.component';
 import { ViewInvestorsComponent } from './view-investors/view-investors.component';
 import { FaqComponent } from './faq/faq.component';
+import { RequestListComponent } from './request-list/request-list.component';
+import { RequestDetailsComponent } from './request-details/request-details.component';
 
 const routes: Routes = [
   {
@@ -34,6 +36,8 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent ,canActivate: [AuthGuard]},
       {path: 'investors',component: InvestorsComponent, canActivate: [AuthGuard]},
       {path: 'view-investors/:id',component: ViewInvestorsComponent, canActivate: [AuthGuard]},
+      {path: 'requests',component: RequestListComponent, canActivate: [AuthGuard]},
+      {path: 'view-requests/:id',component: RequestDetailsComponent, canActivate: [AuthGuard]},
       {path: 'projects',component: ProjectsComponent, canActivate: [AuthGuard],},
       {path: 'creators',component: CreatorsComponent, canActivate: [AuthGuard],},
       {path: 'privacy',component: PrivacyPolicyComponent, canActivate: [AuthGuard],},

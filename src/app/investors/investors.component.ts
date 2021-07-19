@@ -65,7 +65,6 @@ export class InvestorsComponent implements OnInit {
 
 
    this._fetchData();
-
  }
 
  
@@ -73,7 +72,7 @@ export class InvestorsComponent implements OnInit {
  _fetchData() {
 
   let params = {
-    url: "admin/getUserListWithFilter",
+    url: "admin/getInvestorList",
   }  
   this.apiCall.userGetService(params).subscribe((result:any)=>{
     let resu = result.body;
@@ -146,8 +145,6 @@ close(data){
 
  onSubmit(){
    
-
-
   const postData = this.updateInvestor.value
   postData['updatedby'] = this.updatedby;
   postData['userType'] = "admin";
@@ -178,5 +175,41 @@ this.apiCall.commonPutService(params).subscribe(
 )
 
  }
+
+ onChangeStatus(id,status,news){
+   const data = {}
+  data['_user_ID_'] = id
+  data['updatedby'] = this.updatedby;
+  data['userType'] = "admin";
+  data['role'] = this.role;
+  data['_userRole_'] = "investor";
+  data['_is_admin_arroved_'] = status;
+  data['_send_me_newsletter_'] = news;
+
+  var params = {
+    url: 'admin/changeInvestorStatus',
+    data: data
+  }
+  console.log("fef",params)
+  this.apiCall.commonPutService(params).subscribe(
+    (response: any) => {
+      if (response.body.error == false) {
+        // Success
+        this.apiCall.showToast('Status Updated Successfully', 'Success', 'successToastr')
+        this.ngOnInit();
+      } else {
+        // Query Error
+        this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+      }
+    },
+    (error) => {
+      this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+      console.log('Error', error)
+    }
+  )
+
+ }
+
+
 }
 

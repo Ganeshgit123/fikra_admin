@@ -56,3 +56,36 @@
     position: absolute;
     right: 0;
   }
+  .approve_btn{
+    color: #00C853;
+    font-weight: 600;
+  }
+.not_verify_btn{
+  color: #F21C47;
+  font-weight: 600;
+}
+select.pend_btn{
+  background: #fff;
+  border: 2px solid #FFC107 ! important;
+  color: #FFC107 ! important;
+  border-radius: 10px;
+  padding: 0px 4px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+select.apprve_btn{
+  background: #fff;
+  border: 2px solid #00C853 ! important;
+  color: #00C853 ! important;
+  border-radius: 10px;
+  padding: 0px 4px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+select:focus{
+  outline: none;
+}
+.list_ul{
+  padding-left: 0;
+  list-style: none;
+}
