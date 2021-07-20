@@ -75,6 +75,10 @@
 </div>
 <div class="modal-body">
 <form [formGroup]="addBannerImg">
+    <div class="form-group">
+        <label>Image Name</label>
+        <input type="text" class="form-control" formControlName="imageName">
+    </div>
 <div class="img_upload">
 <label for="customFile">
 <img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
@@ -97,6 +101,7 @@
 class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
 <thead>
 <tr>
+<th>Image Name</th>
 <th>Image</th>
 <th>ALT tag</th>
 <th>Status</th>
@@ -105,13 +110,20 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 </thead>
 <tbody>
 <tr *ngFor="let item of bannerImage">
+<td>{{item.imageName}}</td>
 <td><p class="text-center"><img src="{{item.imageUrl}}" class="img_size"></p></td>
 <td>{{item.imageAlt}}</td>
-<td *ngIf="item._isImageOn_ == true">Active</td>
 <td>
-    <a href="javascript:void(0);" class="mr-3 text-info" ngbTooltip="Edit"><i
+    <label class="switch">
+        <input *ngIf="item._isImageOn_ == true"  type="checkbox" checked (change)="onchangeImageStatus($event,item._id)">
+        <input *ngIf="item._isImageOn_ !== true" type="checkbox" unchecked (change)="onchangeImageStatus($event,item._id)">
+        <span class="slider"></span>
+    </label>
+</td>
+<td>
+    <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewBanner(item,centerDataModal)"><i
         class="mdi mdi-pencil font-size-18"></i></a>
-    <a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete"><i
+    <a class="text-danger" ngbTooltip="Delete"><i
         class="mdi mdi-trash-can font-size-18"></i></a>
 </td>
 </tr>

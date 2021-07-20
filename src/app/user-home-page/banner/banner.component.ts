@@ -17,6 +17,9 @@ export class BannerComponent implements OnInit {
   addBannerImg: FormGroup;
   imagePreview = null;
   fileUpload: any;
+  isEdit = false;
+  bannerId:any;
+  imageStat:any;
 
   bannerImage: any =[];
  
@@ -45,6 +48,7 @@ export class BannerComponent implements OnInit {
     this.addBannerImg = this.formBuilder.group({
       bannerImage: [''],
       imageAlt: [''],
+      imageName: [''],
     });
 
     this.fetchHomePageLeftData();
@@ -98,13 +102,10 @@ console.log("ddd",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {
-          // Success
-          // console.log("res",response.body)
 
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.ngOnInit();
         } else {
-          // Query Error
           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
         }
       },
@@ -131,9 +132,16 @@ console.log("ddd",params)
   }
 
  bannerImgUpload(){
-console.log("fewfe")
+
+if(this.isEdit){
+  this.bannerEditService(this.addBannerImg.value)
+  return;
+}
+
 
     var postData = new FormData();
+    postData.append('imageAlt', this.addBannerImg.get('imageAlt').value);
+    postData.append('imageName', this.addBannerImg.get('imageName').value);
     postData.append('bannerImage', this.fileUpload);
     postData.append('createdBy', this.updatedby);
     postData.append('userType', 'admin');
@@ -143,7 +151,7 @@ console.log("fewfe")
       url: 'admin/postBannerImage',
       data: postData
     }
-    console.log("img",params)
+    // console.log("img",params)
 
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
@@ -152,6 +160,8 @@ console.log("fewfe")
         if (response.body.error == false) {
      
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.modalService.dismissAll();
+          this.imagePreview = null;
           this.ngOnInit();
         } else {
           // Query Error
@@ -164,6 +174,70 @@ console.log("fewfe")
       } 
     )
 
+  }
+
+  viewBanner(data,centerDataModal: any){
+    this.modalService.open(centerDataModal, { centered: true });
+    this.isEdit = true;
+    this.imagePreview = data['imageUrl'];
+    this.bannerId = data['_id'];
+    this.imageStat = data['_isImageOn_'];
+    this.addBannerImg   = this.formBuilder.group({
+      bannerImage: [''],
+      imageAlt: [data['imageAlt']],
+      imageName: [data['imageName']],
+    })
+
+  }
+
+  bannerEditService(data){
+      
+       var data:any = new FormData();
+       data.append('imageAlt', this.addBannerImg.get('imageAlt').value);
+       data.append('imageName', this.addBannerImg.get('imageName').value);
+       data.append('bannerImage', this.fileUpload);
+       data.append('createdBy', this.updatedby);
+       data.append('userType', 'admin');
+       data.append('role', this.role);
+       data.append('_isImageOn_', true);
+       data.append('imageId', this.bannerId);
+
+
+    var params = {
+      url: 'admin/updateBannerImage',
+      data: data
+    }
+    // console.log("ppp",params)
+    this.apiCall.commonPutService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.isEdit = false;
+          this.modalService.dismissAll();
+          this.imagePreview = null;
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
+
+
+  onchangeImageStatus(values:any,val){
+
+  }
+
+  ngOnDestroy() {
+    this.imagePreview = null;
+    this.addBannerImg.reset();
+    this.modalService.dismissAll();
   }
 
 }

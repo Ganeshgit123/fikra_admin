@@ -197,7 +197,7 @@ export class FaqComponent implements OnInit {
      url: 'admin/updateFAQStatus',
      data: object
    }
-   console.log("da",params)
+  //  console.log("da",params)
    this.apiCall.commonPutService(params).subscribe(
      (response: any) => {
        if (response.body.error == false) {

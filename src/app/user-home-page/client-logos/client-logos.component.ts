@@ -16,6 +16,9 @@ export class ClientLogosComponent implements OnInit {
   imagePreview = null;
   fileUpload: any;
   clientData:any = [];
+  isEdit = false;
+  logoId:any;
+  logoStat:any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -73,6 +76,11 @@ export class ClientLogosComponent implements OnInit {
 
   onSubmit(){
 
+    if(this.isEdit){
+      this.logoEditService(this.addClientLogo.value)
+      return;
+    }
+
     var postData = new FormData();
 
     postData.append('logoName', this.addClientLogo.get('logoName').value);
@@ -87,7 +95,7 @@ export class ClientLogosComponent implements OnInit {
       data: postData
     }
   
-     console.log("img",params)
+    //  console.log("img",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         console.log("res",response)
@@ -108,6 +116,61 @@ export class ClientLogosComponent implements OnInit {
         console.log('Error', error)
       } 
     )
+  }
+
+  viewClientLogo(data,creatorCorner: any){
+    this.modalService.open(creatorCorner, { centered: true });
+    this.isEdit = true;
+    this.imagePreview = data['logoUrl'];
+    this.logoId = data['_id'];
+    this.logoStat = data['_isLogoOn_'];
+
+    this.addClientLogo   = this.formBuilder.group({
+      clientLogo: [''],
+      logoAlt: [data['logoAlt']],
+      logoName: [data['logoName']],
+    })
+
+  }
+
+  logoEditService(data){
+
+    var data:any = new FormData();
+    data.append('logoAlt', this.addClientLogo.get('logoAlt').value);
+    data.append('logoName', this.addClientLogo.get('logoName').value);
+    data.append('clientLogo', this.fileUpload);
+    data.append('createdBy', this.updatedby);
+    data.append('userType', 'admin');
+    data.append('role', this.role);
+    data.append('_isLogoOn_', true);
+    data.append('clientLogoId', this.logoId);
+
+
+ var params = {
+   url: 'admin/updateClientLogo',
+   data: data
+ }
+ // console.log("ppp",params)
+ this.apiCall.commonPutService(params).subscribe(
+   (response: any) => {
+     if (response.body.error == false) {
+       // Success
+       this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+       this.isEdit = false;
+       this.modalService.dismissAll();
+       this.imagePreview = null;
+       this.ngOnInit();
+     } else {
+       // Query Error
+       this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+     }
+   },
+   (error) => {
+     this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+     console.log('Error', error)
+   }
+ )
+
   }
 
   ngOnDestroy() {

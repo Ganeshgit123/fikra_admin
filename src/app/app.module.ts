@@ -58,6 +58,7 @@ import { ViewInvestorsComponent } from './view-investors/view-investors.componen
 import { FaqComponent } from './faq/faq.component';
 import { RequestListComponent } from './request-list/request-list.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
+import { ViewProjectsComponent } from './view-projects/view-projects.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -75,7 +76,7 @@ export function createTranslateLoader(http: HttpClient): any {
     DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, 
     FieldeditComponent, PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent, 
     UserHomePageComponent, AboutPageComponent, SettingsComponent, CategorySubCategoryComponent, 
-    StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent, CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, InvestorFieldComponent, CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, RequestDetailsComponent,
+    StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent, CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, InvestorFieldComponent, CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, RequestDetailsComponent, ViewProjectsComponent,
   ],
   imports: [
     BrowserModule,

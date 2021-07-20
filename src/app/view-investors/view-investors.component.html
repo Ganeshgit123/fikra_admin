@@ -10,15 +10,21 @@
 </a>
 <br>
 <ng-template ngbNavContent>
-  <div class="card">
-    <div class="card-body">
-<div class="row">
-<div class="col-md-4">
-
-</div>
-</div>
-</div>
-</div>
+  <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
+    <thead>
+    <tr>
+     <th *ngFor="let item of getField">{{item.fieldName}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of abc">
+      <td *ngFor="let data of getData(user)">{{user[data]}}</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
 </ng-template>
 </li>
 <li [ngbNavItem]="2">

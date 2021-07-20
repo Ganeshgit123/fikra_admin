@@ -55,7 +55,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let user of getReqList  | filter:searchTerm">
-      <td><a routerLink="/view-investors/{{ user._id}}">{{user.fullName}}</a></td>
+      <td><a routerLink="/view-requests/{{ user._id}}">{{user.fullName}}</a></td>
       <td>{{user.userName}}</td>
       <td>{{user.email}}</td>
       <td>{{user.businessName}}</td>

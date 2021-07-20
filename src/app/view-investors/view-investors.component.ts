@@ -11,9 +11,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ViewInvestorsComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   getuserList: any=[];
-  getfieldList: any=[];
+  getField: any=[];
   userId: number;
-
+  temp = [];
+  abc: any=[];
   
  constructor(private apiCall: ApiCallService,
   private formBuilder: FormBuilder,
@@ -26,21 +27,29 @@ export class ViewInvestorsComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Investors' },{ label: 'Investor Details', active: true }];
     this.route.params.subscribe(params => this.userId = params.id);
     this._fetchData();
+    this._fetchFieldData();
     // this.fetchLoginHist();
 
+  }
+
+  getData(item) {
+    return Object.keys(item);
   }
 
   _fetchData() {
 
     let params = {
       url: "admin/getUserDetailsById",
+      userId : this.userId,
     }  
     this.apiCall.userGetService(params).subscribe((result:any)=>{
       let resu = result.body;
       if(resu.error == false)
       {
         this.getuserList = resu.data;
-         console.log("user",this.getuserList)
+
+     this.temp.push(this.getuserList)
+        //  console.log("user",temp)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -50,6 +59,39 @@ export class ViewInvestorsComponent implements OnInit {
     });
   
   
+   }
+
+   _fetchFieldData(){
+    let params = {
+      url: "admin/getInvestorList",
+    }  
+    this.apiCall.userGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+        this.getField = resu.fields;
+
+        const field_name = this.getField.map((it)=>{
+          return it.fieldId
+        })
+  
+        this.abc = this.temp.map((item)=>{
+          const a = {}
+          field_name.forEach((f)=>{
+            a[f] = item[f]
+  
+          })
+          return item = a
+        })
+        console.log("fef",this.abc)
+
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
+    });
    }
 
 
