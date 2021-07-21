@@ -1,34 +1,30 @@
 <div class="card">
-    <div class="card-body">
-    <form [formGroup]="addNewsLetter">
-    <div class="row">
-    <div class="col-md-6">
-    <label>Newsletter Heading (EN)</label>
-    <div class="form-group">
-    <input type="text" class="form-control" formControlName="subcribeHead">
-    </div>
+<div class="card-body">
+<form [formGroup]="addNewsLetter">
+<div class="row">
+<div class="col-md-6">
+<div class="form-group">
+<label>Newsletter Heading (EN)</label>
+<input type="text" class="form-control" formControlName="subcribeHead">
 </div>
-    <div class="col-md-6">
-    <label>Newsletter Heading (AR)</label>
-    <div class="form-group">
-    <input type="text" class="form-control" formControlName="subcribeHead_ar">
-    </div>
+<div class="form-group">
+<label>Newsletter Content (EN)</label>
+<input type="text" class="form-control" formControlName="subcribeBody">
 </div>
-    <div class="col-md-6">
-        <label>Newsletter Content (EN)</label>
-        <div class="form-group">
-        <input type="text" class="form-control" formControlName="subcribeBody">
-        </div>
-    </div>
-        <div class="col-md-6">
-            <div class="form-group">
-        <label>Newsletter Content (AR)</label>
-        <input type="text" class="form-control" formControlName="subcribeBody_ar">
-        </div>  
-    </div>
-    </div>
-    <br>
-    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="contentUpdate()">Save</button></p>    
-    </form>
-    </div>
-    </div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>Newsletter Heading (AR)</label>
+<input type="text" class="form-control" formControlName="subcribeHead_ar">
+</div>
+<div class="form-group">
+    <label>Newsletter Content (AR)</label>
+<input type="text" class="form-control" formControlName="subcribeBody_ar">
+</div> 
+</div>
+</div>
+<br>
+<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="contentUpdate()">Save</button></p>    
+</form>
+</div>
+</div>

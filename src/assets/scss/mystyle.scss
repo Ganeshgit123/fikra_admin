@@ -92,3 +92,21 @@ select:focus{
 .text-info{
   cursor: pointer;
 }
+.review_btn{
+  background: #fff;
+  border: 2px solid #5664d2 ! important;
+  color: #5664d2 ! important;
+  border-radius: 10px;
+  padding: 0px 4px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.reject_btn{
+  background: #fff;
+  border: 2px solid #F21C47 ! important;
+  color: #F21C47 ! important;
+  border-radius: 10px;
+  padding: 0px 4px;
+  font-weight: 600;
+  line-height: 1.5;
+}

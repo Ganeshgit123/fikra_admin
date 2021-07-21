@@ -1,0 +1,32 @@
+<div class="card">
+<div class="card-body">
+<form [formGroup]="quote" (ngSubmit)="bannerCont()">
+<div class="row">
+<div class="col-md-6">
+<div class="form-group">
+<label>Quote Description (EN)</label>
+<textarea class="form-control" formControlName="quoteDescriptionEn"></textarea>
+</div>
+<div class="form-group">
+<label>Author Name (EN)</label>
+<input type="text" class="form-control" formControlName="quoteAuthorEn">
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>Quote Description (AR)</label>
+<textarea class="form-control" formControlName="quoteDescriptionAr"></textarea>
+</div>
+<div class="form-group">
+<label>Author Name (AR)</label>
+<input type="text" class="form-control" formControlName="quoteAuthorAr">
+</div>
+</div>
+</div>
+
+
+</form>
+<br>
+<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+</div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder,Validators} from '@angular/forms';
+import { FormGroup, FormBuilder,Validators, Form} from '@angular/forms';
 import { ApiCallService } from '../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
@@ -14,6 +14,9 @@ export class AboutPageComponent implements OnInit {
 
   imagePreview = null;
   fileUpload: any;
+  addprofile:FormGroup;
+  addMissionCont:FormGroup;
+  addVisionCont:FormGroup;
 
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -31,6 +34,23 @@ export class AboutPageComponent implements OnInit {
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'CMS' }, { label: 'About Page', active: true }];
 
+    this.addprofile   = this.formBuilder.group({
+      profileContentEN: [''],
+      profileContentAR: [''],
+    })
+
+    this.addMissionCont   = this.formBuilder.group({
+      missionImage: [''],
+      missionContentEn: [''],
+      missionContentAr: [''],
+    })
+
+    this.addVisionCont   = this.formBuilder.group({
+      visionImage: [''],
+      visionContentEn: [''],
+      visionContentAr: [''],
+    })
+
   }
 
   uploadImageFile(event){
@@ -42,5 +62,7 @@ export class AboutPageComponent implements OnInit {
       this.fileUpload = event.target.files[0]
   }
 
-
+  onSubmit(){
+    
+  }
 }

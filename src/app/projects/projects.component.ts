@@ -16,6 +16,7 @@ export class ProjectsComponent implements OnInit {
   role = sessionStorage.getItem('adminRole');
   projectList: any=[];
   searchTerm;
+  addComment:FormGroup;
   
  constructor(
   private apiCall: ApiCallService,
@@ -24,6 +25,10 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Projects List', active: true }];
+
+    this.addComment = this.formBuilder.group({
+      rejection_comment: [''],
+    });
 
     this._fetchData();
   }
@@ -48,6 +53,14 @@ export class ProjectsComponent implements OnInit {
     });
   
   
+   }
+
+   onChangeProjStatus(id,status){
+
+   }
+
+   rejectReason(){
+     
    }
 
 }

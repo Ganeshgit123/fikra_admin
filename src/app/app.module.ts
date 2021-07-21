@@ -59,6 +59,11 @@ import { FaqComponent } from './faq/faq.component';
 import { RequestListComponent } from './request-list/request-list.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
 import { ViewProjectsComponent } from './view-projects/view-projects.component';
+import { StartBannerComponent } from './start-a-project/start-banner/start-banner.component';
+import { QuoteComponent } from './start-a-project/quote/quote.component';
+import { ProjectQComponent } from './start-a-project/project-q/project-q.component';
+import { VideoSectionComponent } from './start-a-project/video-section/video-section.component';
+import { WhyFikraComponent } from './start-a-project/why-fikra/why-fikra.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -76,7 +81,7 @@ export function createTranslateLoader(http: HttpClient): any {
     DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, 
     FieldeditComponent, PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent, 
     UserHomePageComponent, AboutPageComponent, SettingsComponent, CategorySubCategoryComponent, 
-    StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent, CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, InvestorFieldComponent, CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, RequestDetailsComponent, ViewProjectsComponent,
+    StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent, CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, InvestorFieldComponent, CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, ProjectQComponent, VideoSectionComponent, WhyFikraComponent,
   ],
   imports: [
     BrowserModule,

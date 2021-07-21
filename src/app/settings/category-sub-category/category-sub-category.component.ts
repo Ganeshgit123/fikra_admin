@@ -23,21 +23,25 @@ export class CategorySubCategoryComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Settings' }, { label: 'Add Category', active: true }];
 
     this.addNewCategory = this.formBuilder.group({
-      categoryName: [''],
+      categoryNameEn: [''],
+      categoryNameAr: [''],
     });
 
     this.addNewSubCategory = this.formBuilder.group({
       selectCategoryName: [''],
-      subCategoryName: [''],
+      subCategoryNameEN: [''],
+      subCategoryNameAR: [''],
     });
 
     this.addNewCountry = this.formBuilder.group({
-      countryName: [''],
+      countryNameEN: [''],
+      countryNameAR: [''],
     });
 
     this.addNewCity = this.formBuilder.group({
       selectCountry: [''],
-      cityName: [''],
+      cityNameEn: [''],
+      cityNameAr: [''],
     });
 
   }

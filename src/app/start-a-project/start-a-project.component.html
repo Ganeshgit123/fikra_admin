@@ -13,23 +13,7 @@
 <span class="d-none d-sm-block">Banner Section</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-<label>Banner Left Side Content</label>
-<form [formGroup]="bannerLeftCont" (ngSubmit)="bannerCont()">
-<div class="form-group">
-<label>Title</label>
-<input type="text" class="form-control" formControlName="fistContent">
-</div>
-<div class="form-group">
-<label>Description</label>
-<textarea class="form-control" formControlName="descripContent"></textarea>
-</div>
-</form>
-<br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-</div>
-</div>
+    <app-start-banner></app-start-banner>
 </ng-template>
 </li>
 <li [ngbNavItem]="2">
@@ -38,22 +22,7 @@
 <span class="d-none d-sm-block">Quote Section</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-<form [formGroup]="quote" (ngSubmit)="bannerCont()">
-<div class="form-group">
-<label>Quote Description</label>
-<textarea class="form-control" formControlName="quoteDescription"></textarea>
-</div>
-<div class="form-group">
-<label>Author Name</label>
-<input type="text" class="form-control" formControlName="quoteAuthor">
-</div>
-</form>
-<br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-</div>
-</div>
+<app-quote></app-quote>
 </ng-template>
 </li>
 <li [ngbNavItem]="3">
@@ -62,73 +31,7 @@
 <span class="d-none d-sm-block">Project Q&A Section</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-<form [formGroup]="projectTitle" (ngSubmit)="bannerCont()">
-<label>Title</label>
-<div class="row">
-<div class="col-md-10">
-<div class="form-group">
-<textarea class="form-control" formControlName="projTitle"></textarea>
-</div>
-</div>
-<div class="col-md-2">
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-</div>
-</div>
-</form>
-</div>
-</div>
-<div class="card">
-<div class="card-body">
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addQuesAndAns(addQuesAns)">Add New</button></p>
-<!-- Center Modal -->
-<ng-template #addQuesAns let-modal>
-<div class="modal-header">
-<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-</div>
-<div class="modal-body">
-<form [formGroup]="addQues" (ngSubmit)="onSubmit()">
-<div class="form-group">
-<label>Project Question</label>
-<textarea class="form-control" formControlName="projQues"></textarea>
-</div>
-<div class="form-group">
-<label>Project Answer</label>
-<textarea class="form-control" formControlName="projAns"></textarea>
-</div>
-<br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>    
-</form>
-</div>
-</ng-template>
-<div class="table-responsive">
-<table id="basic-datatable"
-class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
-<thead>
-<tr>
-<th>Question</th>
-<th>Answer</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
+<app-project-q></app-project-q>
 </ng-template>
 </li>
 <li [ngbNavItem]="4">
@@ -137,26 +40,7 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <span class="d-none d-sm-block">Video Section</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-<form [formGroup]="video" (ngSubmit)="bannerCont()">
-<div class="form-group">
-<label>Use embeeded vide link Here</label>
-<input type="text" class="form-control" formControlName="videoLink">
-</div>
-<div class="form-group">
-<label>Right side Heading</label>
-<input type="text" class="form-control" formControlName="videoHead">
-</div>
-<div class="form-group">
-<label>Right side Description</label>
-<textarea class="form-control" formControlName="videoDescription"></textarea>
-</div>
-</form>
-<br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-</div>
-</div>
+<app-video-section></app-video-section>
 </ng-template>
 </li>
 <li [ngbNavItem]="5">
@@ -165,42 +49,7 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <span class="d-none d-sm-block">Why Fikra Section</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-<form [formGroup]="whyFikra" (ngSubmit)="bannerCont()">
-<div class="form-group">
-<label>Heading</label>
-<input type="text" class="form-control" formControlName="whyHead">
-</div>
-<div class="form-group">
-<label>1. Question</label>
-<input type="text" class="form-control" formControlName="quesOne">
-</div>
-<div class="form-group">
-<label>1. Answer</label>
-<textarea class="form-control" formControlName="answerOne"></textarea>
-</div>
-<div class="form-group">
-<label>2. Question</label>
-<input type="text" class="form-control" formControlName="quesTwo">
-</div>
-<div class="form-group">
-<label>2. Answer</label>
-<textarea class="form-control" formControlName="answerTwo"></textarea>
-</div>
-<div class="form-group">
-<label>3. Question</label>
-<input type="text" class="form-control" formControlName="quesThree">
-</div>
-<div class="form-group">
-<label>3. Answer</label>
-<textarea class="form-control" formControlName="answerThree"></textarea>
-</div>
-</form>
-<br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-</div>
-</div>
+<app-why-fikra></app-why-fikra>
 </ng-template>
 </li>
 </ul>

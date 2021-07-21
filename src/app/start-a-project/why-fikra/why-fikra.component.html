@@ -1,0 +1,70 @@
+<div class="card">
+<div class="card-body">
+<form [formGroup]="whyFikra" (ngSubmit)="bannerCont()">
+<div class="row">
+<div class="col-md-6">
+    <div class="form-group">
+    <label>Heading (EN)</label>
+    <input type="text" class="form-control" formControlName="whyHeadEn">
+    </div>
+    <div class="form-group">
+    <label>1. Question (EN)</label>
+    <input type="text" class="form-control" formControlName="quesOneEn">
+    </div>
+    <div class="form-group">
+    <label>1. Answer (EN)</label>
+    <textarea class="form-control" formControlName="answerOneEn"></textarea>
+    </div>
+    <div class="form-group">
+    <label>2. Question (EN)</label>
+    <input type="text" class="form-control" formControlName="quesTwoEn">
+    </div>
+    <div class="form-group">
+    <label>2. Answer (EN)</label>
+    <textarea class="form-control" formControlName="answerTwoEn"></textarea>
+    </div>
+    <div class="form-group">
+    <label>3. Question (EN)</label>
+    <input type="text" class="form-control" formControlName="quesThreeEn">
+    </div>
+    <div class="form-group">
+    <label>3. Answer (EN)</label>
+    <textarea class="form-control" formControlName="answerThreeEn"></textarea>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+    <label>Heading (AR)</label>
+    <input type="text" class="form-control" formControlName="whyHeadAr">
+    </div>
+    <div class="form-group">
+    <label>1. Question (AR)</label>
+    <input type="text" class="form-control" formControlName="quesOneAr">
+    </div>
+    <div class="form-group">
+    <label>1. Answer (AR)</label>
+    <textarea class="form-control" formControlName="answerOneAr"></textarea>
+    </div>
+    <div class="form-group">
+    <label>2. Question (AR)</label>
+    <input type="text" class="form-control" formControlName="quesTwoAr">
+    </div>
+    <div class="form-group">
+    <label>2. Answer (AR)</label>
+    <textarea class="form-control" formControlName="answerTwoAr"></textarea>
+    </div>
+    <div class="form-group">
+    <label>3. Question (AR)</label>
+    <input type="text" class="form-control" formControlName="quesThreeAr">
+    </div>
+    <div class="form-group">
+    <label>3. Answer (AR)</label>
+    <textarea class="form-control" formControlName="answerThreeAr"></textarea>
+    </div>
+</div>
+</div>
+<br>
+<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+</form>
+</div>
+</div>
