@@ -19,16 +19,16 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
 </select> entries</label></div>
 </div> -->
 <div class="col-sm-12 col-md-6">
-    <div class="form-group row">
-        <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
-        <div class="col-md-4">
-            <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
-        </div>
-        <label for="example-date-input1" class="col-md-2 col-form-label text-center">End Date</label>
-        <div class="col-md-4">
-            <input class="form-control" type="date" value="2019-08-19" id="example-date-input1">
-        </div>
-        </div>
+<div class="form-group row">
+<label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
+<div class="col-md-4">
+<input class="form-control" type="date" value="2019-08-19" id="example-date-input">
+</div>
+<label for="example-date-input1" class="col-md-2 col-form-label text-center">End Date</label>
+<div class="col-md-4">
+<input class="form-control" type="date" value="2019-08-19" id="example-date-input1">
+</div>
+</div>
 </div>
 <!-- Search -->
 <div class="col-sm-12 col-md-4">
@@ -45,43 +45,47 @@ aria-controls="tickets-table"></label></div>
 class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
 <thead>
 <tr>
-    <th>Project Title</th>
-    <th>Category</th>
-    <th>Sub Category</th>
-    <th>Description</th>
-    <th>User Name</th>
-    <th>Commission</th>
-    <th>Admin Approval</th>
+<th>Project Title</th>
+<th>Category</th>
+<th>Sub Category</th>
+<th>Description</th>
+<th>User Name</th>
+<th>Commission</th>
+<th>Admin Approval</th>
 </tr>
 </thead>
 <tbody>
 <tr *ngFor="let proj of projectList  | filter:searchTerm">
-    <td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>
-    <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'" (change)="onChangeProjStatus(proj._id,$event.target.value)">
-        <option>{{proj.aproval_Status}}</option>
-        <option>approved</option>
-        <option>under_review</option>
-        <option>rejected</option>
-    </select>
-    <select class="apprve_btn" *ngIf="proj.aproval_Status === 'approved'" (change)="onChangeProjStatus(proj._id,$event.target.value)">
-    <option>{{proj.aproval_Status}}</option>
-    <option>rejected</option>
-    </select>
-    <select class="review_btn" *ngIf="proj.aproval_Status === 'under_review'" (change)="onChangeProjStatus(proj._id,$event.target.value)">
-        <option>{{proj.aproval_Status}}</option>
-        <option>approved</option>
-        <option>rejected</option>
-        </select>
-        <select class="reject_btn" *ngIf="proj.aproval_Status === 'rejected'" (change)="onChangeProjStatus(proj._id,$event.target.value)">
-            <option>{{proj.aproval_Status}}</option>
-            </select>
-    </td>
+<td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>
+<select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
+<option>{{proj.aproval_Status}}</option>
+<option>approved</option>
+<option>under_review</option>
+<option>rejected</option>
+</select>
+<select class="apprve_btn" *ngIf="proj.aproval_Status === 'approved'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
+<option>{{proj.aproval_Status}}</option>
+<option>rejected</option>
+</select>
+<select class="review_btn" *ngIf="proj.aproval_Status === 'under_review'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
+<option>{{proj.aproval_Status}}</option>
+<option>approved</option>
+<option>rejected</option>
+</select>
+<select class="reject_btn" *ngIf="proj.aproval_Status === 'rejected'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
+<option>{{proj.aproval_Status}}</option>
+</select>
+</td>
+<td *ngIf="proj.rejection_comment !== ''">
+   Reject Reason <br>
+   {{proj.rejection_comment}}
+</td>
 </tr>
 </tbody>
 </table>
@@ -111,18 +115,18 @@ entries
 </div>
 
 <ng-template #centerDataModal let-modal>
-    <div class="modal-header">
-    <h5 class="modal-title mt-0">Rejection Reason</h5>
-    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-    </div>
-    <div class="modal-body">
-    <form [formGroup]="addComment">
-        <div class="form-group">
-            <label>Reason</label>
-            <textarea class="form-control" formControlName="rejection_comment"></textarea>
-        </div>
-    <br>
-    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="rejectReason()">Save</button></p>
-    </form>
-    </div>
-    </ng-template>
+<div class="modal-header">
+<h5 class="modal-title mt-0">Rejection Reason</h5>
+<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form [formGroup]="addComment">
+<div class="form-group">
+<label>Reason</label>
+<textarea class="form-control" formControlName="rejection_comment"></textarea>
+</div>
+<br>
+<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="rejectReason()">Save</button></p>
+</form>
+</div>
+</ng-template>

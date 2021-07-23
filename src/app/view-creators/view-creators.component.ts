@@ -4,24 +4,24 @@ import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-request-details',
-  templateUrl: './request-details.component.html',
-  styleUrls: ['./request-details.component.scss']
+  selector: 'app-view-creators',
+  templateUrl: './view-creators.component.html',
+  styleUrls: ['./view-creators.component.scss']
 })
-export class RequestDetailsComponent implements OnInit {
+export class ViewCreatorsComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   getuserList: any=[];
   userId: number;
   temp = [];
   getCreatorList = [];
-  
-  constructor(private apiCall: ApiCallService,
+
+   constructor(private apiCall: ApiCallService,
   private formBuilder: FormBuilder,
   private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Requests' },{ label: 'Creator Request Details', active: true }];
+    this.breadCrumbItems = [{ label: 'Creators' },{ label: 'Creator Details', active: true }];
     this.route.params.subscribe(params => this.userId = params.id);
     this._fetchData();
   }
@@ -55,4 +55,3 @@ export class RequestDetailsComponent implements OnInit {
    }
 
 }
-

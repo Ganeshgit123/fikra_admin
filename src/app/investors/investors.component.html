@@ -55,20 +55,20 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 </tr>
 </thead>
 <tbody>
-<tr *ngFor="let user of abc  | filter:searchTerm">
+<tr *ngFor="let user of getuserList  | filter:searchTerm">
   <td><a routerLink="/view-investors/{{ user._id}}">{{user.fullName}}</a></td>
   <td>{{user.userName}}</td>
   <td>{{user.email}}</td>
   <td>{{user.mobileNumber}}</td>
   <td>{{user.city}}</td>
   <td>
-    <select class="pend_btn" *ngIf="user._is_admin_arroved_ == false" (change)="onChangeStatus(user._id,user._send_me_newsletter_,$event.target.value)">
+    <select class="pend_btn" *ngIf="user._is_admin_arroved_ == false" (change)="onChangeStatus(user._id,$event.target.value,user._send_me_newsletter_)">
       <option>Pending</option>
-      <option value="true">Approved</option>
+      <option>Approved</option>
    </select>
-   <select class="apprve_btn" *ngIf="user._is_admin_arroved_ == true" (change)="onChangeStatus(user._id,user._send_me_newsletter_,$event.target.value)">
+   <select class="apprve_btn" *ngIf="user._is_admin_arroved_ == true" (change)="onChangeStatus(user._id,$event.target.value,user._send_me_newsletter_)">
     <option>Approved</option>
-    <option value="false">Pending</option>
+    <option>Pending</option>
  </select>
 </td>
   <td>

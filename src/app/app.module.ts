@@ -23,14 +23,12 @@ import { DndModule } from 'ngx-drag-drop';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LayoutsModule } from './layouts/layouts.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { FormModule } from './form/form.module';
 import { TablesModule } from './tables/tables.module';
 import { ProjectsComponent } from './projects/projects.component';
 import { InvestorsComponent } from './investors/investors.component';
@@ -64,6 +62,7 @@ import { QuoteComponent } from './start-a-project/quote/quote.component';
 import { ProjectQComponent } from './start-a-project/project-q/project-q.component';
 import { VideoSectionComponent } from './start-a-project/video-section/video-section.component';
 import { WhyFikraComponent } from './start-a-project/why-fikra/why-fikra.component';
+import { ViewCreatorsComponent } from './view-creators/view-creators.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -81,7 +80,7 @@ export function createTranslateLoader(http: HttpClient): any {
     DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, 
     FieldeditComponent, PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent, 
     UserHomePageComponent, AboutPageComponent, SettingsComponent, CategorySubCategoryComponent, 
-    StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent, CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, InvestorFieldComponent, CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, ProjectQComponent, VideoSectionComponent, WhyFikraComponent,
+    StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent, CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, InvestorFieldComponent, CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,9 +104,7 @@ export function createTranslateLoader(http: HttpClient): any {
     PerfectScrollbarModule,
     DndModule,
     FullCalendarModule,
-    FormModule,
     TablesModule,
-    LeafletModule,
     WidgetModule,
     ToastrModule.forRoot(),
     TranslateModule.forRoot({

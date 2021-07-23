@@ -10,21 +10,85 @@
 </a>
 <br>
 <ng-template ngbNavContent>
-  <div class="table-responsive">
-    <table id="basic-datatable"
-    class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
-    <thead>
-    <tr>
-     <th *ngFor="let item of getField">{{item.fieldName}}</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of abc">
-      <td *ngFor="let data of getData(user)">{{user[data]}}</td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
+
+<div class="row"  *ngFor="let item of temp">
+<div class="col-md-3">
+  <div class="card card-body">
+<h6 class="text-center">Full Name</h6>
+<p class="text-center">{{item.fullName}}</p>
+</div>
+</div>
+<div class="col-md-3">
+  <div class="card card-body">
+    <h6 class="text-center">Display Name</h6>
+  <p class="text-center">{{item.userName}}</p>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="card card-body">
+  <h6 class="text-center">Mobile Number</h6>
+  <p class="text-center">{{item.mobileNumber}}</p>
+</div>
+</div>
+<div class="col-md-3">
+  <div class="card card-body">
+  <h6 class="text-center">Email</h6>
+  <p class="text-center">{{item.email}}</p>
+</div>
+</div>
+<div class="col-md-3">
+  <div class="card card-body">
+    <h6 class="text-center">Country</h6>
+  <p class="text-center">{{item.country}}</p>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="card card-body">
+    <h6 class="text-center">City</h6>
+  <p class="text-center">{{item.country}}</p>
+  </div>
+</div>
+<hr>
+<div class="col-md-3">
+  <div class="card card-body">
+  <h6 class="text-center">Street</h6>
+  <p class="text-center">{{item.street}}</p>
+</div>
+</div>
+<div class="col-md-3">
+  <div class="card card-body">
+  <h6 class="text-center">DOB</h6>
+  <p class="text-center">{{item.dob}}</p>
+</div>
+</div>
+<div class="col-md-3">
+  <div class="card card-body">
+  <h6 class="text-center">DOB</h6>
+  <p class="text-center">{{item.dob}}</p>
+</div>
+</div>
+<div class="col-md-3">
+  <div class="card card-body">
+  <h6 class="text-center">Send Me Newsletter</h6>
+  <p class="text-center" *ngIf="item._is_mobile_verified_ == true" >Yes</p>
+  <p class="text-center" *ngIf="item._is_mobile_verified_ == false" >No</p>
+</div>
+</div>
+<div class="col-md-3">
+  <div class="card card-body">
+  <h6 class="text-center">Mobile Verified</h6>
+  <p class="text-center" *ngIf="item._is_mobile_verified_ == true" >Yes</p>
+  <p class="text-center" *ngIf="item._is_mobile_verified_ == false" >No</p>
+</div>
+</div>
+<div class="col-md-3">
+  <div class="card card-body">
+  <h6 class="text-center">Admin Approval</h6>
+  <p class="text-center" *ngIf="item._is_admin_arroved_ == true" >Approved</p>
+  <p class="text-center" *ngIf="item._is_admin_arroved_ == false" >Pending</p>
+</div>
+</div>
+</div>
 </ng-template>
 </li>
 <li [ngbNavItem]="2">
@@ -33,6 +97,33 @@
 <span class="d-none d-sm-block">Login History</span>
 </a>
 <ng-template ngbNavContent>
+  <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
+    <thead>
+    <tr>
+     <th>Login Time</th>
+     <th>Latitude</th>
+     <th>Longitude</th>
+     <th>Logout</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of getuserList">
+      <td>{{item._login_Time}}</td>
+      <td>{{item.lat}}</td>
+      <td>{{item.lang}}</td>
+      <td>
+        <label class="switch">
+          <input *ngIf="item._is_Log_Outted_ == true"  type="checkbox" checked>
+          <input *ngIf="item._is_Log_Outted_ == false" type="checkbox" unchecked>
+          <span class="slider"></span>
+          </label>
+        </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
 </ng-template>
 </li>
 <!-- <li [ngbNavItem]="3">

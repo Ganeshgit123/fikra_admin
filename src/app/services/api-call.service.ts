@@ -63,7 +63,8 @@ export class ApiCallService {
       params: new HttpParams()
       .set('createdby', this.updatedby)
       .set('userType', 'admin')
-      .set('role',this.role ),
+      .set('role',this.role )
+      .set('user_Id',params.user_Id),
       headers: httpHeaders,
       observe: 'response'
     });

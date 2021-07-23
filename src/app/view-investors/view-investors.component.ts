@@ -27,8 +27,8 @@ export class ViewInvestorsComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Investors' },{ label: 'Investor Details', active: true }];
     this.route.params.subscribe(params => this.userId = params.id);
     this._fetchData();
-    this._fetchFieldData();
-    // this.fetchLoginHist();
+    // this._fetchFieldData();
+    this.fetchLoginHist();
 
   }
 
@@ -61,57 +61,57 @@ export class ViewInvestorsComponent implements OnInit {
   
    }
 
-   _fetchFieldData(){
-    let params = {
-      url: "admin/getInvestorList",
-    }  
-    this.apiCall.userGetService(params).subscribe((result:any)=>{
-      let resu = result.body;
-      if(resu.error == false)
-      {
-        this.getField = resu.fields;
+  //  _fetchFieldData(){
+  //   let params = {
+  //     url: "admin/getInvestorList",
+  //   }  
+  //   this.apiCall.userGetService(params).subscribe((result:any)=>{
+  //     let resu = result.body;
+  //     if(resu.error == false)
+  //     {
+  //       this.getField = resu.fields;
 
-        const field_name = this.getField.map((it)=>{
-          return it.fieldId
-        })
+  //       const field_name = this.getField.map((it)=>{
+  //         return it.fieldId
+  //       })
   
-        this.abc = this.temp.map((item)=>{
-          const a = {}
-          field_name.forEach((f)=>{
-            a[f] = item[f]
+  //       this.abc = this.temp.map((item)=>{
+  //         const a = {}
+  //         field_name.forEach((f)=>{
+  //           a[f] = item[f]
   
-          })
-          return item = a
-        })
-        console.log("fef",this.abc)
+  //         })
+  //         return item = a
+  //       })
+  //       console.log("fef",this.abc)
 
-      }else{
-        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
-      }
-    },(error)=>{
-       console.error(error);
+  //     }else{
+  //       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+  //     }
+  //   },(error)=>{
+  //      console.error(error);
        
-    });
-   }
+  //   });
+  //  }
 
 
-//  fetchLoginHist(){
-//   let params = {
-//     url: "admin/getInvestorList",
-//   }  
-//   this.apiCall.userGetService(params).subscribe((result:any)=>{
-//     let resu = result.body;
-//     if(resu.error == false)
-//     {
-//       this.getuserList = resu.data; 
-
-//     }else{
-//       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
-//     }
-//   },(error)=>{
-//      console.error(error);
+ fetchLoginHist(){
+  let params = {
+    url: "admin/getUserHistoryByID",
+    user_Id : this.userId,
+  }  
+  this.apiCall.smallGetService(params).subscribe((result:any)=>{
+    let resu = result.body;
+    if(resu.error == false)
+    {
+      this.getuserList = resu.data; 
+    }else{
+      this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+    }
+  },(error)=>{
+     console.error(error);
      
-//   });
-// }
+  });
+}
 
 }

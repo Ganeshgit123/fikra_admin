@@ -80,21 +80,21 @@ export class InvestorsComponent implements OnInit {
     {
       this.getfieldList = resu.fields;
       this.getuserList = resu.data;
-      this.getuserList.forEach(element => {
-        element['isEdit'] = false;
-      });
-      const field_name = this.getfieldList.map((it)=>{
-        return it.fieldId
-      })
+      // this.getuserList.forEach(element => {
+      //   element['isEdit'] = false;
+      // });
+      // const field_name = this.getfieldList.map((it)=>{
+      //   return it.fieldId
+      // })
 
-      this.abc = this.getuserList.map((item)=>{
-        const a = {}
-        field_name.forEach((f)=>{
-          a[f] = item[f]
+      // this.abc = this.getuserList.map((item)=>{
+      //   const a = {}
+      //   field_name.forEach((f)=>{
+      //     a[f] = item[f]
 
-        })
-        return item = a
-      })
+      //   })
+      //   return item = a
+      // })
 
       // console.log("abc",this.abc)
 
@@ -177,20 +177,26 @@ this.apiCall.commonPutService(params).subscribe(
  }
 
  onChangeStatus(id,status,news){
+
+   if(status === 'Pending'){
+      var stat = false
+   }else{
+    var stat = true
+   }
+  //  console.log("dfe",stat)
    const data = {}
   data['_user_ID_'] = id
   data['updatedby'] = this.updatedby;
   data['userType'] = "admin";
   data['role'] = this.role;
-  data['_userRole_'] = "investor";
-  data['_is_admin_arroved_'] = status;
+  data['_is_admin_arroved_'] = stat;
   data['_send_me_newsletter_'] = news;
 
   var params = {
     url: 'admin/changeInvestorStatus',
     data: data
   }
-  console.log("fef",params)
+  // console.log("fef",params)
   this.apiCall.commonPutService(params).subscribe(
     (response: any) => {
       if (response.body.error == false) {

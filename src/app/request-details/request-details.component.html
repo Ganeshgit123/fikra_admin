@@ -1,1 +1,92 @@
-<p>request-details works!</p>
+<div class="container-fluid">    
+<a routerLink="/requests"><app-pagetitle title="Requests" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
+<div class="card">
+<div class="card-body">
+<ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
+<li [ngbNavItem]="1">
+<a ngbNavLink>
+<span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+<span class="d-none d-sm-block">Requester Details</span>
+</a>
+<br>
+<ng-template ngbNavContent>
+
+<div class="row"  *ngFor="let item of temp">
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Full Name</h6>
+<p class="text-center">{{item.fullName}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Display Name</h6>
+<p class="text-center">{{item.userName}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Mobile Number</h6>
+<p class="text-center">{{item.mobileNumber}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Email</h6>
+<p class="text-center">{{item.email}}</p>
+</div>
+</div>
+</div>
+<div class="row" *ngFor="let creat of getCreatorList">
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Profile Image</h6>
+<p class="text-center"><img src="{{creat.profileImage}}" class="img_size"></p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Profile Story</h6>
+<p class="text-center">{{creat.profileStory}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Account no.</h6>
+<p class="text-center">{{creat.accountNumber}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">IBAN</h6>
+<p class="text-center">{{creat.iban}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Business Name</h6>
+<p class="text-center">{{creat.businessName}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Business Address</h6>
+<p class="text-center">{{creat.businessAddress}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Business Type</h6>
+<p class="text-center">{{creat.businessType}}</p>
+</div>
+</div>
+</div>
+</ng-template>
+</li>
+</ul>
+<div [ngbNavOutlet]="justifiednav"></div>
+</div>
+</div>
+
+
+</div>

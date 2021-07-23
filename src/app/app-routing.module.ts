@@ -25,6 +25,7 @@ import { FaqComponent } from './faq/faq.component';
 import { RequestListComponent } from './request-list/request-list.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
 import { ViewProjectsComponent } from './view-projects/view-projects.component';
+import { ViewCreatorsComponent } from './view-creators/view-creators.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
       {path: 'projects',component: ProjectsComponent, canActivate: [AuthGuard],},
       {path: 'view-projects/:id',component: ViewProjectsComponent, canActivate: [AuthGuard]},
       {path: 'creators',component: CreatorsComponent, canActivate: [AuthGuard],},
+      {path: 'view-creators/:id',component: ViewCreatorsComponent, canActivate: [AuthGuard]},
       {path: 'privacy',component: PrivacyPolicyComponent, canActivate: [AuthGuard],},
       {path: 'cookie_policy',component: CookiePolicyComponent, canActivate: [AuthGuard],},
       {path: 'terms_of_use',component: TermsOfUseComponent, canActivate: [AuthGuard],},
@@ -52,7 +54,6 @@ const routes: Routes = [
       {path: 'faq',component: FaqComponent, canActivate: [AuthGuard],},
       {path: 'start_project_page',component: StartAProjectComponent, canActivate: [AuthGuard],},
       {path: 'category_sub_category',component: CategorySubCategoryComponent, canActivate: [AuthGuard],},
-      { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
       { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     ],
     canActivate: [AuthGuard]
