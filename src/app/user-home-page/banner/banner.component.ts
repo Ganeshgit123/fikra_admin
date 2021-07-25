@@ -98,7 +98,7 @@ export class BannerComponent implements OnInit {
       url: 'admin/postHomeLeftcontentandUpdate',
       data: postData
     }
-console.log("ddd",params)
+// console.log("ddd",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {

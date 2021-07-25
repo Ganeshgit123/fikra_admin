@@ -63,6 +63,12 @@ import { ProjectQComponent } from './start-a-project/project-q/project-q.compone
 import { VideoSectionComponent } from './start-a-project/video-section/video-section.component';
 import { WhyFikraComponent } from './start-a-project/why-fikra/why-fikra.component';
 import { ViewCreatorsComponent } from './view-creators/view-creators.component';
+import { CategoriesComponent } from './settings/category-sub-category/categories/categories.component';
+import { SubCategoriesComponent } from './settings/category-sub-category/sub-categories/sub-categories.component';
+import { CountriesComponent } from './settings/country-city/countries/countries.component';
+import { CitiesComponent } from './settings/country-city/cities/cities.component';
+import { CountryCityComponent } from './settings/country-city/country-city.component';
+import { TagsComponent } from './settings/tags/tags.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -80,7 +86,12 @@ export function createTranslateLoader(http: HttpClient): any {
     DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, 
     FieldeditComponent, PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent, 
     UserHomePageComponent, AboutPageComponent, SettingsComponent, CategorySubCategoryComponent, 
-    StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent, CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, InvestorFieldComponent, CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent,
+    StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent,
+    CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, InvestorFieldComponent, 
+    CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, 
+    RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, ProjectQComponent, 
+    VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
+    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent,
   ],
   imports: [
     BrowserModule,

@@ -96,10 +96,22 @@ export const MENU: MenuItem[] = [
                 link: '/category_sub_category',
                 parentId: 13
             },
+            {
+                id: 17,
+                label: 'MENUITEMS.COUNTRY_CITY.TEXT',
+                link: '/country_city',
+                parentId: 13
+            },
+            {
+                id: 18,
+                label: 'MENUITEMS.TAGGS.TEXT',
+                link: '/tags',
+                parentId: 13
+            },
         ]
     },
     {
-        id: 17,
+        id: 19,
         label: 'MENUITEMS.FORMFIELDEDIT.TEXT',
         icon: 'ri-eraser-fill',
         link: '/form-field-edit'

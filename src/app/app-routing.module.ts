@@ -26,6 +26,8 @@ import { RequestListComponent } from './request-list/request-list.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
 import { ViewProjectsComponent } from './view-projects/view-projects.component';
 import { ViewCreatorsComponent } from './view-creators/view-creators.component';
+import { CountryCityComponent } from './settings/country-city/country-city.component';
+import { TagsComponent } from './settings/tags/tags.component';
 
 const routes: Routes = [
   {
@@ -54,6 +56,8 @@ const routes: Routes = [
       {path: 'faq',component: FaqComponent, canActivate: [AuthGuard],},
       {path: 'start_project_page',component: StartAProjectComponent, canActivate: [AuthGuard],},
       {path: 'category_sub_category',component: CategorySubCategoryComponent, canActivate: [AuthGuard],},
+      {path: 'country_city',component: CountryCityComponent, canActivate: [AuthGuard],},
+      {path: 'tags',component: TagsComponent, canActivate: [AuthGuard],},
       { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     ],
     canActivate: [AuthGuard]

@@ -117,6 +117,12 @@
     "REQUESTS": {
       "TEXT": "Creator Requests"
     },
+    "COUNTRY_CITY": {
+      "TEXT": "Country & City"
+    },
+    "TAGGS": {
+      "TEXT": "Tags"
+    },
 
     
     "LAYOUTS": {
