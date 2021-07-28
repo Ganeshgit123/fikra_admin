@@ -110,3 +110,16 @@ select:focus{
   font-weight: 600;
   line-height: 1.5;
 }
+.section_show{
+  text-align: right;
+}
+.sec_show_ul{
+  padding-left: 0;
+}
+.sec_show_ul li{
+  display: inline-block;
+  padding-left: 10px;
+}
+.sec_show_ul li.text{
+  font-weight: bold;
+}

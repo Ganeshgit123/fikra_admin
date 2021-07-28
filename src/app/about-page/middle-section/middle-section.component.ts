@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,Validators, Form} from '@angular/forms';
-import { ApiCallService } from '../services/api-call.service';
+import { ApiCallService } from '../../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 @Component({
-  selector: 'app-about-page',
-  templateUrl: './about-page.component.html',
-  styleUrls: ['./about-page.component.scss']
+  selector: 'app-middle-section',
+  templateUrl: './middle-section.component.html',
+  styleUrls: ['./middle-section.component.scss']
 })
-export class AboutPageComponent implements OnInit {
-  breadCrumbItems: Array<{}>;
+export class MiddleSectionComponent implements OnInit {
   updatedby:any;
   role:any;
   imagePreview = null;
   fileUpload: any;
-  addBanner:FormGroup;
-  topStatus:any;
+  addMiddleCont:FormGroup;
+  middleStatus:any;
 
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -32,21 +31,18 @@ export class AboutPageComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'CMS' }, { label: 'About Page', active: true }];
-
     this.updatedby = sessionStorage.getItem('adminId');
     this.role = sessionStorage.getItem('adminRole');
 
-    this.addBanner   = this.formBuilder.group({
-      topImage: [''],
-      topHead: [''],
-      topHeadAr: [''],
-      topContent: [''],
-      topContentAr: [''],
+    this.addMiddleCont   = this.formBuilder.group({
+      middleHead: [''],
+      middileContend: [''],
+      middleHeadAr: [''],
+      middileContendAr: [''],
     })
 
-
     this.fetchAboutList();
+
   }
 
   fetchAboutList(){
@@ -57,16 +53,14 @@ export class AboutPageComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
-        this.imagePreview = resu.data.topImage;
-        this.addBanner = this.formBuilder.group({
-          topImage: [''],
-          topHead: [resu.data.topHead,[]],
-          topHeadAr: [resu.data.topHeadAr,[]],
-          topContent: [resu.data.topContent,[]],
-          topContentAr: [resu.data.topContentAr,[]],
+        this.addMiddleCont = this.formBuilder.group({
+          middleHead: [resu.data.middleHead,[]],
+          middileContend: [resu.data.middileContend,[]],
+          middleHeadAr: [resu.data.middleHeadAr,[]],
+          middileContendAr: [resu.data.middileContendAr,[]],
         });
 
-        this.topStatus = resu.data._is_Top_On_;
+        this.middleStatus = resu.data._is_Middle_On_;
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -86,45 +80,36 @@ export class AboutPageComponent implements OnInit {
       this.fileUpload = event.target.files[0]
   }
 
-  onTopUpdate(){
+  onMiddleUpdate(){
+    const postData = this.addMiddleCont.value;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
 
-    var data:any = new FormData();
-    data.append('topHead', this.addBanner.get('topHead').value);
-    data.append('topContent', this.addBanner.get('topContent').value);
-    data.append('topHeadAr', this.addBanner.get('topHeadAr').value);
-    data.append('topContentAr', this.addBanner.get('topContentAr').value);
-    data.append('topImage', this.fileUpload);
-    data.append('createdBy', this.updatedby);
-    data.append('userType', 'admin');
-    data.append('role', this.role);
-
- var params = {
-   url: 'admin/postTopSectionAboutUs',
-   data: data
- }
- // console.log("ppp",params)
- this.apiCall.commonPostService(params).subscribe(
-  (response: any) => {
-    console.log("res",response)
-
-    if (response.body.error == false) {
- 
-      this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-      this.imagePreview = null;
-      this.ngOnInit();
-    } else {
-      // Query Error
-      this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+    var params = {
+      url: 'admin/postMiddleSectionAboutUs',
+      data: postData
     }
-  },
-  (error) => {
-    this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-    console.log('Error', error)
-  } 
-)
+    // console.log("data",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+
   }
 
-  onchangeTopStatus(values:any){
+  onchangeMiddleStatus(values:any){
     if(values.currentTarget.checked === true){
       var visible = true 
      } else {
@@ -132,13 +117,13 @@ export class AboutPageComponent implements OnInit {
      }
      const object = {}
 
-     object['_is_Top_On_'] = visible;
+     object['_is_Middle_On_'] = visible;
      object['createdBy'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;
 
      var params = {
-      url: 'admin/updateStatusTopAboutUs',
+      url: 'admin/updateStatusMiddleAboutUs',
       data: object
     }
     this.apiCall.commonPostService(params).subscribe(
@@ -158,4 +143,5 @@ export class AboutPageComponent implements OnInit {
       }
     )
   }
+
 }

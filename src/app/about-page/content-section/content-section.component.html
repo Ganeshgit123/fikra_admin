@@ -1,0 +1,82 @@
+<div class="card">
+<div class="card-body">
+<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addContents(contentModal)">Add New</button></p>
+<ng-template #contentModal let-modal>
+<div class="modal-header">
+<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form [formGroup]="addContenteSection">
+<div class="row">
+<div class="col-md-12">
+<div class="img_upload">
+<label for="customFile">
+<img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
+<img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
+</label>
+<input type="file" formControlName="secImage" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+</div>
+<div class="form-group">
+<label>Content Section Heading (EN)</label>
+<input type="text" class="form-control" formControlName="secHeadName">
+</div>
+<div class="form-group">
+<label>Content Section Heading (AR)</label>
+<input type="text" class="form-control" formControlName="secHeadNameAr">
+</div>
+<div class="form-group">
+<label>Content Section Description (EN)</label>
+<textarea class="form-control" formControlName="secContent"></textarea>
+</div>
+<div class="form-group">
+<label>Content Section Description (AR)</label>
+<textarea class="form-control" formControlName="secContentAr"></textarea>
+</div>
+<br>
+<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onTopUpdate()">Save</button></p>
+</div>
+</div>
+</form>
+</div>
+</ng-template>
+
+<div class="table-responsive">
+<table id="basic-datatable"
+class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+<thead>
+<tr>
+<th>Heading(EN)</th>
+<th>Heading(AR)</th>
+<th>Description(EN)</th>
+<th>Description(AR)</th>
+<th>Image</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr  *ngFor="let item of sectionList">
+<td>{{item.secHeadName}}</td>
+<td>{{item.secHeadNameAr}}</td>
+<td>{{item.secContent}}</td>
+<td>{{item.secContentAr}}</td>
+<td><p class="text-center"><img src="{{item.secImage}}" class="img_size"></p></td>
+<td>
+    <label class="switch">
+        <input *ngIf="item._is_Sec_On_ == true"  type="checkbox" checked (change)="onchangeContentStatus($event,item._id)">
+        <input *ngIf="item._is_Sec_On_ !== true" type="checkbox" unchecked (change)="onchangeContentStatus($event,item._id)">
+        <span class="slider"></span>
+    </label>
+</td>
+<td>
+<a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewContent(item,contentModal)"><i
+class="mdi mdi-pencil font-size-18"></i></a>
+<a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete"  (click)="onDeleteContentStatus(true,item._id,item._is_Sec_On_)"><i
+class="mdi mdi-trash-can font-size-18"></i></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>

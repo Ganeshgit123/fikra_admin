@@ -10,25 +10,59 @@
 <li [ngbNavItem]="1">
 <a ngbNavLink class="mb-2">
 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-<span class="d-none d-sm-block">Profile Section</span>
+<span class="d-none d-sm-block">Top Section</span>
 </a>
 <ng-template ngbNavContent>
 <div class="card">
 <div class="card-body">
-    <form  [formGroup]="addprofile" (ngSubmit)="onSubmit()">
+    <div class="section_show">
+        <ul class="sec_show_ul">
+            <li class="text">Section Shows in Website</li>
+            <li>
+                <label class="switch">
+                    <input *ngIf="topStatus == true"  type="checkbox" checked (change)="onchangeTopStatus($event)">
+                    <input *ngIf="topStatus !== true" type="checkbox" unchecked (change)="onchangeTopStatus($event)">
+                    <span class="slider"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <form  [formGroup]="addBanner">
 <div class="row">
-<div class="col-md-6">
-    <label>Profile content (EN)</label>
-    <ckeditor [editor]="Editor" formControlName="profileContentEN" (ready)="onReady($event)"></ckeditor>
+<div class="col-md-12">
+    <div class="img_upload">
+        <label for="customFile">
+        <img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
+        <img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
+        </label>
+        <input formControlName="topImage" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+    </div>
 </div>
 <div class="col-md-6">
-    <label>Profile content (AR)</label>
-    <ckeditor [editor]="Editor" formControlName="profileContentAR" (ready)="onReady($event)"></ckeditor>
+    <div class="form-group">
+        <label>Top Heading (EN)</label>
+        <input type="text" class="form-control" formControlName="topHead">
+    </div>
+    <div class="form-group">
+        <label>Top content (EN)</label>
+        <ckeditor [editor]="Editor" formControlName="topContent" (ready)="onReady($event)"></ckeditor>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Top Heading (AR)</label>
+        <input type="text" class="form-control" formControlName="topHeadAr">
+    </div>
+    <div class="form-group">
+        <label>Top content (AR)</label>
+        <ckeditor [editor]="Editor" formControlName="topContentAr" (ready)="onReady($event)"></ckeditor>
+    </div>
 </div>
 </div>
 </form>
 <br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="onTopUpdate()">Save</button></p>
 </div>
 </div>
 </ng-template>
@@ -36,75 +70,19 @@
 <li [ngbNavItem]="2">
 <a ngbNavLink class="mb-2">
 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-<span class="d-none d-sm-block">Our Mission</span>
+<span class="d-none d-sm-block">Content Section</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-    <form [formGroup]="addMissionCont">
-<div class="row">
-<div class="col-md-6">
-<div class="img_upload">
-    <label for="customFile">
-    <img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
-    <img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
-    </label>
-    <input type="file" formControlName="missionImage" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
-    </div>
-</div>
-<div class="col-md-6">
-    <div class="form-group">
-        <label>Mission Content (EN)</label>
-        <textarea class="form-control" formControlName="missionContentEn"></textarea>
-    </div>
-    <div class="form-group">
-        <label>Mission Content (AR)</label>
-        <textarea class="form-control" formControlName="missionContentAr"></textarea>
-    </div>
-</div>
-</div>
-</form>
-<br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-</div>
-</div>
+<app-content-section></app-content-section>
 </ng-template>
 </li>
 <li [ngbNavItem]="3">
 <a ngbNavLink class="mb-2">
 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-<span class="d-none d-sm-block">Our Vision</span>
+<span class="d-none d-sm-block">Middle Section</span>
 </a>
 <ng-template ngbNavContent>
-<div class="card">
-<div class="card-body">
-    <form [formGroup]="addVisionCont">
-    <div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label>Vision Content (EN)</label>
-            <textarea class="form-control" formControlName="visionContentEn"></textarea>
-        </div>
-        <div class="form-group">
-            <label>Vision Content (AR)</label>
-            <textarea class="form-control" formControlName="visionContentAr"></textarea>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="img_upload">
-            <label for="customFile">
-            <img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
-            <img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
-            </label>
-            <input type="file" formControlName="visionImage" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
-            </div>
-        </div>
-    </div>
-</form>
-<br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-</div>
-</div>
+<app-middle-section></app-middle-section>
 </ng-template>
 </li>
 </ul>

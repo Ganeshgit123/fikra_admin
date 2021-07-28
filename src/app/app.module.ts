@@ -69,6 +69,8 @@ import { CountriesComponent } from './settings/country-city/countries/countries.
 import { CitiesComponent } from './settings/country-city/cities/cities.component';
 import { CountryCityComponent } from './settings/country-city/country-city.component';
 import { TagsComponent } from './settings/tags/tags.component';
+import { MiddleSectionComponent } from './about-page/middle-section/middle-section.component';
+import { ContentSectionComponent } from './about-page/content-section/content-section.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -91,7 +93,7 @@ export function createTranslateLoader(http: HttpClient): any {
     CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, 
     RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, ProjectQComponent, 
     VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
-    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent,
+    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, ContentSectionComponent,
   ],
   imports: [
     BrowserModule,

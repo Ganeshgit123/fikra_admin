@@ -37,7 +37,7 @@ export class ApiCallService {
     this.role = sessionStorage.getItem('adminRole');
 
     const httpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
       'auth': this.accToken,
     });
     return this.http.get(this.baseUrl + params.url,  {
