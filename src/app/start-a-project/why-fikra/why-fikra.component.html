@@ -1,70 +1,89 @@
 <div class="card">
 <div class="card-body">
-<form [formGroup]="whyFikra" (ngSubmit)="bannerCont()">
+    <div class="section_show">
+        <ul class="sec_show_ul">
+            <li class="text">Section Shows in Website</li>
+            <li>
+                <label class="switch">
+                    <input *ngIf="whyFikraStatus == true"  type="checkbox" checked (change)="onchangeWhyStatus($event)">
+                    <input *ngIf="whyFikraStatus !== true" type="checkbox" unchecked (change)="onchangeWhyStatus($event)">
+                    <span class="slider"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <hr>
+<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addFikra(addWhyFikra)">Add New</button></p>
+<!-- Center Modal -->
+<ng-template #addWhyFikra let-modal>
+<div class="modal-header">
+<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form [formGroup]="whyFikra">
 <div class="row">
 <div class="col-md-6">
-    <div class="form-group">
-    <label>Heading (EN)</label>
-    <input type="text" class="form-control" formControlName="whyHeadEn">
-    </div>
-    <div class="form-group">
-    <label>1. Question (EN)</label>
-    <input type="text" class="form-control" formControlName="quesOneEn">
-    </div>
-    <div class="form-group">
-    <label>1. Answer (EN)</label>
-    <textarea class="form-control" formControlName="answerOneEn"></textarea>
-    </div>
-    <div class="form-group">
-    <label>2. Question (EN)</label>
-    <input type="text" class="form-control" formControlName="quesTwoEn">
-    </div>
-    <div class="form-group">
-    <label>2. Answer (EN)</label>
-    <textarea class="form-control" formControlName="answerTwoEn"></textarea>
-    </div>
-    <div class="form-group">
-    <label>3. Question (EN)</label>
-    <input type="text" class="form-control" formControlName="quesThreeEn">
-    </div>
-    <div class="form-group">
-    <label>3. Answer (EN)</label>
-    <textarea class="form-control" formControlName="answerThreeEn"></textarea>
-    </div>
+<div class="form-group">
+<label>Question (EN)</label>
+<input type="text" class="form-control" formControlName="why_Head">
+</div>
+<div class="form-group">
+<label>Answer (EN)</label>
+<textarea class="form-control" formControlName="solution"></textarea>
+</div>
 </div>
 <div class="col-md-6">
-    <div class="form-group">
-    <label>Heading (AR)</label>
-    <input type="text" class="form-control" formControlName="whyHeadAr">
-    </div>
-    <div class="form-group">
-    <label>1. Question (AR)</label>
-    <input type="text" class="form-control" formControlName="quesOneAr">
-    </div>
-    <div class="form-group">
-    <label>1. Answer (AR)</label>
-    <textarea class="form-control" formControlName="answerOneAr"></textarea>
-    </div>
-    <div class="form-group">
-    <label>2. Question (AR)</label>
-    <input type="text" class="form-control" formControlName="quesTwoAr">
-    </div>
-    <div class="form-group">
-    <label>2. Answer (AR)</label>
-    <textarea class="form-control" formControlName="answerTwoAr"></textarea>
-    </div>
-    <div class="form-group">
-    <label>3. Question (AR)</label>
-    <input type="text" class="form-control" formControlName="quesThreeAr">
-    </div>
-    <div class="form-group">
-    <label>3. Answer (AR)</label>
-    <textarea class="form-control" formControlName="answerThreeAr"></textarea>
-    </div>
+<div class="form-group">
+<label>Question (AR)</label>
+<input type="text" class="form-control" formControlName="why_HeadAr">
+</div>
+<div class="form-group">
+<label>Answer (AR)</label>
+<textarea class="form-control" formControlName="solutionAr"></textarea>
+</div>
 </div>
 </div>
 <br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="whyFikraSubmit()">Save</button></p>
 </form>
+</div>
+</ng-template>
+<div class="table-responsive">
+<table id="basic-datatable"
+class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+<thead>
+<tr>
+<th>Question(EN)</th>
+<th>Question(AR)</th>
+<th>Answer(EN)</th>
+<th>Answer(AR)</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let item of whyFikraList">
+<td>{{item.why_Head}}</td>
+<td>{{item.why_HeadAr}}</td>
+<td>{{item.solution}}</td>
+<td>{{item.solutionAr   }}</td>
+<td>
+<label class="switch">
+<input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeWhyFikraStatus($event,item._id)">
+<input *ngIf="item._is_on_ !== true" type="checkbox" unchecked (change)="onchangeWhyFikraStatus($event,item._id)">
+<span class="slider"></span>
+</label>    
+</td>
+<td>
+<a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewWhyFikra(item,addWhyFikra)"><i
+class="mdi mdi-pencil font-size-18"></i></a>
+<a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteWhyFikra(true,item._id,item._is_on_)"><i
+class="mdi mdi-trash-can font-size-18"></i></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
 </div>
 </div>

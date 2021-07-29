@@ -1,22 +1,35 @@
 <div class="card">
 <div class="card-body">
-<form [formGroup]="projectTitle" (ngSubmit)="bannerCont()">
+    <div class="section_show">
+        <ul class="sec_show_ul">
+            <li class="text">Section Shows in Website</li>
+            <li>
+                <label class="switch">
+                    <input *ngIf="questionStatus == true"  type="checkbox" checked (change)="onchangeQuesStatus($event)">
+                    <input *ngIf="questionStatus !== true" type="checkbox" unchecked (change)="onchangeQuesStatus($event)">
+                    <span class="slider"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <hr>
+<form [formGroup]="projectTitle">
 <div class="row">
 <div class="col-md-6">
 <div class="form-group">
     <label>Project Title (EN)</label>
-<textarea class="form-control" formControlName="projTitleEn"></textarea>
+<textarea class="form-control" formControlName="headName"></textarea>
 </div>
 </div>
 <div class="col-md-6">
     <div class="form-group">
         <label>Project Title (AR)</label>
-    <textarea class="form-control" formControlName="projTitleAr"></textarea>
+    <textarea class="form-control" formControlName="headNameAr"></textarea>
     </div>
     </div>
 </div>
 <br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
+<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="projTitleSubmit()">Save</button></p>
 </form>
 </div>
 </div>
@@ -29,25 +42,25 @@
 <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
 </div>
 <div class="modal-body">
-<form [formGroup]="addQues" (ngSubmit)="onSubmit()">
+<form [formGroup]="addQues">
 <div class="form-group">
 <label>Project Question (EN)</label>
-<textarea class="form-control" formControlName="projQuesEn"></textarea>
+<textarea class="form-control" formControlName="question"></textarea>
 </div>
 <div class="form-group">
     <label>Project Question (AR)</label>
-    <textarea class="form-control" formControlName="projQuesAr"></textarea>
+    <textarea class="form-control" formControlName="questionAr"></textarea>
     </div>
 <div class="form-group">
 <label>Project Answer (EN)</label>
-<textarea class="form-control" formControlName="projAnsEn"></textarea>
+<textarea class="form-control" formControlName="answer"></textarea>
 </div>
 <div class="form-group">
     <label>Project Answer (AR)</label>
-    <textarea class="form-control" formControlName="projAnsAr"></textarea>
+    <textarea class="form-control" formControlName="answerAr"></textarea>
     </div>
 <br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Save</button></p>    
+<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addQuesSubmit()">Save</button></p>    
 </form>
 </div>
 </ng-template>
@@ -65,25 +78,22 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
+<tr *ngFor="let item of quesAndAnsList">
+<td>{{item.question}}</td>
+<td>{{item.questionAr}}</td>
+<td>{{item.answer}}</td>
+<td>{{item.answerAr}}</td>
 <td>
     <label class="switch">
-        <input  type="checkbox" checked>
+        <input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeQuesAnsStatus($event,item._id)">
+        <input *ngIf="item._is_on_ !== true" type="checkbox" unchecked (change)="onchangeQuesAnsStatus($event,item._id)">
         <span class="slider"></span>
     </label>    
 </td>
 <td>
-    <a class="mr-3 text-info" ngbTooltip="Edit"><i
+    <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewQuesandAns(item,addQuesAns)"><i
         class="mdi mdi-pencil font-size-18"></i></a>
-    <a class="text-danger" ngbTooltip="Delete"><i
+    <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteQuesAndAnsStatus(true,item._id,item._is_on_)"><i
         class="mdi mdi-trash-can font-size-18"></i></a>
 </td>
 </tr>

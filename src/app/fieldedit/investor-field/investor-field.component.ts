@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder,FormControl  } from '@angular/forms';
+import { FormGroup, FormBuilder,FormArray,FormControl  } from '@angular/forms';
 import { ApiCallService } from '../../services/api-call.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ApiCallService } from '../../services/api-call.service';
   styleUrls: ['./investor-field.component.scss']
 })
 export class InvestorFieldComponent implements OnInit {
-
+   
   accToken = sessionStorage.getItem('access_token');
 
   updatedby = sessionStorage.getItem('adminId');
@@ -26,6 +26,7 @@ export class InvestorFieldComponent implements OnInit {
     this.fetchFieldData();
 
   }
+
 
 
   fetchFieldData(){
@@ -46,9 +47,5 @@ export class InvestorFieldComponent implements OnInit {
         
      });
      }
-   
-     submitForm(){
-   
-     }
-
+  
 }

@@ -1,50 +1,50 @@
 <div class="card">
-    <div class="card-body">
-    <label>Banner Left Side Content</label>
-    <form [formGroup]="bannerLeftCont" (ngSubmit)="bannerCont()">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Title (EN)</label>
-                <input type="text" class="form-control" formControlName="banTitleEn">
-            </div>
-            <div class="form-group">
-                <label>Description (EN)</label>
-                <input type="text" class="form-control" formControlName="banDescriptionEn">
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Title (AR)</label>
-                <input type="text" class="form-control" formControlName="banTitleAr">
-            </div>
-            <div class="form-group">
-                <label>Description (AR)</label>
-                <input type="text" class="form-control" formControlName="banDescriptionAr">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>Button Name (EN)</label>
-                <input type="text" class="form-control" formControlName="buttonNameEN">
-            </div>
-            </div>
-            <div class="col-md-4">
-            <div class="form-group">
-                <label>Button Name (AR)</label>
-                <input type="text" class="form-control" formControlName="buttonNameAr">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>Button Link</label>
-                <input type="text" class="form-control" formControlName="buttonLink">
-            </div>
+<div class="card-body">
+<label>Banner Left Side Content</label>
+<form [formGroup]="bannerLeftCont">
+<div class="row">
+<div class="col-md-6">
+<div class="form-group">
+<label>Title (EN)</label>
+<input type="text" class="form-control" formControlName="headName">
+</div>
+<div class="form-group">
+<label>Description (EN)</label>
+<input type="text" class="form-control" formControlName="description">
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>Title (AR)</label>
+<input type="text" class="form-control" formControlName="headNameAr">
+</div>
+<div class="form-group">
+<label>Description (AR)</label>
+<input type="text" class="form-control" formControlName="descriptionAr">
+</div>
+</div>
+<div class="col-md-4">
+<div class="form-group">
+<label>Button Name (EN)</label>
+<input type="text" class="form-control" formControlName="buttonName">
+</div>
+</div>
+<div class="col-md-4">
+<div class="form-group">
+<label>Button Name (AR)</label>
+<input type="text" class="form-control" formControlName="buttonNameAr">
+</div>
+</div>
+<div class="col-md-4">
+<div class="form-group">
+<label>Button Link</label>
+<input type="text" class="form-control" formControlName="buttonURL">
+</div>
 
-        </div>
-    </div>
-    </form>
-    <br>
-    <p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light">Save</button></p>
-    </div>
-    </div>
+</div>
+</div>
+</form>
+<br>
+<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="bannerCont()">Save</button></p>
+</div>
+</div>

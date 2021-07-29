@@ -1,0 +1,33 @@
+<div class="card">
+<div class="card-body">
+    <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Label</label>
+                <input type="text" class="form-control" formControlName="fieldName" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Placeholder</label>
+                <input type="text" class="form-control" formControlName="placeholder" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Input Type</label>
+                <select class="form-control" formControlName="fieldType">
+                    <option value="text">TextBox</option>
+                    <option value="textarea">TextArea</option>
+                    <option value="select">Dropdown</option>
+                    <option value="file">Upload</option>
+                    <option value="checkbox">Checkbox</option>
+                    <option value="radio">Radio Button</option>
+                </select>
+            </div>
+        </div>
+        </div>
+        </form>
+</div>
+</div>
