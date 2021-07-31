@@ -1,1 +1,94 @@
-<p>view-projects works!</p>
+<div class="container-fluid">    
+<a routerLink="/projects"><app-pagetitle title="Project" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
+<!-- <div class="card">
+<div class="card-body"> -->
+<ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
+<li [ngbNavItem]="1">
+<a ngbNavLink>
+<span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+<span class="d-none d-sm-block">Project Details</span>
+</a>
+<br>
+<ng-template ngbNavContent>
+<div class="row">
+<div class="col-md-2">
+<div class="card">
+<div class="card-body">
+<ul ngbNav #verticalNav="ngbNav" [activeId]="1" class="nav-pills flex-column">
+<li [ngbNavItem]="1">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+<span class="d-none d-sm-block">Basic Info</span>
+</a>
+<ng-template ngbNavContent>
+<app-basic-info></app-basic-info>
+</ng-template>
+</li>
+<li [ngbNavItem]="2">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+<span class="d-none d-sm-block">Rewards</span>
+</a>
+<ng-template ngbNavContent>
+<app-rewards></app-rewards>
+</ng-template>
+</li>
+<li [ngbNavItem]="3">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+<span class="d-none d-sm-block">Story</span>
+</a>
+<ng-template ngbNavContent>
+<app-story></app-story>
+</ng-template>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-10">
+
+<div [ngbNavOutlet]="verticalNav"></div>
+
+</div>
+</div>
+</ng-template>
+</li>
+<li [ngbNavItem]="2">
+    <a ngbNavLink>
+    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+    <span class="d-none d-sm-block">Tagged</span>
+    </a>
+    <br>
+    <ng-template ngbNavContent>
+      <div class="card card-body">
+       <div class="row">
+        <div class="col-md-6">
+          <form [formGroup]="addTags">
+           <div class="form-group">
+            <label>Add Tags to this Project</label>
+            <ng-select [items]="tagList "
+               bindLabel="tagName"
+               bindValue="tagName"
+               placeholder="Select Tags"
+               appendTo="body"
+               multiple="true"
+               formControlName="tagsArray"
+               >
+            </ng-select> 
+           </div>
+           <br>
+           <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addTagSubmit()">Save</button></p>
+           </form>
+        </div>
+       </div>
+      </div>
+    </ng-template>
+    </li>
+</ul>
+<div [ngbNavOutlet]="justifiednav"></div>
+<!-- </div>
+</div> -->
+
+
+</div>

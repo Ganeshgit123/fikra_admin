@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-projects',
@@ -20,6 +21,11 @@ export class ProjectsComponent implements OnInit {
   addComment:FormGroup;
   projectId: any;
   projectStatus:any;
+  catName:any;
+  subCatName:any;
+  temp:any;
+  launDate:any;
+  goalAmt:any;
 
  constructor(
   private apiCall: ApiCallService,
@@ -46,8 +52,16 @@ export class ProjectsComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
-                this.projectList = resu.data;
-  // console.log("llll",this.projectList)
+         this.projectList = resu.data;
+         this.projectList.forEach(element => {
+          this.catName = element.basicInfoId.categoryName
+           this.subCatName = element.basicInfoId.subCategoryName
+           this.launDate = element.basicInfoId.launchDate
+           this.goalAmt = element.basicInfoId.goalAmount
+
+          });
+        
+  // console.log("llll", this.temp)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -68,6 +82,8 @@ export class ProjectsComponent implements OnInit {
     if(this.projectStatus === 'rejected'){
       this.modalService.open(centerDataModal, { centered: true });
     }
+
+   
 
     const data = {}
     data['projectId'] = this.projectId
@@ -134,5 +150,50 @@ export class ProjectsComponent implements OnInit {
     )
      
    }
+
+   deleteProject(id){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#34c38f',
+      cancelButtonColor: '#ff3d60',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(result => {
+      if (result.value) {
+    console.log("id",id)
+   const data = {}
+  data['projectId'] = id
+  data['updatedby'] = this.updatedby;
+  data['userType'] = "admin";
+  data['role'] = this.role;
+
+  var params = {
+    url: 'admin/adminProjectDelete',
+    data: data
+  }
+  console.log("fef",params)
+  this.apiCall.commonPutService(params).subscribe(
+    (response: any) => {
+      if (response.body.error == false) {
+        // Success
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+        // this.apiCall.showToast('Status Updated Successfully', 'Success', 'successToastr')
+        this.ngOnInit();
+      } else {
+        // Query Error
+        this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+      }
+    },
+    (error) => {
+      this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+      console.log('Error', error)
+    }
+  )
+      }
+    });
+
+  }
 
 }

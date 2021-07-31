@@ -42,26 +42,26 @@ aria-controls="tickets-table"></label></div>
 <!-- Table -->
 <div class="table-responsive">
 <table id="basic-datatable"
-class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
+class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <thead>
 <tr>
 <th>Project Title</th>
 <th>Category</th>
-<th>Sub Category</th>
-<th>Description</th>
+<th>Launch Date</th>
 <th>User Name</th>
-<th>Commission</th>
+<th>Goal Amount</th>
 <th>Admin Approval</th>
+<th>Recommended</th>
+<th>Action</th>
 </tr>
 </thead>
 <tbody>
 <tr *ngFor="let proj of projectList  | filter:searchTerm">
 <td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
+<td>{{catName}}</td>
+<td>{{launDate}}</td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>{{goalAmt}}</td>
 <td>
 <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
 <option>{{proj.aproval_Status}}</option>
@@ -81,11 +81,22 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 <select class="reject_btn" *ngIf="proj.aproval_Status === 'rejected'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
 <option>{{proj.aproval_Status}}</option>
 </select>
+<span *ngIf="proj.aproval_Status === 'rejected'">
+   <p style="margin: 10px 0;"><strong>Reject Reason:</strong></p>
+   <p>  {{proj.rejection_comment}}</p>
+</span>
 </td>
-<td *ngIf="proj.rejection_comment !== ''">
-   Reject Reason <br>
-   {{proj.rejection_comment}}
+<td>
+   <label class="switch">
+      <input *ngIf="proj._is_Recommeded_ === true"  type="checkbox" checked>
+      <input *ngIf="proj._is_Recommeded_ === false" type="checkbox" unchecked>
+  <span class="slider"></span>
+  </label>   
 </td>
+<td>
+   <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteProject(proj._id)"><i
+     class="mdi mdi-trash-can font-size-18"></i></a>
+ </td>
 </tr>
 </tbody>
 </table>

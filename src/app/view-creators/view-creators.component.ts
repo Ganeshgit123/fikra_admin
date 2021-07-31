@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ViewCreatorsComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   getuserList: any=[];
-  userId: number;
+  userId: any;
   temp = [];
   getCreatorList = [];
 

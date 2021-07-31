@@ -12,6 +12,7 @@ import { ToastrModule } from 'ng6-toastr-notifications';
 
 import { UiModule } from './shared/ui/ui.module';
 import { WidgetModule } from './shared/widget/widget.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { NgbNavModule, NgbDropdownModule, NgbTooltipModule, NgbPaginationModule, NgbTypeaheadModule,
   NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap';
@@ -72,6 +73,10 @@ import { TagsComponent } from './settings/tags/tags.component';
 import { MiddleSectionComponent } from './about-page/middle-section/middle-section.component';
 import { ContentSectionComponent } from './about-page/content-section/content-section.component';
 import { AddNewFieldsComponent } from './fieldedit/investor-field/add-new-fields/add-new-fields.component';
+import { BasicInfoComponent } from './view-projects/basic-info/basic-info.component';
+import { RewardsComponent } from './view-projects/rewards/rewards.component';
+import { StoryComponent } from './view-projects/story/story.component';
+import { PeopleComponent } from './view-projects/people/people.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -94,7 +99,7 @@ export function createTranslateLoader(http: HttpClient): any {
     CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, 
     RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, ProjectQComponent, 
     VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
-    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, ContentSectionComponent, AddNewFieldsComponent,
+    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, ContentSectionComponent, AddNewFieldsComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +114,7 @@ export function createTranslateLoader(http: HttpClient): any {
     CKEditorModule,
     Ng2SearchPipeModule,
     NgbNavModule,
+    NgSelectModule,
     NgbDropdownModule,
     NgbTooltipModule,
     NgbPaginationModule,

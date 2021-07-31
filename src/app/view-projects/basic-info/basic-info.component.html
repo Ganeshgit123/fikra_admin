@@ -1,0 +1,89 @@
+<div class="card card-body">
+<div class="row" *ngFor="let item of basicInfoArray">
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Image</h6>
+<p class="text-center"><img src="{{item.projectImage}}" class="img_size"></p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Title</h6>
+<p class="text-center">{{item.title}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Sub-Title</h6>
+<p class="text-center">{{item.subTitle}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Fund</h6>
+<p class="text-center">
+<span *ngIf="item._is_All_Nothing_ == true">Is All Nothing : <span class="green_color">Yes</span></span>
+<span *ngIf="item._is_All_Nothing_ !== true">Is All Nothing : <span class="red_color">No</span></span>
+</p>
+<p class="text-center">
+<span *ngIf="item._is_Keep_It_All_ == true">Is Keep It All : <span class="green_color">Yes</span></span>
+<span *ngIf="item._is_Keep_It_All_ !== true">Is Keep It All : <span class="red_color">No</span></span>
+</p>
+</div>
+</div>
+</div>
+
+<div class="row" *ngFor="let item of basicInfoArray">
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Description</h6>
+<p class="text-justify">{{item.decription}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Category</h6>
+<p class="text-center">{{item.categoryName}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Sub-category</h6>
+<p class="text-center">{{item.subCategoryName}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Goal Amount</h6>
+<p class="text-center">{{item.goalAmount}}</p>
+</div>
+</div>
+</div>
+
+<div class="row" *ngFor="let item of basicInfoArray">
+    <div class="col-md-3">
+    <div class="card card-body">
+    <h6 class="text-center">Launch Date</h6>
+    <p class="text-center">{{item.launchDate}}</p>
+    </div>
+    </div>
+    <div class="col-md-3">
+    <div class="card card-body">
+    <h6 class="text-center">Campaign Duration</h6>
+    <p class="text-center">{{item.campaignDuation}}</p>
+    </div>
+    </div>
+    <div class="col-md-3">
+    <div class="card card-body">
+    <h6 class="text-center">Country</h6>
+    <p class="text-center">{{item.country}}</p>
+    </div>
+    </div>
+    <div class="col-md-3">
+    <div class="card card-body">
+    <h6 class="text-center">City</h6>
+    <p class="text-center">{{item.city}}</p>
+    </div>
+    </div>
+    </div>
+</div>
