@@ -117,29 +117,29 @@ export const MENU: MenuItem[] = [
         link: '/form-field-edit'
     },
  
-    {
-        id: 49,
-        label: 'MENUITEMS.FORMS.TEXT',
-        icon: 'ri-eraser-fill',
-        subItems: [
-            {
-                id: 50,
-                label: 'MENUITEMS.FORMS.LIST.ELEMENTS',
-                link: '/form/elements',
-                parentId: 49
-            },
-            {
-                id: 52,
-                label: 'MENUITEMS.FORMS.LIST.ADVANCED',
-                link: '/form/advanced',
-                parentId: 49
-            },
-        ]
-    },
-    {
-        id: 57,
-        label: 'MENUITEMS.TABLES.TEXT',
-        icon: 'ri-table-2',
-        link: '/tables/advanced'
-    }
+    // {
+    //     id: 49,
+    //     label: 'MENUITEMS.FORMS.TEXT',
+    //     icon: 'ri-eraser-fill',
+    //     subItems: [
+    //         {
+    //             id: 50,
+    //             label: 'MENUITEMS.FORMS.LIST.ELEMENTS',
+    //             link: '/form/elements',
+    //             parentId: 49
+    //         },
+    //         {
+    //             id: 52,
+    //             label: 'MENUITEMS.FORMS.LIST.ADVANCED',
+    //             link: '/form/advanced',
+    //             parentId: 49
+    //         },
+    //     ]
+    // },
+    // {
+    //     id: 57,
+    //     label: 'MENUITEMS.TABLES.TEXT',
+    //     icon: 'ri-table-2',
+    //     link: '/tables/advanced'
+    // }
 ];

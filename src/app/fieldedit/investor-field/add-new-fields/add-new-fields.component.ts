@@ -15,6 +15,8 @@ export class AddNewFieldsComponent implements OnInit {
   role = sessionStorage.getItem('adminRole');
 
   empForm: FormGroup;
+  dropDown:any;
+  selected;
 
   constructor(
     private apiCall: ApiCallService,
@@ -27,11 +29,40 @@ export class AddNewFieldsComponent implements OnInit {
       fieldName: '',
       fieldType: '',
       placeholder: '',
-      // employees: this.formBuilder.array([])
+      fieldId: '',
+      _is_Mandatory_: '',
+      defauldValue:'',
+      description:'',
+      dropDown: this.formBuilder.array([
+        this.getdropdownValues()
+      ]),
     });
+    this.dropDown = this.empForm.controls.dropDown.value
 
     // this.fetchFieldData();
 
+  }
+
+  private getdropdownValues() {
+    return this.formBuilder.group({
+      displayName: [''],
+      value: [''],
+    })
+  }
+
+  addOptions(){
+    let control = <FormArray>this.empForm.controls.dropDown;
+    control.push(
+      this.formBuilder.group({
+        displayName: [''],
+        value: [''],
+      })
+    )
+  }
+
+  deleteOptions(index){
+    let control = <FormArray>this.empForm.controls.dropDown;
+    control.removeAt(index)
   }
 
   // employees(): FormArray {
