@@ -88,8 +88,8 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 </td>
 <td>
    <label class="switch">
-      <input *ngIf="proj._is_Recommeded_ === true"  type="checkbox" checked>
-      <input *ngIf="proj._is_Recommeded_ === false" type="checkbox" unchecked>
+      <input *ngIf="proj._is_Recommeded_ === true"  type="checkbox" checked (change)="onchangeRecommednStatus(proj._id,$event)">
+      <input *ngIf="proj._is_Recommeded_ === false" type="checkbox" unchecked (change)="onchangeRecommednStatus(proj._id,$event)">
   <span class="slider"></span>
   </label>   
 </td>

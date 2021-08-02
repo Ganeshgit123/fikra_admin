@@ -198,6 +198,7 @@ export class AddNewFieldsComponent implements OnInit {
           this.isEdit = false;
           this.ngOnInit();
           this.router.navigateByUrl('/form-field-edit');
+          window.location.reload();
         } else {
           // Query Error
           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')

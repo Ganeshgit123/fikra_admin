@@ -1,1 +1,65 @@
-<p>rewards works!</p>
+<div class="card card-body">
+<div class="row" *ngFor="let item of rewardArray">
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Title</h6>
+<p class="text-center">{{item.title}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Amount</h6>
+<p class="text-center">{{item.amount}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Description</h6>
+<p class="text-center">{{item.description}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Estimated Time</h6>
+<p class="text-center">{{item.estimateDelivery}}</p>
+</div>
+</div>
+</div>
+
+<div class="row" *ngFor="let item of rewardArray">
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Shipping Type</h6>
+<p class="text-justify">{{item.sippingType}}</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Quality</h6>
+<p class="text-center">{{item.quality}}</p>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Time Limit</h6>
+<p class="text-center">{{item.timeLimit}}</p>
+</div>
+</div>
+</div>
+
+<div class="row" *ngFor="let item of rewardArray">
+<div class="col-md-6">
+<div class="card card-body" *ngFor="let items of item.sipping">
+<h6 class="text-center">Destination : {{items.destination}}</h6>
+<p class="text-center">Cost : {{items.cost}}</p>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card card-body" *ngFor="let iitrem of item.items">
+<h6 class="text-center">Title</h6>
+<p class="text-center">{{iitrem.title}}</p>
+</div>
+</div>
+</div>
+</div>

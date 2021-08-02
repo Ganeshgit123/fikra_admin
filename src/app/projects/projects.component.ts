@@ -196,4 +196,43 @@ export class ProjectsComponent implements OnInit {
 
   }
 
+  onchangeRecommednStatus(id,values:any){
+    // console.log("id",id)
+    if(values.currentTarget.checked === true){
+      var visible = true 
+     } else {
+       var visible = false
+     }
+     const object = {}
+
+     object['_is_Recommeded_'] = visible;
+     object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+    object['projectId'] = id; 
+
+     var params = {
+      url: 'admin/addAsRecommended',
+      data: object
+    }
+    console.log("dd",object)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+
+  }
+
 }
