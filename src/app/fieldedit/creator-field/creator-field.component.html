@@ -2,9 +2,12 @@
     <div class="col-12">
     <div class="card">
     <div class="card-body">
-    <div class="row mb-md-2">
+        <div class="form-group">
+            <p class="text-right"><a routerLink="/add-new-create-field" class="btn btn-primary w-md waves-effect waves-light">Add New</a></p>
+        </div>
+    <!-- <div class="row mb-md-2">
     <div class="col-sm-12 col-md-8">
-    <!-- <div class="dataTables_length" id="tickets-table_length"><label
+    <div class="dataTables_length" id="tickets-table_length"><label
     class="d-inline-flex align-items-center">Show
     <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
     [(ngModel)]="pageSize"
@@ -13,31 +16,32 @@
     <option [ngValue]="25">25</option>
     <option [ngValue]="50">50</option>
     <option [ngValue]="100">100</option>
-    </select> entries</label></div> -->
+    </select> entries</label></div>
     </div>
-    <!-- Search -->
+    Search
     <div class="col-sm-12 col-md-4">
     <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
     class="d-inline-flex align-items-center">Search:
     <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
     aria-controls="tickets-table"></label></div>
     </div>
-    <!-- End search -->
-    </div>
+    End search
+    </div> -->
     <!-- Table -->
     <div class="table-responsive">
     
     <table id="basic-datatable"
     class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
     <thead>
-    <tr>
-        <th>Label</th>
-        <th>Input Type</th>
-        <th>Placeholder</th>
-        <th>Form ControlName</th>
-        <th>Value</th>
-        <th>Required</th>
-    </tr>
+        <tr>
+            <th>Label</th>
+            <th>Input Type</th>
+            <th>Placeholder</th>
+            <th>Form ControlName</th>
+            <th>Value</th>
+            <th>Required</th>
+            <th>Action</th>
+        </tr>
     </thead>
     <tbody>
         <tr *ngFor="let item of getCreatorData;">
@@ -54,6 +58,12 @@
             <td>{{item.fieldId}}</td>
             <td>{{item.defauldValue}}</td>
             <td>{{item._is_Mandatory_}}</td>
+            <td>
+                <a routerLink="/add-new-create-field" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickCreateField(item)"><i
+                    class="mdi mdi-pencil font-size-18"></i></a>  
+                <!-- <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteFaqStatus(true,item._id,item._is_visible_)"><i
+                        class="mdi mdi-trash-can font-size-18"></i></a>  -->
+            </td>
             </tr>
     </tbody>
     </table>

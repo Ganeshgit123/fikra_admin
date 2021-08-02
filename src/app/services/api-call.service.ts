@@ -19,6 +19,20 @@ export class ApiCallService {
 
   constructor(private http: HttpClient, public toastr: ToastrManager) { }
 
+  private cateData = new BehaviorSubject<string>('0');
+  fieldEditFn = this.cateData.asObservable();
+
+  fiedlValue(value) {
+    this.cateData.next(value)
+  }
+
+  private createCateData = new BehaviorSubject<string>('0');
+  createFieldEditFn = this.createCateData.asObservable();
+
+  createFiedlValue(value) {
+    this.createCateData.next(value)
+  }
+
   adminLogin(apiData) {
 
     const httpHeaders = new HttpHeaders({

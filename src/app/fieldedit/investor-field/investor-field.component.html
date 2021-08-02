@@ -40,6 +40,7 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
     <th>Form ControlName</th>
     <th>Value</th>
     <th>Required</th>
+    <th>Action</th>
 </tr>
 </thead>
 <tbody>
@@ -57,6 +58,13 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 <td>{{item.fieldId}}</td>
 <td>{{item.defauldValue}}</td>
 <td>{{item._is_Mandatory_}}</td>
+<td>
+    <a routerLink="/add-investor-field/{{ item._id}}" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickField(item)"><i
+        class="mdi mdi-pencil font-size-18"></i></a>  
+    <!-- <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteFaqStatus(true,item._id,item._is_visible_)"><i
+            class="mdi mdi-trash-can font-size-18"></i></a>  -->
+</td>
+
 </tr>
 </tbody>
 </table>

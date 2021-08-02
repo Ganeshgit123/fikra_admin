@@ -14,6 +14,8 @@ export class CreatorFieldComponent implements OnInit {
   updatedby = sessionStorage.getItem('adminId');
   role = sessionStorage.getItem('adminRole');
 
+  creaFieldId:any;
+
   constructor(
     private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
@@ -43,5 +45,10 @@ export class CreatorFieldComponent implements OnInit {
      });
      }
    
+     clickCreateField(item){
+      this.creaFieldId = item._id
+      item.isEdit = true
+      this.apiCall.createFiedlValue(item)
+     }
 
 }

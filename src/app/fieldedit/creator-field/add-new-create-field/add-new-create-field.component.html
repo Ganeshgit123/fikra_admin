@@ -1,7 +1,7 @@
 <a routerLink="/form-field-edit"><app-pagetitle title="Field Edit" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
 <div class="card">
 <div class="card-body">
-<form [formGroup]="empForm">
+<form [formGroup]="creatorForm">
 <div class="row">
 <div class="col-md-6">
 <div class="form-group">
@@ -25,7 +25,7 @@
 <div class="col-md-12" *ngIf="showAccept == true">
 <button class="btn btn-primary w-md waves-effect waves-light" (click)="addOptions()" style="margin-bottom: 10px;">Add New Option</button>
 <div formArrayName="dropDown">
-<div class="row" *ngFor="let comp of empForm['controls'].dropDown['controls']; let i=index;">
+<div class="row" *ngFor="let comp of creatorForm['controls'].dropDown['controls']; let i=index;">
 <div class="col-md-12" [formGroupName]="i">
 <div class="row">
 <div class="col-md-6">

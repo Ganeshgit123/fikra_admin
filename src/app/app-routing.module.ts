@@ -29,6 +29,7 @@ import { ViewCreatorsComponent } from './view-creators/view-creators.component';
 import { CountryCityComponent } from './settings/country-city/country-city.component';
 import { TagsComponent } from './settings/tags/tags.component';
 import { AddNewFieldsComponent } from './fieldedit/investor-field/add-new-fields/add-new-fields.component';
+import { AddNewCreateFieldComponent } from './fieldedit/creator-field/add-new-create-field/add-new-create-field.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,8 @@ const routes: Routes = [
       {path: 'form-field-edit',component: FieldeditComponent, canActivate: [AuthGuard],},
       {path: 'add-investor-field',component: AddNewFieldsComponent, canActivate: [AuthGuard]},
       {path: 'add-investor-field/:id',component: AddNewFieldsComponent, canActivate: [AuthGuard]},
+      {path: 'add-new-create-field',component: AddNewCreateFieldComponent, canActivate: [AuthGuard]},
+      {path: 'add-new-create-field/:id',component: AddNewCreateFieldComponent, canActivate: [AuthGuard]},
       {path: 'faq',component: FaqComponent, canActivate: [AuthGuard],},
       {path: 'start_project_page',component: StartAProjectComponent, canActivate: [AuthGuard],},
       {path: 'category_sub_category',component: CategorySubCategoryComponent, canActivate: [AuthGuard],},

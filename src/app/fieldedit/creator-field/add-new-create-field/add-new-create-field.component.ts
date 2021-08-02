@@ -4,11 +4,12 @@ import { FormGroup, FormBuilder,FormArray,FormControl  } from '@angular/forms';
 import { ApiCallService } from '../../../services/api-call.service';
 
 @Component({
-  selector: 'app-add-new-fields',
-  templateUrl: './add-new-fields.component.html',
-  styleUrls: ['./add-new-fields.component.scss']
+  selector: 'app-add-new-create-field',
+  templateUrl: './add-new-create-field.component.html',
+  styleUrls: ['./add-new-create-field.component.scss']
 })
-export class AddNewFieldsComponent implements OnInit {
+export class AddNewCreateFieldComponent implements OnInit {
+
   breadCrumbItems: Array<{}>;
 
   accToken = sessionStorage.getItem('access_token');
@@ -16,7 +17,7 @@ export class AddNewFieldsComponent implements OnInit {
   updatedby = sessionStorage.getItem('adminId');
   role = sessionStorage.getItem('adminRole');
 
-  empForm: FormGroup;
+  creatorForm: FormGroup;
   dropDown:any;
   isEdit =false;
   showAccept = false;
@@ -31,7 +32,7 @@ export class AddNewFieldsComponent implements OnInit {
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Field Edit' },{ label: 'New Field', active: true }];
-    this.empForm = this.formBuilder.group({
+    this.creatorForm = this.formBuilder.group({
       fieldName: '',
       fieldType: '',
       placeholder: '',
@@ -46,15 +47,15 @@ export class AddNewFieldsComponent implements OnInit {
     });
 
 
-    this.apiCall.fieldEditFn.subscribe(result => {
+    this.apiCall.createFieldEditFn.subscribe(result => {
       if(result != '0'){
         if(result['isEdit'] === true){
           this.isEdit = true;
           this.showAccept = true;
-          this.editProducts(result)
+          this.editCreateField(result)
         } else {
           this.isEdit = false;
-          this.empForm.reset();
+          this.creatorForm.reset();
         }
         
         }
@@ -62,7 +63,7 @@ export class AddNewFieldsComponent implements OnInit {
       console.log(err);
     });
 
-    // this.dropDown = this.empForm.controls.dropDown.value
+    // this.dropDown = this.creatorForm.controls.dropDown.value
 
     // this.fetchFieldData();
 
@@ -88,7 +89,7 @@ export class AddNewFieldsComponent implements OnInit {
   }
 
   addOptions(){
-    let control = <FormArray>this.empForm.controls.dropDown;
+    let control = <FormArray>this.creatorForm.controls.dropDown;
     control.push(
       this.formBuilder.group({
         displayName: [''],
@@ -98,12 +99,13 @@ export class AddNewFieldsComponent implements OnInit {
   }
 
   deleteOptions(index){
-    let control = <FormArray>this.empForm.controls.dropDown;
+    let control = <FormArray>this.creatorForm.controls.dropDown;
     control.removeAt(index)
   }
 
-  public editProducts(data){
+  public editCreateField(data){
     console.log("edit",data)
+
 
     this.ffiedId = data['_id'] 
 
@@ -116,7 +118,7 @@ export class AddNewFieldsComponent implements OnInit {
       }
     }
 
-    this.empForm = this.formBuilder.group({
+    this.creatorForm = this.formBuilder.group({
       fieldName: [data['fieldName']],
       fieldType: [data['fieldType']],
       placeholder: [data['placeholder']],
@@ -140,30 +142,30 @@ export class AddNewFieldsComponent implements OnInit {
 
 
   onSubmit() {
-    // console.log(this.empForm.value);
+    // console.log(this.creatorForm.value);
 
     if(this.isEdit){
-      this.fieldEditService(this.empForm.value)
+      this.fieldEditService(this.creatorForm.value)
       return;
     }
 
-    const postData = this.empForm.value;
+    const postData = this.creatorForm.value;
     postData['createdBy'] = this.updatedby;
     postData['userType'] = "admin";
     postData['role'] = this.role;
 
     var params = {
-      url: 'admin/saveUserProfileCreationField',
+      url: 'admin/saveCreatorProfileCreationField',
       data: postData
     }
     // console.log("data",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {
-          this.empForm.reset();
+          this.creatorForm.reset();
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-          this.ngOnInit();
           this.router.navigateByUrl('/form-field-edit');
+          this.ngOnInit();
         } else {
           // Query Error
           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
@@ -184,7 +186,7 @@ export class AddNewFieldsComponent implements OnInit {
     data['role'] = this.role;
 
     var params = {
-      url: 'admin/updateUserProfileCreationField',
+      url: 'admin/updateCreatorProfileCreationField',
       data: data
     }
 
@@ -193,11 +195,11 @@ export class AddNewFieldsComponent implements OnInit {
       (response: any) => {
         if (response.body.error == false) {
           // Success
-          this.empForm.reset();
+          this.creatorForm.reset();
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.isEdit = false;
-          this.ngOnInit();
           this.router.navigateByUrl('/form-field-edit');
+          this.ngOnInit();
         } else {
           // Query Error
           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
@@ -208,10 +210,10 @@ export class AddNewFieldsComponent implements OnInit {
         console.log('Error', error)
       }
     )
-
   }
+
   ngOnDestroy() {
-    this.empForm.reset();
+    this.creatorForm.reset();
   }
 
 }

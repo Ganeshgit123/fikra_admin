@@ -52,7 +52,6 @@ import { ClientLogosComponent } from './user-home-page/client-logos/client-logos
 import { FooterContentComponent } from './user-home-page/footer-content/footer-content.component';
 import { InvestorFieldComponent } from './fieldedit/investor-field/investor-field.component';
 import { CreatorFieldComponent } from './fieldedit/creator-field/creator-field.component';
-import { ProjectsFieldComponent } from './fieldedit/projects-field/projects-field.component';
 import { ViewInvestorsComponent } from './view-investors/view-investors.component';
 import { FaqComponent } from './faq/faq.component';
 import { RequestListComponent } from './request-list/request-list.component';
@@ -77,6 +76,7 @@ import { BasicInfoComponent } from './view-projects/basic-info/basic-info.compon
 import { RewardsComponent } from './view-projects/rewards/rewards.component';
 import { StoryComponent } from './view-projects/story/story.component';
 import { PeopleComponent } from './view-projects/people/people.component';
+import { AddNewCreateFieldComponent } from './fieldedit/creator-field/add-new-create-field/add-new-create-field.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -96,10 +96,10 @@ export function createTranslateLoader(http: HttpClient): any {
     UserHomePageComponent, AboutPageComponent, SettingsComponent, CategorySubCategoryComponent, 
     StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent,
     CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, InvestorFieldComponent, 
-    CreatorFieldComponent, ProjectsFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, 
+    CreatorFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, 
     RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, ProjectQComponent, 
     VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
-    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, ContentSectionComponent, AddNewFieldsComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent,
+    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, ContentSectionComponent, AddNewFieldsComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, AddNewCreateFieldComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +109,7 @@ export function createTranslateLoader(http: HttpClient): any {
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     LayoutsModule,
     UiModule,
     CKEditorModule,

@@ -15,6 +15,7 @@ export class InvestorFieldComponent implements OnInit {
   role = sessionStorage.getItem('adminRole');
 
   getfieldData:any=[];
+  fieldId:any;
 
   constructor(
     private apiCall: ApiCallService,
@@ -27,8 +28,6 @@ export class InvestorFieldComponent implements OnInit {
 
   }
 
-
-
   fetchFieldData(){
     let params = {
        url: "admin/getUserProfileCreationField",
@@ -38,7 +37,7 @@ export class InvestorFieldComponent implements OnInit {
        if(resu.error == false)
        {
          this.getfieldData = resu.data;
-         console.log("dafa",this.getfieldData)
+        //  console.log("dafa",this.getfieldData)
        }else{
          this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
        }
@@ -47,5 +46,11 @@ export class InvestorFieldComponent implements OnInit {
         
      });
      }
-  
+
+     clickField(item){
+      this.fieldId = item._id
+      item.isEdit = true
+      this.apiCall.fiedlValue(item)
+     }
+
 }
