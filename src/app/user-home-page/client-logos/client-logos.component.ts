@@ -13,6 +13,7 @@ export class ClientLogosComponent implements OnInit {
   updatedby:any;
   role:any;
   addClientLogo: FormGroup;
+  creativeIndepen: FormGroup;
   imagePreview = null;
   fileUpload: any;
   clientData:any = [];
@@ -36,6 +37,16 @@ export class ClientLogosComponent implements OnInit {
       logoAlt: [''],
     });
 
+    this.creativeIndepen = this.formBuilder.group({
+      headName: [''],
+      headName_ar: [''],
+      discription: [''],
+      discription_ar: [''],
+      buttenName: [''],
+      buttenName_ar: [''],
+      buttonURL: [''],
+    });
+
     this.fetchclientData();
   }
 
@@ -47,6 +58,16 @@ export class ClientLogosComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
+
+        this.creativeIndepen = this.formBuilder.group({
+          headName: [resu.data.headName,[]],
+          headName_ar: [resu.data.headName_ar,[]],
+          discription: [resu.data.discription,[]],
+          discription_ar: [resu.data.discription_ar,[]],
+          buttenName: [resu.data.buttenName,[]],
+          buttenName_ar: [resu.data.buttenName_ar,[]],
+          buttonURL: [resu.data.buttonURL,[]],
+        });
 
         this.clientData = resu.data.clientLogo;
 
@@ -171,6 +192,34 @@ export class ClientLogosComponent implements OnInit {
    }
  )
 
+  }
+
+  onSubmitInde(){
+    const postData = this.creativeIndepen.value;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+
+    var params = {
+      url: 'admin/postCreativeLeftContent',
+      data: postData
+    }
+// console.log("ddd",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
   }
 
   ngOnDestroy() {
