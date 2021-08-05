@@ -18,7 +18,7 @@ export class AddNewFieldsComponent implements OnInit {
 
   empForm: FormGroup;
   dropDown:any;
-  isEdit =false;
+
   showAccept = false;
   ffiedId:any;
 
@@ -45,22 +45,6 @@ export class AddNewFieldsComponent implements OnInit {
       ]),
     });
 
-
-    this.apiCall.fieldEditFn.subscribe(result => {
-      if(result != '0'){
-        if(result['isEdit'] === true){
-          this.isEdit = true;
-          this.showAccept = true;
-          this.editProducts(result)
-        } else {
-          this.isEdit = false;
-          this.empForm.reset();
-        }
-        
-        }
-      }, err => {
-      console.log(err);
-    });
 
     // this.dropDown = this.empForm.controls.dropDown.value
 
@@ -102,51 +86,10 @@ export class AddNewFieldsComponent implements OnInit {
     control.removeAt(index)
   }
 
-  public editProducts(data){
-    console.log("edit",data)
-
-    this.ffiedId = data['_id'] 
-
-    var dropDownValue = data['dropDown']
-    var dropDownArray = []
-
-    if(dropDownValue.length > 0){
-      for(var i=0; i < dropDownValue.length; i++){
-        dropDownArray.push(this.dropDownEditArray(dropDownValue[i]))
-      }
-    }
-
-    this.empForm = this.formBuilder.group({
-      fieldName: [data['fieldName']],
-      fieldType: [data['fieldType']],
-      placeholder: [data['placeholder']],
-      fieldId: [data['fieldId']],
-      _is_Mandatory_:[data['_is_Mandatory_']],
-      defauldValue:[data['defauldValue']],
-      description:[data['description']],
-      fieldInputType:[data['fieldInputType']],
-      dropDown: this.formBuilder.array(dropDownArray),
-    });
-
-  }
-
-  dropDownEditArray(obj): FormGroup{
-    // console.log("droparray",obj)
-    return this.formBuilder.group({
-      displayName: [obj.displayName],
-      value: [obj.value],
-    })
-  }
-
+  
 
   onSubmit() {
     // console.log(this.empForm.value);
-
-    if(this.isEdit){
-      this.fieldEditService(this.empForm.value)
-      return;
-    }
-
     const postData = this.empForm.value;
     postData['createdBy'] = this.updatedby;
     postData['userType'] = "admin";
@@ -176,41 +119,6 @@ export class AddNewFieldsComponent implements OnInit {
     )
   }
 
-  fieldEditService(data){
-
-    data['dataId'] = this.ffiedId;
-    data['createdBy'] = this.updatedby;
-    data['userType'] = "admin";
-    data['role'] = this.role;
-
-    var params = {
-      url: 'admin/updateUserProfileCreationField',
-      data: data
-    }
-
-    // console.log("par",params)
-    this.apiCall.commonPutService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          // Success
-          this.empForm.reset();
-          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-          this.isEdit = false;
-          this.ngOnInit();
-          this.router.navigateByUrl('/form-field-edit');
-          window.location.reload();
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-        }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
-      }
-    )
-
-  }
   ngOnDestroy() {
     this.empForm.reset();
   }

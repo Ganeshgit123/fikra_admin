@@ -30,6 +30,7 @@ import { CountryCityComponent } from './settings/country-city/country-city.compo
 import { TagsComponent } from './settings/tags/tags.component';
 import { AddNewFieldsComponent } from './fieldedit/investor-field/add-new-fields/add-new-fields.component';
 import { AddNewCreateFieldComponent } from './fieldedit/creator-field/add-new-create-field/add-new-create-field.component';
+import { EditNewFieldsComponent } from './fieldedit/investor-field/edit-new-fields/edit-new-fields.component';
 
 const routes: Routes = [
   {
@@ -56,7 +57,7 @@ const routes: Routes = [
       {path: 'settings',component: SettingsComponent, canActivate: [AuthGuard],},
       {path: 'form-field-edit',component: FieldeditComponent, canActivate: [AuthGuard],},
       {path: 'add-investor-field',component: AddNewFieldsComponent, canActivate: [AuthGuard]},
-      {path: 'add-investor-field/:id',component: AddNewFieldsComponent, canActivate: [AuthGuard]},
+      {path: 'edit-investor-field/:id',component: EditNewFieldsComponent, canActivate: [AuthGuard]},
       {path: 'add-new-create-field',component: AddNewCreateFieldComponent, canActivate: [AuthGuard]},
       {path: 'add-new-create-field/:id',component: AddNewCreateFieldComponent, canActivate: [AuthGuard]},
       {path: 'faq',component: FaqComponent, canActivate: [AuthGuard],},

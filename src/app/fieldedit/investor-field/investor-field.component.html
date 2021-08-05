@@ -31,8 +31,8 @@ End search
 <div class="table-responsive">
 
 <table id="basic-datatable"
-class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
-<thead>
+class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
+<thead> 
 <tr>
     <th>Label</th>
     <th>Input Type</th>
@@ -57,9 +57,12 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
 <td>{{item.placeholder}}</td>
 <td>{{item.fieldId}}</td>
 <td>{{item.defauldValue}}</td>
-<td>{{item._is_Mandatory_}}</td>
 <td>
-    <a routerLink="/add-investor-field/{{ item._id}}" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickField(item)"><i
+    <span *ngIf="item._is_Mandatory_ == true">Yes</span>
+    <span *ngIf="item._is_Mandatory_ == false">No</span>
+</td>
+<td>
+    <a routerLink="/edit-investor-field/{{ item._id}}" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickField(item)"><i
         class="mdi mdi-pencil font-size-18"></i></a>  
     <!-- <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteFaqStatus(true,item._id,item._is_visible_)"><i
             class="mdi mdi-trash-can font-size-18"></i></a>  -->

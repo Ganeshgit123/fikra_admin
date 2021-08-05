@@ -77,6 +77,7 @@ import { RewardsComponent } from './view-projects/rewards/rewards.component';
 import { StoryComponent } from './view-projects/story/story.component';
 import { PeopleComponent } from './view-projects/people/people.component';
 import { AddNewCreateFieldComponent } from './fieldedit/creator-field/add-new-create-field/add-new-create-field.component';
+import { EditNewFieldsComponent } from './fieldedit/investor-field/edit-new-fields/edit-new-fields.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -99,7 +100,7 @@ export function createTranslateLoader(http: HttpClient): any {
     CreatorFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, 
     RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, ProjectQComponent, 
     VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
-    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, ContentSectionComponent, AddNewFieldsComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, AddNewCreateFieldComponent,
+    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, ContentSectionComponent, AddNewFieldsComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, AddNewCreateFieldComponent, EditNewFieldsComponent,
   ],
   imports: [
     BrowserModule,
