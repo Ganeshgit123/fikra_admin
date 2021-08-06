@@ -16,7 +16,6 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
-import { FieldeditComponent } from './fieldedit/fieldedit.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CategorySubCategoryComponent } from './settings/category-sub-category/category-sub-category.component';
 import { StartAProjectComponent } from './start-a-project/start-a-project.component';
@@ -28,9 +27,12 @@ import { ViewProjectsComponent } from './view-projects/view-projects.component';
 import { ViewCreatorsComponent } from './view-creators/view-creators.component';
 import { CountryCityComponent } from './settings/country-city/country-city.component';
 import { TagsComponent } from './settings/tags/tags.component';
-import { AddNewFieldsComponent } from './fieldedit/investor-field/add-new-fields/add-new-fields.component';
-import { AddNewCreateFieldComponent } from './fieldedit/creator-field/add-new-create-field/add-new-create-field.component';
-import { EditNewFieldsComponent } from './fieldedit/investor-field/edit-new-fields/edit-new-fields.component';
+import { InvestorFormComponent } from './investor-form/investor-form.component';
+import { CreatorsFormComponent } from './creators-form/creators-form.component';
+import { AddInvestorFieldComponent } from './investor-form/add-investor-field/add-investor-field.component';
+import { EditInvestorFieldComponent } from './investor-form/edit-investor-field/edit-investor-field.component';
+import { AddCreatorFieldComponent } from './creators-form/add-creator-field/add-creator-field.component';
+import { EditCreatorFieldComponent } from './creators-form/edit-creator-field/edit-creator-field.component';
 
 const routes: Routes = [
   {
@@ -55,11 +57,12 @@ const routes: Routes = [
       {path: 'home_page',component: UserHomePageComponent, canActivate: [AuthGuard],},
       {path: 'about_page',component: AboutPageComponent, canActivate: [AuthGuard],},
       {path: 'settings',component: SettingsComponent, canActivate: [AuthGuard],},
-      {path: 'form-field-edit',component: FieldeditComponent, canActivate: [AuthGuard],},
-      {path: 'add-investor-field',component: AddNewFieldsComponent, canActivate: [AuthGuard]},
-      {path: 'edit-investor-field/:id',component: EditNewFieldsComponent, canActivate: [AuthGuard]},
-      {path: 'add-new-create-field',component: AddNewCreateFieldComponent, canActivate: [AuthGuard]},
-      {path: 'add-new-create-field/:id',component: AddNewCreateFieldComponent, canActivate: [AuthGuard]},
+      {path: 'investor_form',component: InvestorFormComponent, canActivate: [AuthGuard],},
+      {path: 'creator_form',component: CreatorsFormComponent, canActivate: [AuthGuard],},
+      {path: 'add-investor-field',component: AddInvestorFieldComponent, canActivate: [AuthGuard]},
+      {path: 'edit-investor-field/:id',component: EditInvestorFieldComponent, canActivate: [AuthGuard]},
+      {path: 'add-creator-field',component: AddCreatorFieldComponent, canActivate: [AuthGuard]},
+      {path: 'edit-creator-field/:id',component: EditCreatorFieldComponent, canActivate: [AuthGuard]},
       {path: 'faq',component: FaqComponent, canActivate: [AuthGuard],},
       {path: 'start_project_page',component: StartAProjectComponent, canActivate: [AuthGuard],},
       {path: 'category_sub_category',component: CategorySubCategoryComponent, canActivate: [AuthGuard],},

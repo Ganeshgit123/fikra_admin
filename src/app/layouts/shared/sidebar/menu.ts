@@ -112,9 +112,22 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 19,
-        label: 'MENUITEMS.FORMFIELDEDIT.TEXT',
+        label: 'MENUITEMS.SIGNUPFORM.TEXT',
         icon: 'ri-eraser-fill',
-        link: '/form-field-edit'
+        subItems: [
+            {
+                id: 20,
+                label: 'MENUITEMS.INVESTORS_FORM.TEXT',
+                link: '/investor_form',
+                parentId: 19
+            },
+            {
+                id: 21,
+                label: 'MENUITEMS.CREATORS_FORM.TEXT',
+                link: '/creator_form',
+                parentId: 19
+            },
+        ]
     },
  
     // {

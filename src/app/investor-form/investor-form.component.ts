@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder,FormControl  } from '@angular/forms';
-import { ApiCallService } from '../../services/api-call.service';
+import { FormGroup, FormBuilder,FormArray,FormControl  } from '@angular/forms';
+import { ApiCallService } from '../services/api-call.service';
 
 @Component({
-  selector: 'app-creator-field',
-  templateUrl: './creator-field.component.html',
-  styleUrls: ['./creator-field.component.scss']
+  selector: 'app-investor-form',
+  templateUrl: './investor-form.component.html',
+  styleUrls: ['./investor-form.component.scss']
 })
-export class CreatorFieldComponent implements OnInit {
-  getCreatorData:any=[];
+export class InvestorFormComponent implements OnInit {
+
   accToken = sessionStorage.getItem('access_token');
 
   updatedby = sessionStorage.getItem('adminId');
   role = sessionStorage.getItem('adminRole');
 
-  creaFieldId:any;
+  getfieldData:any=[];
+  fieldId:any;
 
   constructor(
     private apiCall: ApiCallService,
@@ -22,20 +23,21 @@ export class CreatorFieldComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.fetchCreatorFieldData();
+
+    this.fetchFieldData();
 
   }
 
-  fetchCreatorFieldData(){
+  fetchFieldData(){
     let params = {
-       url: "admin/getCreatorProfileCreationField",
+       url: "admin/getUserProfileCreationField",
      }  
      this.apiCall.commonGetService(params).subscribe((result:any)=>{
        let resu = result.body;
        if(resu.error == false)
        {
-         this.getCreatorData = resu.data;
-         console.log("dafa",this.getCreatorData)
+         this.getfieldData = resu.data;
+        //  console.log("dafa",this.getfieldData)
        }else{
          this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
        }
@@ -44,11 +46,12 @@ export class CreatorFieldComponent implements OnInit {
         
      });
      }
-   
-     clickCreateField(item){
-      this.creaFieldId = item._id
+
+     clickField(item){
+      this.fieldId = item._id
       item.isEdit = true
-      this.apiCall.createFiedlValue(item)
+      this.apiCall.fiedlValue(item)
      }
 
 }
+

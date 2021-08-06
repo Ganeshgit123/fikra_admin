@@ -1,4 +1,4 @@
-<a routerLink="/form-field-edit"><app-pagetitle title="Field Edit" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
+<a routerLink="/creator_form"><app-pagetitle title="Edit Field" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
 <div class="card">
 <div class="card-body">
 <form [formGroup]="creatorForm">
@@ -16,6 +16,10 @@
     <option value="text">TextBox</option>
     <option value="textarea">TextArea</option>
     <option value="select">Dropdown</option>
+    <option value="date">Date</option>
+    <option value="email">Email</option>
+    <option value="number">Number</option>
+    <option value="password">Password</option>
     <option value="file">Upload</option>
     <option value="checkbox">Checkbox</option>
     <option value="radio">Radio Button</option>

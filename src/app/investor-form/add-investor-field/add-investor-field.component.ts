@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder,FormArray,FormControl  } from '@angular/forms';
-import { ApiCallService } from '../../../services/api-call.service';
+import { ApiCallService } from '../../services/api-call.service';
 
 @Component({
-  selector: 'app-add-new-fields',
-  templateUrl: './add-new-fields.component.html',
-  styleUrls: ['./add-new-fields.component.scss']
+  selector: 'app-add-investor-field',
+  templateUrl: './add-investor-field.component.html',
+  styleUrls: ['./add-investor-field.component.scss']
 })
-export class AddNewFieldsComponent implements OnInit {
+export class AddInvestorFieldComponent implements OnInit {
+
   breadCrumbItems: Array<{}>;
 
   accToken = sessionStorage.getItem('access_token');
@@ -30,7 +31,7 @@ export class AddNewFieldsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Field Edit' },{ label: 'New Field', active: true }];
+    this.breadCrumbItems = [{ label: 'Investor Signup Form' },{ label: 'Add New Field', active: true }];
     this.empForm = this.formBuilder.group({
       fieldName: '',
       fieldType: '',
@@ -106,7 +107,7 @@ export class AddNewFieldsComponent implements OnInit {
           this.empForm.reset();
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.ngOnInit();
-          this.router.navigateByUrl('/form-field-edit');
+          this.router.navigateByUrl('/investor_form');
         } else {
           // Query Error
           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')

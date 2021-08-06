@@ -35,7 +35,6 @@ import { ProjectsComponent } from './projects/projects.component';
 import { InvestorsComponent } from './investors/investors.component';
 import { CreatorsComponent } from './creators/creators.component';
 import { LoginComponent } from './login/login.component';
-import { FieldeditComponent } from './fieldedit/fieldedit.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
@@ -50,8 +49,7 @@ import { FeaturedTakingoffComponent } from './user-home-page/featured-takingoff/
 import { CreatorsCornerComponent } from './user-home-page/creators-corner/creators-corner.component';
 import { ClientLogosComponent } from './user-home-page/client-logos/client-logos.component';
 import { FooterContentComponent } from './user-home-page/footer-content/footer-content.component';
-import { InvestorFieldComponent } from './fieldedit/investor-field/investor-field.component';
-import { CreatorFieldComponent } from './fieldedit/creator-field/creator-field.component';
+
 import { ViewInvestorsComponent } from './view-investors/view-investors.component';
 import { FaqComponent } from './faq/faq.component';
 import { RequestListComponent } from './request-list/request-list.component';
@@ -71,13 +69,17 @@ import { CountryCityComponent } from './settings/country-city/country-city.compo
 import { TagsComponent } from './settings/tags/tags.component';
 import { MiddleSectionComponent } from './about-page/middle-section/middle-section.component';
 import { ContentSectionComponent } from './about-page/content-section/content-section.component';
-import { AddNewFieldsComponent } from './fieldedit/investor-field/add-new-fields/add-new-fields.component';
 import { BasicInfoComponent } from './view-projects/basic-info/basic-info.component';
 import { RewardsComponent } from './view-projects/rewards/rewards.component';
 import { StoryComponent } from './view-projects/story/story.component';
 import { PeopleComponent } from './view-projects/people/people.component';
-import { AddNewCreateFieldComponent } from './fieldedit/creator-field/add-new-create-field/add-new-create-field.component';
-import { EditNewFieldsComponent } from './fieldedit/investor-field/edit-new-fields/edit-new-fields.component';
+
+import { InvestorFormComponent } from './investor-form/investor-form.component';
+import { CreatorsFormComponent } from './creators-form/creators-form.component';
+import { AddInvestorFieldComponent } from './investor-form/add-investor-field/add-investor-field.component';
+import { EditInvestorFieldComponent } from './investor-form/edit-investor-field/edit-investor-field.component';
+import { AddCreatorFieldComponent } from './creators-form/add-creator-field/add-creator-field.component';
+import { EditCreatorFieldComponent } from './creators-form/edit-creator-field/edit-creator-field.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -93,14 +95,15 @@ export function createTranslateLoader(http: HttpClient): any {
   declarations: [
     AppComponent,
     DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, 
-    FieldeditComponent, PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent, 
+    PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent, 
     UserHomePageComponent, AboutPageComponent, SettingsComponent, CategorySubCategoryComponent, 
     StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent,
-    CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, InvestorFieldComponent, 
-    CreatorFieldComponent, ViewInvestorsComponent, FaqComponent, RequestListComponent, 
-    RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, ProjectQComponent, 
-    VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
-    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, ContentSectionComponent, AddNewFieldsComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, AddNewCreateFieldComponent, EditNewFieldsComponent,
+    CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, ViewInvestorsComponent, FaqComponent,
+    RequestListComponent, RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, 
+    ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
+    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, 
+    ContentSectionComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, InvestorFormComponent, 
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent,
   ],
   imports: [
     BrowserModule,

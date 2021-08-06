@@ -1,0 +1,108 @@
+<a routerLink="/investor_form"><app-pagetitle title="Edit Field" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
+<div class="card">
+<div class="card-body">
+<form [formGroup]="empForm">
+<div class="row">
+<div class="col-md-6">
+<div class="form-group">
+<label>Label</label>
+<input type="text" class="form-control" formControlName="fieldName" />
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>Input Type</label>
+<select (change)="selected($event.target.value)" class="form-control" formControlName="fieldType">
+    <option value="text">TextBox</option>
+    <option value="textarea">TextArea</option>
+    <option value="select">Dropdown</option>
+    <option value="date">Date</option>
+    <option value="email">Email</option>
+    <option value="number">Number</option>
+    <option value="password">Password</option>
+    <option value="file">Upload</option>
+    <option value="checkbox">Checkbox</option>
+    <option value="radio">Radio Button</option>
+</select>
+</div>
+</div>
+<div class="col-md-12" *ngIf="showAccept == true">
+<button class="btn btn-primary w-md waves-effect waves-light" (click)="addOptions()" style="margin-bottom: 10px;">Add New Option</button>
+<div formArrayName="dropDown">
+<div class="row" *ngFor="let comp of empForm['controls'].dropDown['controls']; let i=index;">
+<div class="col-md-12" [formGroupName]="i">
+<div class="row">
+<div class="col-md-6">
+<div class="form-group">
+<label>Dropdown Option Name</label>
+<input type="text" class="form-control" formControlName="displayName" />
+</div>
+</div>
+<div class="col-md-5">
+<div class="form-group">
+<label>Dropdown Option Values</label>
+<input type="text" class="form-control" formControlName="value" />
+</div>
+</div>
+<div class="col-md-1">
+<a class="text-danger delete_btn" ngbTooltip="Delete" (click)="deleteOptions(i)"><i
+class="mdi mdi-trash-can font-size-24"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+    <div class="form-group">
+        <label>Placeholder</label>
+        <input type="text" class="form-control" formControlName="placeholder" />
+        </div>
+</div>
+
+<div class="col-md-4">
+    <div class="form-group">
+        <label>Form Control Name</label>
+        <input type="text" class="form-control" formControlName="fieldId" />
+        </div>
+</div>
+
+<div class="col-md-4">
+    <div class="form-group">
+        <label>Field Input Typer</label>
+        <select class="form-control" formControlName="fieldInputType">
+            <option value="String">String</option>
+            <option value="Boolean">Boolean</option>
+        </select>
+        </div>
+</div>
+
+<div class="col-md-4">
+    <div class="form-group">
+        <label>Required</label>
+        <select class="form-control" formControlName="_is_Mandatory_">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        </div>
+</div>
+<div class="col-md-4">
+    <div class="form-group">
+        <label>Default Value</label>
+        <input type="text" class="form-control" formControlName="defauldValue" />
+        </div>
+</div>
+<div class="col-md-4">
+    <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" formControlName="description"></textarea>
+        </div>
+</div>
+<div class="col-md-12">
+    <p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
+</div>
+</div>
+</form> 
+</div>
+</div>

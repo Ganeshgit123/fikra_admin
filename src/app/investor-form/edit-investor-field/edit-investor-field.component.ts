@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder,FormArray,FormControl  } from '@angular/forms';
-import { ApiCallService } from '../../../services/api-call.service';
+import { ApiCallService } from '../../services/api-call.service';
 
 @Component({
-  selector: 'app-edit-new-fields',
-  templateUrl: './edit-new-fields.component.html',
-  styleUrls: ['./edit-new-fields.component.scss']
+  selector: 'app-edit-investor-field',
+  templateUrl: './edit-investor-field.component.html',
+  styleUrls: ['./edit-investor-field.component.scss']
 })
-export class EditNewFieldsComponent implements OnInit {
+export class EditInvestorFieldComponent implements OnInit {
   breadCrumbItems: Array<{}>;
 
   accToken = sessionStorage.getItem('access_token');
@@ -29,7 +29,7 @@ export class EditNewFieldsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Field Edit' },{ label: 'Edit Field', active: true }];
+    this.breadCrumbItems = [{ label: 'Investor Signup Form' },{ label: 'Edit Field', active: true }];
 
     this.apiCall.fieldEditFn.subscribe(result => {
       if(result != '0'){
@@ -49,7 +49,7 @@ export class EditNewFieldsComponent implements OnInit {
   }
 
   public editProducts(data){
-    console.log("edit",data)
+    // console.log("edit",data)
 
     this.ffiedId = data['_id'] 
 
@@ -142,7 +142,7 @@ export class EditNewFieldsComponent implements OnInit {
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.isEdit = false;
           this.ngOnInit();
-          this.router.navigateByUrl('/form-field-edit');
+          this.router.navigateByUrl('/investor_form');
         } else {
           // Query Error
           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
