@@ -65,8 +65,10 @@ export class EditInvestorFieldComponent implements OnInit {
 
     this.empForm = this.formBuilder.group({
       fieldName: [data['fieldName']],
+      arabicFieldName: [data['arabicFieldName']],
       fieldType: [data['fieldType']],
       placeholder: [data['placeholder']],
+      arabicPlaceholder: [data['arabicPlaceholder']],
       fieldId: [data['fieldId']],
       _is_Mandatory_:[data['_is_Mandatory_']],
       defauldValue:[data['defauldValue']],

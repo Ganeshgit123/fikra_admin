@@ -34,8 +34,10 @@ export class AddInvestorFieldComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Investor Signup Form' },{ label: 'Add New Field', active: true }];
     this.empForm = this.formBuilder.group({
       fieldName: '',
+      arabicFieldName:'',
       fieldType: '',
       placeholder: '',
+      arabicPlaceholder:'',
       fieldId: '',
       _is_Mandatory_: '',
       defauldValue:'',

@@ -3,13 +3,19 @@
 <div class="card-body">
 <form [formGroup]="creatorForm">
 <div class="row">
-<div class="col-md-6">
-<div class="form-group">
-<label>Label</label>
-<input type="text" class="form-control" formControlName="fieldName" />
-</div>
-</div>
-<div class="col-md-6">
+    <div class="col-md-4">
+        <div class="form-group">
+        <label>Label(EN)</label>
+        <input type="text" class="form-control" formControlName="fieldName" />
+        </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+            <label>Label(AR)</label>
+            <input type="text" class="form-control" formControlName="arabicFieldName" />
+            </div>
+            </div>
+<div class="col-md-4">
 <div class="form-group">
 <label>Input Type</label>
 <select (change)="selected($event.target.value)" class="form-control" formControlName="fieldType">
@@ -56,10 +62,18 @@ class="mdi mdi-trash-can font-size-24"></i></a>
 
 <div class="col-md-4">
     <div class="form-group">
-        <label>Placeholder</label>
+        <label>Placeholder(EN)</label>
         <input type="text" class="form-control" formControlName="placeholder" />
         </div>
 </div>
+
+<div class="col-md-4">
+    <div class="form-group">
+        <label>Placeholder(AR)</label>
+        <input type="text" class="form-control" formControlName="arabicPlaceholder" />
+        </div>
+</div>
+
 
 <div class="col-md-4">
     <div class="form-group">

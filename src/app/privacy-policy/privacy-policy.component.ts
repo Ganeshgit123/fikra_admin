@@ -40,6 +40,7 @@ export class PrivacyPolicyComponent implements OnInit {
 
     this.addPrivacy   = this.formBuilder.group({
       privacyContent: [''],
+      privacyContent_Ar: [''],
     })
 
     var params = {
@@ -57,6 +58,7 @@ export class PrivacyPolicyComponent implements OnInit {
 
           this.addPrivacy   = this.formBuilder.group({
             privacyContent: [response.body.data[0].privacyContent,[]],
+            privacyContent_Ar: [response.body.data[0].privacyContent_Ar,[]],
           })
         } else {
           // Query Error

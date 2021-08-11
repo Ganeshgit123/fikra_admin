@@ -40,6 +40,7 @@ export class TermsOfUseComponent implements OnInit {
 
     this.addTerms   = this.formBuilder.group({
       termsContent: [''],
+      termsContent_Ar: [''],
     })
 
     var params = {
@@ -57,6 +58,7 @@ export class TermsOfUseComponent implements OnInit {
 
           this.addTerms   = this.formBuilder.group({
             termsContent: [response.body.data[0].termsContent,[]],
+            termsContent_Ar: [response.body.data[0].termsContent_Ar,[]],
           })
         } else {
           // Query Error

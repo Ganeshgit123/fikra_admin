@@ -42,6 +42,7 @@ export class CookiePolicyComponent implements OnInit {
 
     this.addCookie   = this.formBuilder.group({
       cookieContent: [''],
+      cookieContent_Ar:[''],
     })
 
     var params = {
@@ -59,6 +60,7 @@ export class CookiePolicyComponent implements OnInit {
 
           this.addCookie   = this.formBuilder.group({
             cookieContent: [response.body.data[0].cookieContent,[]],
+            cookieContent_Ar: [response.body.data[0].cookieContent_Ar,[]],
           })
         } else {
           // Query Error

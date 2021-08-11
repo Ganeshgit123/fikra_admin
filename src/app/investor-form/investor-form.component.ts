@@ -37,7 +37,7 @@ export class InvestorFormComponent implements OnInit {
        if(resu.error == false)
        {
          this.getfieldData = resu.data;
-        //  console.log("dafa",this.getfieldData)
+         console.log("dafa",this.getfieldData)
        }else{
          this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
        }

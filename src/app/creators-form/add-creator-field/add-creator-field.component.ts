@@ -35,8 +35,10 @@ export class AddCreatorFieldComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Creator Signup Form' },{ label: 'Add New Field', active: true }];
     this.creatorForm = this.formBuilder.group({
       fieldName: '',
+      arabicFieldName:'',
       fieldType: '',
       placeholder: '',
+      arabicPlaceholder:'',
       fieldId: '',
       _is_Mandatory_: '',
       defauldValue:'',
