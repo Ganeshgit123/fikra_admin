@@ -65,10 +65,10 @@ export class EditInvestorFieldComponent implements OnInit {
 
     this.empForm = this.formBuilder.group({
       fieldName: [data['fieldName']],
-      arabicFieldName: [data['arabicFieldName']],
+      fieldName_Ar: [data['fieldName_Ar']],
       fieldType: [data['fieldType']],
       placeholder: [data['placeholder']],
-      arabicPlaceholder: [data['arabicPlaceholder']],
+      placeholder_Ar: [data['placeholder_Ar']],
       fieldId: [data['fieldId']],
       _is_Mandatory_:[data['_is_Mandatory_']],
       defauldValue:[data['defauldValue']],
@@ -96,6 +96,7 @@ export class EditInvestorFieldComponent implements OnInit {
     control.push(
       this.formBuilder.group({
         displayName: [''],
+        displayName_Ar:[''],
         value: [''],
       })
     )
@@ -111,6 +112,7 @@ export class EditInvestorFieldComponent implements OnInit {
     // console.log("droparray",obj)
     return this.formBuilder.group({
       displayName: [obj.displayName],
+      displayName_Ar:[obj.displayName_Ar],
       value: [obj.value],
     })
   }

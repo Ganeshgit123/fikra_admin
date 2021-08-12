@@ -34,10 +34,10 @@ export class AddInvestorFieldComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Investor Signup Form' },{ label: 'Add New Field', active: true }];
     this.empForm = this.formBuilder.group({
       fieldName: '',
-      arabicFieldName:'',
+      fieldName_Ar:'',
       fieldType: '',
       placeholder: '',
-      arabicPlaceholder:'',
+      placeholder_Ar:'',
       fieldId: '',
       _is_Mandatory_: '',
       defauldValue:'',
@@ -70,6 +70,7 @@ export class AddInvestorFieldComponent implements OnInit {
   private getdropdownValues() {
     return this.formBuilder.group({
       displayName: [''],
+      displayName_Ar:[''],
       value: [''],
     })
   }
@@ -79,6 +80,7 @@ export class AddInvestorFieldComponent implements OnInit {
     control.push(
       this.formBuilder.group({
         displayName: [''],
+        displayName_Ar:[''],
         value: [''],
       })
     )

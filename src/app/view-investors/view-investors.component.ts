@@ -40,7 +40,7 @@ export class ViewInvestorsComponent implements OnInit {
 
     let params = {
       url: "admin/getUserDetailsById",
-      userId : this.userId,
+      userId : this.userId,userRole: "investor",
     }  
     this.apiCall.userGetService(params).subscribe((result:any)=>{
       let resu = result.body;

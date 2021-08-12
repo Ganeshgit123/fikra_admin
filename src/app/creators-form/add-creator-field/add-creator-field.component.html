@@ -12,7 +12,7 @@
 <div class="col-md-4">
     <div class="form-group">
     <label>Label(AR)</label>
-    <input type="text" class="form-control" formControlName="arabicFieldName" />
+    <input type="text" class="form-control" formControlName="fieldName_Ar" />
     </div>
     </div>
 <div class="col-md-4">
@@ -37,29 +37,37 @@
 <div formArrayName="dropDown">
 <div class="row" *ngFor="let comp of creatorForm['controls'].dropDown['controls']; let i=index;">
 <div class="col-md-12" [formGroupName]="i">
+    <div class="row">
+        <div class="col-md-4">
+        <div class="form-group">
+        <label>Dropdown Option Name(EN)</label>
+        <input type="text" class="form-control" formControlName="displayName" />
+        </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Dropdown Option Name(AR)</label>
+                <input type="text" class="form-control" formControlName="displayName_Ar" />
+            </div>
+        </div>
+        <div class="col-md-3">
+        <div class="form-group">
+        <label>Dropdown Option Values</label>
+        <input type="text" class="form-control" formControlName="value" />
+        </div>
+        </div>
+        <div class="col-md-1">
+        <a class="text-danger delete_btn" ngbTooltip="Delete" (click)="deleteOptions(i)"><i
+        class="mdi mdi-trash-can font-size-24"></i></a>
+        </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <div class="row">
-<div class="col-md-6">
-<div class="form-group">
-<label>Dropdown Option Name</label>
-<input type="text" class="form-control" formControlName="displayName" />
-</div>
-</div>
-<div class="col-md-5">
-<div class="form-group">
-<label>Dropdown Option Values</label>
-<input type="text" class="form-control" formControlName="value" />
-</div>
-</div>
-<div class="col-md-1">
-<a class="text-danger delete_btn" ngbTooltip="Delete" (click)="deleteOptions(i)"><i
-class="mdi mdi-trash-can font-size-24"></i></a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
 <div class="col-md-4">
     <div class="form-group">
         <label>Placeholder(EN)</label>
@@ -70,7 +78,7 @@ class="mdi mdi-trash-can font-size-24"></i></a>
 <div class="col-md-4">
     <div class="form-group">
         <label>Placeholder(AR)</label>
-        <input type="text" class="form-control" formControlName="arabicPlaceholder" />
+        <input type="text" class="form-control" formControlName="placeholder_Ar" />
         </div>
 </div>
 

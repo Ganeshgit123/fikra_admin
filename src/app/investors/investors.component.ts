@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChildren, QueryList,PipeTransform } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 import { ApiCallService } from '../services/api-call.service';
-import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder,FormControl } from '@angular/forms';
 
-import { AdvancedSortableDirective, SortEvent,SortDirection } from '../services/advanced-sortable.directive';
+import { AdvancedSortableDirective} from '../services/advanced-sortable.directive';
 
 @Component({
   selector: 'app-investors',
@@ -142,80 +140,6 @@ getTableData(data){
 close(data){
   data.isEdit = false;
  }
-
- onSubmit(){
-   
-  const postData = this.updateInvestor.value
-  postData['updatedby'] = this.updatedby;
-  postData['userType'] = "admin";
-  postData['role'] = this.role;
-  // postData['_user_ID_'] = '60daa9b4547aa766315e0857';
-
-  var params = {
-    url: 'admin/updateUserDetails',
-    data: postData
-  }
-console.log("daa",params)
-
-this.apiCall.commonPutService(params).subscribe(
-  (response: any) => {
-    if (response.body.error == false) {
-      // Success
-      this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-      this.ngOnInit();
-    } else {
-      // Query Error
-      this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-    }
-  },
-  (error) => {
-    this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-    console.log('Error', error)
-  }
-)
-
- }
-
- onChangeStatus(id,status,news){
-
-   if(status === 'Pending'){
-      var stat = false
-   }else{
-    var stat = true
-   }
-  //  console.log("dfe",stat)
-   const data = {}
-  data['_user_ID_'] = id
-  data['updatedby'] = this.updatedby;
-  data['userType'] = "admin";
-  data['role'] = this.role;
-  data['_is_admin_arroved_'] = stat;
-  data['_send_me_newsletter_'] = news;
-
-  var params = {
-    url: 'admin/changeInvestorStatus',
-    data: data
-  }
-  // console.log("fef",params)
-  this.apiCall.commonPutService(params).subscribe(
-    (response: any) => {
-      if (response.body.error == false) {
-        // Success
-        this.apiCall.showToast('Status Updated Successfully', 'Success', 'successToastr')
-        this.ngOnInit();
-      } else {
-        // Query Error
-        this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-      }
-    },
-    (error) => {
-      this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-      console.log('Error', error)
-    }
-  )
-
- }
-
 
 }
 

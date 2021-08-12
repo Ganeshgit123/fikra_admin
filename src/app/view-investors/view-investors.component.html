@@ -18,76 +18,6 @@
 <p class="text-center">{{item.fullName}}</p>
 </div>
 </div>
-<div class="col-md-3">
-  <div class="card card-body">
-    <h6 class="text-center">Display Name</h6>
-  <p class="text-center">{{item.userName}}</p>
-  </div>
-</div>
-<div class="col-md-3">
-  <div class="card card-body">
-  <h6 class="text-center">Mobile Number</h6>
-  <p class="text-center">{{item.mobileNumber}}</p>
-</div>
-</div>
-<div class="col-md-3">
-  <div class="card card-body">
-  <h6 class="text-center">Email</h6>
-  <p class="text-center">{{item.email}}</p>
-</div>
-</div>
-<div class="col-md-3">
-  <div class="card card-body">
-    <h6 class="text-center">Country</h6>
-  <p class="text-center">{{item.country}}</p>
-  </div>
-</div>
-<div class="col-md-3">
-  <div class="card card-body">
-    <h6 class="text-center">City</h6>
-  <p class="text-center">{{item.country}}</p>
-  </div>
-</div>
-<hr>
-<div class="col-md-3">
-  <div class="card card-body">
-  <h6 class="text-center">Street</h6>
-  <p class="text-center">{{item.street}}</p>
-</div>
-</div>
-<div class="col-md-3">
-  <div class="card card-body">
-  <h6 class="text-center">DOB</h6>
-  <p class="text-center">{{item.dob}}</p>
-</div>
-</div>
-<div class="col-md-3">
-  <div class="card card-body">
-  <h6 class="text-center">DOB</h6>
-  <p class="text-center">{{item.dob}}</p>
-</div>
-</div>
-<div class="col-md-3">
-  <div class="card card-body">
-  <h6 class="text-center">Send Me Newsletter</h6>
-  <p class="text-center" *ngIf="item._is_mobile_verified_ == true" >Yes</p>
-  <p class="text-center" *ngIf="item._is_mobile_verified_ == false" >No</p>
-</div>
-</div>
-<div class="col-md-3">
-  <div class="card card-body">
-  <h6 class="text-center">Mobile Verified</h6>
-  <p class="text-center" *ngIf="item._is_mobile_verified_ == true" >Yes</p>
-  <p class="text-center" *ngIf="item._is_mobile_verified_ == false" >No</p>
-</div>
-</div>
-<div class="col-md-3">
-  <div class="card card-body">
-  <h6 class="text-center">Admin Approval</h6>
-  <p class="text-center" *ngIf="item._is_admin_arroved_ == true" >Approved</p>
-  <p class="text-center" *ngIf="item._is_admin_arroved_ == false" >Pending</p>
-</div>
-</div>
 </div>
 </ng-template>
 </li>
@@ -115,8 +45,8 @@
       <td>{{item.lang}}</td>
       <td>
         <label class="switch">
-          <input *ngIf="item._is_Log_Outted_ == true"  type="checkbox" checked>
-          <input *ngIf="item._is_Log_Outted_ == false" type="checkbox" unchecked>
+          <input *ngIf="item._is_Log_Outted_ == true" checked>
+          <input *ngIf="item._is_Log_Outted_ == false" unchecked>
           <span class="slider"></span>
           </label>
         </td>

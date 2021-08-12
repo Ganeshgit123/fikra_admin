@@ -30,7 +30,7 @@ export class ViewCreatorsComponent implements OnInit {
 
     let params = {
       url: "admin/getUserDetailsById",
-      userId : this.userId,
+      userId : this.userId,userRole: "creator",
     }  
     this.apiCall.userGetService(params).subscribe((result:any)=>{
       let resu = result.body;
@@ -39,7 +39,7 @@ export class ViewCreatorsComponent implements OnInit {
         this.getuserList = resu.data;
         this.getCreatorList = resu.data.Creator_details;
  
-         console.log("creator",this.getCreatorList)
+        //  console.log("creator",this.getCreatorList)
 
      this.temp.push(this.getuserList)
         //  console.log("user",temp)

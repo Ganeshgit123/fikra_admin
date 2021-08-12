@@ -25,12 +25,6 @@ export const MENU: MenuItem[] = [
         link: '/investors'
     },
     {
-        id: 5,
-        label: 'MENUITEMS.REQUESTS.TEXT',
-        icon: 'ri-git-pull-request-fill',
-        link: '/requests'
-    },
-    {
         id: 6,
         label: 'MENUITEMS.CREATORS.TEXT',
         icon: 'mdi mdi-account-cog',

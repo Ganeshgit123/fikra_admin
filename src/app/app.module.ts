@@ -52,8 +52,6 @@ import { FooterContentComponent } from './user-home-page/footer-content/footer-c
 
 import { ViewInvestorsComponent } from './view-investors/view-investors.component';
 import { FaqComponent } from './faq/faq.component';
-import { RequestListComponent } from './request-list/request-list.component';
-import { RequestDetailsComponent } from './request-details/request-details.component';
 import { ViewProjectsComponent } from './view-projects/view-projects.component';
 import { StartBannerComponent } from './start-a-project/start-banner/start-banner.component';
 import { QuoteComponent } from './start-a-project/quote/quote.component';
@@ -99,7 +97,7 @@ export function createTranslateLoader(http: HttpClient): any {
     UserHomePageComponent, AboutPageComponent, SettingsComponent, CategorySubCategoryComponent, 
     StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent,
     CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, ViewInvestorsComponent, FaqComponent,
-    RequestListComponent, RequestDetailsComponent, ViewProjectsComponent, StartBannerComponent, QuoteComponent, 
+    ViewProjectsComponent, StartBannerComponent, QuoteComponent, 
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, 
     ContentSectionComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, InvestorFormComponent, 

@@ -121,7 +121,8 @@ export class ApiCallService {
       .set('role',this.role )
       .set('updatedby', this.updatedby)
       .set('userType', 'admin')
-      .set('userId',params.userId),
+      .set('userId',params.userId)
+      .set('userRole',params.userRole),
 
       headers: httpHeaders,
       observe: 'response'
