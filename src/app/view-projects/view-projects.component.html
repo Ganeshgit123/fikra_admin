@@ -42,6 +42,22 @@
 <app-story></app-story>
 </ng-template>
 </li>
+<li [ngbNavItem]="4">
+  <a ngbNavLink class="mb-2">
+  <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+  <span class="d-none d-sm-block">Comments</span>
+  </a>
+  <ng-template ngbNavContent>
+    <form [formGroup]="commentForm" (ngSubmit)="commentSubmit()">
+    <div class="form-group">
+      <label>Comments about this project</label>
+      <textarea class="form-control" formControlName="adminComment"></textarea>
+      </div>
+      <br>
+      <p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light ban_con_btn">Save</button></p>
+    </form>
+  </ng-template>
+  </li>
 </ul>
 </div>
 </div>

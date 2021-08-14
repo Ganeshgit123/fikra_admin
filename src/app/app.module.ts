@@ -78,6 +78,9 @@ import { AddInvestorFieldComponent } from './investor-form/add-investor-field/ad
 import { EditInvestorFieldComponent } from './investor-form/edit-investor-field/edit-investor-field.component';
 import { AddCreatorFieldComponent } from './creators-form/add-creator-field/add-creator-field.component';
 import { EditCreatorFieldComponent } from './creators-form/edit-creator-field/edit-creator-field.component';
+import { CreatorHandbookComponent } from './creator-handbook/creator-handbook.component';
+import { RequestBackProjectComponent } from './projects/request-back-project/request-back-project.component';
+import { RecommendedProjectsComponent } from './projects/recommended-projects/recommended-projects.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -101,7 +104,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, 
     ContentSectionComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, InvestorFormComponent, 
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent,
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent,
   ],
   imports: [
     BrowserModule,

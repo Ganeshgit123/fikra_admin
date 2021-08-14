@@ -16,7 +16,26 @@ export const MENU: MenuItem[] = [
         id: 3,
         label: 'MENUITEMS.PROJECTS.TEXT',
         icon: 'ri-stack-fill',
-        link: '/projects'
+        subItems: [
+            {
+                id: 22,
+                label: 'MENUITEMS.PROJECTS_LIST.TEXT',
+                link: '/projects',
+                parentId: 3
+            },
+            {
+                id: 23,
+                label: 'MENUITEMS.REQUESTED_LIST.TEXT',
+                link: '/requested_projects',
+                parentId: 3
+            },
+            {
+                id: 24,
+                label: 'MENUITEMS.RECOMMENDED_LIST.TEXT',
+                link: '/recommended_projects',
+                parentId: 3
+            },
+        ]
     },
     {
         id: 4,
@@ -51,6 +70,12 @@ export const MENU: MenuItem[] = [
                 id: 10,
                 label: 'MENUITEMS.STARTPROJECT.TEXT',
                 link: '/start_project_page',
+                parentId: 6
+            },
+            {
+                id: 24,
+                label: 'MENUITEMS.CREATOR_HANDBOOK.TEXT',
+                link: '/creator_handbook',
                 parentId: 6
             },
             {

@@ -13,6 +13,7 @@ export class ViewProjectsComponent implements OnInit {
   projectId:any;
   tagList=[];
   addTags:FormGroup;
+  commentForm:FormGroup;
   updatedby:any;
   role:any;
   some:any;
@@ -32,6 +33,10 @@ export class ViewProjectsComponent implements OnInit {
 
     this.addTags = this.formBuilder.group({
       tagsArray: [''],
+    });
+    
+    this.commentForm = this.formBuilder.group({
+      adminComment: [''],
     });
 
     this.fetchtagArray();
@@ -120,6 +125,38 @@ export class ViewProjectsComponent implements OnInit {
         this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
         console.log('Error', error)
       } 
+    )
+  }
+
+  commentSubmit(){
+    const data = {}
+    data['projectId'] = this.projectId
+    data['createdBy'] = this.updatedby;
+    data['userType'] = "admin";
+    data['role'] = this.role;
+    data['adminComment'] = this.commentForm.get('adminComment').value;
+
+    var params = {
+      url: 'admin/sendRequestToUser',
+      data: data
+    }
+    // console.log("fef",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == true) {
+          // Success
+          this.apiCall.showToast('Comment Sent Successfully', 'Success', 'successToastr')
+          this.ngOnInit();
+
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
     )
   }
 

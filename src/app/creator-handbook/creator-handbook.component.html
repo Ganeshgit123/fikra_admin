@@ -1,0 +1,256 @@
+<div class="container-fluid">
+<app-pagetitle title="Creator Handbook" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<div class="row">
+<div class="col-lg-12">
+<div class="row">
+<div class="col-md-2">
+<div class="card">
+<div class="card-body">
+<ul ngbNav #verticalNav="ngbNav" [activeId]="1" class="nav-pills flex-column">
+<li [ngbNavItem]="1">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+<span class="d-none d-sm-block">General Section</span>
+</a>
+<ng-template ngbNavContent>
+<div class="card">
+<div class="card-body">
+<form [formGroup]="addHandbook">
+<div class="row">
+<div class="col-md-6">
+<div class="form-group">
+<label>Heading (EN)</label>
+<input type="text" class="form-control" formControlName="headEn">
+</div>
+<div class="form-group">
+<label>Description (EN)</label>            
+<textarea class="form-control" formControlName="descriptionEn"></textarea>
+</div>
+
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>Heading (AR)</label>
+<input type="text" class="form-control" formControlName="headAr">
+</div>
+<div class="form-group">
+<label>Description (AR)</label>
+<textarea class="form-control" formControlName="descriptionAr"></textarea>
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 1 (EN)</label>
+<input type="text" class="form-control" formControlName="title1En">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 1 (AR)</label>
+<input type="text" class="form-control" formControlName="title1Ar">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 2 (EN)</label>
+<input type="text" class="form-control" formControlName="title2En">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 2 (AR)</label>
+<input type="text" class="form-control" formControlName="title2Ar">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 3 (EN)</label>
+<input type="text" class="form-control" formControlName="title3En">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 3 (AR)</label>
+<input type="text" class="form-control" formControlName="title3Ar">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 4 (EN)</label>
+<input type="text" class="form-control" formControlName="title4En">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 4 (AR)</label>
+<input type="text" class="form-control" formControlName="title4Ar">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 5 (EN)</label>
+<input type="text" class="form-control" formControlName="title5En">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 5 (AR)</label>
+<input type="text" class="form-control" formControlName="title5Ar">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 6 (EN)</label>
+<input type="text" class="form-control" formControlName="title6En">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 6 (AR)</label>
+<input type="text" class="form-control" formControlName="title6Ar">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 7 (EN)</label>
+<input type="text" class="form-control" formControlName="title7En">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 7 (AR)</label>
+<input type="text" class="form-control" formControlName="title7Ar">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 8 (EN)</label>
+<input type="text" class="form-control" formControlName="title8En">
+</div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Title 8 (AR)</label>
+<input type="text" class="form-control" formControlName="title8Ar">
+</div>
+</div>
+</div>
+<br>
+<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click) ="onSubmit()">Save</button></p>    
+</form>
+</div>
+</div>
+</ng-template>
+</li>
+<li [ngbNavItem]="2">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Getting Started</span>
+</a>
+<ng-template ngbNavContent>
+<div class="card">
+<div class="card-body">
+<form [formGroup]="gettingStarted" >
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+<div class="img_upload">
+<label for="customFile">
+<img class="upload-img" src="assets/images/upload_img.png"/>
+</label>
+<input formControlName="bannerImage" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>content (EN)</label>
+<ckeditor [editor]="Editor" formControlName="contentEn" (ready)="onReady($event)"></ckeditor>
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+<label>content (AR)</label>
+<ckeditor [editor]="Editor" formControlName="contentAr" (ready)="onReady($event)"></ckeditor>
+</div>
+</div>
+</div>
+<br>
+<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="onGettingUpdate()">Save</button></p>
+</form>
+</div>
+</div>
+</ng-template>
+</li>
+<li [ngbNavItem]="3">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Funding</span>
+</a>
+<ng-template ngbNavContent>
+</ng-template>
+</li>
+<li [ngbNavItem]="4">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Fulfillment</span>
+</a>
+<ng-template ngbNavContent>
+</ng-template>
+</li>
+<li [ngbNavItem]="5">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Telling Your Story</span>
+</a>
+<ng-template ngbNavContent>
+</ng-template>
+</li>
+<li [ngbNavItem]="6">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Promotion</span>
+</a>
+<ng-template ngbNavContent>
+</ng-template>
+</li>
+<li [ngbNavItem]="7">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Further Reading</span>
+</a>
+<ng-template ngbNavContent>
+</ng-template>
+</li>
+<li [ngbNavItem]="8">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Bilding Rewards</span>
+</a>
+<ng-template ngbNavContent>
+</ng-template>
+</li>
+<li [ngbNavItem]="9">
+<a ngbNavLink class="mb-2">
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Communicating with Backers</span>
+</a>
+<ng-template ngbNavContent>
+</ng-template>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-10">
+
+<div [ngbNavOutlet]="verticalNav"></div>
+
+</div>
+</div>
+
+
+</div><!-- End vertical nav tab -->
+
+</div>
+</div>

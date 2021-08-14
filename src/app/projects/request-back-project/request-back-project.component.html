@@ -63,40 +63,15 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <td></td>
 <td>{{goalAmt}}</td>
 <td>
-<select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
-<option>{{proj.aproval_Status}}</option>
-<option>approved</option>
-<option>under_review</option>
-<option>rejected</option>
-</select>
-<select class="apprve_btn" *ngIf="proj.aproval_Status === 'approved'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
-<option>{{proj.aproval_Status}}</option>
-<option>rejected</option>
-</select>
-<select class="review_btn" *ngIf="proj.aproval_Status === 'under_review'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
-<option>{{proj.aproval_Status}}</option>
-<option>approved</option>
-<option>rejected</option>
-</select>
-<select class="reject_btn" *ngIf="proj.aproval_Status === 'rejected'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
-<option>{{proj.aproval_Status}}</option>
-</select>
-<span *ngIf="proj.aproval_Status === 'rejected'">
-   <p style="margin: 10px 0;"><strong>Reject Reason:</strong></p>
-   <p>  {{proj.rejection_comment}}</p>
-</span>
+    {{proj.aproval_Status}}
 </td>
 <td>
-   <label class="switch">
-      <input *ngIf="proj._is_Recommeded_ === true"  type="checkbox" checked (change)="onchangeRecommednStatus(proj._id,$event)">
-      <input *ngIf="proj._is_Recommeded_ === false" type="checkbox" unchecked (change)="onchangeRecommednStatus(proj._id,$event)">
-  <span class="slider"></span>
-  </label>   
+
 </td>
 <td>
-   <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteProject(proj._id)"><i
-     class="mdi mdi-trash-can font-size-18"></i></a>
- </td>
+<a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteProject(proj._id)"><i
+    class="mdi mdi-trash-can font-size-18"></i></a>
+</td>
 </tr>
 </tbody>
 </table>
@@ -124,20 +99,3 @@ entries
 </div>
 </div>
 </div>
-
-<ng-template #centerDataModal let-modal>
-<div class="modal-header">
-<h5 class="modal-title mt-0">Rejection Reason</h5>
-<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-</div>
-<div class="modal-body">
-<form [formGroup]="addComment">
-<div class="form-group">
-<label>Reason</label>
-<textarea class="form-control" formControlName="rejection_comment"></textarea>
-</div>
-<br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="rejectReason()">Save</button></p>
-</form>
-</div>
-</ng-template>

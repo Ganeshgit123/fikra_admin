@@ -31,6 +31,9 @@ import { AddInvestorFieldComponent } from './investor-form/add-investor-field/ad
 import { EditInvestorFieldComponent } from './investor-form/edit-investor-field/edit-investor-field.component';
 import { AddCreatorFieldComponent } from './creators-form/add-creator-field/add-creator-field.component';
 import { EditCreatorFieldComponent } from './creators-form/edit-creator-field/edit-creator-field.component';
+import { CreatorHandbookComponent } from './creator-handbook/creator-handbook.component';
+import { RequestBackProjectComponent } from './projects/request-back-project/request-back-project.component';
+import { RecommendedProjectsComponent } from './projects/recommended-projects/recommended-projects.component';
 
 const routes: Routes = [
   {
@@ -44,6 +47,8 @@ const routes: Routes = [
       {path: 'investors',component: InvestorsComponent, canActivate: [AuthGuard]},
       {path: 'view-investors/:id',component: ViewInvestorsComponent, canActivate: [AuthGuard]},
       {path: 'projects',component: ProjectsComponent, canActivate: [AuthGuard],},
+      {path: 'requested_projects',component: RequestBackProjectComponent, canActivate: [AuthGuard],},
+      {path: 'recommended_projects',component: RecommendedProjectsComponent, canActivate: [AuthGuard],},
       {path: 'view-projects/:id',component: ViewProjectsComponent, canActivate: [AuthGuard]},
       {path: 'creators',component: CreatorsComponent, canActivate: [AuthGuard],},
       {path: 'view-creators/:id',component: ViewCreatorsComponent, canActivate: [AuthGuard]},
@@ -52,6 +57,7 @@ const routes: Routes = [
       {path: 'terms_of_use',component: TermsOfUseComponent, canActivate: [AuthGuard],},
       {path: 'home_page',component: UserHomePageComponent, canActivate: [AuthGuard],},
       {path: 'about_page',component: AboutPageComponent, canActivate: [AuthGuard],},
+      {path: 'creator_handbook',component: CreatorHandbookComponent, canActivate: [AuthGuard],},
       {path: 'settings',component: SettingsComponent, canActivate: [AuthGuard],},
       {path: 'investor_form',component: InvestorFormComponent, canActivate: [AuthGuard],},
       {path: 'creator_form',component: CreatorsFormComponent, canActivate: [AuthGuard],},

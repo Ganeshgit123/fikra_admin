@@ -129,7 +129,18 @@
     "CREATORS_FORM": {
       "TEXT": "Creator Form"
     },
-    
+    "PROJECTS_LIST": {
+      "TEXT": "Projects List"
+    },
+    "REQUESTED_LIST": {
+      "TEXT": "Change Request List"
+    },
+    "RECOMMENDED_LIST": {
+      "TEXT": "Recommended Projects"
+    },
+    "CREATOR_HANDBOOK": {
+      "TEXT": "Creator Handbook"
+    },
     
     "LAYOUTS": {
       "TEXT": "Layouts",
