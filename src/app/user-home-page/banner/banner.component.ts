@@ -36,8 +36,6 @@ export class BannerComponent implements OnInit {
     this.bannerLeftCont = this.formBuilder.group({
       bannerLeftContents: [''],
       bannerLeftContents_ar: [''],
-      companyName: [''],
-      companyName_ar: [''],
       headName: [''],
       headName_ar: [''],
       buttonName: [''],
@@ -67,8 +65,6 @@ export class BannerComponent implements OnInit {
         this.bannerLeftCont = this.formBuilder.group({
           bannerLeftContents: [resu.data.bannerLeftContents,[]],
           bannerLeftContents_ar: [resu.data.bannerLeftContents_ar,[]],
-          companyName: [resu.data.companyName,[]],
-          companyName_ar: [resu.data.companyName_ar,[]],
           headName: [resu.data.headName,[]],
           headName_ar: [resu.data.headName_ar,[]],
           buttonName: [resu.data.buttonName,[]],

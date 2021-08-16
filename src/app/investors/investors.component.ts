@@ -38,8 +38,6 @@ export class InvestorsComponent implements OnInit {
   updatedby = sessionStorage.getItem('adminId');
   role = sessionStorage.getItem('adminRole');
 
-
-      
  @ViewChildren(AdvancedSortableDirective) headers: QueryList<AdvancedSortableDirective>;
 
  constructor(private pipe: DecimalPipe,
@@ -142,4 +140,3 @@ close(data){
  }
 
 }
-

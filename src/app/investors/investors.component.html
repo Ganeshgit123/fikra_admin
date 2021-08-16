@@ -38,7 +38,6 @@ class="d-inline-flex align-items-center">Search:
 aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
 </div>
 <!-- End search -->
-</div>
 <!-- Table -->
 <div class="table-responsive">
 <table id="basic-datatable"
@@ -65,18 +64,8 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
     <span *ngIf="user._is_mobile_verified_ === false" class="not_verify_btn">Not Verified</span>
     </td>
 </tr>
-</tbody>
+</tbody> 
 </table>
-</div>
-<!-- End table -->
-<div class="row justify-content-md-between align-items-md-center mt-2">
-<!-- <div class="col-sm-12 col-md-5">
-<div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
-{{startIndex}} to
-{{endIndex}} of {{totalRecords}}
-entries
-</div>
-</div> -->
 <!-- Pagination -->
 <div class="col-sm-12 col-md-5">
 <div class="text-md-right float-md-right pagination-rounded">
@@ -85,6 +74,7 @@ entries
 </div>
 </div>
 <!-- End Pagination -->
+</div>
 </div>
 </div>
 </div>
