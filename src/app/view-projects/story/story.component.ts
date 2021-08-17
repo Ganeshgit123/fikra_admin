@@ -11,8 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class StoryComponent implements OnInit {
   projectId:any;
   projectList: any=[];
-  storyObject:any;
-
   storyArray =[];
 
   constructor(private apiCall: ApiCallService,
@@ -35,14 +33,10 @@ export class StoryComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
-         this.projectList = resu.data;
-         this.projectList.forEach(element => {
-          this.storyObject = element.storyTableId
-               
-          });
-          this.storyArray.push(this.storyObject)
+         this.projectList = resu.data.storyTableId;
 
-  // console.log("llll", this.storyArray)
+          this.storyArray.push(this.projectList)
+
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

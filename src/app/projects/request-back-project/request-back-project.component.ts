@@ -49,7 +49,7 @@ export class RequestBackProjectComponent implements OnInit {
       if(resu.error == false)
       {
          this.projectList = resu.data;
-         console.log("list",this.projectList)
+        //  console.log("list",this.projectList)
          this.projectList.forEach(element => {
           this.catName = element.basicInfoId.categoryName
            this.subCatName = element.basicInfoId.subCategoryName

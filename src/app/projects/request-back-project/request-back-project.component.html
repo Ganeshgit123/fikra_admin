@@ -51,7 +51,6 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <th>User Name</th>
 <th>Goal Amount</th>
 <th>Admin Approval</th>
-<th>Recommended</th>
 <th>Action</th>
 </tr>
 </thead>
@@ -64,9 +63,6 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <td>{{goalAmt}}</td>
 <td>
     {{proj.aproval_Status}}
-</td>
-<td>
-
 </td>
 <td>
 <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteProject(proj._id)"><i

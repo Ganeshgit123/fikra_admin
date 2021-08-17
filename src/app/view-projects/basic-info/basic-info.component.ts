@@ -11,8 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class BasicInfoComponent implements OnInit {
   projectId:any;
   projectList: any=[];
-  basicInfoObject:any;
-
   basicInfoArray =[];
 
  constructor(private apiCall: ApiCallService,
@@ -35,14 +33,11 @@ export class BasicInfoComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
-         this.projectList = resu.data;
-         this.projectList.forEach(element => {
-          this.basicInfoObject = element.basicInfoId
-               
-          });
-          this.basicInfoArray.push(this.basicInfoObject)
+         this.projectList = resu.data.basicInfoId;
+        //  console.log("list",this.projectList)
 
-  // console.log("llll", this.basicInfoArray)
+         this.basicInfoArray.push(this.projectList)
+
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

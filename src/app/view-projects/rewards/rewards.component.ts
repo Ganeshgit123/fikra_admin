@@ -11,8 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class RewardsComponent implements OnInit {
   projectId:any;
   projectList: any=[];
-  rewardObject:any;
-
   rewardArray =[];
 
   constructor(private apiCall: ApiCallService,
@@ -35,13 +33,10 @@ export class RewardsComponent implements OnInit {
         let resu = result.body;
         if(resu.error == false)
         {
-           this.projectList = resu.data;
-           this.projectList.forEach(element => {
-            this.rewardObject = element.rewardTableId
-                 
-            });
-            this.rewardArray.push(this.rewardObject)
-  console.log("llll", this.rewardArray)
+           this.projectList = resu.data.rewardTableId;
+
+            this.rewardArray.push(this.projectList)
+
         }else{
           this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
         }

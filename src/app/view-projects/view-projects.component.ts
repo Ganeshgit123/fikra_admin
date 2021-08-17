@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-view-projects',
@@ -16,11 +17,16 @@ export class ViewProjectsComponent implements OnInit {
   commentForm:FormGroup;
   updatedby:any;
   role:any;
-  some:any;
+  recommend:any;
+  feature:any;
+  addFeatureForm:FormGroup;
+  homeStatus:any;
+
 
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private modalService: NgbModal
     ) { }
 
   ngOnInit(): void {
@@ -39,6 +45,12 @@ export class ViewProjectsComponent implements OnInit {
       adminComment: [''],
     });
 
+    this.addFeatureForm = this.formBuilder.group({
+      fromDate: [''],
+      toDate: [''],
+    });
+
+
     this.fetchtagArray();
 
     this.fetchTagList();
@@ -55,14 +67,17 @@ export class ViewProjectsComponent implements OnInit {
       if(resu.error == false)
       {
         
-            var array = resu.data
-            array.forEach(element => {
-            this.some = element.tags
-              });
+            var array = resu.data.tags
 
+             
               this.addTags = this.formBuilder.group({
-                tagsArray: [this.some,[]],
+                tagsArray: [array,[]],
               });
+              this.recommend = resu.data._is_Recommeded_;
+              this.feature = resu.data._is_featured_;
+
+            this.homeStatus = resu._is_On_HomeSlide_
+              // console.log("roc",this.homeStatus)
           
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -109,10 +124,10 @@ export class ViewProjectsComponent implements OnInit {
       url: 'admin/addTagstoProjects',
       data: postData
     }
-    console.log("ppa",params)
+    // console.log("ppa",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
-        console.log("res",response)
+        // console.log("res",response)
         if (response.body.error == false) {
 
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
@@ -126,6 +141,40 @@ export class ViewProjectsComponent implements OnInit {
         console.log('Error', error)
       } 
     )
+  }
+
+  onchangeRecommednStatus(values:any){
+
+     const object = {}
+
+     object['_is_Recommeded_'] = values;
+     object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+    object['projectId'] = this.projectId; 
+
+     var params = {
+      url: 'admin/addAsRecommended',
+      data: object
+    }
+    // console.log("dd",object)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+
   }
 
   commentSubmit(){
@@ -143,7 +192,7 @@ export class ViewProjectsComponent implements OnInit {
     // console.log("fef",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
-        if (response.body.error == true) {
+        if (response.body.error == false) {
           // Success
           this.apiCall.showToast('Comment Sent Successfully', 'Success', 'successToastr')
           this.ngOnInit();
@@ -157,6 +206,98 @@ export class ViewProjectsComponent implements OnInit {
         this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
         console.log('Error', error)
       }
+    )
+  }
+
+  addFeature(centerDataModal: any){
+    this.modalService.open(centerDataModal, { centered: true });
+  }
+
+  addFeatureSubmit(){
+    const postData = this.addFeatureForm.value;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+    postData['projectId'] = this.projectId
+
+    var params = {
+      url: 'admin/addToFeaturedProject',
+      data: postData
+    }
+// console.log("ddd",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.modalService.dismissAll();
+          this.ngOnInit();
+        } else {
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+  }
+
+  addHomeBannList(){
+    const object = {};
+    object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+    object['projectId'] = this.projectId
+
+    var params = {
+      url: 'admin/updateProjectToSlide',
+      data: object
+    }
+// console.log("ddd",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+  }
+
+  removeHomeBannList(){
+    const object = {};
+    object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+    object['projectId'] = this.projectId
+
+    var params = {
+      url: 'admin/removeProjectToSlide',
+      data: object
+    }
+// console.log("ddd",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
     )
   }
 
