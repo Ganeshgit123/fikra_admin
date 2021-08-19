@@ -1,0 +1,146 @@
+<div class="container-fluid">    
+<a routerLink="/investors"><app-pagetitle title="Contact Page" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
+<div class="card">
+<div class="card-body">
+<ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
+<li [ngbNavItem]="1">
+<a ngbNavLink>
+<span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+<span class="d-none d-sm-block">Branch Details</span>
+</a>
+<br>
+<ng-template ngbNavContent>
+<div class="card">
+<div class="card-body">
+<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addBranch(branchCorner)">Add New</button></p>
+<!-- Center Modal -->
+<ng-template #branchCorner let-modal>
+<div class="modal-header">
+<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form [formGroup]="addBranchData">
+<div class="form-group">
+<label>Branch Name</label>
+<input type="text" class="form-control" formControlName="branchName">
+</div>
+<div class="form-group">
+<label>Address</label>
+<textarea class="form-control" formControlName="address"></textarea>
+</div>
+<div class="form-group">
+<label>Latitude</label>
+<input type="text" class="form-control" formControlName="lat">
+</div>
+<div class="form-group">
+<label>Longitude</label>
+<input type="text" class="form-control" formControlName="long">
+</div>
+<div class="form-group">
+<label>Email</label>
+<input type="text" class="form-control" formControlName="email">
+</div>
+<div class="form-group">
+<label>Fax</label>
+<input type="text" class="form-control" formControlName="fax">
+</div>
+<div class="form-group">
+<label>Phone No.</label>
+<input type="text" class="form-control" formControlName="phone">
+</div>
+<br>
+<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
+</form>
+</div>
+</ng-template>
+
+<div class="table-responsive">
+<table id="basic-datatable"
+class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+<thead>
+<tr>
+<th>Branch Name</th>
+<th>Address</th>
+<th>Latitude</th>
+<th>Longitude</th>
+<th>Email</th>
+<th>Fax</th>
+<th>Phone No.</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr  *ngFor="let item of branchData">
+<td>{{item.branchName}}</td>
+<td>{{item.address}}</td>
+<td>{{item.lat}}</td>
+<td>{{item.long}}</td>
+<td>{{item.email}}</td>
+<td>{{item.fax}}</td>
+<td>{{item.phone}}</td>
+<td>
+<label class="switch">
+    <input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeBranchStatus($event,item._id)">
+    <input *ngIf="item._is_on_ !== true" type="checkbox" unchecked (change)="onchangeBranchStatus($event,item._id)">
+    <span class="slider"></span>
+</label>
+</td>
+<td>
+<a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewBrach(item,branchCorner)"><i
+    class="mdi mdi-pencil font-size-18"></i></a>  
+<a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteBranch(item._id)"><i
+        class="mdi mdi-trash-can font-size-18"></i></a>     
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</ng-template>
+</li>
+<li [ngbNavItem]="2">
+<a ngbNavLink>
+<span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+<span class="d-none d-sm-block">Contact Form List</span>
+</a>
+<ng-template ngbNavContent>
+    <div class="table-responsive">
+        <table id="basic-datatable"
+        class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+        <thead>
+        <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Message</th>
+        <th>Inquiry Type</th>
+        <th>Inquiry Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  *ngFor="let item of contactListData">
+        <td>{{item.name}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.country}}</td>
+        <td>{{item.city}}</td>
+        <td>{{item.message}}</td>
+        <td>{{item.inqueryType}}</td>
+        <td>{{item.inqueryMessage}}</td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+</ng-template>
+</li>
+</ul>
+<div [ngbNavOutlet]="justifiednav"></div>
+</div>
+</div>
+
+
+</div>

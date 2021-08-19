@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder} from '@angular/forms';
+import { FormGroup, FormBuilder, Form} from '@angular/forms';
 import { ApiCallService } from '../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-faq',
-  templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.scss']
+  selector: 'app-contact-us',
+  templateUrl: './contact-us.component.html',
+  styleUrls: ['./contact-us.component.scss']
 })
-export class FaqComponent implements OnInit {
+export class ContactUsComponent implements OnInit {
+  breadCrumbItems: Array<{}>;
   updatedby:any;
   role:any;
-  addFaqData : FormGroup;
-  faqData:any;
+  addBranchData:FormGroup;
+  branchData:any;
   isEdit = false;
-  faqId:any;
-
+  branchId:any;
+  contactListData:any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -23,30 +24,35 @@ export class FaqComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-
+    this.breadCrumbItems = [{ label: 'Contact' },{ label: 'contact Details', active: true }];
     this.updatedby = sessionStorage.getItem('adminId');
     this.role = sessionStorage.getItem('adminRole');
 
-    this.addFaqData = this.formBuilder.group({
-      faq_Header: [''],
-      faq_Header_ar: [''],
-      faq_Body: [''],
-      faq_Body_ar: [''],
+    this.addBranchData = this.formBuilder.group({
+      branchName: [''],
+      address: [''],
+      lat: [''],
+      long: [''],
+      email: [''],
+      fax: [''],
+      phone: [''],
     });
 
-    this.fetchFaqData();
+    this.fetchBranchData();
+    
+    this.fetchContactListData();
   }
 
-  fetchFaqData(){
+  fetchBranchData(){
     let params = {
-      url: "admin/getAllFAQContent",
+      url: "admin/getBranchDetails",
     }  
     this.apiCall.commonGetService(params).subscribe((result:any)=>{
       let resu = result.body;
       if(resu.error == false)
       {
 
-        this.faqData = resu.data;
+        this.branchData = resu.data;
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -54,42 +60,78 @@ export class FaqComponent implements OnInit {
     },(error)=>{
        console.error(error);
        
-    }); 
+    });
   }
 
-  addFaq(creatorCorner: any){
-    this.modalService.open(creatorCorner, { centered: true });
+
+  addBranch(branchCorner: any){
+    this.modalService.open(branchCorner, { centered: true });
 
   }
 
-  viewFaq(data,creatorCorner: any){
+  onSubmit(){
+
+    if(this.isEdit){
+      this.branchEditService(this.addBranchData.value)
+      return;
+    }
+
+    const postData = this.addBranchData.value;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+
+    var params = {
+      url: 'admin/addBranch',
+      data: postData
+    }
+    // console.log("fefe",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.modalService.dismissAll();
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+  }
+
+  viewBrach(data,creatorCorner: any){
     this.modalService.open(creatorCorner, { centered: true });
 
     this.isEdit = true;
 
-    this.faqId = data['_id']
-    this.addFaqData   = this.formBuilder.group({
-      faq_Header: [data['faq_Header']],
-      faq_Header_ar: [data['faq_Header_ar']],
-      faq_Body: [data['faq_Body']],
-      faq_Body_ar: [data['faq_Body_ar']],
+    this.branchId = data['_id']
+    this.addBranchData   = this.formBuilder.group({
+      branchName: [data['branchName']],
+      address: [data['address']],
+      lat: [data['lat']],
+      long: [data['long']],
+      email: [data['email']],
+      fax: [data['fax']],
+      phone: [data['phone']],
     })
   }
 
-  faqEditService(data){
-
-    data['faqId'] = this.faqId
+  branchEditService(data){
+    data['branchId'] = this.branchId
     data['createdBy'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;
-    data['_is_Deleted_'] = false;
-    data['_is_visible_'] = true;
 
     var params = {
-      url: 'admin/updateFAQContent',
+      url: 'admin/updateBranch',
       data: data
     }
-    this.apiCall.commonPutService(params).subscribe(
+    this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {
           // Success
@@ -107,45 +149,9 @@ export class FaqComponent implements OnInit {
         console.log('Error', error)
       }
     )
-
   }
 
-  onSubmit(){
-
-    if(this.isEdit){
-      this.faqEditService(this.addFaqData.value)
-      return;
-    }
-
-    const postData = this.addFaqData.value;
-    postData['createdBy'] = this.updatedby;
-    postData['userType'] = "admin";
-    postData['role'] = this.role;
-
-    var params = {
-      url: 'admin/saveFAQContents',
-      data: postData
-    }
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-          this.modalService.dismissAll();
-          this.ngOnInit();
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-        }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
-      } 
-    )
-
-  }
-
-  onchangeFaqStatus(values:any,val){
+  onchangeBranchStatus(values:any,val){
 
     if(values.currentTarget.checked === true){
       var visible = true 
@@ -154,18 +160,17 @@ export class FaqComponent implements OnInit {
      }
      const object = {}
 
-     object['faqId'] = val;
-     object['_is_visible_'] = visible;
-     object['_is_Deleted_'] = false;
+     object['branchId'] = val;
+     object['_is_on_'] = visible;
      object['createdBy'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;
 
      var params = {
-      url: 'admin/updateFAQStatus',
+      url: 'admin/updateBranchStatus',
       data: object
     }
-    this.apiCall.commonPutService(params).subscribe(
+    this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {
           // Success
@@ -183,22 +188,20 @@ export class FaqComponent implements OnInit {
     )
   }
 
-  onDeleteFaqStatus(val,id,visible){
+  onDeleteBranch(id){
     const object = {}
 
-    object['faqId'] = id;
-    object['_is_visible_'] = visible;
-    object['_is_Deleted_'] = val;
+    object['branchId'] = id;
     object['createdBy'] = this.updatedby;
    object['userType'] = "admin";
    object['role'] = this.role;
 
     var params = {
-     url: 'admin/updateFAQStatus',
+     url: 'admin/removeBranch',
      data: object
    }
   //  console.log("da",params)
-   this.apiCall.commonPutService(params).subscribe(
+   this.apiCall.commonPostService(params).subscribe(
      (response: any) => {
        if (response.body.error == false) {
          // Success
@@ -215,4 +218,25 @@ export class FaqComponent implements OnInit {
      }
    )
   }
+
+  fetchContactListData(){
+    let params = {
+      url: "admin/getContactMessage",
+    }  
+    this.apiCall.commonGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+
+        this.contactListData = resu.data;
+
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
+    });
+  }
+
 }

@@ -81,6 +81,7 @@ import { EditCreatorFieldComponent } from './creators-form/edit-creator-field/ed
 import { CreatorHandbookComponent } from './creator-handbook/creator-handbook.component';
 import { RequestBackProjectComponent } from './projects/request-back-project/request-back-project.component';
 import { RecommendedProjectsComponent } from './projects/recommended-projects/recommended-projects.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -104,7 +105,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, 
     ContentSectionComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, InvestorFormComponent, 
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent,
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent,
   ],
   imports: [
     BrowserModule,

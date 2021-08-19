@@ -79,6 +79,12 @@ export const MENU: MenuItem[] = [
                 parentId: 6
             },
             {
+                id: 25,
+                label: 'MENUITEMS.CONTACT_US.TEXT',
+                link: '/contact',
+                parentId: 6
+            },
+            {
                 id: 11,
                 label: 'MENUITEMS.FAQ.TEXT',
                 link: '/faq',

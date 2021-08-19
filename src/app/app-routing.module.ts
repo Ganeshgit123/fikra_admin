@@ -34,6 +34,7 @@ import { EditCreatorFieldComponent } from './creators-form/edit-creator-field/ed
 import { CreatorHandbookComponent } from './creator-handbook/creator-handbook.component';
 import { RequestBackProjectComponent } from './projects/request-back-project/request-back-project.component';
 import { RecommendedProjectsComponent } from './projects/recommended-projects/recommended-projects.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
   {
@@ -70,6 +71,7 @@ const routes: Routes = [
       {path: 'category_sub_category',component: CategorySubCategoryComponent, canActivate: [AuthGuard],},
       {path: 'country_city',component: CountryCityComponent, canActivate: [AuthGuard],},
       {path: 'tags',component: TagsComponent, canActivate: [AuthGuard],},
+      {path: 'contact',component: ContactUsComponent, canActivate: [AuthGuard],},
       { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     ],
     canActivate: [AuthGuard]
