@@ -12,6 +12,8 @@ export class HandbookComponent implements OnInit {
   updatedby:any;
   role:any;
   videoStatus:any;
+  handBookStatus:any;
+
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     ) { }
@@ -45,7 +47,8 @@ export class HandbookComponent implements OnInit {
           headAr: [resu.data.creatorHandbook[0].headAr,[]],
           bodyAr: [resu.data.creatorHandbook[0].bodyAr,[]],
         });
-
+         
+        this.handBookStatus = resu.data.creatorHandbook[0]._is_on_;
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -83,5 +86,7 @@ export class HandbookComponent implements OnInit {
       } 
     )
   }
+
+
 
 }
