@@ -1,0 +1,48 @@
+<div class="card card-body">
+    <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner>
+    <form [formGroup]="addHandbookData">
+    <div class="row">
+    <div class="col-md-12">
+    <div class="img_upload">
+    <label for="customFile">
+    <img class="upload-img1" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
+    <img class="upload-img1" *ngIf="imagePreview" src="{{imagePreview}}"/>
+    </label>
+    <input formControlName="handbookImg" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+    </div>
+    </div>
+    <div class="col-md-6">
+    <div class="form-group">
+    <label>Heading(EN)</label>
+    <input type="text" class="form-control" formControlName="handBookHead">
+    </div>
+    <div class="form-group">
+    <label>Description(EN)</label>
+    <ckeditor [editor]="Editor" formControlName="handBookBody" (ready)="onReady($event)"></ckeditor>
+    </div>
+    </div>
+    
+    <div class="col-md-6">
+    <div class="form-group">
+    <label>Heading(AR)</label>
+    <input type="text" class="form-control" formControlName="handBookHeadAr">
+    </div>
+    <div class="form-group">
+    <label>Description(AR)</label>
+    <ckeditor [editor]="Editor" formControlName="handBookBodyAr" (ready)="onReady($event)"></ckeditor>
+    </div>
+    </div>
+    <div class="col-md-12">
+        <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
+    </div>
+    </div>
+    
+    </form>
+    </div>
+    

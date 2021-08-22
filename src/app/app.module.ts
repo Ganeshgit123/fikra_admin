@@ -25,6 +25,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { LayoutsModule } from './layouts/layouts.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -82,6 +83,9 @@ import { CreatorHandbookComponent } from './creator-handbook/creator-handbook.co
 import { RequestBackProjectComponent } from './projects/request-back-project/request-back-project.component';
 import { RecommendedProjectsComponent } from './projects/recommended-projects/recommended-projects.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { HandbookComponent } from './start-a-project/handbook/handbook.component';
+import { AddHandbookComponent } from './creator-handbook/add-handbook/add-handbook.component';
+import { EditHandbookComponent } from './creator-handbook/edit-handbook/edit-handbook.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -105,7 +109,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, 
     ContentSectionComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, InvestorFormComponent, 
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent,
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,6 +137,7 @@ export function createTranslateLoader(http: HttpClient): any {
     FullCalendarModule,
     TablesModule,
     WidgetModule,
+    NgxSpinnerModule,
     ToastrModule.forRoot(),
     TranslateModule.forRoot({
       loader: {

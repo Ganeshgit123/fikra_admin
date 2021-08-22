@@ -52,6 +52,15 @@
 <app-why-fikra></app-why-fikra>
 </ng-template>
 </li>
+<li [ngbNavItem]="6">
+    <a ngbNavLink class="mb-2">
+    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+    <span class="d-none d-sm-block">Creator Handbook Section</span>
+    </a>
+    <ng-template ngbNavContent>
+    <app-handbook></app-handbook>
+    </ng-template>
+    </li>
 </ul>
 </div>
 </div>

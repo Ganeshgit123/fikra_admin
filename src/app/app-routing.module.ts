@@ -35,6 +35,8 @@ import { CreatorHandbookComponent } from './creator-handbook/creator-handbook.co
 import { RequestBackProjectComponent } from './projects/request-back-project/request-back-project.component';
 import { RecommendedProjectsComponent } from './projects/recommended-projects/recommended-projects.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AddHandbookComponent } from './creator-handbook/add-handbook/add-handbook.component';
+import { EditHandbookComponent } from './creator-handbook/edit-handbook/edit-handbook.component';
 
 const routes: Routes = [
   {
@@ -59,6 +61,8 @@ const routes: Routes = [
       {path: 'home_page',component: UserHomePageComponent, canActivate: [AuthGuard],},
       {path: 'about_page',component: AboutPageComponent, canActivate: [AuthGuard],},
       {path: 'creator_handbook',component: CreatorHandbookComponent, canActivate: [AuthGuard],},
+      {path: 'add_handbook',component: AddHandbookComponent, canActivate: [AuthGuard],},
+      {path: 'edit_handbook/:id',component: EditHandbookComponent, canActivate: [AuthGuard],},
       {path: 'settings',component: SettingsComponent, canActivate: [AuthGuard],},
       {path: 'investor_form',component: InvestorFormComponent, canActivate: [AuthGuard],},
       {path: 'creator_form',component: CreatorsFormComponent, canActivate: [AuthGuard],},

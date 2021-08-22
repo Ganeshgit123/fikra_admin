@@ -1,11 +1,5 @@
-.custom-file-input {
-    display: none;
-  }
-  .upload-img{
-    width: 300px;
-    height: 300px;
-    cursor: pointer;
-  } 
-  .img_upload{
-      text-align: center;
-  }
+.img_size{
+width: 300px;
+height: 150px;
+object-fit: contain;
+}

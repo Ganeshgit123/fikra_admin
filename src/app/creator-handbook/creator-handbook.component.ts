@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder,Validators} from '@angular/forms';
+import { FormGroup, FormBuilder} from '@angular/forms';
 import { ApiCallService } from '../services/api-call.service';
-import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-creator-handbook',
@@ -14,20 +14,16 @@ export class CreatorHandbookComponent implements OnInit {
   role:any;
   imagePreview = null;
   fileUpload: any;
-  addHandbook:FormGroup;
-  gettingStarted:FormGroup;
+  addHandbookData:FormGroup;
+  handBookData:any;
+  imgUrl:any;
+  isEdit:any;
+  handBookId:any;
 
-  public Editor = DecoupledEditor;
-  public onReady( editor ) {
-     editor.ui.getEditableElement().parentElement.insertBefore(
-         editor.ui.view.toolbar.element,
-         editor.ui.getEditableElement()
-     );
- }
-
-  
   constructor(private formBuilder: FormBuilder,
-    private apiCall: ApiCallService    ) { }
+    private apiCall: ApiCallService,
+    private spinner: NgxSpinnerService
+    ) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'CMS' }, { label: 'Creator Handbook', active: true }];
@@ -35,54 +31,105 @@ export class CreatorHandbookComponent implements OnInit {
     this.updatedby = sessionStorage.getItem('adminId');
     this.role = sessionStorage.getItem('adminRole');
 
-    this.addHandbook = this.formBuilder.group({
-      headEn: [''],
-      descriptionEn: [''],
-      headAr: [''],
-      descriptionAr: [''],
-      title1En:[''],
-      title1Ar:[''],
-      title2En:[''],
-      title2Ar:[''],
-      title3En:[''],
-      title3Ar:[''],
-      title4En:[''],
-      title4Ar:[''],
-      title5En:[''],
-      title5Ar:[''],
-      title6En:[''],
-      title6Ar:[''],
-      title7En:[''],
-      title7Ar:[''],
-      title8En:[''],
-      title8Ar:[''],
+    this.addHandbookData = this.formBuilder.group({
+      handbookImg: [''],
+      handBookHead: [''],
+      handBookBody: [''],
+      handBookHeadAr: [''],
+      handBookBodyAr: [''],
     });
 
-
-    this.gettingStarted = this.formBuilder.group({
-      bannerImage: [''],
-      contentEn: [''],
-      contentAr: [''],
-    });
-
+    this.fetchHandbookData();
 
   }
 
-  uploadImageFile(event){
-    var reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.imagePreview = event.target.result;
+  fetchHandbookData(){
+    let params = {
+      url: "admin/getAllHandbooks",
+    }  
+    this.apiCall.commonGetService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+
+        this.handBookData = response.body.data;
+// console.log("dd",this.createCornerData)
+      }else{
+        this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
       }
-      reader.readAsDataURL(event.target.files[0]); 
-      this.fileUpload = event.target.files[0]
+    },(error)=>{
+       console.error(error);
+       
+    });
   }
 
-  onSubmit(){
 
+  onchangeHandbookStatus(values:any,val){
+    if(values.currentTarget.checked === true){
+      var visible = true 
+     } else {
+       var visible = false
+     }
+     const object = {}
+
+     object['handBookId'] = val;
+     object['_is_Visible_'] = visible;
+     object['_is_Deleted_'] = false;
+     object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+
+     var params = {
+      url: 'admin/updateHandbookforUserStatus',
+      data: object
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
   }
 
-  onGettingUpdate(){
-    
-  }
+  // onDeleteHandbookStatus(val,id,visible){
+  //   const object = {}
 
+  //   object['handBookId'] = id;
+  //   object['_is_Visible_'] = visible;
+  //   object['_is_Deleted_'] = val;
+  //   object['createdBy'] = this.updatedby;
+  //  object['userType'] = "admin";
+  //  object['role'] = this.role;
+
+  //   var params = {
+  //    url: 'admin/updateHandbookforUserStatus',
+  //    data: object
+  //  }
+  // //  console.log("da",params)
+  //  this.apiCall.commonPostService(params).subscribe(
+  //    (response: any) => {
+  //      if (response.body.error == false) {
+  //        // Success
+  //        this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
+  //        this.ngOnInit();
+  //      } else {
+  //        // Query Error
+  //        this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+  //      }
+  //    },
+  //    (error) => {
+  //      this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+  //      console.log('Error', error)
+  //    }
+  //  )
+  // }
 }
