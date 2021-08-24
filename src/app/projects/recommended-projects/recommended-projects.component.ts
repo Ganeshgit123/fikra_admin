@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiCallService } from '../../services/api-call.service';
+import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-recommended-projects',
@@ -6,10 +10,60 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recommended-projects.component.scss']
 })
 export class RecommendedProjectsComponent implements OnInit {
+  breadCrumbItems: Array<{}>;
 
-  constructor() { }
+  accToken = sessionStorage.getItem('access_token');
+
+  updatedby = sessionStorage.getItem('adminId');
+  role = sessionStorage.getItem('adminRole');
+  projectList: any=[];
+  projTitle:any;
+  catName:any;
+  launDate:any;
+  goalAmt:any;
+  campaignDuration:any;
+  userId:any;
+  userName:any;
+  
+   constructor(
+  private apiCall: ApiCallService,
+  private formBuilder: FormBuilder,
+  private modalService: NgbModal) {
+ }
 
   ngOnInit(): void {
+    this.breadCrumbItems = [{ label: 'Recommended List', active: true }];
+
+    this.fetchProjectData();
+  }
+
+  fetchProjectData(){
+    let params = {
+      url: "admin/getRecommenedProjectsAdmin",
+    }  
+    this.apiCall.commonGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+         this.projectList = resu.data;
+        //  console.log("list",this.projectList)
+         this.projectList.forEach(element => {
+          this.catName = element.basicInfoId.categoryName
+           this.launDate = element.basicInfoId.launchDate
+           this.goalAmt = element.basicInfoId.goalAmount
+           this.campaignDuration = element.basicInfoId.campaignDuation
+           this.userId = element.userId._id
+           this.userName = element.userId.userName
+          });
+        
+  // console.log("llll", this.temp)
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
+    });
   }
 
 }

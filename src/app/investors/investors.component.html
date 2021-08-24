@@ -18,7 +18,7 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
 <option [ngValue]="100">100</option>
 </select> entries</label></div>
 </div> -->
-<div class="col-sm-12 col-md-6">
+<!-- <div class="col-sm-12 col-md-6">
     <div class="form-group row">
         <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
         <div class="col-md-4">
@@ -29,14 +29,14 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
           <input class="form-control" type="date" id="example-date-input1">
         </div>
       </div>
-</div>
+</div> -->
 <!-- Search -->
-<div class="col-sm-12 col-md-4">
+<!-- <div class="col-sm-12 col-md-4">
 <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
 class="d-inline-flex align-items-center">Search:
 <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
 aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
-</div>
+</div> -->
 <!-- End search -->
 <!-- Table -->
 <div class="table-responsive">
@@ -48,8 +48,8 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
   <th>Full Name</th>
   <th>Email Id</th>
   <th>Phone Number</th>
+  <th>Country</th>
   <th>city</th>
-  <th>Mobile Approval</th>
 </tr>
 </thead>
 <tbody>
@@ -58,11 +58,8 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
   <td>{{user.fullName}}</td>
   <td>{{user.email}}</td>
   <td>{{user.mobileNumber}}</td>
+  <td>{{user.country}}</td>
   <td>{{user.city}}</td>
-  <td>
-    <span *ngIf="user._is_mobile_verified_ === true" class="approve_btn">Verified</span>
-    <span *ngIf="user._is_mobile_verified_ === false" class="not_verify_btn">Not Verified</span>
-    </td>
 </tr>
 </tbody> 
 </table>

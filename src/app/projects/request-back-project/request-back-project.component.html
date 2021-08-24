@@ -18,7 +18,7 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
 <option [ngValue]="100">100</option>
 </select> entries</label></div>
 </div> -->
-<div class="col-sm-12 col-md-6">
+<!-- <div class="col-sm-12 col-md-6">
 <div class="form-group row">
 <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
 <div class="col-md-4">
@@ -29,14 +29,14 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
 <input class="form-control" type="date" value="2019-08-19" id="example-date-input1">
 </div>
 </div>
-</div>
+</div> -->
 <!-- Search -->
-<div class="col-sm-12 col-md-4">
+<!-- <div class="col-sm-12 col-md-4">
 <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
 class="d-inline-flex align-items-center">Search:
 <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
 aria-controls="tickets-table"></label></div>
-</div>
+</div> -->
 <!-- End search -->
 </div>
 <!-- Table -->
@@ -55,7 +55,7 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 </tr>
 </thead>
 <tbody>
-<tr *ngFor="let proj of projectList  | filter:searchTerm">
+<tr *ngFor="let proj of projectList">
 <td><a routerLink="/view-projects/{{ proj._id}}">{{proj._id}}</a></td>
 <td>{{catName}}</td>
 <td>{{launDate}}</td>

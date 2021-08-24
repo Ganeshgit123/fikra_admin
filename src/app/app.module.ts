@@ -70,8 +70,6 @@ import { MiddleSectionComponent } from './about-page/middle-section/middle-secti
 import { ContentSectionComponent } from './about-page/content-section/content-section.component';
 import { BasicInfoComponent } from './view-projects/basic-info/basic-info.component';
 import { RewardsComponent } from './view-projects/rewards/rewards.component';
-import { StoryComponent } from './view-projects/story/story.component';
-import { PeopleComponent } from './view-projects/people/people.component';
 
 import { InvestorFormComponent } from './investor-form/investor-form.component';
 import { CreatorsFormComponent } from './creators-form/creators-form.component';
@@ -92,6 +90,7 @@ import { SpecialRequestsComponent } from './special-requests/special-requests.co
 import { CareerComponent } from './career/career.component';
 import { JobsComponent } from './career/jobs/jobs.component';
 import { ProjectReportsComponent } from './projects/project-reports/project-reports.component';
+import { LikedProjectsComponent } from './view-projects/liked-projects/liked-projects.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -114,8 +113,8 @@ export function createTranslateLoader(http: HttpClient): any {
     ViewProjectsComponent, StartBannerComponent, QuoteComponent, 
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, 
-    ContentSectionComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, InvestorFormComponent, 
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent,
+    ContentSectionComponent, BasicInfoComponent, RewardsComponent, InvestorFormComponent, 
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent,
   ],
   imports: [
     BrowserModule,

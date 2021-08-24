@@ -21,7 +21,8 @@ export class ViewProjectsComponent implements OnInit {
   feature:any;
   addFeatureForm:FormGroup;
   homeStatus:any;
-
+  projectList: any=[];
+  storyArray =[];
 
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
@@ -54,6 +55,7 @@ export class ViewProjectsComponent implements OnInit {
     this.fetchtagArray();
 
     this.fetchTagList();
+    this._fetchStory();
 
   }
 
@@ -299,6 +301,28 @@ export class ViewProjectsComponent implements OnInit {
         console.log('Error', error)
       } 
     )
+  }
+
+  _fetchStory(){
+    let params = {
+      url: "admin/getProjectListById",
+      projectId : this.projectId
+    }  
+    this.apiCall.projectGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+         this.projectList = resu.data.storyTableId;
+
+          this.storyArray.push(this.projectList)
+
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
+    });
   }
 
 }

@@ -1,7 +1,6 @@
 <div class="container-fluid">    
  <a routerLink="/investors"><app-pagetitle title="Investors" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
-<div class="card">
-<div class="card-body">
+
 <ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
 <li [ngbNavItem]="1">
 <a ngbNavLink>
@@ -14,10 +13,70 @@
 <div class="row"  *ngFor="let item of temp">
 <div class="col-md-3">
   <div class="card card-body">
+<h6 class="text-center">User Name</h6>
+<p class="text-center">{{item.userName}}</p>
+</div>
+</div>
+
+<div class="col-md-3">
+  <div class="card card-body">
 <h6 class="text-center">Full Name</h6>
 <p class="text-center">{{item.fullName}}</p>
 </div>
 </div>
+
+<div class="col-md-3">
+  <div class="card card-body">
+<h6 class="text-center">Email</h6>
+<p class="text-center">{{item.email}}</p>
+</div>
+</div>
+
+<div class="col-md-3">
+  <div class="card card-body">
+<h6 class="text-center">Mobile Number</h6>
+<p class="text-center">{{item.mobileNumber}}</p>
+</div>
+</div>
+
+<div class="col-md-3">
+  <div class="card card-body">
+<h6 class="text-center">DOB</h6>
+<p class="text-center">{{item.dob}}</p>
+</div>
+</div>
+
+<div class="col-md-3">
+  <div class="card card-body">
+<h6 class="text-center">Country</h6>
+<p class="text-center">{{item.country}}</p>
+</div>
+</div>
+
+<div class="col-md-3">
+  <div class="card card-body">
+<h6 class="text-center">City</h6>
+<p class="text-center">{{item.city}}</p>
+</div>
+</div>
+
+<div class="col-md-3">
+  <div class="card card-body">
+<h6 class="text-center">Street</h6>
+<p class="text-center">{{item.street}}</p>
+</div>
+</div>
+
+<div class="col-md-3">
+  <div class="card card-body">
+<h6 class="text-center">Newletter</h6>
+<p class="text-center">
+<span *ngIf="item._send_me_newsletter_ == true">Yes</span>
+  <span *ngIf="item._send_me_newsletter_ == false">No</span>
+<p>
+</div>
+</div>
+
 </div>
 </ng-template>
 </li>
@@ -27,6 +86,7 @@
 <span class="d-none d-sm-block">Login History</span>
 </a>
 <ng-template ngbNavContent>
+<div class="card card-body">
   <div class="table-responsive">
     <table id="basic-datatable"
     class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
@@ -54,6 +114,7 @@
     </tbody>
     </table>
     </div>
+  </div>
 </ng-template>
 </li>
 <!-- <li [ngbNavItem]="3">
@@ -66,8 +127,7 @@
 </li> -->
 </ul>
 <div [ngbNavOutlet]="justifiednav"></div>
-</div>
-</div>
+
 
 
 </div>
