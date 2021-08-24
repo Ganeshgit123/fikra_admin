@@ -86,6 +86,12 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HandbookComponent } from './start-a-project/handbook/handbook.component';
 import { AddHandbookComponent } from './creator-handbook/add-handbook/add-handbook.component';
 import { EditHandbookComponent } from './creator-handbook/edit-handbook/edit-handbook.component';
+import { SpecialServicesComponent } from './settings/special-services/special-services.component';
+import { SubscribersComponent } from './subscribers/subscribers.component';
+import { SpecialRequestsComponent } from './special-requests/special-requests.component';
+import { CareerComponent } from './career/career.component';
+import { JobsComponent } from './career/jobs/jobs.component';
+import { ProjectReportsComponent } from './projects/project-reports/project-reports.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -109,7 +115,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, 
     ContentSectionComponent, BasicInfoComponent, RewardsComponent, StoryComponent, PeopleComponent, InvestorFormComponent, 
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent,
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent,
   ],
   imports: [
     BrowserModule,

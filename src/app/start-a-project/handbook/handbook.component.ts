@@ -38,7 +38,7 @@ export class HandbookComponent implements OnInit {
     }  
     this.apiCall.commonGetService(params).subscribe((result:any)=>{
       let resu = result.body;
-      console.log("con",resu)
+      // console.log("con",resu)
       if(resu.error == false)
       {
         this.handbook = this.formBuilder.group({
@@ -48,7 +48,7 @@ export class HandbookComponent implements OnInit {
           bodyAr: [resu.data.creatorHandbook[0].bodyAr,[]],
         });
          
-        this.handBookStatus = resu.data.creatorHandbook[0]._is_on_;
+        this.handBookStatus = resu.data._is_HandBook_on_;
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -87,6 +87,39 @@ export class HandbookComponent implements OnInit {
     )
   }
 
+  onchangeHandbookStatus(values:any){
+    if(values.currentTarget.checked === true){
+      var visible = true 
+     } else {
+       var visible = false
+     }
+     const object = {}
 
+     object['_is_HandBook_on_'] = visible;
+     object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+
+     var params = {
+      url: 'admin/status_FIKRA_Handbook',
+      data: object
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
 
 }

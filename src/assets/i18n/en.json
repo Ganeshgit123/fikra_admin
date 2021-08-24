@@ -144,7 +144,21 @@
     "CONTACT_US": {
       "TEXT": "Contact Us"
     },
-    
+    "SPECIAL_SERVICES": {
+      "TEXT": "Special Services"
+    },
+    "SUBSCRIBERS": {
+      "TEXT": "Subscribers"
+    },
+    "SPECIAL_REQUESTS": {
+      "TEXT": "Special Requests"
+    },
+    "CAREER": {
+      "TEXT": "Career"
+    },
+    "PROJECT_REPORTS": {
+      "TEXT": "Reported projects"
+    },
     
     "LAYOUTS": {
       "TEXT": "Layouts",

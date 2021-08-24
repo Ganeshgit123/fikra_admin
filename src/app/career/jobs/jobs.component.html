@@ -1,0 +1,85 @@
+<div class="card">
+    <div class="card-body">
+    <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addJobs(creatorCorner)">Add New</button></p>
+    <!-- Center Modal -->
+    <ng-template #creatorCorner let-modal>
+    <div class="modal-header">
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="addJobData">
+    <div class="form-group">
+    <label>Job Title</label>
+    <input type="text" class="form-control" formControlName="jobTitle">
+    </div>
+    <div class="form-group">
+        <label>Job Description</label>
+    <textarea class="form-control" formControlName="jobDescription"></textarea>
+    </div>
+    <div class="form-group">
+    <label>Job criteria</label>
+    <textarea class="form-control" formControlName="criteria"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Job Role</label>
+    <input type="text" class="form-control" formControlName="jobRole">
+        </div>
+        <div class="form-group">
+            <label>Job Openings</label>
+            <input type="text" class="form-control" formControlName="jobVacancies">
+        </div>
+        <div class="form-group">
+            <label>Job Location</label>
+            <select class="form-control" formControlName="location">
+            <option  *ngFor="let item of branchList" value="{{item._id}}">{{item.branchName}}</option>
+            </select>
+            </div>
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
+    </form>
+    </div>
+    </ng-template>
+    
+    <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+    <thead>
+    <tr>
+    <th>Job Title</th>
+    <th>Job Description</th>
+    <th>criteria</th>
+    <th>Role</th>
+    <th>Vacancies</th>
+    <th>Location</th>
+    <th>Status</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let item of jobData">
+    <td>{{item.jobTitle}}</td>
+    <td>{{item.jobDescription}}</td>
+    <td>{{item.criteria}}</td>
+    <td>{{item.jobRole}}</td>
+    <td>{{item.jobVacancies}}</td>
+    <td>{{item.location}}</td>
+    <td>
+        <label class="switch">
+            <input *ngIf="item._is_On_ == true"  type="checkbox" checked (change)="onchangeJobStatus($event,item._id)">
+            <input *ngIf="item._is_On_ !== true" type="checkbox" unchecked (change)="onchangeJobStatus($event,item._id)">
+            <span class="slider"></span>
+        </label>
+    </td>
+    
+    <td>
+        <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewJobs(item,creatorCorner)"><i
+            class="mdi mdi-pencil font-size-18"></i></a>  
+        <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteJobStatus(true,item._id,item._is_On_)"><i
+                class="mdi mdi-trash-can font-size-18"></i></a>     
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>

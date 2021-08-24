@@ -37,6 +37,11 @@ import { RecommendedProjectsComponent } from './projects/recommended-projects/re
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AddHandbookComponent } from './creator-handbook/add-handbook/add-handbook.component';
 import { EditHandbookComponent } from './creator-handbook/edit-handbook/edit-handbook.component';
+import { SpecialServicesComponent } from './settings/special-services/special-services.component';
+import { SubscribersComponent } from './subscribers/subscribers.component';
+import { SpecialRequestsComponent } from './special-requests/special-requests.component';
+import { CareerComponent } from './career/career.component';
+import { ProjectReportsComponent } from './projects/project-reports/project-reports.component';
 
 const routes: Routes = [
   {
@@ -76,6 +81,11 @@ const routes: Routes = [
       {path: 'country_city',component: CountryCityComponent, canActivate: [AuthGuard],},
       {path: 'tags',component: TagsComponent, canActivate: [AuthGuard],},
       {path: 'contact',component: ContactUsComponent, canActivate: [AuthGuard],},
+      {path: 'special_services',component: SpecialServicesComponent, canActivate: [AuthGuard],},
+      {path: 'subscribers',component: SubscribersComponent, canActivate: [AuthGuard],},
+      {path: 'special_requests',component: SpecialRequestsComponent, canActivate: [AuthGuard],},
+      {path: 'career',component: CareerComponent, canActivate: [AuthGuard],},
+      {path: 'project_reports',component: ProjectReportsComponent, canActivate: [AuthGuard],},
       { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     ],
     canActivate: [AuthGuard]

@@ -35,6 +35,12 @@ export const MENU: MenuItem[] = [
                 link: '/recommended_projects',
                 parentId: 3
             },
+            {
+                id: 30,
+                label: 'MENUITEMS.PROJECT_REPORTS.TEXT',
+                link: '/project_reports',
+                parentId: 3
+            },
         ]
     },
     {
@@ -82,6 +88,12 @@ export const MENU: MenuItem[] = [
                 id: 25,
                 label: 'MENUITEMS.CONTACT_US.TEXT',
                 link: '/contact',
+                parentId: 6
+            },
+            {
+                id: 29,
+                label: 'MENUITEMS.CAREER.TEXT',
+                link: '/career',
                 parentId: 6
             },
             {
@@ -133,6 +145,12 @@ export const MENU: MenuItem[] = [
                 link: '/tags',
                 parentId: 13
             },
+            {
+                id: 26,
+                label: 'MENUITEMS.SPECIAL_SERVICES.TEXT',
+                link: '/special_services',
+                parentId: 13
+            },
         ]
     },
     {
@@ -153,6 +171,18 @@ export const MENU: MenuItem[] = [
                 parentId: 19
             },
         ]
+    },
+    {
+        id: 27,
+        label: 'MENUITEMS.SPECIAL_REQUESTS.TEXT',
+        icon: 'mdi mdi-account-cog',
+        link: '/special_requests'
+    },
+    {
+        id: 28,
+        label: 'MENUITEMS.SUBSCRIBERS.TEXT',
+        icon: 'mdi mdi-account-cog',
+        link: '/subscribers'
     },
  
     // {
