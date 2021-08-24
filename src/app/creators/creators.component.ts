@@ -37,7 +37,7 @@ export class CreatorsComponent implements OnInit {
       if(resu.error == false)
       {
         this.getCreateList = resu.data;
-      console.log("fetch",this.getCreateList)
+      // console.log("fetch",this.getCreateList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -47,5 +47,42 @@ export class CreatorsComponent implements OnInit {
     });
   
    }
+
+   onCretiveIndependentStatus(values:any,val){
+
+    if(values.currentTarget.checked === true){
+      var visible = true 
+     } else {
+       var visible = false
+     }
+     const object = {}
+
+     object['creatorId'] = val;
+     object['_is_On_Creative_In_'] = visible;
+     object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+
+     var params = {
+      url: 'admin/setUserToIndepententSection',
+      data: object
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
 
 }

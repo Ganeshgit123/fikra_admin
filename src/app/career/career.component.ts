@@ -99,7 +99,7 @@ export class CareerComponent implements OnInit {
   }
 
   checkFileFormat(checkFile){
-    if(checkFile.type == 'image/png' || checkFile.type == 'image/jpeg' || checkFile.type == 'image/TIF' || checkFile.type == 'image/tif' || checkFile.type == 'image/tiff'){
+    if(checkFile.type == 'image/png' || checkFile.type == 'image/jpeg' || checkFile.type == 'image/jpg' || checkFile.type == 'image/TIF' || checkFile.type == 'image/tif' || checkFile.type == 'image/tiff'){
       return false;
     } else {
       return true;
@@ -140,7 +140,7 @@ export class CareerComponent implements OnInit {
       )
       }
 
-    // console.log("lol",this.imgUrl)
+    console.log("lol",this.imgUrl)
     const data = this.addCareer.value;
     data['careerImage'] = this.imagePreview;
     data['createdBy'] = this.updatedby;
@@ -151,7 +151,7 @@ export class CareerComponent implements OnInit {
   url: 'admin/postCareerContent',
   data: data
   }
-  // console.log("img",params1)
+  console.log("img",params1)
   this.apiCall.commonPostService(params1).subscribe(
   (response: any) => {
   if (response.body.error == false) {

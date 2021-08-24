@@ -14,17 +14,17 @@ export class ProjectReportsComponent implements OnInit {
   role:any;
   searchTerm;
   reportedList = [];
-  adminStatus:any;
-  investorId:any;
   creatorName:any;
   creatorId:any;
   repcomment:any;
-  reportId:any;
+  investorId:any;
+  investorName:any;
 
    constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     private modalService: NgbModal
     ) { }
+    adminStatus:any;
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Reported-Project List', active: true }];
@@ -46,19 +46,11 @@ export class ProjectReportsComponent implements OnInit {
         this.reportedList = resu.data;
         
         this.reportedList.forEach(element => {
-          this.adminStatus = element.adminStatus;
-          this.investorId = element.userId;
           this.creatorName = element.aboutProjectId.userId.userName;
           this.creatorId = element.aboutProjectId.userId._id;
-          this.repcomment = element.reportComment;
-          this.reportId = element._id;
-
-          // this.userName = element.userId.userName;
-          // this.creatorId = element.userId._id;
-          // this.projectId = element.projectId._id;
+          this.investorId = element.userDetails._id;
+          this.investorName = element.userDetails.userName;
         });
-
-        console.log("ef",this.creatorName)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

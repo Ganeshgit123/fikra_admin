@@ -59,7 +59,7 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
 <td>{{catName}}</td>
 <td>{{launDate}}</td>
-<td></td>
+<td><a routerLink="/view-creators/{{creatorId}}">{{creatorName}}</a></td>
 <td>{{goalAmt}}</td>
 <td>
 <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">

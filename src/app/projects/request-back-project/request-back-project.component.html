@@ -56,10 +56,10 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 </thead>
 <tbody>
 <tr *ngFor="let proj of projectList">
-<td><a routerLink="/view-projects/{{ proj._id}}">{{proj._id}}</a></td>
+<td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
 <td>{{catName}}</td>
 <td>{{launDate}}</td>
-<td></td>
+<td><a routerLink="/view-creators/{{creatorId}}">{{creatorName}}</a></td>
 <td>{{goalAmt}}</td>
 <td>
     {{proj.aproval_Status}}

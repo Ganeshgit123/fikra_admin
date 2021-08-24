@@ -35,7 +35,7 @@ export class RewardsComponent implements OnInit {
         {
            this.projectList = resu.data.rewardTableId;
 
-            this.rewardArray.push(this.projectList)
+            console.log("rew",this.projectList)
 
         }else{
           this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

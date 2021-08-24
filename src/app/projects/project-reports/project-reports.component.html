@@ -44,6 +44,7 @@
     class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
     <thead>
     <tr>
+      <th>Report Id</th>
       <th>Investor Id</th>
       <th>Creator Name</th>
       <th>Report Comment</th>
@@ -52,22 +53,23 @@
     </thead>
     <tbody>
     <tr *ngFor="let user of reportedList">
-      <td><a routerLink="/view-investors/{{investorId}}">{{investorId}}</a></td>
+      <td>{{user._id}}</td>
+      <td><a routerLink="/view-investors/{{investorId}}">{{investorName}}</a></td>
       <td><a routerLink="/view-creators/{{creatorId}}">{{creatorName}}</a></td>
-      <td>{{repcomment}}</td>
+      <td>{{user.reportComment}}</td>
       <td>
-        <select class="pend_btn" *ngIf="adminStatus === 'pending'" (change)="onChangeReportStatus(reportId,$event.target.value)">
-          <option>{{adminStatus}}</option>
+        <select class="pend_btn" *ngIf="user.adminStatus === 'pending'" (change)="onChangeReportStatus(user._id,$event.target.value)">
+          <option>{{user.adminStatus}}</option>
           <option>approved</option>
           <option>under_review</option>
           </select>
-          <select class="apprve_btn" *ngIf="adminStatus === 'approved'" (change)="onChangeReportStatus(reportId,$event.target.value)">
-            <option>{{adminStatus}}</option>
+          <select class="apprve_btn" *ngIf="user.adminStatus === 'approved'" (change)="onChangeReportStatus(user._id,$event.target.value)">
+            <option>{{user.adminStatus}}</option>
             <option>pending</option>
             <option>under_review</option>
             </select>
-            <select class="review_btn" *ngIf="adminStatus === 'under_review'" (change)="onChangeReportStatus(reportId,$event.target.value)">
-              <option>{{adminStatus}}</option>
+            <select class="review_btn" *ngIf="user.adminStatus === 'under_review'" (change)="onChangeReportStatus(user._id,$event.target.value)">
+              <option>{{user.adminStatus}}</option>
               <option>approved</option>
               <option>pending</option>
               </select>

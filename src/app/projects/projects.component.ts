@@ -26,6 +26,8 @@ export class ProjectsComponent implements OnInit {
   temp:any;
   launDate:any;
   goalAmt:any;
+  creatorName:any;
+  creatorId:any;
 
  constructor(
   private apiCall: ApiCallService,
@@ -58,6 +60,8 @@ export class ProjectsComponent implements OnInit {
            this.subCatName = element.basicInfoId.subCategoryName
            this.launDate = element.basicInfoId.launchDate
            this.goalAmt = element.basicInfoId.goalAmount
+           this.creatorName = element.userId.userName
+           this.creatorId = element.userId._id
 
           });
         
