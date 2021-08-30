@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { LanguageService } from '../../../core/services/language.service';
 import { environment } from '../../../../environments/environment';
+import { ApiCallService } from '../../../services/api-call.service';
 
 @Component({
   selector: 'app-topbar',
@@ -19,17 +20,25 @@ export class TopbarComponent implements OnInit {
   flagvalue;
   countryName;
   valueset: string;
+  notificationData: any;
+  updatedby: any;
+  role: any;
+  sessionNotiData:any;
 
   listLang = [
     { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
   ];
 
   // tslint:disable-next-line: max-line-length
-  constructor(@Inject(DOCUMENT) private document: any, private router: Router, public languageService: LanguageService, public cookiesService: CookieService) { }
+  constructor(@Inject(DOCUMENT) private document: any, private router: Router, public languageService: LanguageService, public cookiesService: CookieService,
+    private apiCall: ApiCallService,) { }
 
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
   ngOnInit(): void {
+    this.updatedby = sessionStorage.getItem('adminId');
+    this.role = sessionStorage.getItem('adminRole');
+
     this.element = document.documentElement;
     this.configData = {
       suppressScrollX: true,
@@ -44,8 +53,113 @@ export class TopbarComponent implements OnInit {
     } else {
       this.flagvalue = val.map(element => element.flag);
     }
+
+    this.fetchNotificationData();
+    this.fetchSessionNotifyData();
+
   }
 
+  fetchNotificationData() {
+    let params = {
+      url: "admin/getNotificationAdmin",
+    }
+    this.apiCall.commonGetService(params).subscribe((result: any) => {
+      let resu = result.body;
+      if (resu.error == false) {
+
+        this.notificationData = resu.notification;
+        // console.log("data", this.notificationData)
+
+      } else {
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    }, (error) => {
+      console.error(error);
+
+    });
+  }
+
+  visitedStatus(val) {
+
+    const object = {}
+
+    object['notificationId'] = val;
+    object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+
+    var params = {
+      url: 'admin/isVisitedNotificationAdmin',
+      data: object
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Visited Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
+
+  onDeleteNotification(id) {
+    const object = {}
+
+    object['notificationId'] = id;
+    object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+
+    var params = {
+      url: 'admin/deleteNotificationAdmin',
+      data: object
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Visited Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
+
+  fetchSessionNotifyData(){
+    let params = {
+      url: "admin/getSesstionAdmin",
+    }
+    this.apiCall.commonGetService(params).subscribe((result: any) => {
+      let resu = result.body;
+      if (resu.error == false) {
+
+        this.sessionNotiData = resu.notification.length;
+
+        // console.log("len",sessionNotiData)
+
+      } else {
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    }, (error) => {
+      console.error(error);
+
+    });
+  }
   /**
    * Toggle the menu bar when having mobile screen
    */
@@ -107,7 +221,7 @@ export class TopbarComponent implements OnInit {
    * Logout the user
    */
   logout() {
-    console.log("fef")
+    // console.log("fef")
     sessionStorage.clear();
     this.router.navigate(['/']);
   }

@@ -175,14 +175,20 @@ export const MENU: MenuItem[] = [
     {
         id: 27,
         label: 'MENUITEMS.SPECIAL_REQUESTS.TEXT',
-        icon: 'mdi mdi-account-cog',
+        icon: ' ri-external-link-fill',
         link: '/special_requests'
     },
     {
         id: 28,
         label: 'MENUITEMS.SUBSCRIBERS.TEXT',
-        icon: 'mdi mdi-account-cog',
+        icon: ' ri-user-shared-fill',
         link: '/subscribers'
+    },
+    {
+        id: 31,
+        label: 'MENUITEMS.NOTIFICATIONS.TEXT',
+        icon: 'ri-notification-4-line',
+        link: '/notifications'
     },
  
     // {

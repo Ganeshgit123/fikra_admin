@@ -159,6 +159,9 @@
     "PROJECT_REPORTS": {
       "TEXT": "Reported projects"
     },
+    "NOTIFICATIONS": {
+      "TEXT": "Notifications"
+    },
     
     "LAYOUTS": {
       "TEXT": "Layouts",

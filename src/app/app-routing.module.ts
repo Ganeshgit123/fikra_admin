@@ -42,6 +42,7 @@ import { SubscribersComponent } from './subscribers/subscribers.component';
 import { SpecialRequestsComponent } from './special-requests/special-requests.component';
 import { CareerComponent } from './career/career.component';
 import { ProjectReportsComponent } from './projects/project-reports/project-reports.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const routes: Routes = [
   {
@@ -86,6 +87,7 @@ const routes: Routes = [
       {path: 'special_requests',component: SpecialRequestsComponent, canActivate: [AuthGuard],},
       {path: 'career',component: CareerComponent, canActivate: [AuthGuard],},
       {path: 'project_reports',component: ProjectReportsComponent, canActivate: [AuthGuard],},
+      {path: 'notifications',component: NotificationsComponent, canActivate: [AuthGuard],},
       { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     ],
     canActivate: [AuthGuard]
