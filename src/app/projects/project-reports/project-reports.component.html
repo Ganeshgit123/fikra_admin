@@ -54,8 +54,8 @@
     <tbody>
     <tr *ngFor="let user of reportedList">
       <td>{{user._id}}</td>
-      <td><a routerLink="/view-investors/{{investorId}}">{{investorName}}</a></td>
-      <td><a routerLink="/view-creators/{{creatorId}}">{{creatorName}}</a></td>
+      <td><a routerLink="/view-investors/{{user.userDetails._id}}">{{user.userDetails.userName}}</a></td>
+      <td><a routerLink="/view-creators/{{user.aboutProjectId.userId._id}}">{{user.aboutProjectId.userId.userName}}</a></td>
       <td>{{user.reportComment}}</td>
       <td>
         <select class="pend_btn" *ngIf="user.adminStatus === 'pending'" (change)="onChangeReportStatus(user._id,$event.target.value)">

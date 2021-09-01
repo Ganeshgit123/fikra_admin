@@ -162,6 +162,18 @@
     "NOTIFICATIONS": {
       "TEXT": "Notifications"
     },
+    "ROLES & PERMISSION": {
+      "TEXT": "Roles & Permissions"
+    },
+    "ROLES": {
+      "TEXT": "Roles"
+    },
+    "PERMISSIONS": {
+      "TEXT": "Permissions"
+    },
+    "ADMIN_USERS": {
+      "TEXT": "Users"
+    },
     
     "LAYOUTS": {
       "TEXT": "Layouts",

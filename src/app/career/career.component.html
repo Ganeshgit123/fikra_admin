@@ -85,7 +85,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Job Title</label>
-                <select class="form-control" (click)="jobclick($event)">
+                <select class="form-control" (click)="jobclick($event.target.value)">
                 <option  *ngFor="let item of jobData" value="{{item._id}}">{{item.jobTitle}}</option>
                 </select>
                 </div>
@@ -97,25 +97,27 @@
         class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
         <thead>
         <tr>
-        <th>Job Title</th>
-        <th>Job Description</th>
-        <th>Job Criteria</th>
-        <th>Job Role</th>
-        <th>Job Vacancies</th>
-        <th>Branch</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Resume</th>
+        <th>Experience</th>
+        <th>Description</th>
         </tr>
         </thead>
         <tbody>
-        <!-- <tr  *ngFor="let item of contactListData">
+        <tr  *ngFor="let item of candidateListData">
         <td>{{item.name}}</td>
         <td>{{item.email}}</td>
         <td>{{item.phone}}</td>
         <td>{{item.country}}</td>
+        <td><a href="{{item.resume}}" target="_blank">{{item.resume}}</a></td>
         <td>{{item.city}}</td>
-        <td>{{item.message}}</td>
-        <td>{{item.inqueryType}}</td>
-        <td>{{item.inqueryMessage}}</td>
-        </tr> -->
+        <td>{{item.experiance}}</td>
+        <td>{{item.discription}}</td>
+        </tr>
         </tbody>
         </table>
         </div>

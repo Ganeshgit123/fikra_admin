@@ -154,6 +154,31 @@ export const MENU: MenuItem[] = [
         ]
     },
     {
+        id: 32,
+        label: 'MENUITEMS.ROLES & PERMISSION.TEXT',
+        icon: '  fas fa-user-lock',
+        subItems: [
+            {
+                id: 33,
+                label: 'MENUITEMS.ROLES.TEXT',
+                link: '/roles',
+                parentId: 32
+            },
+            {
+                id: 34,
+                label: 'MENUITEMS.PERMISSIONS.TEXT',
+                link: '/permissions',
+                parentId: 32
+            },
+        ]
+    },
+    {
+        id: 35,
+        label: 'MENUITEMS.ADMIN_USERS.TEXT',
+        icon: 'mdi mdi-account-cog',
+        link: '/admin_users'
+    },
+    {
         id: 19,
         label: 'MENUITEMS.SIGNUPFORM.TEXT',
         icon: 'ri-eraser-fill',

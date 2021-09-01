@@ -50,6 +50,7 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <th>Launch Date</th>
 <th>User Name</th>
 <th>Goal Amount</th>
+<th>Duration</th>
 <th>Admin Approval</th>
 <th>Action</th>
 </tr>
@@ -57,10 +58,11 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <tbody>
 <tr *ngFor="let proj of projectList  | filter:searchTerm">
 <td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
-<td>{{catName}}</td>
-<td>{{launDate}}</td>
-<td><a routerLink="/view-creators/{{creatorId}}">{{creatorName}}</a></td>
-<td>{{goalAmt}}</td>
+<td>{{proj.basicInfoId.categoryName}}</td>
+<td>{{proj.basicInfoId.launchDate | date}}</td>
+<td><a routerLink="/view-creators/{{proj.userId._id}}">{{proj.userId.userName}}</a></td>
+<td>{{proj.basicInfoId.goalAmount}}</td>
+<td>{{proj.basicInfoId.campaignDuation | date}}</td>
 <td>
 <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
 <option>{{proj.aproval_Status}}</option>

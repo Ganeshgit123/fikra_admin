@@ -1,0 +1,53 @@
+<div class="container-fluid">    
+<app-pagetitle title="Roles List" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<div class="card">
+<div class="card-body">
+<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addRole(roleCorner)">Add New</button></p>
+<!-- Center Modal -->
+<ng-template #roleCorner let-modal>
+<div class="modal-header">
+<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<form [formGroup]="addNewRole">
+<div class="form-group">
+<label>Role Name</label>
+<input type="text" class="form-control" formControlName="roleName">
+</div>
+<div class="form-group">
+<label>Role Id (Unique Name)</label>
+<input type="text" class="form-control" formControlName="roleId">
+</div>
+<br>
+<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
+</form>
+</div>
+</ng-template>
+
+<div class="table-responsive">
+<table id="basic-datatable"
+class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+<thead>
+<tr>
+<th>Role Name</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr  *ngFor="let item of roleData">
+<td>{{item.roleName}}</td>
+<td>
+<a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewRole(item,roleCorner)"><i
+class="mdi mdi-pencil font-size-18"></i></a>  
+<a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteRole(item._id)"><i
+class="mdi mdi-trash-can font-size-18"></i></a>     
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+</div>

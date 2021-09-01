@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <app-pagetitle title="Admin Users" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<div class="card">
+    <div class="card-body">
+    <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addUsers(userCorner)">Add New</button></p>
+    <!-- Center Modal -->
+    <ng-template #userCorner let-modal>
+    <div class="modal-header">
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="addUserData">
+    <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" formControlName="systemAdminName">
+    </div>
+    <div class="form-group">
+        <label>Mail Id</label>
+        <input type="email" class="form-control" formControlName="systemAdminUserName">
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" formControlName="systemAdminPassword">
+    </div>
+    <div class="form-group">
+        <label>Admin Role</label>
+        <select class="form-control" formControlName="systemAdminRoleId" >
+        <option  *ngFor="let item of roleData" value="{{item._id}}">{{item.roleName}}</option>
+        </select>
+        </div>
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
+    </form>
+    </div>
+    </ng-template>
+    
+    <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+    <thead>
+    <tr>
+    <th>Name</th>
+    <th>Mail Id</th>
+    <th>Role Name</th>
+    <th>Status</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let item of userData">
+    <td>{{item.systemAdminName}}</td>
+    <td>{{item.systemAdminUserName}}</td>
+    <td>{{roleNameForUser}}</td>
+    <!-- <td>
+        <label class="switch">
+            <input *ngIf="item._is_visible_ == true"  type="checkbox" checked (change)="onchangeFaqStatus($event,item._id)">
+            <input *ngIf="item._is_visible_ !== true" type="checkbox" unchecked (change)="onchangeFaqStatus($event,item._id)">
+            <span class="slider"></span>
+        </label>
+    </td>
+    
+    <td>
+        <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewFaq(item,creatorCorner)"><i
+            class="mdi mdi-pencil font-size-18"></i></a>  
+        <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteFaqStatus(true,item._id,item._is_visible_)"><i
+                class="mdi mdi-trash-can font-size-18"></i></a>     
+    </td> -->
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>

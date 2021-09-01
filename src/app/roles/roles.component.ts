@@ -1,54 +1,53 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Form} from '@angular/forms';
 import { ApiCallService } from '../services/api-call.service';
-import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+  selector: 'app-roles',
+  templateUrl: './roles.component.html',
+  styleUrls: ['./roles.component.scss']
 })
-export class ProjectsComponent implements OnInit {
+export class RolesComponent implements OnInit {
   breadCrumbItems: Array<{}>;
+  updatedby:any;
+  role:any;
+  addNewRole:FormGroup;
+  roleData:any;
+  isEdit = false;
+  roleId:any;
 
-  accToken = sessionStorage.getItem('access_token');
-
-  updatedby = sessionStorage.getItem('adminId');
-  role = sessionStorage.getItem('adminRole');
-  projectList: any=[];
-  searchTerm;
-  addComment:FormGroup;
-  projectId: any;
-  projectStatus:any;
-
- constructor(
-  private apiCall: ApiCallService,
-  private formBuilder: FormBuilder,
-  private modalService: NgbModal) {
- }
+   constructor(private formBuilder: FormBuilder,
+    private apiCall: ApiCallService,
+    private modalService: NgbModal
+    ) { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Projects List', active: true }];
+    this.breadCrumbItems = [{ label: 'Roles' },{ label: 'Roles List', active: true }];
+    this.updatedby = sessionStorage.getItem('adminId');
+    this.role = sessionStorage.getItem('adminRole');
 
-    this.addComment = this.formBuilder.group({
-      rejection_comment: [''],
+    this.addNewRole = this.formBuilder.group({
+      roleName: [''],
+      roleId:['']
     });
 
-    this._fetchData();
+    this.fetchRoleData();
   }
 
-  _fetchData() {
-
+  fetchRoleData(){
     let params = {
-      url: "admin/listProject",
+      url: "admin/getAllRoles",
     }  
-    this.apiCall.smallGetService(params).subscribe((result:any)=>{
+    this.apiCall.commonGetService(params).subscribe((result:any)=>{
       let resu = result.body;
       if(resu.error == false)
       {
-         this.projectList = resu.data;
-      //  console.log("data",this.projectList)   
+
+        this.roleData = resu.data;
+        // console.log("data",this.roleData)
+
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -56,39 +55,35 @@ export class ProjectsComponent implements OnInit {
        console.error(error);
        
     });
-  
-  
-   }
+  }
 
-   onChangeProjStatus(id,status,centerDataModal:any){
-    
-    this.projectId = id;
+  addRole(roleCorner: any){
+    this.modalService.open(roleCorner, { centered: true });
+  }
 
-    this.projectStatus = status;
-    
-    if(this.projectStatus === 'rejected'){
-      this.modalService.open(centerDataModal, { centered: true });
+  onSubmit(){
+
+    if(this.isEdit){
+      this.roleEditService(this.addNewRole.value)
+      return;
     }
 
-   
 
-    const data = {}
-    data['projectId'] = this.projectId
-    data['createdby'] = this.updatedby;
-    data['userType'] = "admin";
-    data['role'] = this.role;
-    data['aproval_Status'] = this.projectStatus;
-  
+    const postData = this.addNewRole.value;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+
     var params = {
-      url: 'admin/adminProjectApproval',
-      data: data
+      url: 'admin/addRoleWithName',
+      data: postData
     }
-    console.log("fef",params)
+    // console.log("fefe",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {
-          // Success
-          this.apiCall.showToast('Status Updated Successfully', 'Success', 'successToastr')
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.modalService.dismissAll();
           this.ngOnInit();
         } else {
           // Query Error
@@ -98,31 +93,40 @@ export class ProjectsComponent implements OnInit {
       (error) => {
         this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
         console.log('Error', error)
-      }
+      } 
     )
-  
-   }
+  }
 
-   rejectReason(){
+  viewRole(data,roleCorner: any){
+    this.modalService.open(roleCorner, { centered: true });
 
-    const data = {}
-    data['projectId'] = this.projectId
-    data['createdby'] = this.updatedby;
+    this.isEdit = true;
+
+    this.roleId = data['_id']
+    this.addNewRole   = this.formBuilder.group({
+      roleName: [data['roleName']],
+      roleId: [data['roleId']],
+    })
+
+  }
+
+  roleEditService(data){
+    data['_id'] = this.roleId
+    data['createdBy'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;
-    data['rejection_comment'] = this.addComment.get('rejection_comment').value;
-    data['aproval_Status'] = this.projectStatus;
 
     var params = {
-      url: 'admin/adminProjectApproval',
+      url: 'admin/updateRoleDetails',
       data: data
     }
-    console.log("Reject",params)
+    // console.log("par",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {
           // Success
-          this.apiCall.showToast('Reason updated Successfully', 'Success', 'successToastr')
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.isEdit = false;
           this.modalService.dismissAll();
           this.ngOnInit();
         } else {
@@ -135,10 +139,11 @@ export class ProjectsComponent implements OnInit {
         console.log('Error', error)
       }
     )
-     
-   }
+  }
 
-   deleteProject(id){
+
+
+  onDeleteRole(id){
     Swal.fire({
       title: 'Are you sure?',
       text: 'You won\'t be able to revert this!',
@@ -149,19 +154,18 @@ export class ProjectsComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then(result => {
       if (result.value) {
-    console.log("id",id)
    const data = {}
-  data['projectId'] = id
-  data['updatedby'] = this.updatedby;
+  data['roleId'] = id
+  data['createdBy'] = this.updatedby;
   data['userType'] = "admin";
   data['role'] = this.role;
 
   var params = {
-    url: 'admin/adminProjectDelete',
+    url: 'admin/removeRolesById',
     data: data
   }
-  console.log("fef",params)
-  this.apiCall.commonPutService(params).subscribe(
+  // console.log("fef",params)
+  this.apiCall.commonPostService(params).subscribe(
     (response: any) => {
       if (response.body.error == false) {
         // Success
@@ -182,6 +186,5 @@ export class ProjectsComponent implements OnInit {
     });
 
   }
-
 
 }

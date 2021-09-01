@@ -172,10 +172,6 @@ export class CareerComponent implements OnInit {
   )
   }
   
-  jobclick(value){
-    const data = {jobsId: value}
-    this.fetchCareerListData(data);
-  } 
 
   fetchJobData(){
     let params = {
@@ -197,7 +193,7 @@ export class CareerComponent implements OnInit {
     });
   }
 
-  fetchCareerListData(id){
+  jobclick(id){
     let params = {
       url: "admin/getCandidateByJobId",
       jobsId : id
@@ -208,7 +204,7 @@ export class CareerComponent implements OnInit {
       {
 
         this.candidateListData = resu.data;
-        console.log("job",this.candidateListData)
+        // console.log("job",this.candidateListData)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

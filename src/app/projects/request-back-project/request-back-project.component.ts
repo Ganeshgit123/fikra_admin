@@ -21,13 +21,7 @@ export class RequestBackProjectComponent implements OnInit {
   addComment:FormGroup;
   projectId: any;
   projectStatus:any;
-  catName:any;
-  subCatName:any;
-  temp:any;
-  launDate:any;
-  goalAmt:any;
-  creatorName:any;
-  creatorId:any;
+
 
    constructor(
   private apiCall: ApiCallService,
@@ -52,17 +46,6 @@ export class RequestBackProjectComponent implements OnInit {
       {
          this.projectList = resu.data;
         //  console.log("list",this.projectList)
-         this.projectList.forEach(element => {
-          this.catName = element.basicInfoId.categoryName
-           this.subCatName = element.basicInfoId.subCategoryName
-           this.launDate = element.basicInfoId.launchDate
-           this.goalAmt = element.basicInfoId.goalAmount
-           this.creatorId = element.userId._id
-           this.creatorName = element.userId.userName
-
-          });
-        
-  // console.log("llll", this.temp)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

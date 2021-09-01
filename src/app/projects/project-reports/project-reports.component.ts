@@ -14,11 +14,6 @@ export class ProjectReportsComponent implements OnInit {
   role:any;
   searchTerm;
   reportedList = [];
-  creatorName:any;
-  creatorId:any;
-  repcomment:any;
-  investorId:any;
-  investorName:any;
 
    constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -44,13 +39,6 @@ export class ProjectReportsComponent implements OnInit {
       if(resu.error == false)
       {
         this.reportedList = resu.data;
-        
-        this.reportedList.forEach(element => {
-          this.creatorName = element.aboutProjectId.userId.userName;
-          this.creatorId = element.aboutProjectId.userId._id;
-          this.investorId = element.userDetails._id;
-          this.investorName = element.userDetails.userName;
-        });
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

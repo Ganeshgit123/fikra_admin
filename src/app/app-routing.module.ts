@@ -43,6 +43,9 @@ import { SpecialRequestsComponent } from './special-requests/special-requests.co
 import { CareerComponent } from './career/career.component';
 import { ProjectReportsComponent } from './projects/project-reports/project-reports.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { RolesComponent } from './roles/roles.component';
+import { PermissionComponent } from './roles/permission/permission.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 const routes: Routes = [
   {
@@ -88,6 +91,9 @@ const routes: Routes = [
       {path: 'career',component: CareerComponent, canActivate: [AuthGuard],},
       {path: 'project_reports',component: ProjectReportsComponent, canActivate: [AuthGuard],},
       {path: 'notifications',component: NotificationsComponent, canActivate: [AuthGuard],},
+      {path: 'roles',component: RolesComponent, canActivate: [AuthGuard],},
+      {path: 'permissions',component: PermissionComponent, canActivate: [AuthGuard],},
+      {path: 'admin_users',component: AdminUsersComponent, canActivate: [AuthGuard],},
       { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     ],
     canActivate: [AuthGuard]

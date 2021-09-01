@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../../services/api-call.service';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-rewards',
@@ -16,6 +17,7 @@ export class RewardsComponent implements OnInit {
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private modalService: NgbModal
     ) { }
 
     ngOnInit(): void {
@@ -44,6 +46,14 @@ export class RewardsComponent implements OnInit {
          console.error(error);
          
       });
+    }
+
+    viewRewardItem(rewardModal: any){
+      this.modalService.open(rewardModal, { centered: true });
+    }
+
+    viewShippingAddress(shippingModal: any){
+      this.modalService.open(shippingModal, { centered: true });
     }
 
 }

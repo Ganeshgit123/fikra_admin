@@ -55,14 +55,59 @@
     </thead>
     <tbody>
     <tr *ngFor="let user of projectList">
-      <td>{{user.title}}</td>
+      <td><a (click)="viewRewardItem(rewardModal)" class="reward_a">{{user.title}}</a>
+        <ng-template #rewardModal let-modal>
+          <div class="modal-header">
+          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+          </div>
+          <div class="modal-body">
+            <table id="basic-datatable"
+    class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+    <thead>
+    <tr>
+      <th>Item Title</th>
+      <th>Count Allowed</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rewsd of user.items">
+        <td>{{rewsd.title}}</td>
+        <td>{{rewsd.quandity}}</td>
+      </tr>
+      </tbody>
+      </table>
+          </div>
+          </ng-template>
+        </td>
       <td>{{user.rewardedCount}}</td>
       <td>{{user.amount}}</td>
       <td>{{user.estimateDelivery}}</td>
-      <td>{{user.sippingType}}</td>
+      <td><a (click)="viewShippingAddress(shippingModal)" class="reward_a">{{user.sippingType}}</a>
+        <ng-template #shippingModal let-modal>
+          <div class="modal-header">
+          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+          </div>
+          <div class="modal-body">
+            <table id="basic-datatable"
+    class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+    <thead>
+    <tr>
+      <th>Shipping Destination</th>
+      <th>Shipping Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ship of user.sipping">
+        <td>{{ship.destination}}</td>
+        <td>{{ship.cost}}</td>
+      </tr>
+      </tbody>
+      </table>
+          </div>
+          </ng-template>
+        </td>
       <td>{{user.timeLimit}}</td>
       <td>{{user.description}}</td>
-
     </tr>
     </tbody> 
     </table>
@@ -80,41 +125,4 @@
     </div>
     </div>
     </div>
-
-    <div class="row">
-        <div class="col-6">
-        <div class="card">
-        <div class="card-body">
-        <div class="row mb-md-2">
-       
-        <div class="table-responsive">
-        <table id="basic-datatable"
-        class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
-        <thead>
-        <tr>
-          <th>Title</th>
-          <th>Quantity</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let user of projectList">
-          <td>{{user.title}}</td>
-          <td>{{user.rewardedCount}}</td>
-        </tr>
-        </tbody> 
-        </table>
-        <!-- Pagination -->
-        <div class="col-sm-12 col-md-5">
-        <div class="text-md-right float-md-right pagination-rounded">
-        <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
-        </ngb-pagination> -->
-        </div>
-        </div>
-        <!-- End Pagination -->
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
     </div>

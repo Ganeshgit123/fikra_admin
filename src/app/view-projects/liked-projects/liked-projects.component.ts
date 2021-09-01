@@ -13,12 +13,6 @@ export class LikedProjectsComponent implements OnInit {
   updatedby:any;
   role:any;
   projectList=[];
-  investorName:any;
-  investorFullName:any;
-  investorMobile:any;
-  investorDob:any;
-  investorId:any;
-  investorEmail:any;
 
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
@@ -44,15 +38,6 @@ export class LikedProjectsComponent implements OnInit {
       if(resu.error == false)
       {
          this.projectList = resu.data;
-         this.projectList.forEach(element => {
-           this.investorName = element.userId.userName
-           this.investorFullName = element.userId.fullName
-           this.investorEmail = element.userId.email
-           this.investorMobile = element.userId.mobileNumber
-           this.investorDob = element.userId.dob
-           this.investorId = element.userId._id
-         });
-        //  console.log("name",this.investorName)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

@@ -1,0 +1,54 @@
+<div class="container-fluid">    
+    <app-pagetitle title="Permissions" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    <div class="card">
+    <div class="card-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Role Title</label>
+                <select class="form-control" (click)="roleClick($event.target.value)">
+                <option  *ngFor="let item of roleData" value="{{item._id}}">{{item.roleName}}</option>
+                </select>
+                </div>
+        </div>
+    </div>
+    
+    <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+    <thead>
+    <tr>
+    <th>Permission Name</th>
+    <th>Read</th>
+    <th>Write</th>
+    <th>Admin Approval</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let item of permissionData">
+    <td>{{item.permissionName}}</td>
+    <td>
+        <label class="switch">
+            <input *ngIf="item.read == 'true'"  type="checkbox" checked (change)="read_update_change($event,item.permissionId,item.write,item._with_Approval_)">
+            <input *ngIf="item.read !== 'true'" type="checkbox" unchecked (change)="read_update_change($event,item.permissionId,item.write,item._with_Approval_)">
+            <span class="slider"></span>
+        </label>
+       </td>
+    <td>
+        <label class="switch">
+            <input *ngIf="item.write == 'true'"  type="checkbox" checked (change)="write_update_change($event,item.permissionId,item.read,item._with_Approval_)">
+            <input *ngIf="item.write !== 'true'" type="checkbox" unchecked (change)="write_update_change($event,item.permissionId,item.read,item._with_Approval_)">
+            <span class="slider"></span>
+        </label>
+</td>
+    <td>{{item._with_Approval_}}</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    
+    
+    </div>
+    
