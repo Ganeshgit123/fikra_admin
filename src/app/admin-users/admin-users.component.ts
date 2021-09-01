@@ -15,7 +15,9 @@ export class AdminUsersComponent implements OnInit {
   addUserData:FormGroup;
   userData:any;
   roleData:any;
-  roleNameForUser:any;
+  isEdit = false;
+  adminUserId:any;
+  adminRoleId:any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -29,10 +31,12 @@ export class AdminUsersComponent implements OnInit {
     this.role = sessionStorage.getItem('adminRole');
 
     this.addUserData = this.formBuilder.group({
-      faq_Header: [''],
-      faq_Header_ar: [''],
-      faq_Body: [''],
-      faq_Body_ar: [''],
+      systemAdminName: [''],
+      systemAdminUserName: [''],
+      systemAdminPassword: [''],
+      systemAdminRoleId: [''],
+      timeFrom:[''],
+      timeTo:['']
     });
 
     this.fetchUserData();
@@ -72,11 +76,6 @@ export class AdminUsersComponent implements OnInit {
       {
 
         this.userData = resu.data;
-
-        this.userData.forEach(element => {
-              var adminRole = element.systemAdminRoleId
-              this.roleNameForUser = adminRole.roleName
-        });
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -93,6 +92,160 @@ export class AdminUsersComponent implements OnInit {
 
   onSubmit(){
 
+    if(this.isEdit){
+      this.userEditService(this.addUserData.value)
+      return;
+    }
+
+    const postData = this.addUserData.value;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+
+    var params = {
+      url: 'admin/addSystemAdminAndPermission',
+      data: postData
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.modalService.dismissAll();
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+  }
+
+
+  viewUsers(data,creatorCorner: any){
+    this.modalService.open(creatorCorner, { centered: true });
+
+    this.isEdit = true;
+
+    this.adminUserId = data['_id']
+   
+    this.adminRoleId = data.systemAdminRoleId._id
+
+    this.addUserData = this.formBuilder.group({
+      systemAdminName: [data['systemAdminName']],
+      systemAdminUserName: [data['systemAdminUserName']],
+      systemAdminPassword: [data['systemAdminPassword']],
+      systemAdminRoleId: [this.adminRoleId],
+      timeFrom:[data['timeFrom']],
+      timeTo:[data['timeTo']]
+    });
+
+  }
+
+  userEditService(data){
+
+    data['adminUserId'] = this.adminUserId
+    data['createdBy'] = this.updatedby;
+    data['userType'] = "admin";
+    data['role'] = this.role;
+
+    var params = {
+      url: 'admin/updateAdminDetails',
+      data: data
+    }
+    // console.log("data",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.isEdit = false;
+          this.modalService.dismissAll();
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
+
+  onchangeUserStatus(values:any,val){
+
+    if(values.currentTarget.checked === true){
+      var visible = true 
+     } else {
+       var visible = false
+     }
+     const object = {}
+
+     object['adminUserId'] = val;
+     object['_can_Login_'] = visible;
+     object['_is_Deleted_'] = false;
+     object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+
+     var params = {
+      url: 'admin/updateStatusofAdminUser',
+      data: object
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
+
+  onDeleteUser(val,id,can_login){
+    const object = {}
+
+    object['adminUserId'] = id;
+    object['_can_Login_'] = can_login;
+    object['_is_Deleted_'] = val;
+    object['createdBy'] = this.updatedby;
+   object['userType'] = "admin";
+   object['role'] = this.role;
+
+    var params = {
+     url: 'admin/updateStatusofAdminUser',
+     data: object
+   }
+  //  console.log("da",params)
+   this.apiCall.commonPostService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
   }
 
 }

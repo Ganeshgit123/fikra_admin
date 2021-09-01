@@ -64,6 +64,25 @@ export class ApiCallService {
     });
   }
 
+  subCommonGetService(params) {
+    this.accToken = sessionStorage.getItem('access_token');
+    this.updatedby = sessionStorage.getItem('adminId');
+    this.role = sessionStorage.getItem('adminRole');
+
+    const httpHeaders = new HttpHeaders({
+      // 'Content-Type': 'application/json',
+      'auth': this.accToken,
+    });
+    return this.http.get(this.baseUrl + params.url,  {
+      params: new HttpParams()
+      .set('updatedby', this.updatedby)
+      .set('userType', 'admin')
+      .set('role',this.role ),
+      headers: httpHeaders,
+      observe: 'response'
+    });
+  }
+
   smallGetService(params) {
     this.accToken = sessionStorage.getItem('access_token');
     this.updatedby = sessionStorage.getItem('adminId');

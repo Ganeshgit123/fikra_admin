@@ -56,8 +56,8 @@
     <tr *ngFor="let user of requestsList  | filter:searchTerm">
       <td>{{user.serviceType}}</td>
       <td>{{user.comments}}</td>
-      <td><a routerLink="/view-creators/{{creatorId}}">{{userName}}</a></td>
-      <td><a routerLink="/view-projects/{{projectId}}">{{projectId}}</a></td>
+      <td><a routerLink="/view-creators/{{user.userId._id}}">{{user.userId.userName}}</a></td>
+      <td><a routerLink="/view-projects/{{user.projectId._id}}">{{user.projectId._id}}</a></td>
       <td>
         <button class="btn btn-primary w-md waves-effect waves-light" (click)="adminComment(centerDataModal)">Comment</button>
         <ng-template #centerDataModal let-modal>

@@ -30,7 +30,6 @@ export class RolesComponent implements OnInit {
 
     this.addNewRole = this.formBuilder.group({
       roleName: [''],
-      roleId:['']
     });
 
     this.fetchRoleData();
@@ -105,7 +104,6 @@ export class RolesComponent implements OnInit {
     this.roleId = data['_id']
     this.addNewRole   = this.formBuilder.group({
       roleName: [data['roleName']],
-      roleId: [data['roleId']],
     })
 
   }

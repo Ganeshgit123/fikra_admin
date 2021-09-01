@@ -28,6 +28,14 @@
         <option  *ngFor="let item of roleData" value="{{item._id}}">{{item.roleName}}</option>
         </select>
         </div>
+        <div class="form-group">
+        <label>Start Time</label>
+        <input class="form-control" type="time" value="13:45:00" formControlName="timeFrom">
+    </div>
+    <div class="form-group">
+        <label>End Time</label>
+        <input class="form-control" type="time" value="13:45:00" formControlName="timeTo">
+    </div>
     <br>
     <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
     </form>
@@ -42,6 +50,8 @@
     <th>Name</th>
     <th>Mail Id</th>
     <th>Role Name</th>
+    <th>Start Time</th>
+    <th>To Time</th>
     <th>Status</th>
     <th>Action</th>
     </tr>
@@ -50,21 +60,23 @@
     <tr  *ngFor="let item of userData">
     <td>{{item.systemAdminName}}</td>
     <td>{{item.systemAdminUserName}}</td>
-    <td>{{roleNameForUser}}</td>
-    <!-- <td>
+    <td>{{item.systemAdminRoleId.roleName}}</td>
+    <td>{{item.timeFrom}}</td>
+    <td>{{item.timeTo}}</td>
+    <td>
         <label class="switch">
-            <input *ngIf="item._is_visible_ == true"  type="checkbox" checked (change)="onchangeFaqStatus($event,item._id)">
-            <input *ngIf="item._is_visible_ !== true" type="checkbox" unchecked (change)="onchangeFaqStatus($event,item._id)">
+            <input *ngIf="item._can_Login_ == true"  type="checkbox" checked (change)="onchangeUserStatus($event,item._id)">
+            <input *ngIf="item._can_Login_ !== true" type="checkbox" unchecked (change)="onchangeUserStatus($event,item._id)">
             <span class="slider"></span>
         </label>
     </td>
     
     <td>
-        <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewFaq(item,creatorCorner)"><i
+        <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewUsers(item,userCorner)"><i
             class="mdi mdi-pencil font-size-18"></i></a>  
-        <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteFaqStatus(true,item._id,item._is_visible_)"><i
+        <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteUser(true,item._id,item._can_Login_)"><i
                 class="mdi mdi-trash-can font-size-18"></i></a>     
-    </td> -->
+    </td>
     </tr>
     </tbody>
     </table>

@@ -14,9 +14,6 @@ export class SpecialRequestsComponent implements OnInit {
   role:any;
   searchTerm;
   requestsList = [];
-  userName:any;
-  creatorId:any;
-  projectId:any;
   addNewComment:FormGroup;
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -45,14 +42,7 @@ export class SpecialRequestsComponent implements OnInit {
       if(resu.error == false)
       {
         this.requestsList = resu.data;
-
-        this.requestsList.forEach(element => {
-          this.userName = element.userId.userName;
-          this.creatorId = element.userId._id;
-          this.projectId = element.projectId._id;
-        });
-
-        console.log("ef",this.userName)
+        // console.log("ef",this.userName)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
