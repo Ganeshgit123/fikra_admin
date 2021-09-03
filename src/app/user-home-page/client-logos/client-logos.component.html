@@ -41,7 +41,7 @@
     </div>
     </div>
     <div class="col-md-12">
-    <p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light ban_con_btn">Save</button></p>
+    <p class="text-center" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light ban_con_btn">Save</button></p>
     </div>
     </div>
     </form>
@@ -50,7 +50,7 @@
 
 <div class="card">
 <div class="card-body">
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCreators(creatorCorner)">Add New</button></p>
+<p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCreators(creatorCorner)">Add New</button></p>
 <!-- Center Modal -->
 <ng-template #creatorCorner let-modal>
 <div class="modal-header">

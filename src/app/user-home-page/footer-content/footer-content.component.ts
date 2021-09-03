@@ -13,6 +13,7 @@ export class FooterContentComponent implements OnInit {
   updatedby:any;
   role:any;
   addFooterCont: FormGroup;
+  showAccept = true;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -42,7 +43,16 @@ export class FooterContentComponent implements OnInit {
     });
 
     this.fetchfooterData();
+    this.callRolePermission();
 
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
   }
 
   fetchfooterData(){

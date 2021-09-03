@@ -15,6 +15,7 @@ export class CreatorsFormComponent implements OnInit {
   role = sessionStorage.getItem('adminRole');
 
   creaFieldId:any;
+  showAccept = true;
 
   constructor(
     private apiCall: ApiCallService,
@@ -23,7 +24,15 @@ export class CreatorsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchCreatorFieldData();
+    this.callRolePermission();
+  }
 
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let singupPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = singupPermssion[5].write
+      // console.log("prer", singupPermssion[5])
+    }
   }
 
   fetchCreatorFieldData(){

@@ -51,7 +51,7 @@
     <th>User Name</th>
     <th>Goal Amount</th>
     <th>Duration</th>
-    <th>Action</th>
+    <th *ngIf="showAccept === true">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -63,7 +63,7 @@
     <td>{{proj.basicInfoId.goalAmount}}</td>
     <td>{{proj.basicInfoId.campaignDuation | date}}</td>
     <td>
-    <a class="text-danger text-info" ngbTooltip="Delete" ><i
+    <a *ngIf="showAccept === true" class="text-danger text-info" ngbTooltip="Delete" ><i
         class="mdi mdi-trash-can font-size-18"></i></a>
     </td>
     </tr>

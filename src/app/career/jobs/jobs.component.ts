@@ -16,6 +16,8 @@ export class JobsComponent implements OnInit {
   isEdit = false;
   jobId:any;
   branchList = [];
+  showAccept = true;
+
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     private modalService: NgbModal
@@ -35,6 +37,16 @@ export class JobsComponent implements OnInit {
     });
     this.fetchbranchData();
     this.fetchJobData();
+    this.callRolePermission();
+
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
   }
 
   fetchbranchData(){

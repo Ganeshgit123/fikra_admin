@@ -3,17 +3,23 @@
     <div class="section_show">
         <ul class="sec_show_ul">
             <li class="text">Section Shows in Website</li>
-            <li>
+            <li *ngIf="showAccept === true">
                 <label class="switch">
                     <input *ngIf="whyFikraStatus == true"  type="checkbox" checked (change)="onchangeWhyStatus($event)">
                     <input *ngIf="whyFikraStatus !== true" type="checkbox" unchecked (change)="onchangeWhyStatus($event)">
                     <span class="slider"></span>
                 </label>
             </li>
+            <li *ngIf="showAccept !== true">
+                 <span>
+                     <p *ngIf="whyFikraStatus == true">ON</p>
+                     <p *ngIf="whyFikraStatus !== true">OFf</p>
+                 </span>
+            </li>
         </ul>
     </div>
     <hr>
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addFikra(addWhyFikra)">Add New</button></p>
+<p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addFikra(addWhyFikra)">Add New</button></p>
 <!-- Center Modal -->
 <ng-template #addWhyFikra let-modal>
 <div class="modal-header">
@@ -58,7 +64,7 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <th>Answer(EN)</th>
 <th>Answer(AR)</th>
 <th>Status</th>
-<th>Action</th>
+<th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
 <tbody>
@@ -67,14 +73,20 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <td>{{item.why_HeadAr}}</td>
 <td>{{item.solution}}</td>
 <td>{{item.solutionAr   }}</td>
-<td>
+<td *ngIf="showAccept === true">
 <label class="switch">
 <input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeWhyFikraStatus($event,item._id)">
 <input *ngIf="item._is_on_ !== true" type="checkbox" unchecked (change)="onchangeWhyFikraStatus($event,item._id)">
 <span class="slider"></span>
 </label>    
 </td>
-<td>
+<td *ngIf="showAccept !== true">
+<span>
+    <p *ngIf="item._is_on_ == true">ON</p>
+    <p *ngIf="item._is_on_ !== true">OFf</p>
+</span>
+</td>
+<td *ngIf="showAccept === true">
 <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewWhyFikra(item,addWhyFikra)"><i
 class="mdi mdi-pencil font-size-18"></i></a>
 <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteWhyFikra(true,item._id,item._is_on_)"><i

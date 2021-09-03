@@ -16,7 +16,7 @@
 <div class="card">
 <div class="card-body">
 <div *ngFor = "let item of privacyList">
-<p class="text-right"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "editPrivacy(item)">Edit</button></p>
+<p class="text-right" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "editPrivacy(item)">Edit</button></p>
 
 <form  [formGroup]="addPrivacy" (ngSubmit)="onSubmit()">
 <ckeditor [editor]="Editor" formControlName="privacyContent" (ready)="onReady($event)"></ckeditor>
@@ -43,7 +43,7 @@
     <div class="card">
     <div class="card-body">
     <div *ngFor = "let item of privacyList">
-    <p class="text-right"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "editPrivacy(item)">Edit</button></p>
+    <p class="text-right" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "editPrivacy(item)">Edit</button></p>
     
     <form  [formGroup]="addPrivacy" (ngSubmit)="onSubmit()">
     <ckeditor [editor]="Editor" formControlName="privacyContent_Ar" (ready)="onReady($event)"></ckeditor>

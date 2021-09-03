@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-    <p class="text-right"><a routerLink="/add_handbook" class="btn btn-primary w-md waves-effect waves-light">Add New</a></p>
+    <p class="text-right" *ngIf="showAccept === true"><a routerLink="/add_handbook" class="btn btn-primary w-md waves-effect waves-light">Add New</a></p>
 
     
     <div class="table-responsive">
@@ -14,24 +14,30 @@
     <th>Description(EN)</th>
     <th>Description(AR)</th>
     <th>Status</th>
-    <th>Action</th>
+    <th *ngIf="showAccept === true">Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr  *ngFor="let item of handBookData">
+    <tr *ngFor="let item of handBookData">
     <td><img src="{{item.handbookImg}}" class="img_size"></td>
     <td>{{item.handBookHead}}</td>
     <td>{{item.handBookHeadAr}}</td>
     <td [innerHtml]='item.handBookBody'></td>
     <td [innerHtml]='item.handBookBodyAr'></td>
-    <td>
+    <td *ngIf="showAccept === true">
         <label class="switch">
             <input *ngIf="item._is_Visible_ == true"  type="checkbox" checked (change)="onchangeHandbookStatus($event,item._id)">
             <input *ngIf="item._is_Visible_ !== true" type="checkbox" unchecked (change)="onchangeHandbookStatus($event,item._id)">
             <span class="slider"></span>
         </label>
     </td>
-    <td>
+    <td *ngIf="showAccept !== true">
+     <span>
+         <p *ngIf="item._is_Visible_ == true" >ON</p>
+         <p *ngIf="item._is_Visible_ !== true" >OFF</p>
+     </span>
+    </td>
+    <td *ngIf="showAccept === true">
         <a routerLink="/edit_handbook/{{item._id}}" class="mr-3 text-info" ngbTooltip="Edit"><i
             class="mdi mdi-pencil font-size-18"></i></a>
             <!-- <a class="text-danger" ngbTooltip="Delete" (click)="onDeleteHandbookStatus(true,item._id,item._is_Visible_)"><i

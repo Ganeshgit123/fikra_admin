@@ -17,7 +17,7 @@ export class CookiePolicyComponent implements OnInit {
   cookiecont: any;
   cookieID:any;
   isEdit = false;
-
+  showAccept = true;
 
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -72,7 +72,17 @@ export class CookiePolicyComponent implements OnInit {
         console.log('Error', error)
       }
     )
+    this.callRolePermission();
    
+  }
+
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
   }
 
 

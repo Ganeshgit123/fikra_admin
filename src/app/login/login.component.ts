@@ -86,15 +86,21 @@ export class LoginComponent implements OnInit {
     this.loginForm.value.lang = this.lng
     this.isShow = false;
     this.apiCall.adminLogin(this.loginForm.value).subscribe(
-     res => {
-       if(res.body['error'] == false){
-         sessionStorage.setItem('access_token', (res.body['token']));
-         sessionStorage.setItem('adminRole', (res.body['role']));
-         sessionStorage.setItem('adminId', (res.body['adminId']));
+      (res: any) => {
+       if(res.body.error == false){
+         sessionStorage.setItem('access_token', (res.body.token));
+         sessionStorage.setItem('adminId', (res.body.adminId));
+
+         if(res.body.role == 's_a_r' ){
+          sessionStorage.setItem('adminRole', (res.body.role));
+         }else{
+          sessionStorage.setItem('adminRole', (res.body.role.roleName));
+          sessionStorage.setItem('permission', (JSON.stringify(res.body.role.permission)))
+         }
          this.router.navigateByUrl('/dashboard');
        } else {
          this.isShow = true;
-         this.errorMessge = res.body['message'];
+         this.errorMessge = res.body.message;
        }
        
      })

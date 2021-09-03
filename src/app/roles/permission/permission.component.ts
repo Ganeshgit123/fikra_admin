@@ -74,9 +74,9 @@ export class PermissionComponent implements OnInit {
   read_update_change(event, permisionId,write,appr_stat){
     console.log(event.currentTarget.checked)
     if(event.currentTarget.checked === true){
-      var visible = "true" 
+      var visible = true 
      } else {
-       var visible = "false"
+       var visible = false
      }
     
     var data= {}
@@ -108,9 +108,9 @@ export class PermissionComponent implements OnInit {
 
   write_update_change(event, permisionId,read,appr_stat){
     if(event.currentTarget.checked === true){
-      var visible = "true" 
+      var visible = true 
      } else {
-       var visible = "false"
+       var visible = false
      }
     var data= {}
     data['roleId']=this.roleIdByclick

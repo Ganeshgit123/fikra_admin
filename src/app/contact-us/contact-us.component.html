@@ -12,7 +12,7 @@
 <ng-template ngbNavContent>
 <div class="card">
 <div class="card-body">
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addBranch(branchCorner)">Add New</button></p>
+<p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addBranch(branchCorner)">Add New</button></p>
 <!-- Center Modal -->
 <ng-template #branchCorner let-modal>
 <div class="modal-header">
@@ -67,7 +67,7 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <th>Fax</th>
 <th>Phone No.</th>
 <th>Status</th>
-<th>Action</th>
+<th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
 <tbody>
@@ -79,14 +79,20 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <td>{{item.email}}</td>
 <td>{{item.fax}}</td>
 <td>{{item.phone}}</td>
-<td>
+<td *ngIf="showAccept === true">
 <label class="switch">
     <input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeBranchStatus($event,item._id)">
     <input *ngIf="item._is_on_ !== true" type="checkbox" unchecked (change)="onchangeBranchStatus($event,item._id)">
     <span class="slider"></span>
 </label>
 </td>
-<td>
+<td *ngIf="showAccept !== true">
+<span>
+    <p *ngIf="item._is_on_ == true">ON</p>
+    <p *ngIf="item._is_on_ !== true">OFF</p>
+</span>
+</td>
+<td *ngIf="showAccept === true">
 <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewBrach(item,branchCorner)"><i
     class="mdi mdi-pencil font-size-18"></i></a>  
 <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteBranch(item._id)"><i

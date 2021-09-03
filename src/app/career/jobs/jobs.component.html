@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-    <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addJobs(creatorCorner)">Add New</button></p>
+    <p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addJobs(creatorCorner)">Add New</button></p>
     <!-- Center Modal -->
     <ng-template #creatorCorner let-modal>
     <div class="modal-header">
@@ -52,7 +52,7 @@
     <th>Vacancies</th>
     <th>Location</th>
     <th>Status</th>
-    <th>Action</th>
+    <th *ngIf="showAccept === true">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -63,15 +63,21 @@
     <td>{{item.jobRole}}</td>
     <td>{{item.jobVacancies}}</td>
     <td>{{item.location}}</td>
-    <td>
+    <td *ngIf="showAccept === true">
         <label class="switch">
             <input *ngIf="item._is_On_ == true"  type="checkbox" checked (change)="onchangeJobStatus($event,item._id)">
             <input *ngIf="item._is_On_ !== true" type="checkbox" unchecked (change)="onchangeJobStatus($event,item._id)">
             <span class="slider"></span>
         </label>
     </td>
+    <td *ngIf="showAccept !== true">
+     <span>
+         <p *ngIf="item._is_On_ == true">ON</p>
+         <p *ngIf="item._is_On_ !== true">OFF</p>
+     </span>
+    </td>
     
-    <td>
+    <td *ngIf="showAccept === true">
         <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewJobs(item,creatorCorner)"><i
             class="mdi mdi-pencil font-size-18"></i></a>  
         <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteJobStatus(true,item._id,item._is_On_)"><i

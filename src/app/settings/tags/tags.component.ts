@@ -16,6 +16,7 @@ export class TagsComponent implements OnInit {
   tagId:any;
   deleteStat:any;
   visibleStat:any;
+  showAccept = true;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -33,6 +34,15 @@ export class TagsComponent implements OnInit {
 
     this.fetchTagList();
 
+    this.callRolePermission();
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let settingPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = settingPermssion[4].write
+      // console.log("prer", settingPermssion[4])
+    }
   }
 
   fetchTagList(){

@@ -23,6 +23,7 @@ export class ViewProjectsComponent implements OnInit {
   homeStatus:any;
   projectList: any=[];
   storyArray =[];
+  showAccept = true;
 
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
@@ -56,7 +57,16 @@ export class ViewProjectsComponent implements OnInit {
 
     this.fetchTagList();
     this._fetchStory();
+    this.callRolePermission();
 
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let projectPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = projectPermssion[0].write
+      // console.log("prer", this.showAccept)
+    }
   }
 
   fetchtagArray(){

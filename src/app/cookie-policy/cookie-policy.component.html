@@ -16,7 +16,7 @@
             <div class="card">
               <div class="card-body">
                 <div *ngFor = "let item of cookieList">
-                  <p class="text-right"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "editCookie(item)">Edit</button></p>
+                  <p class="text-right" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "editCookie(item)">Edit</button></p>
                   <form  [formGroup]="addCookie" (ngSubmit)="onSubmit()">
                   <ckeditor [editor]="Editor" formControlName="cookieContent" (ready)="onReady($event)"></ckeditor>
                   <br>
@@ -45,7 +45,7 @@
             <div class="card">
               <div class="card-body">
                 <div *ngFor = "let item of cookieList">
-                  <p class="text-right"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "editCookie(item)">Edit</button></p>
+                  <p class="text-right" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "editCookie(item)">Edit</button></p>
                   <form  [formGroup]="addCookie" (ngSubmit)="onSubmit()">
                   <ckeditor [editor]="Editor" formControlName="cookieContent_Ar" (ready)="onReady($event)"></ckeditor>
                   <br>

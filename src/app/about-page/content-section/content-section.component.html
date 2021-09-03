@@ -1,6 +1,6 @@
 <div class="card">
 <div class="card-body">
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addContents(contentModal)">Add New</button></p>
+<p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addContents(contentModal)">Add New</button></p>
 <ng-template #contentModal let-modal>
 <div class="modal-header">
 <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
@@ -42,7 +42,7 @@
 
 <div class="table-responsive">
 <table id="basic-datatable"
-class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <thead>
 <tr>
 <th>Heading(EN)</th>
@@ -51,7 +51,7 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <th>Description(AR)</th>
 <th>Image</th>
 <th>Status</th>
-<th>Action</th>
+<th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
 <tbody>
@@ -61,14 +61,20 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <td>{{item.secContent}}</td>
 <td>{{item.secContentAr}}</td>
 <td><p class="text-center"><img src="{{item.secImage}}" class="img_size"></p></td>
-<td>
+<td *ngIf="showAccept === true">
     <label class="switch">
         <input *ngIf="item._is_Sec_On_ == true"  type="checkbox" checked (change)="onchangeContentStatus($event,item._id)">
         <input *ngIf="item._is_Sec_On_ !== true" type="checkbox" unchecked (change)="onchangeContentStatus($event,item._id)">
         <span class="slider"></span>
     </label>
 </td>
-<td>
+<td *ngIf="showAccept !== true">
+<span>
+    <p *ngIf="item._is_Sec_On_ == true" >ON</p>
+    <p *ngIf="item._is_Sec_On_ !== true" >OFF</p>
+</span>
+</td>
+<td *ngIf="showAccept === true">
 <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewContent(item,contentModal)"><i
 class="mdi mdi-pencil font-size-18"></i></a>
 <a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete"  (click)="onDeleteContentStatus(true,item._id,item._is_Sec_On_)"><i

@@ -3,12 +3,18 @@
     <div class="section_show">
         <ul class="sec_show_ul">
             <li class="text">Section Shows in Website</li>
-            <li>
+            <li *ngIf="showAccept === true">
                 <label class="switch">
                     <input *ngIf="videoStatus == true"  type="checkbox" checked (change)="onchangeVideoStatus($event)">
                     <input *ngIf="videoStatus !== true" type="checkbox" unchecked (change)="onchangeVideoStatus($event)">
                     <span class="slider"></span>
                 </label>
+            </li>
+            <li *ngIf="showAccept !== true">
+             <span>
+                 <p *ngIf="videoStatus == true">ON</p>
+                 <p *ngIf="videoStatus !== true">OFF</p>
+             </span>
             </li>
         </ul>
     </div>
@@ -45,6 +51,6 @@
 </div>
 </form>
 <br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="videoSubmit()">Save</button></p>
+<p class="text-center" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click)="videoSubmit()">Save</button></p>
 </div>
 </div>

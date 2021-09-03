@@ -16,7 +16,8 @@ export class RoleGuardService implements CanActivate {
       this.adminRolesArray = JSON.parse(token)
       this.expectedRoleaaAdmin = '';
       for(let i=0; i<this.adminRolesArray.length; i++){
-          let currentPermission = this.adminRolesArray[i].permissionName+this.adminRolesArray[i].readOpt
+          let currentPermission = this.adminRolesArray[i].permissionId+this.adminRolesArray[i].read
+
         if ( currentPermission === expectedRole) {
           this.expectedRoleaaAdmin = currentPermission    
         }

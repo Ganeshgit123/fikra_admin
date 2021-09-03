@@ -3,12 +3,18 @@
     <div class="section_show">
         <ul class="sec_show_ul">
             <li class="text">Section Shows in Website</li>
-            <li>
+            <li *ngIf="showAccept === true">
                 <label class="switch">
                     <input *ngIf="quoteStatus == true"  type="checkbox" checked (change)="onchangeQuoteStatus($event)">
                     <input *ngIf="quoteStatus !== true" type="checkbox" unchecked (change)="onchangeQuoteStatus($event)">
                     <span class="slider"></span>
                 </label>
+            </li>
+            <li>
+                <span *ngIf="showAccept !== true">
+                    <p *ngIf="quoteStatus == true">ON</p>
+                    <p *ngIf="quoteStatus !== true">OFF</p>
+                </span>
             </li>
         </ul>
     </div>
@@ -37,7 +43,7 @@
 </div>
 </div>
 <br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="bannerCont()">Save</button></p>
+<p class="text-center" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click)="bannerCont()">Save</button></p>
 
 </form>
 </div>

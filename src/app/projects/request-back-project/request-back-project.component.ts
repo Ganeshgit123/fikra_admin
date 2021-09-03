@@ -21,6 +21,7 @@ export class RequestBackProjectComponent implements OnInit {
   addComment:FormGroup;
   projectId: any;
   projectStatus:any;
+  showAccept = true;
 
 
    constructor(
@@ -33,6 +34,16 @@ export class RequestBackProjectComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Projects List', active: true }];
 
     this._fetchData();
+    this.callRolePermission();
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let projectPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = projectPermssion[0].write
+      // console.log("prer", this.showAccept)
+
+    }
   }
 
   _fetchData() {

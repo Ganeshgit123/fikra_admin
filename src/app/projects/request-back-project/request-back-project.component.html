@@ -52,7 +52,7 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <th>Goal Amount</th>
 <th>Duration</th>
 <th>Admin Approval</th>
-<th>Action</th>
+<th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
 <tbody>
@@ -67,7 +67,7 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
     {{proj.aproval_Status}}
 </td>
 <td>
-<a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteProject(proj._id)"><i
+<a *ngIf="showAccept === true" class="text-danger text-info" ngbTooltip="Delete" (click)="deleteProject(proj._id)"><i
     class="mdi mdi-trash-can font-size-18"></i></a>
 </td>
 </tr>

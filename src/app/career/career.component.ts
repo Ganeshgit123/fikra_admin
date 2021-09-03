@@ -20,6 +20,7 @@ export class CareerComponent implements OnInit {
   imgUrl:any;
   candidateListData:any;
   jobData:any;
+  showAccept = true;
 
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -53,6 +54,16 @@ export class CareerComponent implements OnInit {
 
     this.fetchContentList();
     this.fetchJobData();
+    this.callRolePermission();
+
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
   }
 
   fetchContentList(){

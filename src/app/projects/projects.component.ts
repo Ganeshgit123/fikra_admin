@@ -21,6 +21,7 @@ export class ProjectsComponent implements OnInit {
   addComment:FormGroup;
   projectId: any;
   projectStatus:any;
+  showAccept = true;
 
  constructor(
   private apiCall: ApiCallService,
@@ -36,6 +37,16 @@ export class ProjectsComponent implements OnInit {
     });
 
     this._fetchData();
+    this.callRolePermission();
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let projectPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = projectPermssion[0].write
+      // console.log("prer", this.showAccept)
+
+    }
   }
 
   _fetchData() {

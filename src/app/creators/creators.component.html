@@ -65,11 +65,15 @@ class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-i
     <td>{{user.accountNumber}}</td>
     <td>{{user.iban}}</td>
     <td>
-        <label class="switch">
+        <label class="switch" *ngIf="showAccept === true">
             <input *ngIf="user._is_On_Creative_In_ == true"  type="checkbox" checked (change)="onCretiveIndependentStatus($event,user._id)">
             <input *ngIf="user._is_On_Creative_In_ !== true" type="checkbox" unchecked (change)="onCretiveIndependentStatus($event,user._id)">
             <span class="slider"></span>
         </label>
+        <span *ngIf="showAccept !== true">
+            <p *ngIf="user._is_On_Creative_In_ == true">ON</p>
+            <p *ngIf="user._is_On_Creative_In_ !== true">OFF</p>
+        </span>
     </td>
 </tr>
 </tbody>

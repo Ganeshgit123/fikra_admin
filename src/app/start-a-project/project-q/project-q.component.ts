@@ -17,6 +17,7 @@ export class ProjectQComponent implements OnInit {
   isEdit = false;
   quesAndAnId:any;
   questionStatus:any;
+  showAccept = true;
 
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbModal,
@@ -39,7 +40,16 @@ export class ProjectQComponent implements OnInit {
     });
 
     this.fetchTopContent();
+    this.callRolePermission();
 
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
   }
 
   fetchTopContent(){

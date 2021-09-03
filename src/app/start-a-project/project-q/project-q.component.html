@@ -3,12 +3,18 @@
     <div class="section_show">
         <ul class="sec_show_ul">
             <li class="text">Section Shows in Website</li>
-            <li>
+            <li *ngIf="showAccept === true">
                 <label class="switch">
                     <input *ngIf="questionStatus == true"  type="checkbox" checked (change)="onchangeQuesStatus($event)">
                     <input *ngIf="questionStatus !== true" type="checkbox" unchecked (change)="onchangeQuesStatus($event)">
                     <span class="slider"></span>
                 </label>
+            </li>
+            <li *ngIf="showAccept !== true">
+               <span>
+                   <p *ngIf="questionStatus == true">ON</p>
+                   <p *ngIf="questionStatus !== true">OFF</p>
+               </span>
             </li>
         </ul>
     </div>
@@ -29,13 +35,13 @@
     </div>
 </div>
 <br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="projTitleSubmit()">Save</button></p>
+<p class="text-center" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click)="projTitleSubmit()">Save</button></p>
 </form>
 </div>
 </div>
 <div class="card">
 <div class="card-body">
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addQuesAndAns(addQuesAns)">Add New</button></p>
+<p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addQuesAndAns(addQuesAns)">Add New</button></p>
 <!-- Center Modal -->
 <ng-template #addQuesAns let-modal>
 <div class="modal-header">
@@ -74,7 +80,7 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <th>Answer(EN)</th>
 <th>Answer(AR)</th>
 <th>Status</th>
-<th>Action</th>
+<th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
 <tbody>
@@ -83,14 +89,20 @@ class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline
 <td>{{item.questionAr}}</td>
 <td>{{item.answer}}</td>
 <td>{{item.answerAr}}</td>
-<td>
+<td *ngIf="showAccept === true">
     <label class="switch">
         <input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeQuesAnsStatus($event,item._id)">
         <input *ngIf="item._is_on_ !== true" type="checkbox" unchecked (change)="onchangeQuesAnsStatus($event,item._id)">
         <span class="slider"></span>
     </label>    
 </td>
-<td>
+<td *ngIf="showAccept !== true">
+<span>
+    <p *ngIf="item._is_on_ == true" >ON</p>
+    <p *ngIf="item._is_on_ !== true" >OFF</p>
+</span>
+</td>
+<td *ngIf="showAccept === true">
     <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewQuesandAns(item,addQuesAns)"><i
         class="mdi mdi-pencil font-size-18"></i></a>
     <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteQuesAndAnsStatus(true,item._id,item._is_on_)"><i

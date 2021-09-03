@@ -1,6 +1,7 @@
 <div class="card">
 <div class="card-body">
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCreators(creatorCorner)">Add New</button></p>
+<p class="text-right" *ngIf="showAccept === true">
+<button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCreators(creatorCorner)">Add New</button></p>
 <!-- Center Modal -->
 <ng-template #creatorCorner let-modal>
 <div class="modal-header">

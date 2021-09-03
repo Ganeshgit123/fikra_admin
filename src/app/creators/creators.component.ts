@@ -15,6 +15,8 @@ export class CreatorsComponent implements OnInit {
   updatedby = sessionStorage.getItem('adminId');
   role = sessionStorage.getItem('adminRole');
   getCreateList =[];
+  showAccept = true;
+
   constructor(
   private apiCall: ApiCallService,
   private formBuilder: FormBuilder,) {
@@ -25,6 +27,16 @@ export class CreatorsComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Creators List', active: true }];
 
     this._fetchData();
+    this.callRolePermission();
+
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let creatorPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = creatorPermssion[2].write
+      // console.log("prer", creatorPermssion[2])
+    }
   }
 
   _fetchData() {

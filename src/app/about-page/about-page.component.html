@@ -18,12 +18,18 @@
     <div class="section_show">
         <ul class="sec_show_ul">
             <li class="text">Section Shows in Website</li>
-            <li>
+            <li *ngIf="showAccept === true">
                 <label class="switch">
                     <input *ngIf="topStatus == true"  type="checkbox" checked (change)="onchangeTopStatus($event)">
                     <input *ngIf="topStatus !== true" type="checkbox" unchecked (change)="onchangeTopStatus($event)">
                     <span class="slider"></span>
                 </label>
+            </li>
+            <li *ngIf="showAccept !== true">
+                <span>
+                    <p *ngIf="topStatus == true" >ON</p>
+                    <p *ngIf="topStatus !== true" >OFF</p>
+                </span>
             </li>
         </ul>
     </div>
@@ -62,7 +68,7 @@
 </div>
 </form>
 <br>
-<p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="onTopUpdate()">Save</button></p>
+<p class="text-center" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click)="onTopUpdate()">Save</button></p>
 </div>
 </div>
 </ng-template>

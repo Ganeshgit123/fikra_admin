@@ -15,6 +15,8 @@ export class SpecialRequestsComponent implements OnInit {
   searchTerm;
   requestsList = [];
   addNewComment:FormGroup;
+  showAccept = true;
+
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     private modalService: NgbModal
@@ -31,6 +33,17 @@ export class SpecialRequestsComponent implements OnInit {
     });
 
     this.fetchRequestList();
+    this.callRolePermission();
+
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let specialRequestPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = specialRequestPermssion[6].write
+      // console.log("prer", specialRequestPermssion[6])
+
+    }
   }
 
   fetchRequestList(){

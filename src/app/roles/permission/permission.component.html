@@ -29,15 +29,15 @@
     <td>{{item.permissionName}}</td>
     <td>
         <label class="switch">
-            <input *ngIf="item.read == 'true'"  type="checkbox" checked (change)="read_update_change($event,item.permissionId,item.write,item._with_Approval_)">
-            <input *ngIf="item.read !== 'true'" type="checkbox" unchecked (change)="read_update_change($event,item.permissionId,item.write,item._with_Approval_)">
+            <input *ngIf="item.read == true"  type="checkbox" checked (change)="read_update_change($event,item.permissionId,item.write,item._with_Approval_)">
+            <input *ngIf="item.read !== true" type="checkbox" unchecked (change)="read_update_change($event,item.permissionId,item.write,item._with_Approval_)">
             <span class="slider"></span>
         </label>
        </td>
     <td>
         <label class="switch">
-            <input *ngIf="item.write == 'true'"  type="checkbox" checked (change)="write_update_change($event,item.permissionId,item.read,item._with_Approval_)">
-            <input *ngIf="item.write !== 'true'" type="checkbox" unchecked (change)="write_update_change($event,item.permissionId,item.read,item._with_Approval_)">
+            <input *ngIf="item.write == true"  type="checkbox" checked (change)="write_update_change($event,item.permissionId,item.read,item._with_Approval_)">
+            <input *ngIf="item.write !== true" type="checkbox" unchecked (change)="write_update_change($event,item.permissionId,item.read,item._with_Approval_)">
             <span class="slider"></span>
         </label>
 </td>

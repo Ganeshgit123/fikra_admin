@@ -16,6 +16,7 @@ export class SubCategoriesComponent implements OnInit {
   categList=[];
   subCateg=[];
   subCateId:any;
+  showAccept = true;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -36,7 +37,15 @@ export class SubCategoriesComponent implements OnInit {
 
     this.fetchcategList();
     this.fetchSubCategData();
+    this.callRolePermission();
 
+  }
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let settingPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = settingPermssion[4].write
+      // console.log("prer", settingPermssion[4])
+    }
   }
 
   fetchcategList(){

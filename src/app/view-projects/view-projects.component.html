@@ -1,7 +1,7 @@
 <div class="container-fluid">    
 <a routerLink="/projects"><app-pagetitle title="Project" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
 <div class="card">
-<div class="card-body">
+<div class="card-body" *ngIf="showAccept === true">
 <div class="row">
 <div class="col-md-3">
 <div *ngIf="recommend == true">
@@ -108,7 +108,7 @@
 </div>
 </ng-template>
 </li>
-<li [ngbNavItem]="5">
+<li [ngbNavItem]="5" *ngIf="showAccept === true">
 <a ngbNavLink class="mb-2">
 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
 <span class="d-none d-sm-block">Request Back</span>
@@ -144,7 +144,7 @@ formControlName="tagsArray"
 </ng-select> 
 </div>
 <br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addTagSubmit()">Save</button></p>
+<p class="text-center" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addTagSubmit()">Save</button></p>
 </form>
 </ng-template>
 </li>

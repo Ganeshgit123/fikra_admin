@@ -16,6 +16,7 @@ export class MiddleSectionComponent implements OnInit {
   fileUpload: any;
   addMiddleCont:FormGroup;
   middleStatus:any;
+  showAccept = true;
 
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -42,7 +43,16 @@ export class MiddleSectionComponent implements OnInit {
     })
 
     this.fetchAboutList();
+    this.callRolePermission();
 
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
   }
 
   fetchAboutList(){

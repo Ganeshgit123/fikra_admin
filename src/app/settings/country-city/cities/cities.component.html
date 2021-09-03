@@ -1,6 +1,6 @@
 <div class="card">
 <div class="card-body">
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCity(cityModal)">Add New</button></p>
+<p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCity(cityModal)">Add New</button></p>
 <ng-template #cityModal let-modal>
 <div class="modal-header">
 <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
@@ -24,27 +24,33 @@
 </ng-template>
 <div class="table-responsive">
 <table id="basic-datatable"
-class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <thead>
 <tr>
 <th>Country Name</th>
 <th>City Name</th>
 <th>Status</th>
-<th>Action</th>
+<th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
 <tbody  *ngFor="let item of countryList;">
 <tr *ngFor="let cites of item.city;">
 <td>{{item.countryName}}</td>
 <td>{{cites.cityName}}</td>
-<td>
+<td *ngIf="showAccept === true">
 <label class="switch">
     <input *ngIf="cites._isOn_ === true"  type="checkbox" checked (change)="onchangeCityStatus($event,item._id,cites)">
     <input *ngIf="cites._isOn_ === false" type="checkbox" unchecked (change)="onchangeCityStatus($event,item._id,cites)">
 <span class="slider"></span>
 </label>    
 </td>
-<td>
+<td *ngIf="showAccept !== true">
+    <span>
+        <p *ngIf="cites._isOn_ === true">ON</p>
+        <p *ngIf="cites._isOn_ !== true">OFF</p>
+    </span>
+</td>
+<td *ngIf="showAccept === true">
 <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewCity(item._id,cites,cityModal)"><i
 class="mdi mdi-pencil font-size-18"></i></a>
 <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteCity(item._id,cites)"><i

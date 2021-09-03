@@ -19,6 +19,7 @@ export class CreatorHandbookComponent implements OnInit {
   imgUrl:any;
   isEdit:any;
   handBookId:any;
+  showAccept = true;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -40,7 +41,15 @@ export class CreatorHandbookComponent implements OnInit {
     });
 
     this.fetchHandbookData();
+    this.callRolePermission();
+  }
 
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
   }
 
   fetchHandbookData(){

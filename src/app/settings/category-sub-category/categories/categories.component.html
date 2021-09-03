@@ -1,6 +1,6 @@
 <div class="card">
 <div class="card-body">
-<p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCategory(centerDataModal)">Add New</button></p>
+<p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCategory(centerDataModal)">Add New</button></p>
 <ng-template #centerDataModal let-modal>
 <div class="modal-header">
 <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
@@ -22,27 +22,33 @@
 </ng-template>
 <div class="table-responsive">
 <table id="basic-datatable"
-class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <thead>
 <tr>
 <th>Category Name</th>
 <th>Category Description</th>
 <th>Status</th>
-<th>Action</th>
+<th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
 <tbody>
 <tr *ngFor="let item of categList">
 <td>{{item.categorieName}}</td>
 <td>{{item.discription}}</td>
-<td>
+<td *ngIf="showAccept === true">
 <label class="switch">
     <input *ngIf="item._isOn_ === true"  type="checkbox" checked (change)="onchangeCategStatus($event,item._id)">
     <input *ngIf="item._isOn_ === false" type="checkbox" unchecked (change)="onchangeCategStatus($event,item._id)">
 <span class="slider"></span>
 </label>    
 </td>
-<td>
+<td *ngIf="showAccept !== true">
+<span>
+    <p *ngIf="item._isOn_ === true">ON</p>
+    <p *ngIf="item._isOn_ !== true">OFF</p>
+</span>
+</td>
+<td *ngIf="showAccept === true">
 <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewCategory(item,centerDataModal)"><i
 class="mdi mdi-pencil font-size-18"></i></a>
 <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteCateg(item._id)"><i

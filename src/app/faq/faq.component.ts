@@ -15,7 +15,7 @@ export class FaqComponent implements OnInit {
   faqData:any;
   isEdit = false;
   faqId:any;
-
+  showAccept = true;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -35,8 +35,18 @@ export class FaqComponent implements OnInit {
     });
 
     this.fetchFaqData();
+    this.callRolePermission();
+
   }
 
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
+  }
+  
   fetchFaqData(){
     let params = {
       url: "admin/getAllFAQContent",

@@ -16,6 +16,7 @@ export class InvestorFormComponent implements OnInit {
 
   getfieldData:any=[];
   fieldId:any;
+  showAccept = true;
 
   constructor(
     private apiCall: ApiCallService,
@@ -25,7 +26,15 @@ export class InvestorFormComponent implements OnInit {
   ngOnInit(): void {
 
     this.fetchFieldData();
+    this.callRolePermission();
+  }
 
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let singupPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = singupPermssion[5].write
+      // console.log("prer", singupPermssion[5])
+    }
   }
 
   fetchFieldData(){
@@ -37,7 +46,7 @@ export class InvestorFormComponent implements OnInit {
        if(resu.error == false)
        {
          this.getfieldData = resu.data;
-         console.log("dafa",this.getfieldData)
+        //  console.log("dafa",this.getfieldData)
        }else{
          this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
        }

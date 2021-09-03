@@ -57,7 +57,7 @@
       <td><a routerLink="/view-investors/{{user.userDetails._id}}">{{user.userDetails.userName}}</a></td>
       <td><a routerLink="/view-creators/{{user.aboutProjectId.userId._id}}">{{user.aboutProjectId.userId.userName}}</a></td>
       <td>{{user.reportComment}}</td>
-      <td>
+      <td *ngIf="showAccept === true">
         <select class="pend_btn" *ngIf="user.adminStatus === 'pending'" (change)="onChangeReportStatus(user._id,$event.target.value)">
           <option>{{user.adminStatus}}</option>
           <option>approved</option>
@@ -74,6 +74,7 @@
               <option>pending</option>
               </select>
         </td>
+        <td *ngIf="showAccept !== true">{{user.adminStatus}}</td>
     </tr>
     </tbody> 
     </table>

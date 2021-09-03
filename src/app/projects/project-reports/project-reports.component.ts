@@ -14,12 +14,13 @@ export class ProjectReportsComponent implements OnInit {
   role:any;
   searchTerm;
   reportedList = [];
+  adminStatus:any;
+  showAccept = true;
 
    constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     private modalService: NgbModal
     ) { }
-    adminStatus:any;
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Reported-Project List', active: true }];
@@ -28,6 +29,16 @@ export class ProjectReportsComponent implements OnInit {
     this.role = sessionStorage.getItem('adminRole');
 
     this.fetchReportedList();
+    this.callRolePermission();
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let projectPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = projectPermssion[0].write
+      // console.log("prer", this.showAccept)
+
+    }
   }
 
   fetchReportedList(){

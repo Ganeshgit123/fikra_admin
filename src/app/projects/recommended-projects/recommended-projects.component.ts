@@ -17,6 +17,7 @@ export class RecommendedProjectsComponent implements OnInit {
   updatedby = sessionStorage.getItem('adminId');
   role = sessionStorage.getItem('adminRole');
   projectList: any=[];
+  showAccept = true;
   
    constructor(
   private apiCall: ApiCallService,
@@ -28,8 +29,18 @@ export class RecommendedProjectsComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Recommended List', active: true }];
 
     this.fetchProjectData();
+    this.callRolePermission();
   }
 
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let projectPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = projectPermssion[0].write
+      // console.log("prer", this.showAccept)
+
+    }
+  }
+  
   fetchProjectData(){
     let params = {
       url: "admin/getRecommenedProjectsAdmin",

@@ -41,14 +41,14 @@
     <!-- Table -->
     <div class="table-responsive">
     <table id="basic-datatable"
-    class="table table-bordered dt-responsive text-nowrap datatables no-footer dtr-inline">
+    class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
     <thead>
     <tr>
       <th>Service Type</th>
       <th>Comment</th>
       <th>User Name</th>
       <th>Project Id</th>
-      <th>Comment Button</th>
+      <th *ngIf="showAccept === true">Comment Button</th>
       <th>Admin Comment</th>
     </tr>
     </thead>
@@ -58,7 +58,7 @@
       <td>{{user.comments}}</td>
       <td><a routerLink="/view-creators/{{user.userId._id}}">{{user.userId.userName}}</a></td>
       <td><a routerLink="/view-projects/{{user.projectId._id}}">{{user.projectId._id}}</a></td>
-      <td>
+      <td *ngIf="showAccept === true">
         <button class="btn btn-primary w-md waves-effect waves-light" (click)="adminComment(centerDataModal)">Comment</button>
         <ng-template #centerDataModal let-modal>
           <div class="modal-header">

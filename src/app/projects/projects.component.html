@@ -53,7 +53,7 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <th>Goal Amount</th>
 <th>Duration</th>
 <th>Admin Approval</th>
-<th>Action</th>
+<th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
 <tbody>
@@ -67,7 +67,8 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <td><a routerLink="/view-creators/{{proj.userId._id}}">{{proj.userId.userName}}</a></td>
 <td>{{proj.basicInfoId.goalAmount}}</td>
 <td>{{proj.basicInfoId.campaignDuation | date}}</td>
-<td>
+
+<td *ngIf="showAccept === true">
 <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
 <option>{{proj.aproval_Status}}</option>
 <option>approved</option>
@@ -91,9 +92,10 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
    <p>  {{proj.rejection_comment}}</p>
 </span>
 </td>
+<td *ngIf="showAccept !== true">{{proj.aproval_Status}}</td>
 
 <td>
-   <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteProject(proj._id)"><i
+   <a *ngIf="showAccept === true" class="text-danger text-info" ngbTooltip="Delete" (click)="deleteProject(proj._id)"><i
      class="mdi mdi-trash-can font-size-18"></i></a>
  </td>
 </tr>

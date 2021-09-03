@@ -16,7 +16,7 @@
 <div class="card">
 <div class="card-body">
 <div *ngFor = "let item of termsList">
-<p class="text-right"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "termPrivacy(item)">Edit</button></p>
+<p class="text-right" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "termPrivacy(item)">Edit</button></p>
 <form  [formGroup]="addTerms" (ngSubmit)="onSubmit()">
 <ckeditor [editor]="Editor" formControlName="termsContent" (ready)="onReady($event)"></ckeditor>
 <br>
@@ -42,7 +42,7 @@
 <div class="card">
 <div class="card-body">
 <div *ngFor = "let item of termsList">
-<p class="text-right"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "termPrivacy(item)">Edit</button></p>
+<p class="text-right" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click) = "termPrivacy(item)">Edit</button></p>
 <form  [formGroup]="addTerms" (ngSubmit)="onSubmit()">
 <ckeditor [editor]="Editor" formControlName="termsContent_Ar" (ready)="onReady($event)"></ckeditor>
 <br>

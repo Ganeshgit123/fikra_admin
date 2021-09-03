@@ -26,6 +26,7 @@ export class TermsOfUseComponent implements OnInit {
   termscont:any;
   termsID:any;
   isEdit = false;
+  showAccept = true;
 
   constructor(
     private apiCall: ApiCallService,
@@ -70,6 +71,16 @@ export class TermsOfUseComponent implements OnInit {
         console.log('Error', error)
       }
     )
+    this.callRolePermission();
+
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
   }
 
   onSubmit(){
