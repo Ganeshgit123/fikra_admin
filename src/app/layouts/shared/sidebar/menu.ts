@@ -210,6 +210,12 @@ export const MENU: MenuItem[] = [
         link: '/subscribers'
     },
     {
+        id: 36,
+        label: 'MENUITEMS.INVOICE_BILL.TEXT',
+        icon: 'fas fa-file-invoice',
+        link: '/invoice_bill'
+    },
+    {
         id: 31,
         label: 'MENUITEMS.NOTIFICATIONS.TEXT',
         icon: 'ri-notification-4-line',

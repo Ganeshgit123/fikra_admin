@@ -46,6 +46,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { RolesComponent } from './roles/roles.component';
 import { PermissionComponent } from './roles/permission/permission.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { BillGenerationComponent } from './bill-generation/bill-generation.component';
 
 const routes: Routes = [
   {
@@ -102,6 +103,7 @@ const routes: Routes = [
       {path: 'roles',component: RolesComponent, canActivate: [AuthGuard],},
       {path: 'permissions',component: PermissionComponent, canActivate: [AuthGuard],},
       {path: 'admin_users',component: AdminUsersComponent, canActivate: [AuthGuard],},
+      {path: 'invoice_bill',component: BillGenerationComponent, canActivate: [AuthGuard],},
     ],
     canActivate: [AuthGuard]
     }

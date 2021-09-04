@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .panel-body {
+            padding: 30px;
+            background-color: #F3F3F3;
+        }
+
+        .card-body {
+            padding: 0;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .second_panel_body {
+            padding: 10px 30px;
+        }
+
+        .bill_head {
+            padding: 5px;
+            background-color: #F3F3F3;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        tbody>tr {
+            border: 1px solid #7f7f7f;
+        }
+
+        tbody>tr>td {
+            border-left: 1px solid #7f7f7f;
+            border-right: 1px solid #7f7f7f;
+        }
+
+        .table-responsive::-webkit-scrollbar {
+            display: none;
+        }
+
+        .table-responsive {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        thead>tr {
+            background-color: #F47549;
+            color: #fff;
+        }
+
+        @media print {
+            thead>tr {
+            background-color: auto;
+            color: #000;
+        }
+        thead>tr>th{
+            border: 1px solid #7f7f7f;;
+        }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-body">
+                        <div style="padding: 10px 0;background-color: #F47549;">
+                        </div>
+                        <div class="panel-body">
+                            <div class="clearfix">
+                                <div class="float-left">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="https://fikra.app/assets/image/logo_colored.png"
+                                                class="img-fluid">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <h6 style="margin-top: 20px;">Company Name</h6>
+                                            <p>Address</p>
+                                            <p>Contact Details</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="float-right">
+                                    <h4 style="color: #7f7f7f;font-size: 30px;margin-top: 25px;">INVOICE</h4>
+                                    <p class="center"><strong>2016-04-23</strong></p>
+                                    <p class="center"><strong>Invoice No.</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="second_panel_body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-right mt-3">
+                                        <p>Payment terms (due on receipt, due in X days)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 mt-3">
+                                    <h6 class="bill_head">BILL TO</h6>
+                                    <p>Contact Name</p>
+                                    <p>Client Company Name</p>
+                                    <p>Address</p>
+                                    <p>Phone</p>
+                                    <p>Email</p>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-5 mt-3">
+                                    <h6 class="bill_head">SHIP TO</h6>
+                                    <p>Contact Name</p>
+                                    <p>Client Company Name</p>
+                                    <p>Address</p>
+                                    <p>Phone</p>
+                                    <p>Email</p>
+                                </div>
+                            </div>
+                            <!-- end row -->
+                            <br><br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr style=" background-color: #F47549 !important;">
+                                                    <th>#</th>
+                                                    <th>DESCRIPTION</th>
+                                                    <th class="center">QTY</th>
+                                                    <th class="center">UNIT PRICE</th>
+                                                    <th class="center">TOTAL</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Lorem ipsum dolor sit amet.</td>
+                                                    <td class="center">1</td>
+                                                    <td class="center">380</td>
+                                                    <td class="right">380</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Lorem ipsum dolor sit amet.</td>
+                                                    <td class="center">1</td>
+                                                    <td class="center">380</td>
+                                                    <td class="right">380</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Lorem ipsum dolor sit amet.</td>
+                                                    <td class="center">1</td>
+                                                    <td class="center">380</td>
+                                                    <td class="right">380</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Lorem ipsum dolor sit amet.</td>
+                                                    <td class="center">1</td>
+                                                    <td class="center">380</td>
+                                                    <td class="right">380</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>Lorem ipsum dolor sit amet.</td>
+                                                    <td class="center">1</td>
+                                                    <td class="center">380</td>
+                                                    <td class="right">380</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-4 col-6">
+                                    <div class="clearfix mt-4">
+                                        <h5 class="small text-dark">Remarks / Payment Instructions:</h5>
+                                        <small>
+                                            All accounts are to be paid within 7 days from receipt of
+                                            invoice. To be paid by cheque or credit card or direct payment
+                                            online. If account is not paid within 7 days the credits details
+                                            supplied as confirmation of work undertaken will be charged the
+                                            agreed quoted fee noted above.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-6 offset-xl-4">
+                                    <div class="row">
+                                        <div class="col-md-8 col-8">
+                                            <p class="text-right"><b>SUBTOTAL :</b></p>
+                                            <p class="text-right"><b>DISCOUNT :</b></p>
+                                            <p class="text-right"><b>SUBTOTAL LESS DISCOUNT :</b></p>
+                                            <p class="text-right"><b>TAX RATE :</b></p>
+                                            <p class="text-right"><b>TOTAL TAX :</b></p>
+                                            <p class="text-right"><b>SHIPPING/HANDLING :</b></p>
+                                        </div>
+                                        <div class="col-md-4 col-4">
+                                            <p class="text-right"><b> 2930.00</b></p>
+                                            <p class="text-right"><b>12.9%</b></p>
+                                            <p class="text-right"><b>2800.00</b></p>
+                                            <p class="text-right"><b>15%</b></p>
+                                            <p class="text-right"><b>200</b></p>
+                                            <p class="text-right"><b>0.00</b></p>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <h3 class="text-right">SAR 2930.00</h3>
+                                </div>
+                            </div>
+                            <br>
+                            <div style="padding: 10px 0;background-color: #F47549;">
+                            </div>
+                            <br>
+                            <div class="d-print-none">
+                                <div class="float-right">
+                                    <a href="javascript:window.print()" class="btn btn-dark waves-effect waves-light"><i
+                                            class="fa fa-print"></i></a>&nbsp;&nbsp;
+                                    <a href="#" class="btn btn-primary waves-effect waves-light">Submit</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container-fluid -->
+
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+</body>
+
+</html>
