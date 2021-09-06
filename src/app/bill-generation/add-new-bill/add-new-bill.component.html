@@ -1,0 +1,116 @@
+<a routerLink="/investor_form"><app-pagetitle title="Add New Field" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
+<div class="card">
+<div class="card-body">
+<form [formGroup]="addNewBill">
+<div class="row">
+<div class="col-md-12">
+<div formArrayName="includes">
+<div class="row" *ngFor="let comp of addNewBill['controls'].includes['controls']; let i=index;">
+<div class="col-md-12" [formGroupName]="i">
+<div class="row">
+<div class="col-md-3">
+<div class="form-group">
+<label>Description</label>
+<textarea type="text" class="form-control" formControlName="description" ></textarea>
+</div>
+</div>
+<div class="col-md-1">
+    <div class="form-group">
+        <label>Quantity</label>
+        <input type="text" class="form-control" (keyup)="onQty($event)" formControlName="quantity" />
+    </div>
+</div>
+<div class="col-md-3">
+<div class="form-group">
+<label>Unit Price</label>
+<input type="text" class="form-control"  (keyup)="onUnitPrice($event)" formControlName="unitPrice" />
+</div>
+</div>
+<div class="col-md-3">
+    <div class="form-group">
+    <label>Total</label>
+    <input type="text" class="form-control" formControlName="total" readonly />
+    </div>
+</div>
+<div class="col-md-2">
+<div class="top_btn">
+<button class="btn btn-primary" (click)="addOptions()" style="margin-bottom: 10px;">Add</button>
+<a class="text-danger delete_btn" ngbTooltip="Delete" (click)="deleteOptions(i)"><i
+class="mdi mdi-trash-can font-size-24"></i></a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-md-3">
+<div class="form-group">
+    <label>Due Date</label>
+    <input class="form-control" type="date"  id="example-date-input" formControlName="dueDate">
+</div>
+</div>
+<div class="col-md-3">
+    <div class="form-group">
+        <label>Total Amount</label>
+        <input class="form-control" type="text" formControlName="totalAmount" readonly>
+    </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+        <label>Processing Fees %</label>
+        <input type="text" class="form-control" formControlName="processing_Fees_Percent" readonly />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+        <label>Processing Fees Amt</label>
+        <input type="text" class="form-control" formControlName="processing_Fees" readonly />
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+        <label>VAT %</label>
+        <input type="text" class="form-control" formControlName="VAT_Percent" readonly />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+        <label>VAT Amt</label>
+        <input type="text" class="form-control" formControlName="VAT" readonly />
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+        <label>Payment Model %</label>
+        <input type="text" class="form-control" formControlName="paymentModel_Percent" readonly />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+        <label>Payment Model Amt</label>
+        <input type="text" class="form-control" formControlName="paymentModel" readonly />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+        <label>Discount</label>
+        <input type="text" class="form-control" formControlName="discount" />
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="col-md-12">
+    <p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
+</div>
+</form> 
+</div>
+</div>

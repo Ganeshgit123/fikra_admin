@@ -5,6 +5,25 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
+export class UploadAdapter {
+  private loader;
+  constructor(loader: any) {
+    this.loader = loader;
+  }
+
+  upload() {
+    return this.loader.file
+          .then( file => new Promise( ( resolve, reject ) => {
+                var myReader= new FileReader();
+                myReader.onloadend = (e) => {
+                   resolve({ default: myReader.result });
+                }
+
+                myReader.readAsDataURL(file);
+          } ) );
+ };
+}
+
 @Component({
   selector: 'app-career',
   templateUrl: './career.component.html',
@@ -28,6 +47,10 @@ export class CareerComponent implements OnInit {
          editor.ui.view.toolbar.element,
          editor.ui.getEditableElement()
      );
+     editor.plugins.get('FileRepository').createUploadAdapter = function (loader) {
+      console.log(btoa(loader.file));
+      return new UploadAdapter(loader);
+    };
  }
 
    constructor(private formBuilder: FormBuilder,

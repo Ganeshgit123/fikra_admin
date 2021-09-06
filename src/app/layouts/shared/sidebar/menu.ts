@@ -128,6 +128,12 @@ export const MENU: MenuItem[] = [
         icon: 'ri-settings-5-line',
         subItems: [
             {
+                id: 37,
+                label: 'MENUITEMS.COMMISSION_CHARGES.TEXT',
+                link: '/commission_charges',
+                parentId: 13
+            },
+            {
                 id: 16,
                 label: 'MENUITEMS.CATEGORY_SUB_CATEGORY.TEXT',
                 link: '/category_sub_category',
@@ -213,7 +219,7 @@ export const MENU: MenuItem[] = [
         id: 36,
         label: 'MENUITEMS.INVOICE_BILL.TEXT',
         icon: 'fas fa-file-invoice',
-        link: '/invoice_bill'
+        link: '/bill_list'
     },
     {
         id: 31,

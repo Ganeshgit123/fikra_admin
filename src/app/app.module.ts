@@ -97,6 +97,9 @@ import { PermissionComponent } from './roles/permission/permission.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { BillGenerationComponent } from './bill-generation/bill-generation.component';
 import { InvoicePreviewComponent } from './bill-generation/invoice-preview/invoice-preview.component';
+import { CommissionChargesComponent } from './settings/commission-charges/commission-charges.component';
+import { AddNewBillComponent } from './bill-generation/add-new-bill/add-new-bill.component';
+import { EditNewBillComponent } from './bill-generation/edit-new-bill/edit-new-bill.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -120,7 +123,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, 
     ContentSectionComponent, BasicInfoComponent, RewardsComponent, InvestorFormComponent, 
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent,
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, EditNewBillComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { LanguageService } from '../../../core/services/language.service';
 import { environment } from '../../../../environments/environment';
@@ -24,11 +25,14 @@ export class TopbarComponent implements OnInit {
   updatedby: any;
   role: any;
   sessionNotiData:any;
+  lat : any;
+  lng : any;
 
   listLang = [
     { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
   ];
 
+  
   // tslint:disable-next-line: max-line-length
   constructor(@Inject(DOCUMENT) private document: any, private router: Router, public languageService: LanguageService, public cookiesService: CookieService,
     private apiCall: ApiCallService,) { }
@@ -54,8 +58,18 @@ export class TopbarComponent implements OnInit {
       this.flagvalue = val.map(element => element.flag);
     }
 
-    this.fetchNotificationData();
-    this.fetchSessionNotifyData();
+    this.getPosition().subscribe(pos => {
+      this.lat = pos.coords.latitude
+      this.lng = pos.coords.longitude
+      // console.log("lat",this.lat);
+      // console.log("lng",this.lng);
+   });
+
+    setInterval(() => {
+      this.fetchSessionNotifyData();
+  }, 5000);
+
+  this.fetchNotificationData();
 
   }
 
@@ -148,16 +162,18 @@ export class TopbarComponent implements OnInit {
       let resu = result.body;
       if (resu.error == false) {
 
-        this.sessionNotiData = resu.notification.length;
-
-        // console.log("len",sessionNotiData)
-
+        this.sessionNotiData = resu.notification.length;       
       } else {
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+        if(resu.error.msg == 'jwt expired' || resu.error.msg == 'Your token has been expired'){
+          this.apiCall.showToast("Session Expired", 'Success', 'successToastr')
+          sessionStorage.clear();
+          this.router.navigate(['/']);
+        } 
       }
     }, (error) => {
+      
       console.error(error);
-
     });
   }
   /**
@@ -216,13 +232,48 @@ export class TopbarComponent implements OnInit {
     this.languageService.setLanguage(lang);
   }
 
+    getPosition(): Observable<any> {
+      return Observable.create(observer => {
+        window.navigator.geolocation.getCurrentPosition(position => {
+          observer.next(position);
+          observer.complete();
+        },
+          error => observer.error(error));
+      });
+  }
+
 
   /**
    * Logout the user
    */
   logout() {
-    // console.log("fef")
-    sessionStorage.clear();
-    this.router.navigate(['/']);
+
+    const object = {}
+
+    object['lat'] = this.lat;
+    object['lang'] = this.lng;
+
+    var params = {
+      url: 'admin/adminloginOut',
+      data: object
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Logout Successfully", 'Success', 'successToastr')
+          sessionStorage.clear();
+          this.router.navigate(['/']);
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+
   }
 }

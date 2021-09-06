@@ -47,6 +47,10 @@ import { RolesComponent } from './roles/roles.component';
 import { PermissionComponent } from './roles/permission/permission.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { BillGenerationComponent } from './bill-generation/bill-generation.component';
+import { InvoicePreviewComponent } from './bill-generation/invoice-preview/invoice-preview.component';
+import { CommissionChargesComponent } from './settings/commission-charges/commission-charges.component';
+import { AddNewBillComponent } from './bill-generation/add-new-bill/add-new-bill.component';
+import { EditNewBillComponent } from './bill-generation/edit-new-bill/edit-new-bill.component';
 
 const routes: Routes = [
   {
@@ -95,6 +99,7 @@ const routes: Routes = [
       {path: 'country_city',component: CountryCityComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_setting_true'}},
       {path: 'tags',component: TagsComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_setting_true'}},
       {path: 'special_services',component: SpecialServicesComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_setting_true'}},
+      {path: 'commission_charges',component: CommissionChargesComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_setting_true'}},
 
       {path: 'subscribers',component: SubscribersComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_subscribers_true'}},
       {path: 'special_requests',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
@@ -103,7 +108,11 @@ const routes: Routes = [
       {path: 'roles',component: RolesComponent, canActivate: [AuthGuard],},
       {path: 'permissions',component: PermissionComponent, canActivate: [AuthGuard],},
       {path: 'admin_users',component: AdminUsersComponent, canActivate: [AuthGuard],},
-      {path: 'invoice_bill',component: BillGenerationComponent, canActivate: [AuthGuard],},
+      
+      {path: 'bill_list',component: BillGenerationComponent, canActivate: [AuthGuard],},
+      {path: 'invoice_bill',component: InvoicePreviewComponent, canActivate: [AuthGuard],},
+      {path: 'add_new_bill',component: AddNewBillComponent, canActivate: [AuthGuard],},
+      {path: 'edit_new_bill/:id',component: EditNewBillComponent,canActivate: [AuthGuard],},
     ],
     canActivate: [AuthGuard]
     }

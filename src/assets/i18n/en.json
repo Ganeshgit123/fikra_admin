@@ -177,6 +177,9 @@
     "INVOICE_BILL": {
       "TEXT": "Invoice Bill"
     },
+    "COMMISSION_CHARGES": {
+      "TEXT": "Commission Charges"
+    },
     
     "LAYOUTS": {
       "TEXT": "Layouts",

@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-body">
+    <form [formGroup]="addCommission">
+    <div class="row">
+    <div class="col-md-6">
+    <div class="form-group">
+    <label>Processing Fess</label>
+    <input type="text" class="form-control" formControlName="processing_Fees">
+    </div>
+    <div class="form-group">
+    <label>VAT</label>
+    <input type="text" class="form-control" formControlName="VAT">
+    </div>
+    
+    </div>
+    <div class="col-md-6">
+    <div class="form-group">
+    <label>Keep It All Modal Commission</label>
+    <input type="text" class="form-control" formControlName="keepItAllCommission">
+    </div>
+    <div class="form-group">
+    <label>All or Nothing Modal Commission</label>
+    <input type="text" class="form-control" formControlName="allAreNothingCommission">
+    </div>
+    </div>
+    </div>
+    <br>
+    <p class="text-center" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click) ="onSubmit()">Save</button></p>    
+    </form>
+    </div>
+    </div>
