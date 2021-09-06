@@ -10,13 +10,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ViewInvestorsComponent implements OnInit {
   breadCrumbItems: Array<{}>;
-  getuserList: any;
-  getField: any=[];
-  userId: number;
-  temp = [];
-  abc: any;
-  getLoginDetails:any;
-  
+  userId: any;
+  getLoginDetails = [];
+  getInvestorList = [];
+  getInvestorFeilds = [];
+
  constructor(private apiCall: ApiCallService,
   private formBuilder: FormBuilder,
   private route: ActivatedRoute,
@@ -33,9 +31,6 @@ export class ViewInvestorsComponent implements OnInit {
 
   }
 
-  getData(item) {
-    return Object.keys(item);
-  }
 
   _fetchData() {
 
@@ -47,10 +42,7 @@ export class ViewInvestorsComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
-        this.getuserList = resu.data;
-
-    //  this.temp.push(this.getuserList)
-        //  console.log("user",this.temp)
+        this.getInvestorList = resu.data;
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -64,47 +56,21 @@ export class ViewInvestorsComponent implements OnInit {
 
    _fetchFieldData(){
     let params = {
-      url: "admin/getInvestorList",
-    }  
-    this.apiCall.subCommonGetService(params).subscribe((result:any)=>{
-      let resu = result.body;
-      if(resu.error == false)
-      {
-        this.getField = resu.fields;
-        
-        const field_name = this.getField.map((it)=>{
-          return it.fieldId
-        })
-
-        console.log("fff",field_name);
-
-        // const nextKeyValue = Object.values(this.getuserList)
-        // console.log("ddd",nextKeyValue);
-        
-        // var z = field_name.filter(function(val) {
-        //   return Object.keys(this.getuserList).indexOf(val) != -1;
-        // });
-        //  console.log("see",z)
-
-        // this.abc = this.getuserList.map((item)=>{
-        //   const a = {}
-        //   field_name.forEach((f)=>{
-        //     a[f] = item[f]
-  
-        //   })
-        //   return item = a
-        // })
-        
-        
-        // console.log("abc",this.abc)
-
-      }else{
-        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      url: "admin/getUserProfileCreationField",
+    };
+    this.apiCall.commonGetService(params).subscribe(
+      (result: any) => {
+        let resu = result.body;
+        if (resu.error == false) {
+          this.getInvestorFeilds = resu.data;
+        } else {
+          this.apiCall.showToast(resu.message, "Error", "errorToastr");
+        }
+      },
+      (error) => {
+        console.error(error);
       }
-    },(error)=>{
-       console.error(error);
-       
-    });
+    );
    }
 
 
