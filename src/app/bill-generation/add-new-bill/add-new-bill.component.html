@@ -6,10 +6,10 @@
 <div class="row">
 <div class="col-md-6">
 <div class="form-group">
-<label>Creators List</label>
+<label>Creator Name</label>
 <select class="form-control" formControlName="userId">
     <option value="" disabled>Select Creator</option>
-    <option *ngFor="let item of creatorsList" value="{{item._id}}">{{item.userName}}</option>
+    <option [selected] value="{{useId}}">{{useName}}</option>
 </select>
 </div>
 </div>

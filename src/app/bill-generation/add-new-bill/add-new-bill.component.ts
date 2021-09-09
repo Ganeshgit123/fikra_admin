@@ -36,6 +36,10 @@ export class AddNewBillComponent implements OnInit {
   serviceType:any;
   serviceId:any;
   isShow:any;
+  serviceCreteId:any;
+  createId:any;
+  useId:any;
+  useName:any;
 
   constructor(
     private apiCall: ApiCallService,
@@ -46,6 +50,7 @@ export class AddNewBillComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => this.parmId = params.id);
+    this.route.params.subscribe(params => this.serviceCreteId = params.user_id);
     
     var str = this.parmId
     var splitted = str.split("-"); 
@@ -61,7 +66,7 @@ export class AddNewBillComponent implements OnInit {
       this.isShow = false;
       this.fetchCommonCharges();
     }
-        //  console.log("service",splitted)
+    this.fetchCreatorsList();
 
     this.breadCrumbItems = [{ label: 'Billing' },{ label: 'Add New Bill', active: true }];
     this.addNewBill = this.formBuilder.group({
@@ -84,7 +89,6 @@ export class AddNewBillComponent implements OnInit {
       discount: [''],
     });
 
-    this.fetchCreatorsList();
   }
 
   private getIncludeValues() {
@@ -113,6 +117,30 @@ export class AddNewBillComponent implements OnInit {
     control.removeAt(index)
   }
 
+
+  fetchCreatorsList(){
+    let params = {
+      url: "admin/getCreatorList",
+    }  
+    this.apiCall.subCommonGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+        this.creatorsList = resu.data;
+        this.createId = this.creatorsList.find(ele =>{
+         return ele._id == this.serviceCreteId
+        })
+        this.useId = this.createId._id
+        this.useName = this.createId.userName
+        //  console.log(this.useId)
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
+    });
+  }
 
   fetchCommissionData(val){
     let params = {
@@ -219,24 +247,6 @@ export class AddNewBillComponent implements OnInit {
     });
   }
 
-  fetchCreatorsList(){
-    let params = {
-      url: "admin/getCreatorList",
-    }  
-    this.apiCall.subCommonGetService(params).subscribe((result:any)=>{
-      let resu = result.body;
-      if(resu.error == false)
-      {
-        this.creatorsList = resu.data;
-   
-      }else{
-        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
-      }
-    },(error)=>{
-       console.error(error);
-       
-    });
-  }
 
   projectSelectClick(){
     let params = {
