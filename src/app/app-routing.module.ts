@@ -103,6 +103,7 @@ const routes: Routes = [
 
       {path: 'subscribers',component: SubscribersComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_subscribers_true'}},
       {path: 'special_requests',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
+      {path: 'special_requests/:id',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
 
       {path: 'notifications',component: NotificationsComponent, canActivate: [AuthGuard],},
       {path: 'roles',component: RolesComponent, canActivate: [AuthGuard],},
@@ -110,8 +111,8 @@ const routes: Routes = [
       {path: 'admin_users',component: AdminUsersComponent, canActivate: [AuthGuard],},
       
       {path: 'bill_list',component: BillGenerationComponent, canActivate: [AuthGuard],},
-      {path: 'invoice_bill',component: InvoicePreviewComponent, canActivate: [AuthGuard],},
-      {path: 'add_new_bill',component: AddNewBillComponent, canActivate: [AuthGuard],},
+      {path: 'invoice_bill/:id',component: InvoicePreviewComponent, canActivate: [AuthGuard],},
+      {path: 'add_new_bill/:id',component: AddNewBillComponent, canActivate: [AuthGuard],},
       {path: 'edit_new_bill/:id',component: EditNewBillComponent,canActivate: [AuthGuard],},
     ],
     canActivate: [AuthGuard]

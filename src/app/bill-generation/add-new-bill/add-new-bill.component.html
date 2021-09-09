@@ -1,7 +1,20 @@
-<a routerLink="/investor_form"><app-pagetitle title="Add New Field" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
+<a routerLink="/"><app-pagetitle title="Add New Bill" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
 <div class="card">
 <div class="card-body">
 <form [formGroup]="addNewBill">
+
+<div class="row">
+<div class="col-md-6">
+<div class="form-group">
+<label>Creators List</label>
+<select class="form-control" formControlName="userId">
+    <option value="" disabled>Select Creator</option>
+    <option *ngFor="let item of creatorsList" value="{{item._id}}">{{item.userName}}</option>
+</select>
+</div>
+</div>
+</div>
+<hr>
 <div class="row">
 <div class="col-md-12">
 <div formArrayName="includes">
@@ -29,7 +42,7 @@
 <div class="col-md-3">
     <div class="form-group">
     <label>Total</label>
-    <input type="text" class="form-control" formControlName="total" readonly />
+    <input type="text" class="form-control" formControlName="total" />
     </div>
 </div>
 <div class="col-md-2">
@@ -52,12 +65,6 @@ class="mdi mdi-trash-can font-size-24"></i></a>
     <input class="form-control" type="date"  id="example-date-input" formControlName="dueDate">
 </div>
 </div>
-<div class="col-md-3">
-    <div class="form-group">
-        <label>Total Amount</label>
-        <input class="form-control" type="text" formControlName="totalAmount" readonly>
-    </div>
-    </div>
     <div class="col-md-3">
         <div class="form-group">
         <label>Processing Fees %</label>
@@ -84,13 +91,13 @@ class="mdi mdi-trash-can font-size-24"></i></a>
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3" *ngIf="isShow == true">
         <div class="form-group">
         <label>Payment Model %</label>
         <input type="text" class="form-control" formControlName="paymentModel_Percent" readonly />
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3" *ngIf="isShow == true">
         <div class="form-group">
         <label>Payment Model Amt</label>
         <input type="text" class="form-control" formControlName="paymentModel" readonly />
@@ -102,6 +109,19 @@ class="mdi mdi-trash-can font-size-24"></i></a>
         <input type="text" class="form-control" formControlName="discount" />
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Total Amount</label>
+            <input class="form-control" type="text" formControlName="totalAmount">
+        </div>
+        </div>
+    <div class="col-md-3">
+        <div class="form-group">
+        <label>Due Amount</label>
+        <input type="text" class="form-control" formControlName="dueAmount" />
+        </div>
+    </div>
+    
 </div>
 </div>
 </div>

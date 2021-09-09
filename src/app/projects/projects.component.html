@@ -95,6 +95,8 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <td *ngIf="showAccept !== true">{{proj.aproval_Status}}</td>
 
 <td>
+   <a *ngIf="showAccept === true" routerLink="/add_new_bill/proj-{{ proj._id}}" style="padding-right: 10px;">Create Invoice</a>
+
    <a *ngIf="showAccept === true" class="text-danger text-info" ngbTooltip="Delete" (click)="deleteProject(proj._id)"><i
      class="mdi mdi-trash-can font-size-18"></i></a>
  </td>

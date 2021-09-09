@@ -140,7 +140,7 @@ export class TopbarComponent implements OnInit {
       (response: any) => {
         if (response.body.error == false) {
           // Success
-          this.apiCall.showToast("Visited Successfully", 'Success', 'successToastr')
+          this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
           this.ngOnInit();
         } else {
           // Query Error

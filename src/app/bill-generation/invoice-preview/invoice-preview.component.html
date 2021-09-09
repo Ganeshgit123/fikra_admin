@@ -120,8 +120,8 @@
                                 </div>
                                 <div class="float-right">
                                     <h4 style="color: #7f7f7f;font-size: 30px;margin-top: 25px;">INVOICE</h4>
-                                    <p class="center"><strong>2016-04-23</strong></p>
-                                    <p class="center"><strong>Invoice No.</strong></p>
+                                    <p class="center"><strong>{{invoDate | date}}</strong></p>
+                                    <p class="center"><strong>Invoice No. {{invoNo}}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -130,27 +130,29 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="float-right mt-3">
-                                        <p>Payment terms (due on receipt, due in X days)</p>
+                                        <p>Payment terms (due on receipt, due in {{dueDays}} days)</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5 mt-3">
                                     <h6 class="bill_head">BILL TO</h6>
-                                    <p>Contact Name</p>
-                                    <p>Client Company Name</p>
-                                    <p>Address</p>
-                                    <p>Phone</p>
-                                    <p>Email</p>
+                                    <p>Name : {{billName}}</p>
+                                    <!-- <p>Client Company Name</p> -->
+                                    <p>Address : {{addressOne}}, {{addressTwo}}</p>
+                                    <p>City : {{city}}</p>
+                                    <p>State : {{state}} - {{pin}}</p>
+                                    <p>Phone : {{phone}}</p>
                                 </div>
                                 <div class="col-md-2"></div>
                                 <div class="col-md-5 mt-3">
                                     <h6 class="bill_head">SHIP TO</h6>
-                                    <p>Contact Name</p>
-                                    <p>Client Company Name</p>
-                                    <p>Address</p>
-                                    <p>Phone</p>
-                                    <p>Email</p>
+                                    <p>Name : {{billName}}</p>
+                                    <!-- <p>Client Company Name</p> -->
+                                    <p>Address : {{addressOne}}, {{addressTwo}}</p>
+                                    <p>City : {{city}}</p>
+                                    <p>State : {{state}} - {{pin}}</p>
+                                    <p>Phone : {{phone}}</p>
                                 </div>
                             </div>
                             <!-- end row -->
@@ -169,40 +171,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Lorem ipsum dolor sit amet.</td>
-                                                    <td class="center">1</td>
-                                                    <td class="center">380</td>
-                                                    <td class="right">380</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Lorem ipsum dolor sit amet.</td>
-                                                    <td class="center">1</td>
-                                                    <td class="center">380</td>
-                                                    <td class="right">380</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Lorem ipsum dolor sit amet.</td>
-                                                    <td class="center">1</td>
-                                                    <td class="center">380</td>
-                                                    <td class="right">380</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Lorem ipsum dolor sit amet.</td>
-                                                    <td class="center">1</td>
-                                                    <td class="center">380</td>
-                                                    <td class="right">380</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Lorem ipsum dolor sit amet.</td>
-                                                    <td class="center">1</td>
-                                                    <td class="center">380</td>
-                                                    <td class="right">380</td>
+                                                <tr *ngFor="let item of billIncludes;let i = index">
+                                                    <td>{{i + 1}}</td>
+                                                    <td>{{item.description}}</td>
+                                                    <td class="center">{{item.quantity}}</td>
+                                                    <td class="center">{{item.unitPrice}}</td>
+                                                    <td class="right">{{item.total}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -225,25 +199,25 @@
                                 <div class="col-xl-4 col-6 offset-xl-4">
                                     <div class="row">
                                         <div class="col-md-8 col-8">
-                                            <p class="text-right"><b>SUBTOTAL :</b></p>
+                                            <p class="text-right"><b>SUBTOTAL : </b></p>
                                             <p class="text-right"><b>DISCOUNT :</b></p>
                                             <p class="text-right"><b>SUBTOTAL LESS DISCOUNT :</b></p>
                                             <p class="text-right"><b>TAX RATE :</b></p>
                                             <p class="text-right"><b>TOTAL TAX :</b></p>
-                                            <p class="text-right"><b>SHIPPING/HANDLING :</b></p>
+                                            <!-- <p class="text-right"><b>SHIPPING/HANDLING :</b></p> -->
                                         </div>
                                         <div class="col-md-4 col-4">
-                                            <p class="text-right"><b> 2930.00</b></p>
-                                            <p class="text-right"><b>12.9%</b></p>
-                                            <p class="text-right"><b>2800.00</b></p>
-                                            <p class="text-right"><b>15%</b></p>
-                                            <p class="text-right"><b>200</b></p>
-                                            <p class="text-right"><b>0.00</b></p>
+                                            <p class="text-right"><b>{{totAmt}}</b></p>
+                                            <p class="text-right"><b>{{discount}} %</b></p>
+                                            <p class="text-right"><b>{{discountTot}}</b></p>
+                                            <p class="text-right"><b>{{taxPercent}} %</b></p>
+                                            <p class="text-right"><b>{{taxTotal}}</b></p>
+                                            <!-- <p class="text-right"><b>0.00</b></p> -->
                                         </div>
                                     </div>
 
                                     <hr>
-                                    <h3 class="text-right">SAR 2930.00</h3>
+                                    <h3 class="text-right">SAR {{taxTotal}}</h3>
                                 </div>
                             </div>
                             <br>
@@ -254,7 +228,9 @@
                                 <div class="float-right">
                                     <a href="javascript:window.print()" class="btn btn-dark waves-effect waves-light"><i
                                             class="fa fa-print"></i></a>&nbsp;&nbsp;
-                                    <a href="#" class="btn btn-primary waves-effect waves-light">Submit</a>
+                                      <span *ngIf="userSend == false">    
+                                    <a href="#" class="btn btn-primary waves-effect waves-light" (click)="billSendSubmit(billingId)">Submit</a>
+                                </span>  
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

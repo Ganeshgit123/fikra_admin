@@ -50,6 +50,7 @@
       <th>Project Id</th>
       <th *ngIf="showAccept === true">Comment Button</th>
       <th>Admin Comment</th>
+      <th *ngIf="showAccept === true">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -77,6 +78,7 @@
           </ng-template>
       </td>
       <td>{{user.adminComment}}</td>
+      <td> <a *ngIf="showAccept === true" routerLink="/add_new_bill/special-{{ user._id}}" style="padding-right: 10px;">Create Invoice</a></td>
     </tr>
     </tbody> 
     </table>
