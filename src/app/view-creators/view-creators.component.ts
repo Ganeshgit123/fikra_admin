@@ -13,7 +13,8 @@ export class ViewCreatorsComponent implements OnInit {
   userId: any;
   getCreatorList = [];
   getCreatorFeilds = [];
-
+  pasDel:any;
+  
    constructor(private apiCall: ApiCallService,
   private formBuilder: FormBuilder,
   private route: ActivatedRoute,
@@ -36,6 +37,14 @@ export class ViewCreatorsComponent implements OnInit {
         let resu = result.body;
         if (resu.error == false) {
           this.getCreatorFeilds = resu.data;
+
+          const removeItinerary = (removeId) => {
+            const res = this.getCreatorFeilds.filter(obj => obj.fieldId !== removeId);
+            return res;
+          }
+          
+          this.pasDel = removeItinerary('password')
+
         } else {
           this.apiCall.showToast(resu.message, "Error", "errorToastr");
         }

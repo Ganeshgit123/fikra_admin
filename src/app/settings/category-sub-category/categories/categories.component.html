@@ -8,13 +8,21 @@
 <div class="modal-body">
 <form [formGroup]="addNewCategory">
 <div class="form-group">
-<label>Category Name</label>
+<label>Category Name(EN)</label>
 <input type="text" class="form-control" formControlName="categorieName">
 </div>
 <div class="form-group">
-<label>Category Description</label>
+    <label>Category Name(AR)</label>
+    <input type="text" class="form-control" formControlName="categorieNameAr">
+    </div>
+<div class="form-group">
+<label>Category Description(EN)</label>
 <textarea class="form-control" formControlName="discription"></textarea>
 </div>
+<div class="form-group">
+    <label>Category Description(AR)</label>
+    <textarea class="form-control" formControlName="discriptionAr"></textarea>
+    </div>
 <br>
 <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCategorySubmit()">Save</button></p>
 </form>
@@ -25,8 +33,10 @@
 class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <thead>
 <tr>
-<th>Category Name</th>
-<th>Category Description</th>
+<th>Category Name(EN)</th>
+<th>Category Name(AR)</th>
+<th>Category Description(EN)</th>
+<th>Category Description(AR)</th>
 <th>Status</th>
 <th *ngIf="showAccept === true">Action</th>
 </tr>
@@ -34,7 +44,9 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <tbody>
 <tr *ngFor="let item of categList">
 <td>{{item.categorieName}}</td>
+<td>{{item.categorieNameAr}}</td>
 <td>{{item.discription}}</td>
+<td>{{item.discriptionAr}}</td>
 <td *ngIf="showAccept === true">
 <label class="switch">
     <input *ngIf="item._isOn_ === true"  type="checkbox" checked (change)="onchangeCategStatus($event,item._id)">

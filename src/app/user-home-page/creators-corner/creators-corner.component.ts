@@ -17,6 +17,9 @@ export class CreatorsCornerComponent implements OnInit {
   fileUpload: any;
   createCornerData : any;
   showAccept = true;
+  isEdit = false;
+  creatorId:any
+
 
  constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -29,10 +32,12 @@ export class CreatorsCornerComponent implements OnInit {
     this.role = sessionStorage.getItem('adminRole');
 
     this.addCreatorData = this.formBuilder.group({
-      creatorImg: [''],
-      creatHead: [''],
-      creatDesc: [''],
-      creatLink: [''],
+      blogImage: [''],
+      headName: [''],
+      headName_ar: [''],
+      discription: [''],
+      discription_ar: [''],
+      blogLink: [''],
     });
 
     this.fetchCratorsData();
@@ -67,15 +72,30 @@ export class CreatorsCornerComponent implements OnInit {
   }
 
   uploadImageFile(event){
-    var reader = new FileReader();
+    const file = event.target.files && event.target.files[0];
+    var valid = this.checkFileFormat(event.target.files[0]);
+    if(!valid) {
+      var reader = new FileReader();
       reader.onload = (event: any) => {
         this.imagePreview = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]); 
-      this.fileUpload = event.target.files[0]
+      this.fileUpload = file
+      // console.log(this.filesToUpload)
+    } else {
+      // Not valild image
+    }
   }
 
 
+
+  checkFileFormat(checkFile){
+    if(checkFile.type == 'image/png' || checkFile.type == 'image/jpeg' || checkFile.type == 'image/jpg' || checkFile.type == 'image/TIF' || checkFile.type == 'image/tif' || checkFile.type == 'image/tiff'){
+      return false;
+    } else {
+      return true;
+    }
+  }
 
 
   addCreators(creatorCorner: any){
@@ -86,6 +106,154 @@ export class CreatorsCornerComponent implements OnInit {
 
   onSubmit(){
 
+    if(this.isEdit){
+      this.creatorEditService(this.addCreatorData.value)
+      return;
+    }
+
+    var postData = new FormData();
+    postData.append('headName', this.addCreatorData.get('headName').value);
+    postData.append('headName_ar', this.addCreatorData.get('headName_ar').value);
+    postData.append('discription', this.addCreatorData.get('discription').value);
+    postData.append('discription_ar', this.addCreatorData.get('discription_ar').value);
+    postData.append('blogLink', this.addCreatorData.get('blogLink').value);
+    postData.append('blogImage', this.fileUpload);
+    postData.append('createdBy', this.updatedby);
+    postData.append('userType', 'admin');
+    postData.append('role', this.role);
+
+    var params = {
+      url: 'admin/postCreatorContent',
+      data: postData
+    }
+    // console.log("img",params)
+
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        console.log("res",response)
+
+        if (response.body.error == false) {
+     
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.modalService.dismissAll();
+          this.imagePreview = null;
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+
+    }
+
+    viewCreatorContent(data,creatorCorner: any){
+      this.modalService.open(creatorCorner, { centered: true });
+      this.isEdit = true;
+      this.imagePreview = data['blogImage'];
+      this.creatorId = data['_id'];
+  
+      this.addCreatorData   = this.formBuilder.group({
+        blogImage: [''],
+        headName: [data['headName']],
+        headName_ar: [data['headName_ar']],
+        discription: [data['discription']],
+        discription_ar: [data['discription_ar']],
+        blogLink: [data['blogLink']],
+      })
+  
+    }
+
+    creatorEditService(data){
+      if(this.fileUpload){
+      var data:any = new FormData();
+        data.append('headName', this.addCreatorData.get('headName').value);
+        data.append('headName_ar', this.addCreatorData.get('headName_ar').value);
+        data.append('discription', this.addCreatorData.get('discription').value);
+        data.append('discription_ar', this.addCreatorData.get('discription_ar').value);
+        data.append('blogLink', this.addCreatorData.get('blogLink').value);
+        data.append('blogImage', this.fileUpload);
+        data.append('createdBy', this.updatedby);
+        data.append('userType', 'admin');
+        data.append('role', this.role);
+        data.append('blogId', this.creatorId);
+
+    }else{
+
+    const data = this.addCreatorData.value;
+    data['blogImage'] = this.imagePreview;
+    data['createdBy'] = this.updatedby;
+    data['userType'] = "admin";
+    data['role'] = this.role;
+    data['blogId'] = this.creatorId;
   }
+
+  var params = {
+    url: 'admin/updateCreatorContent',
+    data: data
+  }
+
+   // console.log("ppp",params)
+   this.apiCall.commonPutService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+         this.isEdit = false;
+         this.modalService.dismissAll();
+         this.imagePreview = null;
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
+    }
+
+    onchangeBlogStatus(values:any,id){
+      if(values.currentTarget.checked === true){
+        var visible = true 
+       } else {
+         var visible = false
+       }
+       const object = {}
+  
+       object['_isVisible_'] = visible;
+       object['_isDeleted_'] = false;
+       object['blogId'] = id;
+       object['createdBy'] = this.updatedby;
+      object['userType'] = "admin";
+      object['role'] = this.role;
+  
+       var params = {
+        url: 'admin/updateCreatorContent',
+        data: object
+      }
+      this.apiCall.commonPutService(params).subscribe(
+        (response: any) => {
+          if (response.body.error == false) {
+            // Success
+            this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+            this.ngOnInit();
+          } else {
+            // Query Error
+            this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+          }
+        },
+        (error) => {
+          this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+          console.log('Error', error)
+        }
+      )
+    }
 
 }

@@ -18,7 +18,7 @@
     <option [ngValue]="100">100</option>
     </select> entries</label></div>
     </div> -->
-    <div class="col-sm-12 col-md-6">
+    <!-- <div class="col-sm-12 col-md-6">
         <div class="form-group row">
             <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
             <div class="col-md-4">
@@ -29,7 +29,7 @@
               <input class="form-control" type="date" id="example-date-input1">
             </div>
           </div>
-    </div>
+    </div> -->
     <!-- Search -->
     <div class="col-sm-12 col-md-4">
     <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
@@ -58,7 +58,7 @@
       <td>{{user.serviceType}}</td>
       <td>{{user.comments}}</td>
       <td><a routerLink="/view-creators/{{user.userId._id}}">{{user.userId.userName}}</a></td>
-      <td><a routerLink="/view-projects/{{user.projectId._id}}">{{user.projectId._id}}</a></td>
+      <td><a routerLink="/view-projects/{{user.projectId._id}}">{{user.projectId.title}}</a></td>
       <td *ngIf="showAccept === true">
         <button class="btn btn-primary w-md waves-effect waves-light" (click)="adminComment(centerDataModal)">Comment</button>
         <ng-template #centerDataModal let-modal>

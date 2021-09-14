@@ -27,7 +27,9 @@ export class CategoriesComponent implements OnInit {
 
     this.addNewCategory = this.formBuilder.group({
       categorieName: [''],
+      categorieNameAr: [''],
       discription: [''],
+      discriptionAr: [''],
     });
 
     this.fetchCategoryList();
@@ -107,7 +109,9 @@ export class CategoriesComponent implements OnInit {
         this.cateId = data['_id'];
         this.addNewCategory   = this.formBuilder.group({
           categorieName: [data['categorieName']],
+          categorieNameAr: [data['categorieNameAr']],
           discription: [data['discription']],
+          discriptionAr: [data['discriptionAr']],
         })
       }
     

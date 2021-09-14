@@ -50,7 +50,7 @@
     <th>Launch Date</th>
     <th>User Name</th>
     <th>Goal Amount</th>
-    <th>Duration</th>
+    <th>Remaining Duration</th>
     <th *ngIf="showAccept === true">Action</th>
     </tr>
     </thead>
@@ -61,7 +61,7 @@
     <td>{{proj.basicInfoId.launchDate | date}}</td>
     <td><a routerLink="/view-creators/{{proj.userId._id}}">{{proj.userId.userName}}</a></td>
     <td>{{proj.basicInfoId.goalAmount}}</td>
-    <td>{{proj.basicInfoId.campaignDuation | date}}</td>
+    <td>{{proj.finalDate}} days</td>
     <td>
     <a *ngIf="showAccept === true" class="text-danger text-info" ngbTooltip="Delete" ><i
         class="mdi mdi-trash-can font-size-18"></i></a>

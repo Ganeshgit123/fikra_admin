@@ -43,9 +43,6 @@ export class ClientLogosComponent implements OnInit {
       headName_ar: [''],
       discription: [''],
       discription_ar: [''],
-      buttenName: [''],
-      buttenName_ar: [''],
-      buttonURL: [''],
     });
 
     this.fetchclientData();
@@ -74,9 +71,6 @@ export class ClientLogosComponent implements OnInit {
           headName_ar: [resu.data.headName_ar,[]],
           discription: [resu.data.discription,[]],
           discription_ar: [resu.data.discription_ar,[]],
-          buttenName: [resu.data.buttenName,[]],
-          buttenName_ar: [resu.data.buttenName_ar,[]],
-          buttonURL: [resu.data.buttonURL,[]],
         });
 
         this.clientData = resu.data.clientLogo;
@@ -91,13 +85,31 @@ export class ClientLogosComponent implements OnInit {
   }
 
   uploadImageFile(event){
-    var reader = new FileReader();
+    const file = event.target.files && event.target.files[0];
+    var valid = this.checkFileFormat(event.target.files[0]);
+    if(!valid) {
+      var reader = new FileReader();
       reader.onload = (event: any) => {
         this.imagePreview = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]); 
-      this.fileUpload = event.target.files[0]
+      this.fileUpload = file
+      // console.log(this.filesToUpload)
+    } else {
+      // Not valild image
+    }
   }
+
+
+
+  checkFileFormat(checkFile){
+    if(checkFile.type == 'image/png' || checkFile.type == 'image/jpeg' || checkFile.type == 'image/jpg' || checkFile.type == 'image/TIF' || checkFile.type == 'image/tif' || checkFile.type == 'image/tiff'){
+      return false;
+    } else {
+      return true;
+    }
+  }
+
 
 
   addCreators(creatorCorner: any){
@@ -165,7 +177,7 @@ export class ClientLogosComponent implements OnInit {
   }
 
   logoEditService(data){
-
+    if(this.fileUpload){
     var data:any = new FormData();
     data.append('logoAlt', this.addClientLogo.get('logoAlt').value);
     data.append('logoName', this.addClientLogo.get('logoName').value);
@@ -175,7 +187,15 @@ export class ClientLogosComponent implements OnInit {
     data.append('role', this.role);
     data.append('_isLogoOn_', true);
     data.append('clientLogoId', this.logoId);
-
+    }else{
+      const data = this.addClientLogo.value;
+      data['clientLogo'] = this.imagePreview;
+      data['_isLogoOn_'] = true;
+      data['createdBy'] = this.updatedby;
+      data['userType'] = "admin";
+      data['role'] = this.role;
+      data['clientLogoId'] = this.logoId;
+    }
 
  var params = {
    url: 'admin/updateClientLogo',

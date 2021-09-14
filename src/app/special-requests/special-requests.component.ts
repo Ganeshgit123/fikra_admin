@@ -55,7 +55,7 @@ export class SpecialRequestsComponent implements OnInit {
       if(resu.error == false)
       {
         this.requestsList = resu.data;
-        // console.log("ef",this.userName)
+        console.log("ef",this.requestsList)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

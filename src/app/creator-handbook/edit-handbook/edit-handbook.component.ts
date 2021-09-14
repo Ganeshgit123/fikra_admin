@@ -136,7 +136,7 @@ export class EditHandbookComponent implements OnInit {
       )
       }
 
-    console.log("lol",this.imgUrl)
+    // console.log("lol",this.imgUrl)
     const data = this.addHandbookData.value;
     data['handbookImg'] = this.imagePreview;
     data['createdBy'] = this.updatedby;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-view-investors',
@@ -14,6 +15,7 @@ export class ViewInvestorsComponent implements OnInit {
   getLoginDetails = [];
   getInvestorList = [];
   getInvestorFeilds = [];
+  pasDel:any;
 
  constructor(private apiCall: ApiCallService,
   private formBuilder: FormBuilder,
@@ -43,6 +45,7 @@ export class ViewInvestorsComponent implements OnInit {
       if(resu.error == false)
       {
         this.getInvestorList = resu.data;
+
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -63,6 +66,18 @@ export class ViewInvestorsComponent implements OnInit {
         let resu = result.body;
         if (resu.error == false) {
           this.getInvestorFeilds = resu.data;
+
+          const removeItinerary = (removeId) => {
+            const res = this.getInvestorFeilds.filter(obj => obj.fieldId !== removeId);
+            return res;
+          }
+          
+          this.pasDel = removeItinerary('password')
+           
+          this.pasDel.pop();
+
+          // console.log("eff",this.pasDel)
+    
         } else {
           this.apiCall.showToast(resu.message, "Error", "errorToastr");
         }
@@ -84,6 +99,7 @@ export class ViewInvestorsComponent implements OnInit {
     if(resu.error == false)
     {
       this.getLoginDetails = resu.data; 
+
     }else{
       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
     }
