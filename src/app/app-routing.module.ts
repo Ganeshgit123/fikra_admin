@@ -39,6 +39,7 @@ import { AddHandbookComponent } from './creator-handbook/add-handbook/add-handbo
 import { EditHandbookComponent } from './creator-handbook/edit-handbook/edit-handbook.component';
 import { SpecialServicesComponent } from './settings/special-services/special-services.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
+import { TemplateComponent } from './template/template.component';
 import { SpecialRequestsComponent } from './special-requests/special-requests.component';
 import { CareerComponent } from './career/career.component';
 import { ProjectReportsComponent } from './projects/project-reports/project-reports.component';
@@ -102,6 +103,7 @@ const routes: Routes = [
       {path: 'commission_charges',component: CommissionChargesComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_setting_true'}},
 
       {path: 'subscribers',component: SubscribersComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_subscribers_true'}},
+      {path: 'template',component: TemplateComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_subscribers_true'}},
       {path: 'special_requests',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
       {path: 'special_requests/:id',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
 

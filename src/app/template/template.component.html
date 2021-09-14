@@ -1,0 +1,130 @@
+<div class="container-fluid">
+    <app-pagetitle title="Templates" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+
+    <div class="row" id="needTosend">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]='contentForm'>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Template Name</label>
+                                    <input type="text" class="form-control" formControlName='templateName'>
+                                </div>
+                            </div>
+                            <div class="col-md-6" *ngIf='container.length !== 0'>
+                                <div class="form-group">
+                                    <p class="text-right">
+                                        <button class="btn btn-primary w-md waves-effect waves-light ban_con_btn"
+                                            placement="top" ngbTooltip="Preview and save" (click)='previewOpen(preview)'>
+                                            Preview Template
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <div *ngIf='container.length !== 0'>
+                        <div *ngFor="let list of container; index as i" class='col-md-6 card-body custom-card'>
+                            <div class="col-md-12" style="display: flex; padding: 0px;">
+                                <div class="col-md-11" style="padding: 0px;">
+                                    <span class='spanTo' style="font-size: 20px; padding: 0px;">{{list.textHead}}</span>
+                                </div>
+                                <div class="col-md-1" style="padding: 0px; text-align: right;" (click)='onRemove(i)'>
+                                    <span class="ri-close-line"
+                                        style="font-size: 20px; cursor: pointer; padding: 0px;"></span>
+                                </div>
+                            </div>
+                            <p>{{list.textContent}}</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Template Content</label>
+                        </div>
+                    </div>
+                    <br>
+                    <form [formGroup]="templateContent">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Header</label>
+                                    <input type="text" class="form-control" formControlName='textHead'>
+                                </div>
+                                <div class="form-group">
+                                    <label>Content</label>
+                                    <input type="text" class="form-control" formControlName='textContent'>
+                                </div>
+                                <div class="form-group">
+                                    <label>Project_Three</label>
+                                    <ng-select formControlName="project_Three">
+                                        <ng-option *ngFor="let subscriber of projectDetails" [value]="subscriber._id">
+                                            {{subscriber.title}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Project_One</label>
+                                    <ng-select formControlName="project_One">
+                                        <ng-option *ngFor="let subscriber of projectDetails" [value]="subscriber._id">
+                                            {{subscriber.title}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Project_Two</label>
+                                    <ng-select formControlName="project_Two">
+                                        <ng-option *ngFor="let subscriber of projectDetails" [value]="subscriber._id">
+                                            {{subscriber.title}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Learn More URL</label>
+                                    <input type="text" class="form-control" formControlName='learnMore_URL'>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-md-12 text-center aligin_Button" (click)='onSubmitContent()' placement="top"
+                            ngbTooltip="Add template content">
+                            <span class="ri-add-circle-fill" style="font-size: 45px; cursor: pointer;">
+                            </span>
+                        </div>
+                    </form>
+                    <!--Model-->
+                    <ng-template #preview let-modal>
+                        <div class="modal-header">
+                            <button type="button" class="close" (click)="modal.dismiss('Cross click')"
+                                aria-hidden="true"><span class="ri-close-line"></span></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="spbox">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img src="" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <p class="spboxpara">Fikra</p>
+                                            <p class="spboxpara">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                                Ipsum has been the industry’s standard dummyLorem Ipsum is simply dummy text of
+                                                the printing and typesetting industry. Lorem Ipsum has been the industry’s standard</p>
+                                            <h4 class="spboxauthor">dfgdfg</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </ng-template>
+                    <!--Model End-->
+                </div>
+            </div>
+        </div>
+
+    </div>

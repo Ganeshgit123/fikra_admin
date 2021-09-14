@@ -210,6 +210,12 @@ export const MENU: MenuItem[] = [
         link: '/special_requests'
     },
     {
+        id: 38,
+        label: 'MENUITEMS.TEMPLATES.TEXT',
+        icon: ' ri-layout-3-line',
+        link: '/template'
+    },
+    {
         id: 28,
         label: 'MENUITEMS.SUBSCRIBERS.TEXT',
         icon: ' ri-user-shared-fill',

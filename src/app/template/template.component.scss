@@ -1,0 +1,56 @@
+.aligin_Button{
+    margin-left: 47% !important; 
+    margin-right: 50% !important; 
+    width: 7% !important;
+}
+
+.custom-card{
+    border-radius: 7px;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 0px 20px 0 rgb(0 0 0 / 10%);
+    margin-bottom: 25px;
+    margin-top: 15px;
+}
+
+.spbox {
+    background: transparent linear-gradient(255deg, #FF5959 0%, #FE953A 100%) 0% 0% no-repeat padding-box;
+    padding: 80px 0;
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .spbox {
+        padding: 40px 0;
+    }
+}
+.spboxdoublecodes {
+    font-size: 300px;
+    font-weight: 500;
+    color: #F9A976;
+}
+.spboxpara {
+        text-align: left;
+        font: normal normal normal 15px Poppins;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        opacity: 1;
+        margin-top: 10%;
+        padding: 5px 10px 0px 10px
+    }
+.spboxdoublecodes {
+    display: none;
+}
+.spboxauthor {
+    font: normal normal bold 25px Poppins;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    margin-top: -3%;
+    margin-left: 3%;
+}
+.spboxpara {
+    font-size: 14px;
+    color: #FFFFFF;
+}
+.spboxauthor {
+    font-size: 30px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
