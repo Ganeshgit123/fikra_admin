@@ -1,12 +1,12 @@
 <div class="container-fluid">
-    <app-pagetitle title="Subscribers" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
-    
-    <div class="row">
+  <app-pagetitle title="Subscribers" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+
+  <div class="row" id="needTosend">
     <div class="col-12">
-    <div class="card">
-    <div class="card-body">
-    <div class="row mb-md-2">
-    <!-- <div class="col-sm-12 col-md-2">
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-md-2">
+            <!-- <div class="col-sm-12 col-md-2">
     <div class="dataTables_length" id="tickets-table_length"><label
     class="d-inline-flex align-items-center">Show
     <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
@@ -18,57 +18,112 @@
     <option [ngValue]="100">100</option>
     </select> entries</label></div>
     </div> -->
-    <!-- <div class="col-sm-12 col-md-6">
-        <div class="form-group row">
-            <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
-            <div class="col-md-4">
-              <input class="form-control" type="date"  id="example-date-input">
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group row">
+                <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
+                <div class="col-md-4">
+                  <input class="form-control" type="date" id="example-date-input" />
+                </div>
+                <label for="example-date-input1" class="col-md-2 col-form-label text-center">End Date</label>
+                <div class="col-md-4">
+                  <input class="form-control" type="date" id="example-date-input1" />
+                </div>
+              </div>
             </div>
-            <label for="example-date-input1" class="col-md-2 col-form-label text-center">End Date</label>
-            <div class="col-md-4">
-              <input class="form-control" type="date" id="example-date-input1">
+            <!-- Search -->
+            <div class="col-sm-12 col-md-4">
+              <div id="tickets-table_filter" class="dataTables_filter text-md-right">
+                <label class="d-inline-flex align-items-center">Search:
+                  <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                    aria-controls="tickets-table" [(ngModel)]="searchTerm" />
+                </label>
+              </div>
+            </div>
+            <!-- End search -->
+            <!--Button-->
+            <div *ngIf="subscriberId.length !== 0">
+              <button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                (click)="nesletterOpen(newsletter)">
+                Send Newsletter
+              </button>
+            </div>
+            <!--Button End-->
+            <!--Model-->
+            <ng-template #newsletter let-modal>
+              <div class="modal-header">
+                <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">
+                  <span class="ri-close-line"></span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="newsletterData">
+                  <div class="form-group">
+                    <label>Email Id</label>
+                    <ng-select [multiple]="true" [(ngModel)]="subscriberId" [ngModelOptions]="{standalone: true}">
+                      <ng-option *ngFor="let subscriber of subscribersList" [value]="subscriber.email">
+                        {{subscriber.email}}
+                      </ng-option>
+                    </ng-select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Template</label>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Preview</label>
+                    <ckeditor [editor]="Editor" [data]="htmlElement"></ckeditor>
+                  </div>
+
+                  <br>
+                  <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                      (click)="onSubmit()">Send mail</button></p>
+                </form>
+              </div>
+            </ng-template>
+            <!--Model End-->
+            <!-- Table -->
+            <div class="table-responsive">
+              <table id="basic-datatable" class="
+                  table table-bordered
+                  dt-responsive
+                  text-nowrap
+                  datatables
+                  no-footer
+                  dtr-inline
+                ">
+                <thead>
+                  <tr>
+                    <th>Select</th>
+                    <th>Email</th>
+                    <th>ID</th>
+                    <th>Verified Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of subscribersList | filter: searchTerm">
+                    <td>
+                      <input type="checkbox" [checked]='subscriberId.indexOf(user.email) !== -1'
+                        (change)="onInputChange(user.email)" />
+                    </td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user._id }}</td>
+                    <td>{{ user._is_Verified_ }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- Pagination -->
+              <div class="col-sm-12 col-md-5">
+                <div class="text-md-right float-md-right pagination-rounded">
+                  <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
+    </ngb-pagination> -->
+                </div>
+              </div>
+              <!-- End Pagination -->
             </div>
           </div>
-    </div> -->
-    <!-- Search -->
-    <div class="col-sm-12 col-md-4">
-    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
-    class="d-inline-flex align-items-center">Search:
-    <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
-    aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+        </div>
+      </div>
     </div>
-    <!-- End search -->
-    <!-- Table -->
-    <div class="table-responsive">
-    <table id="basic-datatable"
-    class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
-    <thead>
-    <tr>
-      <th>Email</th>
-      <th>ID</th>
-      <th>Verified Status</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of subscribersList  | filter:searchTerm">
-      <td>{{user.email}}</td>
-      <td>{{user._id}}</td>
-      <td>{{user._is_Verified_}}</td>
-    </tr>
-    </tbody> 
-    </table>
-    <!-- Pagination -->
-    <div class="col-sm-12 col-md-5">
-    <div class="text-md-right float-md-right pagination-rounded">
-    <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
-    </ngb-pagination> -->
-    </div>
-    </div>
-    <!-- End Pagination -->
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+  </div>
+</div>
