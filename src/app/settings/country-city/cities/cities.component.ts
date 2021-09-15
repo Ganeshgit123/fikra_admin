@@ -30,6 +30,7 @@ export class CitiesComponent implements OnInit {
     this.addNewCity = this.formBuilder.group({
       countryId: [''],
       cityName: [''],
+      cityNameAr: [''],
     });
     this.fetchCountryList();
     this.callRolePermission();
@@ -112,6 +113,7 @@ export class CitiesComponent implements OnInit {
     this.addNewCity   = this.formBuilder.group({
       countryId: [this.contrid],
       cityName: [data['cityName']],
+      cityNameAr: [data['cityNameAr']],
     })
   }
 
@@ -161,6 +163,7 @@ export class CitiesComponent implements OnInit {
      object['cityId'] = data['_id']
      object['countryId'] = id
      object['cityName'] = data['cityName']
+     object['cityNameAr'] = data['cityNameAr']
      object['createdby'] = this.updatedby;
      object['userType'] = "admin";
      object['role'] = this.role;
@@ -199,6 +202,7 @@ export class CitiesComponent implements OnInit {
     object['cityId'] = data['_id']
     object['countryId'] = id
     object['cityName'] = data['cityName']
+    object['cityNameAr'] = data['cityNameAr']
     object['createdby'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;

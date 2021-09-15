@@ -17,7 +17,8 @@ export class SubCategoriesComponent implements OnInit {
   subCateg=[];
   subCateId:any;
   showAccept = true;
-
+  searchTerm;
+  
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     private modalService: NgbModal
@@ -32,7 +33,9 @@ export class SubCategoriesComponent implements OnInit {
     this.addNewSubCategory = this.formBuilder.group({
       categorieId: [''],
       subCategorieName: [''],
+      subCategorieNameAr: [''],
       discription: [''],
+      discriptionAr: [''],
     });
 
     this.fetchcategList();
@@ -77,7 +80,7 @@ export class SubCategoriesComponent implements OnInit {
       if(resu.error == false)
       {
         this.subCateg = resu.list;
-        // console.log("res",this.subCateg)
+        console.log("res",this.subCateg)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -99,7 +102,9 @@ export class SubCategoriesComponent implements OnInit {
     this.addNewSubCategory   = this.formBuilder.group({
       categorieId: [data['categorieId']],
       subCategorieName: [data['subCategorieName']],
+      subCategorieNameAr: [data['subCategorieNameAr']],
       discription: [data['discription']],
+      discriptionAr: [data['discriptionAr']],
     })
   }
 

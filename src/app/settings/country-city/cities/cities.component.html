@@ -10,13 +10,17 @@
 <div class="form-group">
 <label>Country Name</label>
 <select class="form-control" formControlName="countryId">
-<option *ngFor="let item of countryList" value="{{item._id}}">{{item.countryName}}</option>
+<option *ngFor="let item of countryList" value="{{item._id}}">{{item.countryName}} / {{item.countryNameAr}}</option>
 </select>
 </div>
 <div class="form-group">
-<label>City Name</label>
+<label>City Name(EN)</label>
 <input type="text" class="form-control" formControlName="cityName">
 </div>
+<div class="form-group">
+    <label>City Name(AR)</label>
+    <input type="text" class="form-control" formControlName="cityNameAr">
+    </div>
 <br>
 <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onCitySubmit()">Save</button></p>
 </form>
@@ -28,15 +32,17 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <thead>
 <tr>
 <th>Country Name</th>
-<th>City Name</th>
+<th>City Name(EN)</th>
+<th>City Name(AR)</th>
 <th>Status</th>
 <th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
 <tbody  *ngFor="let item of countryList;">
 <tr *ngFor="let cites of item.city;">
-<td>{{item.countryName}}</td>
+<td>{{item.countryName}} / {{item.countryNameAr}}</td>
 <td>{{cites.cityName}}</td>
+<td>{{cites.cityNameAr}}</td>
 <td *ngIf="showAccept === true">
 <label class="switch">
     <input *ngIf="cites._isOn_ === true"  type="checkbox" checked (change)="onchangeCityStatus($event,item._id,cites)">

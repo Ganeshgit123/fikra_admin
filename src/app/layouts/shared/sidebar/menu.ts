@@ -228,6 +228,12 @@ export const MENU: MenuItem[] = [
         link: '/bill_list'
     },
     {
+        id: 39,
+        label: 'MENUITEMS.SMSCAMPAIGN.TEXT',
+        icon: ' ri-message-2-line',
+        link: '/sms_campaign'
+    },
+    {
         id: 31,
         label: 'MENUITEMS.NOTIFICATIONS.TEXT',
         icon: 'ri-notification-4-line',

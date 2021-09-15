@@ -8,7 +8,7 @@
     <div class="modal-body">
     <form [formGroup]="addNewCountry">
     <div class="form-group">
-    <label>Country Name</label>
+    <label>Country Name (EN)</label>
     <select name="countryName" formControlName="countryName"  class="form-control" >
         <option>select country</option>
         <option value="Saudi Arabia">Saudi Arabia</option>
@@ -268,6 +268,10 @@
     </select>
     </div>
     <div class="form-group">
+        <label>Country Name (AR)</label>
+        <input type="text" class="form-control" formControlName="countryNameAr">
+    </div>
+    <div class="form-group">
         <label>Country code</label>
         <select name="countryCode" formControlName='countryCode' class="form-control" >
             <option data-countryCode="SA" value="966">Saudi Arabia (+966)</option>
@@ -501,7 +505,8 @@
     class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
     <thead>
     <tr>
-    <th>Country Name</th>
+    <th>Country Name(EN)</th>
+    <th>Country Name(AR)</th>
     <th>Country Code</th>
     <th>Status</th>
     <th *ngIf="showAccept === true">Action</th>
@@ -510,6 +515,7 @@
     <tbody>
     <tr *ngFor="let item of countryList">
     <td>{{item.countryName}}</td>
+    <td>{{item.countryNameAr}}</td>
     <td>{{item.countryCode}}</td>
     <td *ngIf="showAccept === true">
         <label class="switch">

@@ -76,23 +76,6 @@ export class InvestorsComponent implements OnInit {
     {
       this.getfieldList = resu.fields;
       this.getuserList = resu.data;
-      // this.getuserList.forEach(element => {
-      //   element['isEdit'] = false;
-      // });
-      // const field_name = this.getfieldList.map((it)=>{
-      //   return it.fieldId
-      // })
-
-      // this.abc = this.getuserList.map((item)=>{
-      //   const a = {}
-      //   field_name.forEach((f)=>{
-      //     a[f] = item[f]
-
-      //   })
-      //   return item = a
-      // })
-
-      // console.log("abc",this.abc)
 
     }else{
       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

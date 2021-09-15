@@ -183,6 +183,9 @@
     "COMMISSION_CHARGES": {
       "TEXT": "Commission Charges"
     },
+    "SMSCAMPAIGN": {
+      "TEXT": "SMS Campaign"
+    },
     
     "LAYOUTS": {
       "TEXT": "Layouts",

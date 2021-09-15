@@ -52,6 +52,7 @@ import { InvoicePreviewComponent } from './bill-generation/invoice-preview/invoi
 import { CommissionChargesComponent } from './settings/commission-charges/commission-charges.component';
 import { AddNewBillComponent } from './bill-generation/add-new-bill/add-new-bill.component';
 import { EditNewBillComponent } from './bill-generation/edit-new-bill/edit-new-bill.component';
+import { SmsCampaignComponent } from './sms-campaign/sms-campaign.component';
 
 const routes: Routes = [
   {
@@ -103,7 +104,6 @@ const routes: Routes = [
       {path: 'commission_charges',component: CommissionChargesComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_setting_true'}},
 
       {path: 'subscribers',component: SubscribersComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_subscribers_true'}},
-      {path: 'template',component: TemplateComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_subscribers_true'}},
       {path: 'special_requests',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
       {path: 'special_requests/:id',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
 
@@ -116,6 +116,10 @@ const routes: Routes = [
       {path: 'invoice_bill/:id',component: InvoicePreviewComponent, canActivate: [AuthGuard],},
       {path: 'add_new_bill/:id/:user_id',component: AddNewBillComponent, canActivate: [AuthGuard],},
       {path: 'edit_new_bill/:id',component: EditNewBillComponent,canActivate: [AuthGuard],},
+
+      {path: 'template',component: TemplateComponent,canActivate: [AuthGuard],},
+      {path: 'sms_campaign',component: SmsCampaignComponent,canActivate: [AuthGuard],},
+
     ],
     canActivate: [AuthGuard]
     }

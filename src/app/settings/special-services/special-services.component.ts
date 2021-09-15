@@ -28,7 +28,9 @@ export class SpecialServicesComponent implements OnInit {
 
     this.addNewService = this.formBuilder.group({
       specialReqestName: [''],
+      specialReqestNameAr: [''],
       requestDescription: [''],
+      requestDescriptionAr: [''],
     });
 
     this.fetchSeriveList();
@@ -108,7 +110,9 @@ export class SpecialServicesComponent implements OnInit {
     this.serviceId = data['_id'];
     this.addNewService   = this.formBuilder.group({
       specialReqestName: [data['specialReqestName']],
+      specialReqestNameAr: [data['specialReqestNameAr']],
       requestDescription: [data['requestDescription']],
+      requestDescriptionAr: [data['requestDescriptionAr']],
     })
   }
 

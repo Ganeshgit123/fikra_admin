@@ -23,9 +23,11 @@ export class CountriesComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-
+    this.updatedby = sessionStorage.getItem('adminId');
+    this.role = sessionStorage.getItem('adminRole');
     this.addNewCountry = this.formBuilder.group({
       countryName: [''],
+      countryNameAr: [''],
       countryCode: [''],
     });
 
@@ -107,12 +109,13 @@ export class CountriesComponent implements OnInit {
     this.countryId = data['_id'];
     this.addNewCountry   = this.formBuilder.group({
       countryName: [data['countryName']],
+      countryNameAr: [data['countryNameAr']],
       countryCode: [data['countryCode']],
     })
   }
 
   countryEditService(data){
-    data['countryId'] = this.countryId
+    data['countryId'] = this.countryId;
     data['createdby'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;
@@ -157,7 +160,7 @@ export class CountriesComponent implements OnInit {
      object['countryId'] = id;
      object['_isOn_'] = visible;
      object['_isDeleted_'] = false;
-     object['updatedby'] = this.updatedby;
+     object['createdby'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;
 
@@ -192,7 +195,7 @@ export class CountriesComponent implements OnInit {
     object['countryId'] = id;
     object['_isOn_'] = val;
     object['_isDeleted_'] = true;
-    object['updatedby'] = this.updatedby;
+    object['createdby'] = this.updatedby;
    object['userType'] = "admin";
    object['role'] = this.role;
 

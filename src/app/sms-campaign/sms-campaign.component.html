@@ -1,0 +1,30 @@
+<div class="container-fluid">    
+    <div class="card">
+    <div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="addUsers">
+                <div class="form-group">
+                <label>Add Investors</label>
+                <ng-select [items]="getuserList"
+                bindLabel="mobileNumber"
+                bindValue="mobileNumber"
+                placeholder="Select Users"
+                appendTo="body"
+                multiple="true"
+                formControlName="mobileNumbers"
+                >
+                </ng-select> 
+                </div>
+                <div class="form-group">
+                    <label>SMS Content</label>
+                    <textarea class="form-control" formControlName="message"></textarea>
+                </div>
+                <br>
+                <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addUsersSubmit()">Send SMS</button></p>
+                </form>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>

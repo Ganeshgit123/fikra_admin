@@ -8,13 +8,21 @@
     <div class="modal-body">
     <form [formGroup]="addNewService">
     <div class="form-group">
-    <label>Service Name</label>
+    <label>Service Name(EN)</label>
     <input type="text" class="form-control" formControlName="specialReqestName">
     </div>
     <div class="form-group">
-    <label>Service Description</label>
+        <label>Service Name(AR)</label>
+        <input type="text" class="form-control" formControlName="specialReqestNameAr">
+        </div>
+    <div class="form-group">
+    <label>Service Description(EN)</label>
     <textarea class="form-control" formControlName="requestDescription"></textarea>
     </div>
+    <div class="form-group">
+        <label>Service Description(AR)</label>
+        <textarea class="form-control" formControlName="requestDescriptionAr"></textarea>
+        </div>
     <br>
     <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addServiceSubmit()">Save</button></p>
     </form>
@@ -22,11 +30,13 @@
     </ng-template>
     <div class="table-responsive">
     <table id="basic-datatable"
-    class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
+    class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
     <thead>
     <tr>
-    <th>Service Name</th>
-    <th>Service Description</th>
+    <th>Service Name(EN)</th>
+    <th>Service Name(AR)</th>
+    <th>Service Description(EN)</th>
+    <th>Service Description(AR)</th>
     <th>Status</th>
     <th *ngIf="showAccept === true">Action</th>
     </tr>
@@ -34,7 +44,9 @@
     <tbody>
     <tr *ngFor="let item of serviceList">
     <td>{{item.specialReqestName}}</td>
+    <td>{{item.specialReqestNameAr}}</td>
     <td>{{item.requestDescription}}</td>
+    <td>{{item.requestDescriptionAr}}</td>
     <td *ngIf="showAccept === true">
     <label class="switch">
         <input *ngIf="item._is_On_ === true"  type="checkbox" checked (change)="onchangeServiceStatus($event,item._id)">
