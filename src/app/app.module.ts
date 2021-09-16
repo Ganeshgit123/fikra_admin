@@ -102,6 +102,18 @@ import { AddNewBillComponent } from './bill-generation/add-new-bill/add-new-bill
 import { EditNewBillComponent } from './bill-generation/edit-new-bill/edit-new-bill.component';
 import { TemplateComponent } from './template/template.component';
 import { SmsCampaignComponent } from './sms-campaign/sms-campaign.component';
+import { NewsletterViewComponent } from './template/newsletter-view/newsletter-view.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { BasicsComponent } from './project-conent/basics/basics.component';
+import { StoryComponent } from './project-conent/story/story.component';
+import { PaymentComponent } from './project-conent/payment/payment.component';
+import { PromotionComponent } from './project-conent/promotion/promotion.component';
+import { ProjectConentComponent } from './project-conent/project-conent.component';
+import { RewardContentComponent } from './project-conent/reward-content/reward-content.component';
+import { FirstTabContentComponent } from './create-project/first-tab-content/first-tab-content.component';
+import { SecondTabContentComponent } from './create-project/second-tab-content/second-tab-content.component';
+import { ThirdTabContentComponent } from './create-project/third-tab-content/third-tab-content.component';
+import { FourthTabContentComponent } from './create-project/fourth-tab-content/fourth-tab-content.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -125,7 +137,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, 
     ContentSectionComponent, BasicInfoComponent, RewardsComponent, InvestorFormComponent, 
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, EditNewBillComponent, TemplateComponent, SmsCampaignComponent,
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, EditNewBillComponent, TemplateComponent, SmsCampaignComponent, NewsletterViewComponent, CreateProjectComponent, BasicsComponent, StoryComponent, PaymentComponent, PromotionComponent, ProjectConentComponent, RewardContentComponent, FirstTabContentComponent, SecondTabContentComponent, ThirdTabContentComponent, FourthTabContentComponent,
   ],
   imports: [
     BrowserModule,

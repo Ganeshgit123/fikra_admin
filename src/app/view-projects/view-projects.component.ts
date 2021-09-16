@@ -22,7 +22,6 @@ export class ViewProjectsComponent implements OnInit {
   addFeatureForm:FormGroup;
   homeStatus:any;
   projectList: any=[];
-  storyArray =[];
   showAccept = true;
 
   constructor(private apiCall: ApiCallService,
@@ -324,7 +323,7 @@ export class ViewProjectsComponent implements OnInit {
       {
          this.projectList = resu.data.storyTableId;
 
-          this.storyArray.push(this.projectList)
+          // this.storyArray.push(this.projectList)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

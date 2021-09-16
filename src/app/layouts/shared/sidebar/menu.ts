@@ -79,6 +79,18 @@ export const MENU: MenuItem[] = [
                 parentId: 6
             },
             {
+                id: 10,
+                label: 'MENUITEMS.CREATEPROJECT.TEXT',
+                link: '/create_project',
+                parentId: 6
+            },
+            {
+                id: 10,
+                label: 'MENUITEMS.PROJECTCONTENT.TEXT',
+                link: '/project_content',
+                parentId: 6
+            },
+            {
                 id: 24,
                 label: 'MENUITEMS.CREATOR_HANDBOOK.TEXT',
                 link: '/creator_handbook',

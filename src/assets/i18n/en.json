@@ -186,6 +186,12 @@
     "SMSCAMPAIGN": {
       "TEXT": "SMS Campaign"
     },
+    "PROJECTCONTENT": {
+      "TEXT": "Project Page"
+    },
+    "CREATEPROJECT": {
+      "TEXT": "Create Project Page"
+    },
     
     "LAYOUTS": {
       "TEXT": "Layouts",

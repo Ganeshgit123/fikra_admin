@@ -82,11 +82,11 @@
 <span class="d-none d-sm-block">Story</span>
 </a>
 <ng-template ngbNavContent>
-<div class="row" *ngFor="let item of storyArray">
+<div class="row">
 <div class="col-md-12">
 <div class="card card-body">
 <h4 class="text-center">Story</h4>
-<p class="text-justify" [innerHtml]="item.description"></p>
+<p class="text-justify" [innerHtml]="projectList.description"></p>
 </div>
 </div>
 </div>
@@ -98,11 +98,11 @@
 <span class="d-none d-sm-block">Risk Challenges</span>
 </a>
 <ng-template ngbNavContent>
-<div class="row" *ngFor="let item of storyArray">
+<div class="row">
 <div class="col-md-12">
 <div class="card card-body">
 <h4 class="text-center">Risk Challenges</h4>
-<p class="text-justify">{{item.risk_chalenges}}</p>
+<p class="text-justify">{{projectList.risk_chalenges}}</p>
 </div>
 </div>
 </div>

@@ -53,6 +53,8 @@ import { CommissionChargesComponent } from './settings/commission-charges/commis
 import { AddNewBillComponent } from './bill-generation/add-new-bill/add-new-bill.component';
 import { EditNewBillComponent } from './bill-generation/edit-new-bill/edit-new-bill.component';
 import { SmsCampaignComponent } from './sms-campaign/sms-campaign.component';
+import { ProjectConentComponent } from './project-conent/project-conent.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 const routes: Routes = [
   {
@@ -88,6 +90,8 @@ const routes: Routes = [
       {path: 'start_project_page',component: StartAProjectComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
       {path: 'contact',component: ContactUsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
       {path: 'career',component: CareerComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
+      {path: 'project_content',component: ProjectConentComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
+      {path: 'create_project',component: CreateProjectComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
 
       {path: 'investor_form',component: InvestorFormComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_signUpForm_true'}},
       {path: 'creator_form',component: CreatorsFormComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_signUpForm_true'}},

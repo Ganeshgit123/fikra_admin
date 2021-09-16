@@ -74,6 +74,7 @@ export class AdminUsersComponent implements OnInit {
       {
 
         this.userData = resu.data;
+        console.log("user",this.userData)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
