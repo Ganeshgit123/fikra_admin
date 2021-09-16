@@ -55,6 +55,7 @@ import { EditNewBillComponent } from './bill-generation/edit-new-bill/edit-new-b
 import { SmsCampaignComponent } from './sms-campaign/sms-campaign.component';
 import { ProjectConentComponent } from './project-conent/project-conent.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
+import { NewsletterViewComponent } from './template/newsletter-view/newsletter-view.component';
 
 const routes: Routes = [
   {
@@ -122,8 +123,9 @@ const routes: Routes = [
       {path: 'edit_new_bill/:id',component: EditNewBillComponent,canActivate: [AuthGuard],},
 
       {path: 'template',component: TemplateComponent,canActivate: [AuthGuard],},
+      {path: 'newsletter_view',component: NewsletterViewComponent,canActivate: [AuthGuard],},
       {path: 'sms_campaign',component: SmsCampaignComponent,canActivate: [AuthGuard],},
-
+      
     ],
     canActivate: [AuthGuard]
     }

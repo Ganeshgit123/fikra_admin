@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 import { ApiCallService } from '../../services/api-call.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-basics',
@@ -11,9 +12,14 @@ export class BasicsComponent implements OnInit {
   updatedby:any;
   role:any;
   addBasics: FormGroup;
+  addBaiscFieildData:FormGroup;
+  fieldDataList:any;
+  isEdit = false;
+  feildId:any;
 
   constructor(private formBuilder: FormBuilder,
-    private apiCall: ApiCallService    ) { }
+    private apiCall: ApiCallService,
+    private modalService: NgbModal    ) { }
 
   ngOnInit(): void {
     this.updatedby = sessionStorage.getItem('adminId');
@@ -26,6 +32,15 @@ export class BasicsComponent implements OnInit {
       tabHead_Ar: [''],
       description: [''],
       description_Ar: [''],
+    });
+
+    this.addBaiscFieildData = this.formBuilder.group({
+      feildHead: [''],
+      feildHead_Ar: [''],
+      feildDescription: [''],
+      feildDescription_Ar: [''],
+      feildMessage: [''],
+      feildMessage_Ar: [''],
     });
 
     this.fetchBasicsData();
@@ -50,6 +65,8 @@ export class BasicsComponent implements OnInit {
           description_Ar: [resu.data.description_Ar,[]],
         });
 
+        this.fieldDataList = resu.data.fields;
+        // console.log("fie",this.fieldDataList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -85,6 +102,128 @@ export class BasicsComponent implements OnInit {
       } 
     )
 
+  }
+
+  addBasicFields(basicField: any){
+    this.modalService.open(basicField, { centered: true });
+  }
+
+  onBasicFieldSubmit(){
+
+    if(this.isEdit){
+      this.baiscFieldEditService(this.addBaiscFieildData.value)
+      return;
+    }
+
+    const postData = this.addBaiscFieildData.value;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+    postData['tabId'] = '_basic_';
+
+    var params = {
+      url: 'admin/pushFeildDetails',
+      data: postData
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.modalService.dismissAll();
+         this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+  }
+
+
+  viewBasicField(data,basicField: any){
+    this.modalService.open(basicField, { centered: true });
+    this.isEdit = true;
+    this.feildId = data['_id'];
+
+    this.addBaiscFieildData   = this.formBuilder.group({
+      feildHead: [data['feildHead']],
+      feildHead_Ar: [data['feildHead_Ar']],
+      feildDescription: [data['feildDescription']],
+      feildDescription_Ar: [data['feildDescription_Ar']],
+      feildMessage: [data['feildMessage']],
+      feildMessage_Ar: [data['feildMessage_Ar']],
+    })
+  }
+
+  baiscFieldEditService(data){
+
+    data['createdBy'] = this.updatedby;
+    data['userType'] = "admin";
+    data['role'] = this.role;
+    data['feildId'] = this.feildId;
+    data['tabId'] = '_basic_';
+
+
+  var params = {
+    url: 'admin/editFeildDetails',
+    data: data
+  }
+
+   // console.log("ppp",params)
+   this.apiCall.commonPostService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+         this.isEdit = false;
+         this.modalService.dismissAll();
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
+  }
+
+  onDeleteBasicField(id){
+    const object = {}
+
+    object['feildId'] = id; 
+    object['tabId'] = '_basic_'; 
+    object['createdBy'] = this.updatedby;
+   object['userType'] = "admin";
+   object['role'] = this.role;
+
+    var params = {
+     url: 'admin/removeFeildDetails',
+     data: object
+   }
+  //  console.log("da",params)
+   this.apiCall.commonPostService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
   }
 
 }

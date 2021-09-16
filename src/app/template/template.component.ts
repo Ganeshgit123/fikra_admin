@@ -3,8 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { ApiCallService } from "../services/api-call.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: "app-template",
@@ -21,7 +20,9 @@ export class TemplateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -90,7 +91,7 @@ export class TemplateComponent implements OnInit {
   }
 
   previewOpen(param: any){
-    this.modalService.open(param, { centered: true, backdrop: true, size: 'xl' });
+    this.router.navigateByUrl('/newsletter_view');
   }
 
 }

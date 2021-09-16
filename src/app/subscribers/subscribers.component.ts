@@ -17,6 +17,7 @@ export class SubscribersComponent implements OnInit {
   newsletterData:FormGroup;
   subscribersList = [];
   subscriberId = [];
+  isAllSelect = false;
   htmlElement : any;
   editorData = '<p>Hello, world!</p>';
   public Editor = DecoupledEditor;
@@ -55,7 +56,6 @@ export class SubscribersComponent implements OnInit {
         let resu = result.body;
         if (resu.error == false) {
           this.subscribersList = resu.data;
-          console.log("ef", this.subscribersList);
         } else {
           this.apiCall.showToast(resu.message, "Error", "errorToastr");
         }
@@ -93,6 +93,12 @@ export class SubscribersComponent implements OnInit {
     } else {
       this.subscriberId.push(id);
     }
+    
+    if(this.subscriberId.length == this.subscribersList.length){
+      this.isAllSelect = true
+    }else{
+      this.isAllSelect = false 
+    }
   }
 
   nesletterOpen(param: any){
@@ -104,7 +110,6 @@ export class SubscribersComponent implements OnInit {
     this.newsletterData.value['htmlContent']= this.htmlElement
     this.newsletterData.value['emailIds']= this.subscriberId.join(" | ")
 
-    console.log(this.newsletterData.value)
     const postData = this.newsletterData.value;
     postData['createdBy'] = this.updatedby;
     postData['userType'] = "admin";
@@ -128,6 +133,19 @@ export class SubscribersComponent implements OnInit {
         console.log('Error', error)
       } 
     )
+  }
+
+  async onSelectAll(){
+    this.isAllSelect = !this.isAllSelect;
+    if(this.isAllSelect){
+      //selection
+        await this.subscribersList.map(async(element) => {
+          await this.subscriberId.push(element.email)
+        });
+    }else{
+      //deselection
+      this.subscriberId = [];
+    }
   }
 
 

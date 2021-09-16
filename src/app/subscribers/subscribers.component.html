@@ -94,7 +94,14 @@
                 ">
                 <thead>
                   <tr>
-                    <th>Select</th>
+                    <th>
+                      <div class="selectAll" (click)='onSelectAll()'>
+                        <span *ngIf='isAllSelect && subscriberId.length !== 0; else templateName'><u>Deselect All</u></span>
+                      </div>
+                      <ng-template #templateName>
+                        <u>Select All</u>
+                      </ng-template>
+                    </th>
                     <th>Email</th>
                     <th>ID</th>
                     <th>Verified Status</th>
