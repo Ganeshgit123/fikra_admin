@@ -54,7 +54,6 @@ export class CitiesComponent implements OnInit {
       if(resu.error == false)
       {
         this.countryList = resu.data;
-   
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

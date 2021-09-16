@@ -1,84 +1,222 @@
 <div class="card">
-<div class="card-body">
-<form [formGroup]="addFooterCont">
-<div class="row">
-<div class="col-md-6">
-<div class="form-group">
-<label>Heading (EN)</label>
-<input type="text" class="form-control" formControlName="header">
+    <div class="card-body">
+        <form [formGroup]="addFooterCont">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Heading (EN)</label>
+                        <input type="text" class="form-control" formControlName="header">
+                    </div>
+                    <div class="form-group">
+                        <label>Description (EN)</label>
+                        <textarea class="form-control" formControlName="discription"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Heading (AR)</label>
+                        <input type="text" class="form-control" formControlName="header_ar">
+                    </div>
+                    <div class="form-group">
+                        <label>Description (AR)</label>
+                        <textarea class="form-control" formControlName="discription_ar"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Button Name (EN)</label>
+                        <input type="text" class="form-control" formControlName="buttonName">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="text-center">Button Name (AR)</label>
+                        <input type="text" class="form-control" formControlName="buttonName_ar">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Button LinK</label>
+                        <input type="text" class="form-control" formControlName="buttonURL">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Contact Email</label>
+                        <input type="text" class="form-control" formControlName="contactEmail">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="text" class="form-control" formControlName="contactNumber">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Facebook Link</label>
+                        <input type="text" class="form-control" formControlName="facebookURL">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Instagram Link</label>
+                        <input type="text" class="form-control" formControlName="instaURL">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Twitter Link</label>
+                        <input type="text" class="form-control" formControlName="twetterURL">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Youtube Link</label>
+                        <input type="text" class="form-control" formControlName="youtubeURL">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <p class="text-center" *ngIf="showAccept === true"><button type="button"
+                    class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
+        </form>
+    </div>
 </div>
-<div class="form-group">
-<label>Description (EN)</label>
-<textarea class="form-control" formControlName="discription"></textarea>
-</div>
-</div>
-<div class="col-md-6">
-<div class="form-group">
-<label>Heading (AR)</label>
-<input type="text" class="form-control" formControlName="header_ar">
-</div>
-<div class="form-group">
-<label>Description (AR)</label>
-<textarea class="form-control" formControlName="discription_ar"></textarea>
-</div>
-</div>
-<div class="col-md-4">
-<div class="form-group">
-<label>Button Name (EN)</label>
-<input type="text" class="form-control" formControlName="buttonName">
-</div>
-</div>
-<div class="col-md-4">
-<div class="form-group">
-<label class="text-center">Button Name (AR)</label>
-<input type="text" class="form-control" formControlName="buttonName_ar">
-</div>
-</div>
-<div class="col-md-4">
-<div class="form-group">
-<label>Button LinK</label>
-<input type="text" class="form-control" formControlName="buttonURL">
-</div>
-</div>
-<div class="col-md-6">
-<div class="form-group">
-<label>Contact Email</label>
-<input type="text" class="form-control" formControlName="contactEmail">
-</div>
-</div>
-<div class="col-md-6">
-<div class="form-group">
-<label>Contact Number</label>
-<input type="text" class="form-control" formControlName="contactNumber">
-</div>
-</div>
-<div class="col-md-3">
-<div class="form-group">
-<label>Facebook Link</label>
-<input type="text" class="form-control" formControlName="facebookURL">
-</div>
-</div>
-<div class="col-md-3">
-<div class="form-group">
-<label>Instagram Link</label>
-<input type="text" class="form-control" formControlName="instaURL">
-</div>
-</div>
-<div class="col-md-3">
-<div class="form-group">
-<label>Twitter Link</label>
-<input type="text" class="form-control" formControlName="twetterURL">
-</div>
-</div>
-<div class="col-md-3">
-<div class="form-group">
-<label>Youtube Link</label>
-<input type="text" class="form-control" formControlName="youtubeURL">
-</div>
-</div>
-</div>
-<br>
-<p class="text-center" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>    
-</form>
-</div>
+
+<div class="card card-body">
+    <!-- Center Modal -->
+    <ng-template #footerFields let-modal>
+        <div class="modal-header">
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="addFooterLabelData">
+                <div class="row">
+                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Drawer Head(EN)</label>
+                        <input type="text" class="form-control" formControlName="drawerHead">
+                    </div>
+                 </div>
+                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Drawer Head(AR)</label>
+                        <input type="text" class="form-control" formControlName="drawerHead_Ar">
+                    </div>
+                 </div>
+                </div>
+               
+                <div class="row">
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Label One(EN)</label>
+                        <input type="text" class="form-control" formControlName="firstLable">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Two(EN)</label>
+                        <input type="text" class="form-control" formControlName="secondLable">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Three(EN)</label>
+                        <input type="text" class="form-control" formControlName="thirdLable">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Four(EN)</label>
+                        <input type="text" class="form-control" formControlName="fourthLable">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Five(EN)</label>
+                        <input type="text" class="form-control" formControlName="fifthLable">
+                    </div>
+                 </div>
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Label One(AR)</label>
+                        <input type="text" class="form-control" formControlName="firstLable_Ar">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Two(AR)</label>
+                        <input type="text" class="form-control" formControlName="secondLable_Ar">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Three(AR)</label>
+                        <input type="text" class="form-control" formControlName="thirdLable_Ar">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Four(AR)</label>
+                        <input type="text" class="form-control" formControlName="fourthLable_Ar">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Five(AR)</label>
+                        <input type="text" class="form-control" formControlName="fifthLable_Ar">
+                    </div>
+                 </div>
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Label One URL</label>
+                        <input type="text" class="form-control" formControlName="firstLable_URL">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Two URL</label>
+                        <input type="text" class="form-control" formControlName="secondLable_URL">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Three URL</label>
+                        <input type="text" class="form-control" formControlName="thirdLable_URL">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Four URL</label>
+                        <input type="text" class="form-control" formControlName="fourthLable_URL">
+                    </div>
+                    <div class="form-group">
+                        <label>Label Five URL</label>
+                        <input type="text" class="form-control" formControlName="fifthLable_URL">
+                    </div>
+                 </div>
+                </div>
+                <br>
+                <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                        (click)="onFooterContSubmit()">Save</button></p>
+            </form>
+        </div>
+    </ng-template>
+
+    <div class="table-responsive">
+        <table id="basic-datatable" class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+            <thead>
+                <tr>
+                    <th>Drawer Head</th>
+                    <th>Label One</th>
+                    <th>Label Two</th>
+                    <th>Label Three</th>
+                    <th>Label Four</th>
+                    <th>Label Five</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of footerLable">
+                    <td>{{item.drawerHead}}<br>{{item.drawerHead_Ar}}</td>
+                    <td>{{item.firstLable}}<br>{{item.firstLable_Ar}}<br>{{item.firstLable_URL}}</td>
+                    <td>{{item.secondLable}}<br>{{item.secondLable_Ar}}<br>{{item.secondLable_URL}}</td>
+                    <td>{{item.thirdLable}}<br>{{item.thirdLable_Ar}}<br>{{item.thirdLable_URL}}</td>
+                    <td>{{item.fourthLable}}<br>{{item.fourthLable_Ar}}<br>{{item.fourthLable_URL}}</td>
+                    <td>{{item.fifthLable}}<br>{{item.fifthLable_Ar}}<br>{{item.fifthLable_URL}}</td>
+                    <td>
+                        <label class="switch">
+                            <input *ngIf="item._is_Visible_ == true"  type="checkbox" checked (change)="onchangeDrawableStatus($event,item._id)">
+                            <input *ngIf="item._is_Visible_ !== true" type="checkbox" unchecked (change)="onchangeDrawableStatus($event,item._id)">
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewFooterLabel(item,footerFields)"><i
+                                class="mdi mdi-pencil font-size-18"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

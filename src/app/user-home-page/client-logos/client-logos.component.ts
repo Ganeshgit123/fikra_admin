@@ -21,6 +21,7 @@ export class ClientLogosComponent implements OnInit {
   logoId:any;
   logoStat:any;
   showAccept = true;
+  imgUrl:any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -178,49 +179,63 @@ export class ClientLogosComponent implements OnInit {
 
   logoEditService(data){
     if(this.fileUpload){
-    var data:any = new FormData();
-    data.append('logoAlt', this.addClientLogo.get('logoAlt').value);
-    data.append('logoName', this.addClientLogo.get('logoName').value);
-    data.append('clientLogo', this.fileUpload);
-    data.append('createdBy', this.updatedby);
-    data.append('userType', 'admin');
-    data.append('role', this.role);
-    data.append('_isLogoOn_', true);
-    data.append('clientLogoId', this.logoId);
-    }else{
-      const data = this.addClientLogo.value;
-      data['clientLogo'] = this.imagePreview;
-      data['_isLogoOn_'] = true;
-      data['createdBy'] = this.updatedby;
-      data['userType'] = "admin";
-      data['role'] = this.role;
-      data['clientLogoId'] = this.logoId;
-    }
+      var postData = new FormData();
+  
+      postData.append('imageToStore', this.fileUpload);
+  
+      var params = {
+        url: 'admin/postImagetoS3',
+        data: postData
+      }
+  
+      this.apiCall.commonPostService(params).subscribe(
+        (response: any) => {
+  
+          if (response.body.error == false) {
+                this.imgUrl = response.body.data.Location
+                    data['clientLogo'] = this.imgUrl;
+            
+              } else {
+            // Query Error
+            this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+          }
+        },
+        (error) => {
+          this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+          console.log('Error', error)
+        } 
+      )
+      }
 
- var params = {
-   url: 'admin/updateClientLogo',
-   data: data
- }
- // console.log("ppp",params)
- this.apiCall.commonPutService(params).subscribe(
-   (response: any) => {
-     if (response.body.error == false) {
-       // Success
-       this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-       this.isEdit = false;
-       this.modalService.dismissAll();
-       this.imagePreview = null;
-       this.ngOnInit();
-     } else {
-       // Query Error
-       this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-     }
-   },
-   (error) => {
-     this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-     console.log('Error', error)
-   }
- )
+    // console.log("lol",this.imgUrl)
+    data['clientLogo'] = this.imagePreview;
+    data['createdBy'] = this.updatedby;
+    data['userType'] = "admin";
+    data['role'] = this.role;
+    data['clientLogoId'] = this.logoId;
+  
+  var params1 = {
+  url: 'admin/updateClientLogo',
+  data: data
+  }
+  // console.log("img",params1)
+  this.apiCall.commonPutService(params1).subscribe(
+  (response: any) => {
+  if (response.body.error == false) {
+  
+  this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+  this.modalService.dismissAll();
+  this.imagePreview = null;
+  this.ngOnInit();
+  } else {
+  this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+  }
+  },
+  (error) => {
+  this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+  console.log('Error', error)
+  } 
+  )
 
   }
 
@@ -256,6 +271,76 @@ export class ClientLogosComponent implements OnInit {
     this.imagePreview = null;
     this.addClientLogo.reset();
     this.modalService.dismissAll();
+  }
+
+  onchangeLogoStatus(values:any,id){
+    if(values.currentTarget.checked === true){
+      var visible = true 
+     } else {
+       var visible = false
+     }
+     const object = {}
+
+     object['_isLogoOn_'] = visible;
+     object['_isDeleted_'] = false;
+     object['clientLogoId'] = id;
+     object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+
+     var params = {
+      url: 'admin/updateClientLogoStatus',
+      data: object
+    }
+    this.apiCall.commonPutService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
+
+  onDeleteClientLogo(val,id,visible){
+    const object = {}
+  
+    object['clientLogoId'] = id;
+    object['_isLogoOn_'] = visible;
+    object['_isDeleted_'] = val;
+    object['createdBy'] = this.updatedby;
+   object['userType'] = "admin";
+   object['role'] = this.role;
+
+    var params = {
+     url: 'admin/updateClientLogoStatus',
+     data: object
+   }
+  //  console.log("da",params)
+   this.apiCall.commonPutService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
   }
 
 }

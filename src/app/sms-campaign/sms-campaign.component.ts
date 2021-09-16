@@ -41,7 +41,7 @@ export class SmsCampaignComponent implements OnInit {
       if(resu.error == false)
       {
         this.getuserList = resu.data;
-    //  console.log("lpl",this.getuserList)
+     console.log("lpl",this.getuserList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

@@ -14,6 +14,10 @@ export class FooterContentComponent implements OnInit {
   role:any;
   addFooterCont: FormGroup;
   showAccept = true;
+  addFooterLabelData: FormGroup;
+  footerLable:any;
+  isEdit = false;
+  labelContId:any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -42,7 +46,28 @@ export class FooterContentComponent implements OnInit {
       contactNumber: [''],
     });
 
+    this.addFooterLabelData = this.formBuilder.group({
+      drawerHead: [''],
+      drawerHead_Ar: [''],
+      firstLable: [''],
+      firstLable_Ar: [''],
+      firstLable_URL: [''],
+      secondLable: [''],
+      secondLable_Ar: [''],
+      secondLable_URL: [''],
+      thirdLable: [''],
+      thirdLable_Ar: [''],
+      thirdLable_URL: [''],
+      fourthLable: [''],
+      fourthLable_Ar: [''],
+      fourthLable_URL: [''],
+      fifthLable: [''],
+      fifthLable_Ar: [''],
+      fifthLable_URL: [''],
+    });
+
     this.fetchfooterData();
+    this.fetchfooterContentData();
     this.callRolePermission();
 
   }
@@ -119,4 +144,125 @@ export class FooterContentComponent implements OnInit {
 
   }
 
+
+  fetchfooterContentData(){
+    let params = {
+      url: "admin/getFooterLableAndUrl",
+    }  
+    this.apiCall.commonGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+          this.footerLable = resu.data.content;
+          // console.log("dd",this.footerLable)
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
+    });
+  }
+
+  onFooterContSubmit(){
+    if(this.isEdit){
+      this.footerLabelEditService(this.addFooterLabelData.value)
+      return;
+    }
+  }
+
+  viewFooterLabel(data,footerFields: any){
+    this.modalService.open(footerFields, { centered: true,size: 'xl'  });
+
+    this.isEdit = true;
+
+    this.labelContId = data['_id']
+
+    this.addFooterLabelData   = this.formBuilder.group({
+      drawerHead: [data['drawerHead']],
+      drawerHead_Ar: [data['drawerHead_Ar']],
+      firstLable: [data['firstLable']],
+      firstLable_Ar: [data['firstLable_Ar']],
+      firstLable_URL: [data['firstLable_URL']],
+      secondLable: [data['secondLable']],
+      secondLable_Ar: [data['secondLable_Ar']],
+      secondLable_URL: [data['secondLable_URL']],
+      thirdLable: [data['thirdLable']],
+      thirdLable_Ar: [data['thirdLable_Ar']],
+      thirdLable_URL: [data['thirdLable_URL']],
+      fourthLable: [data['fourthLable']],
+      fourthLable_Ar: [data['fourthLable_Ar']],
+      fourthLable_URL: [data['fourthLable_URL']],
+      fifthLable: [data['fifthLable']],
+      fifthLable_Ar: [data['fifthLable_Ar']],
+      fifthLable_URL: [data['fifthLable_URL']],
+    })
+  }
+
+  footerLabelEditService(data){
+   
+    data['contentId'] = this.labelContId
+    data['createdBy'] = this.updatedby;
+    data['userType'] = "admin";
+    data['role'] = this.role;
+
+    var params = {
+      url: 'admin/editFooterLableAndUrl',
+      data: data
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.isEdit = false;
+          this.modalService.dismissAll();
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
+
+  onchangeDrawableStatus(values:any,val){
+    if(values.currentTarget.checked === true){
+      var visible = true 
+     } else {
+       var visible = false
+     }
+     const object = {}
+
+     object['contentId'] = val;
+     object['_is_Visible_'] = visible;
+     object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+
+     var params = {
+      url: 'admin/editStatusFooterLableAndUrl',
+      data: object
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
 }

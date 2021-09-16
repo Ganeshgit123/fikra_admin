@@ -53,6 +53,7 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <th>Goal Amount</th>
 <th>Remaining Duration</th>
 <th>Admin Approval</th>
+<th>Home Page Banner</th>
 <th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
@@ -93,7 +94,14 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 </span>
 </td>
 <td *ngIf="showAccept !== true">{{proj.aproval_Status}}</td>
+<td>
+   <label class="switch">
+      <input *ngIf="proj._is_On_HomeSlide_ == true"  type="checkbox" checked (change)="onHomeBannerStatus($event,proj._id)">
+      <input *ngIf="proj._is_On_HomeSlide_ !== true" type="checkbox" unchecked (change)="onHomeBannerStatus($event,proj._id)">
+      <span class="slider"></span>
+  </label>
 
+</td>
 <td>
    <a *ngIf="showAccept === true" routerLink="/add_new_bill/proj-{{ proj._id}}//{{proj.userId._id}}" style="padding-right: 10px;">Create Invoice</a>
 

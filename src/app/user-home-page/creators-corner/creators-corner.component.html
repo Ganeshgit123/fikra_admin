@@ -75,7 +75,7 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <td>
     <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewCreatorContent(item,creatorCorner)"><i
         class="mdi mdi-pencil font-size-18"></i></a>
-    <a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete"><i
+    <a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete" (click)="onDeleteCornerStatus(true,item._id,item._isVisible_)"><i
         class="mdi mdi-trash-can font-size-18"></i></a>
 </td>
 </tr>

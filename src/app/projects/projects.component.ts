@@ -211,5 +211,73 @@ export class ProjectsComponent implements OnInit {
 
   }
 
+  onHomeBannerStatus(values:any,val){
+    if(values.currentTarget.checked === true){
+      var visible = true 
+      this.addHomeBannList(val);
+     } else {
+       var visible = false
+      this.removeHomeBannList(val);
+     }
+
+  }
+
+  addHomeBannList(id){
+    const object = {};
+    object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+    object['projectId'] = id
+
+    var params = {
+      url: 'admin/updateProjectToSlide',
+      data: object
+    }
+// console.log("ddd",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+  }
+
+  removeHomeBannList(id){
+    const object = {};
+    object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+    object['projectId'] = id
+
+    var params = {
+      url: 'admin/removeProjectToSlide',
+      data: object
+    }
+// console.log("ddd",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+  }
 
 }

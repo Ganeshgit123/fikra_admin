@@ -19,7 +19,7 @@ export class CreatorsCornerComponent implements OnInit {
   showAccept = true;
   isEdit = false;
   creatorId:any
-
+  imgUrl:any;
 
  constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -170,53 +170,63 @@ export class CreatorsCornerComponent implements OnInit {
 
     creatorEditService(data){
       if(this.fileUpload){
-      var data:any = new FormData();
-        data.append('headName', this.addCreatorData.get('headName').value);
-        data.append('headName_ar', this.addCreatorData.get('headName_ar').value);
-        data.append('discription', this.addCreatorData.get('discription').value);
-        data.append('discription_ar', this.addCreatorData.get('discription_ar').value);
-        data.append('blogLink', this.addCreatorData.get('blogLink').value);
-        data.append('blogImage', this.fileUpload);
-        data.append('createdBy', this.updatedby);
-        data.append('userType', 'admin');
-        data.append('role', this.role);
-        data.append('blogId', this.creatorId);
-
-    }else{
-
-    const data = this.addCreatorData.value;
-    data['blogImage'] = this.imagePreview;
-    data['createdBy'] = this.updatedby;
-    data['userType'] = "admin";
-    data['role'] = this.role;
-    data['blogId'] = this.creatorId;
-  }
-
-  var params = {
+        var postData = new FormData();
+    
+        postData.append('imageToStore', this.fileUpload);
+    
+        var params = {
+          url: 'admin/postImagetoS3',
+          data: postData
+        }
+    
+        this.apiCall.commonPostService(params).subscribe(
+          (response: any) => {
+    
+            if (response.body.error == false) {
+                  this.imgUrl = response.body.data.Location
+                      data['blogImage'] = this.imgUrl;
+              
+                } else {
+              // Query Error
+              this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+            }
+          },
+          (error) => {
+            this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+            console.log('Error', error)
+          } 
+        )
+        }
+  
+      // console.log("lol",this.imgUrl)
+      data['blogImage'] = this.imagePreview;
+      data['createdBy'] = this.updatedby;
+      data['userType'] = "admin";
+      data['role'] = this.role;
+      data['blogId'] = this.creatorId;
+    
+    var params1 = {
     url: 'admin/updateCreatorContent',
     data: data
-  }
-
-   // console.log("ppp",params)
-   this.apiCall.commonPutService(params).subscribe(
-     (response: any) => {
-       if (response.body.error == false) {
-         // Success
-         this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-         this.isEdit = false;
-         this.modalService.dismissAll();
-         this.imagePreview = null;
-         this.ngOnInit();
-       } else {
-         // Query Error
-         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-       }
-     },
-     (error) => {
-       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-       console.log('Error', error)
-     }
-   )
+    }
+    // console.log("img",params1)
+    this.apiCall.commonPutService(params1).subscribe(
+    (response: any) => {
+    if (response.body.error == false) {
+    
+    this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+    this.modalService.dismissAll();
+    this.imagePreview = null;
+    this.ngOnInit();
+    } else {
+    this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+    }
+    },
+    (error) => {
+    this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+    console.log('Error', error)
+    } 
+    )
     }
 
     onchangeBlogStatus(values:any,id){
@@ -235,7 +245,7 @@ export class CreatorsCornerComponent implements OnInit {
       object['role'] = this.role;
   
        var params = {
-        url: 'admin/updateCreatorContent',
+        url: 'admin/updateStatusCreatorContent',
         data: object
       }
       this.apiCall.commonPutService(params).subscribe(
@@ -254,6 +264,40 @@ export class CreatorsCornerComponent implements OnInit {
           console.log('Error', error)
         }
       )
+    }
+
+
+    onDeleteCornerStatus(val,id,visible){
+      const object = {}
+  
+      object['blogId'] = id;
+      object['_isVisible_'] = visible;
+      object['_isDeleted_'] = val;
+      object['createdBy'] = this.updatedby;
+     object['userType'] = "admin";
+     object['role'] = this.role;
+  
+      var params = {
+       url: 'admin/updateStatusCreatorContent',
+       data: object
+     }
+    //  console.log("da",params)
+     this.apiCall.commonPutService(params).subscribe(
+       (response: any) => {
+         if (response.body.error == false) {
+           // Success
+           this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
+           this.ngOnInit();
+         } else {
+           // Query Error
+           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+         }
+       },
+       (error) => {
+         this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+         console.log('Error', error)
+       }
+     )
     }
 
 }
