@@ -192,7 +192,12 @@
     "CREATEPROJECT": {
       "TEXT": "Create Project Page"
     },
-    
+    "CREATORS_LIST": {
+      "TEXT": "Creator Lists"
+    },
+    "BANK_REQUESTS": {
+      "TEXT": "Bank A/C Request Lists"
+    },
     "LAYOUTS": {
       "TEXT": "Layouts",
       "LIST": {

@@ -49,10 +49,10 @@
         <tr *ngFor="let item of getCreatorData;">
             <td>{{item.fieldName}}</td>
             <td>{{item.fieldName_Ar}}</td>
-            <td *ngIf = "item.fieldType !== 'select'">{{item.fieldType}}
+            <td *ngIf = "!(item.fieldType == 'select' || item.fieldType == 'radio')">{{item.fieldType}}
                 <span></span>
             </td>
-            <td  *ngIf = "item.fieldType == 'select'">{{item.fieldType}}
+            <td  *ngIf = "item.fieldType == 'select' || item.fieldType == 'radio'">{{item.fieldType}}
                 <tr *ngFor="let items of item.dropDown;let ii = index">
                     <span>options - {{items.displayName}} (value - {{items.value}})<br>
                         options - {{items.displayName_Ar}}</span>

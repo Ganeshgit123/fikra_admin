@@ -68,13 +68,13 @@ export class ClientLogosComponent implements OnInit {
       {
 
         this.creativeIndepen = this.formBuilder.group({
-          headName: [resu.data.headName,[]],
-          headName_ar: [resu.data.headName_ar,[]],
-          discription: [resu.data.discription,[]],
-          discription_ar: [resu.data.discription_ar,[]],
+          headName: [resu.data.creative[0].headName,[]],
+          headName_ar: [resu.data.creative[0].headName_ar,[]],
+          discription: [resu.data.creative[0].discription,[]],
+          discription_ar: [resu.data.creative[0].discription_ar,[]],
         });
 
-        this.clientData = resu.data.clientLogo;
+        this.clientData = resu.data.creative[0].clientLogo;
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

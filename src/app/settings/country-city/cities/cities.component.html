@@ -40,27 +40,27 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 </thead>
 <tbody  *ngFor="let item of countryList;">
 <tr *ngFor="let cites of item.city;">
-<td>{{item.countryName}} / {{item.countryNameAr}}</td>
-<td>{{cites.cityName}}</td>
-<td>{{cites.cityNameAr}}</td>
-<td *ngIf="showAccept === true">
-<label class="switch">
+<td *ngIf="cites._isDeleted_ === false">{{item.countryName}} / {{item.countryNameAr}}</td>
+<td *ngIf="cites._isDeleted_ === false">{{cites.cityName}}</td>
+<td *ngIf="cites._isDeleted_ === false">{{cites.cityNameAr}}</td>
+<td *ngIf="cites._isDeleted_ === false">
+<label class="switch" *ngIf="showAccept === true">
     <input *ngIf="cites._isOn_ === true"  type="checkbox" checked (change)="onchangeCityStatus($event,item._id,cites)">
     <input *ngIf="cites._isOn_ === false" type="checkbox" unchecked (change)="onchangeCityStatus($event,item._id,cites)">
 <span class="slider"></span>
 </label>    
+<span *ngIf="showAccept !== true">
+    <p *ngIf="cites._isOn_ === true">ON</p>
+    <p *ngIf="cites._isOn_ !== true">OFF</p>
+</span>
 </td>
-<td *ngIf="showAccept !== true">
-    <span>
-        <p *ngIf="cites._isOn_ === true">ON</p>
-        <p *ngIf="cites._isOn_ !== true">OFF</p>
-    </span>
-</td>
-<td *ngIf="showAccept === true">
+<td *ngIf="cites._isDeleted_ === false">
+<span  *ngIf="showAccept === true">
 <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewCity(item._id,cites,cityModal)"><i
 class="mdi mdi-pencil font-size-18"></i></a>
 <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteCity(item._id,cites)"><i
 class="mdi mdi-trash-can font-size-18"></i></a>
+</span>
 </td>
 </tr>
 </tbody>

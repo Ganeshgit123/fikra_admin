@@ -53,7 +53,20 @@ export const MENU: MenuItem[] = [
         id: 6,
         label: 'MENUITEMS.CREATORS.TEXT',
         icon: 'mdi mdi-account-cog',
-        link: '/creators'
+        subItems: [
+            {
+                id: 40,
+                label: 'MENUITEMS.CREATORS_LIST.TEXT',
+                link: '/creators',
+                parentId: 6
+            },
+            {
+                id: 41,
+                label: 'MENUITEMS.BANK_REQUESTS.TEXT',
+                link: '/bank_ac_request_lists',
+                parentId: 6
+            },
+        ]
     },
     {
         id: 7,

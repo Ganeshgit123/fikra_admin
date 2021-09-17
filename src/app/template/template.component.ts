@@ -15,7 +15,8 @@ export class TemplateComponent implements OnInit {
   templateContent: FormGroup;
   contentForm:FormGroup;
   container = [];
-  projectDetails = []
+  projectDetails = [];
+  projectList:any=[];
   
   constructor(
     private formBuilder: FormBuilder,
@@ -71,6 +72,7 @@ export class TemplateComponent implements OnInit {
         project_Three: null,
         learnMore_URL: '',
       });
+
     }else{
       this.contentForm.value.content = []
       this.apiCall.showToast("Can't process with empty Header", 'Error', 'errorToastr')
@@ -80,7 +82,7 @@ export class TemplateComponent implements OnInit {
   onPreview(){
     this.contentForm.value.content = this.container
     if(this.contentForm.value.content !== ''){
-      console.log(this.contentForm.value)
+      console.log("content",this.contentForm.value)
     }
   }
 
@@ -91,7 +93,38 @@ export class TemplateComponent implements OnInit {
   }
 
   previewOpen(param: any){
-    this.router.navigateByUrl('/newsletter_view');
+    this.modalService.open(param, { centered: true, backdrop: true, size: 'xl' });
+    // console.log("lplp",this.container)
+    // project_Two
+    // project_Three
+    this.container.forEach(element => {
+      var firstID = element.project_One
+
+      this.fetchProjects(firstID);
+
+    });
+
+
+  }
+
+  fetchProjects(id){
+    let params = {
+      url: "admin/getProjectListById",
+      projectId : id
+    }  
+    this.apiCall.projectGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+         this.projectList = resu.data.basicInfoId;
+        console.log("list",this.projectList)
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
+    });
   }
 
 }

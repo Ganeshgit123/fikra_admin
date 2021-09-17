@@ -49,7 +49,8 @@ class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
     <th>Display Name</th>
     <th>Email Id</th>
     <th>Mobile Number</th>
-    <th>Creative Independent</th>
+    <th>Creative Independent Status</th>
+    <th>Bank Verification Status</th>
 </tr>
 </thead>
 <tbody>
@@ -67,6 +68,12 @@ class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
         <span *ngIf="showAccept !== true">
             <p *ngIf="user._is_On_Creative_In_ == true">ON</p>
             <p *ngIf="user._is_On_Creative_In_ !== true">OFF</p>
+        </span>
+    </td>
+    <td>
+        <span>
+            <p *ngIf="user._is_Bank_Account_Verifyed_ == true">Verified</p>
+            <p *ngIf="user._is_Bank_Account_Verifyed_ !== true">Not Verified</p>
         </span>
     </td>
 </tr>

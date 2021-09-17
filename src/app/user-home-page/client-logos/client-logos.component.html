@@ -73,8 +73,8 @@ class="table table-bordered dt-responsive nowrap  no-footer dtr-inline">
 <th>Action</th>
 </tr>
 </thead>
-<tbody>
-<tr  *ngFor="let item of clientData">
+<tbody *ngFor="let item of clientData">
+<tr *ngIf="item._isDeleted_ == true" >
 <td>{{item.logoName}}</td>
 <td><p class="text-center"><img src="{{item.logoUrl}}" class="img_size"></p></td>
 <td>{{item.logoAlt}}</td>

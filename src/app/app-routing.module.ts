@@ -56,6 +56,7 @@ import { SmsCampaignComponent } from './sms-campaign/sms-campaign.component';
 import { ProjectConentComponent } from './project-conent/project-conent.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { NewsletterViewComponent } from './template/newsletter-view/newsletter-view.component';
+import { BankAccountListsComponent } from './creators/bank-account-lists/bank-account-lists.component';
 
 const routes: Routes = [
   {
@@ -78,6 +79,8 @@ const routes: Routes = [
       
       {path: 'creators',component: CreatorsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_creator_true'}},
       {path: 'view-creators/:id',component: ViewCreatorsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_creator_true'}},
+      {path: 'bank_ac_request_lists',component: BankAccountListsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_creator_true'}},
+
       
       {path: 'privacy',component: PrivacyPolicyComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
       {path: 'cookie_policy',component: CookiePolicyComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
