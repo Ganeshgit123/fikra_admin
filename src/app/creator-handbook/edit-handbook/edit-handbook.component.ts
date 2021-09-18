@@ -148,7 +148,7 @@ export class EditHandbookComponent implements OnInit {
   url: 'admin/updateHandbookforUser',
   data: data
   }
-  console.log("img",params1)
+  // console.log("img",params1)
   this.apiCall.commonPostService(params1).subscribe(
   (response: any) => {
   if (response.body.error == false) {

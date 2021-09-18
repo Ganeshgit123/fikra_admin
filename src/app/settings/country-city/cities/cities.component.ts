@@ -17,6 +17,7 @@ export class CitiesComponent implements OnInit {
   cityId:any;
   contrid:any;
   showAccept = true;
+  searchTerm;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
