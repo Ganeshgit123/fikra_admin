@@ -94,17 +94,8 @@ export class TemplateComponent implements OnInit {
 
   previewOpen(param: any){
     this.modalService.open(param, { centered: true, backdrop: true, size: 'xl' });
-    // console.log("lplp",this.container)
-    // project_Two
-    // project_Three
-    this.container.forEach(element => {
-      var firstID = element.project_One
-
-      this.fetchProjects(firstID);
-
-    });
-
-
+    // console.log(this.container);
+    // console.log(this.contentForm);
   }
 
   fetchProjects(id){

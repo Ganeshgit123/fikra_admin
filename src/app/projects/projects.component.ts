@@ -213,10 +213,8 @@ export class ProjectsComponent implements OnInit {
 
   onHomeBannerStatus(values:any,val){
     if(values.currentTarget.checked === true){
-      var visible = true 
       this.addHomeBannList(val);
      } else {
-       var visible = false
       this.removeHomeBannList(val);
      }
 
@@ -233,7 +231,7 @@ export class ProjectsComponent implements OnInit {
       url: 'admin/updateProjectToSlide',
       data: object
     }
-// console.log("ddd",params)
+console.log("ddd",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {
