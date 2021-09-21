@@ -128,6 +128,12 @@ export const MENU: MenuItem[] = [
                 parentId: 6
             },
             {
+                id: 42,
+                label: 'MENUITEMS.HELP_GUIDES.TEXT',
+                link: '/help_guide',
+                parentId: 6
+            },
+            {
                 id: 12,
                 label: 'MENUITEMS.PRIVACYPOLICY.TEXT',
                 link: '/privacy',

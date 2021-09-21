@@ -12,21 +12,32 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TemplateComponent implements OnInit {
   breadCrumbItems: Array<{}>;
+  updatedby: any;
+  role: any;
   templateContent: FormGroup;
-  contentForm:FormGroup;
+  contentForm: FormGroup;
   container = [];
+  isCollapsed = true;
   projectDetails = [];
-  projectList:any=[];
-  
+  templateDetails = [];
+  projecOneId: any;
+  projecTwoId: any;
+  projecThreeId: any;
+  templateId:any;
+
   constructor(
     private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.updatedby = sessionStorage.getItem('adminId');
+    this.role = sessionStorage.getItem('adminRole');
+    this.breadCrumbItems = [{ label: "Templates", active: true }];
+
     this.templateContent = this.formBuilder.group({
       textHead: '',
       textContent: '',
@@ -40,29 +51,30 @@ export class TemplateComponent implements OnInit {
       templateName: '',
     });
 
-    this.breadCrumbItems = [{ label: "Templates", active: true }];
 
-    this.getProjectInfo()
+    this.fetchTemplateData();
+
+
+    this.getProjectInfo();
   }
 
-  getProjectInfo(){
+  getProjectInfo() {
     let params = {
       url: "admin/listProject",
-    }  
-    this.apiCall.smallGetService(params).subscribe((result:any)=>{
+    }
+    this.apiCall.smallGetService(params).subscribe((result: any) => {
       let resu = result.body;
-      if(resu.error == false)
-      {
-        this.projectDetails = resu.data  
+      if (resu.error == false) {
+        this.projectDetails = resu.data
       }
-    },(error)=>{
-       console.error(error);
-       
+    }, (error) => {
+      console.error(error);
+
     });
   }
 
-  onSubmitContent(){
-    if(this.templateContent.value['textHead'] !== ''){
+  onSubmitContent() {
+    if (this.templateContent.value['textHead'] !== '') {
       this.container.push(this.templateContent.value)
       this.templateContent = this.formBuilder.group({
         textHead: '',
@@ -73,49 +85,94 @@ export class TemplateComponent implements OnInit {
         learnMore_URL: '',
       });
 
-    }else{
+    } else {
       this.contentForm.value.content = []
       this.apiCall.showToast("Can't process with empty Header", 'Error', 'errorToastr')
     }
   }
 
-  onPreview(){
-    this.contentForm.value.content = this.container
-    if(this.contentForm.value.content !== ''){
-      console.log("content",this.contentForm.value)
+
+  onRemove(index) {
+    if (index != -1) {
+      this.container.splice(index, 1)
     }
   }
 
-  onRemove(index){
-    if(index != -1){
-      this.container.splice(index,1)
-    }
-  }
-
-  previewOpen(param: any){
+  previewOpen(param: any) {
     this.modalService.open(param, { centered: true, backdrop: true, size: 'xl' });
     // console.log(this.container);
     // console.log(this.contentForm);
   }
 
-  fetchProjects(id){
-    let params = {
-      url: "admin/getProjectListById",
-      projectId : id
-    }  
-    this.apiCall.projectGetService(params).subscribe((result:any)=>{
-      let resu = result.body;
-      if(resu.error == false)
-      {
-         this.projectList = resu.data.basicInfoId;
-        console.log("list",this.projectList)
-      }else{
-        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+
+  addTemplate() {
+
+    this.modalService.dismissAll();
+    this.contentForm.value.content = this.container
+    if (this.contentForm.value.content !== '') {
+
+      this.contentForm.value.content.forEach((element, index) => {
+
+        this.projecOneId = element.project_One._id
+        this.projecTwoId = element.project_Two._id
+        this.projecThreeId = element.project_Three._id
+
+        this.contentForm.value.content[index].project_One = this.projecOneId
+        this.contentForm.value.content[index].project_Two = this.projecTwoId
+        this.contentForm.value.content[index].project_Three = this.projecThreeId
+      });
+      // console.log("fir",this.projecOneId)
+      const postData = this.contentForm.value;
+      postData['createdBy'] = this.updatedby;
+      postData['userType'] = "admin";
+      postData['role'] = this.role;
+
+      var params = {
+        url: 'admin/addTemplateContent',
+        data: postData
       }
-    },(error)=>{
-       console.error(error);
-       
+      // console.log("data",params)
+      this.apiCall.commonPostService(params).subscribe(
+        (response: any) => {
+          if (response.body.error == false) {
+            this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+            this.ngOnInit();
+            this.isCollapsed = true;
+          } else {
+            // Query Error
+            this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+          }
+        },
+        (error) => {
+          this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+          console.log('Error', error)
+        }
+      )
+
+    }
+  }
+
+
+  fetchTemplateData() {
+    let params = {
+      url: "admin/getAllTemplate",
+    }
+    this.apiCall.commonGetService(params).subscribe((result: any) => {
+      let resu = result.body;
+      if (resu.error == false) {
+        this.templateDetails = resu.data
+      }
+    }, (error) => {
+      console.error(error);
+
     });
   }
+
+  clickTempData(item){
+    // console.log("item",item)
+    this.templateId = item._id
+    item.isEdit = true
+    this.apiCall.templateValue(item)
+   }
 
 }

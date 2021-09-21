@@ -198,6 +198,9 @@
     "BANK_REQUESTS": {
       "TEXT": "Bank A/C Request Lists"
     },
+    "HELP_GUIDES": {
+      "TEXT": "Help Guides"
+    },
     "LAYOUTS": {
       "TEXT": "Layouts",
       "LIST": {

@@ -56,6 +56,8 @@ import { SmsCampaignComponent } from './sms-campaign/sms-campaign.component';
 import { ProjectConentComponent } from './project-conent/project-conent.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { BankAccountListsComponent } from './creators/bank-account-lists/bank-account-lists.component';
+import { EditTemplateComponent } from './template/edit-template/edit-template.component';
+import { HelpGuideComponent } from './help-guide/help-guide.component';
 
 const routes: Routes = [
   {
@@ -95,6 +97,7 @@ const routes: Routes = [
       {path: 'career',component: CareerComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
       {path: 'project_content',component: ProjectConentComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
       {path: 'create_project',component: CreateProjectComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
+      {path: 'help_guide',component: HelpGuideComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
 
       {path: 'investor_form',component: InvestorFormComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_signUpForm_true'}},
       {path: 'creator_form',component: CreatorsFormComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_signUpForm_true'}},
@@ -125,6 +128,7 @@ const routes: Routes = [
       {path: 'edit_new_bill/:id',component: EditNewBillComponent,canActivate: [AuthGuard],},
 
       {path: 'template',component: TemplateComponent,canActivate: [AuthGuard],},
+      {path: 'edit_template/:id',component: EditTemplateComponent,canActivate: [AuthGuard],},
       {path: 'sms_campaign',component: SmsCampaignComponent,canActivate: [AuthGuard],},
       
     ],

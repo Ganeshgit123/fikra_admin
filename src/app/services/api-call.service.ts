@@ -33,6 +33,13 @@ export class ApiCallService {
     this.createCateData.next(value)
   }
 
+  private templateData = new BehaviorSubject<string>('0');
+  templateEditFn = this.templateData.asObservable();
+
+  templateValue(value){
+    this.templateData.next(value)
+  }
+
   adminLogin(apiData) {
 
     const httpHeaders = new HttpHeaders({

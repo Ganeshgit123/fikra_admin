@@ -1,423 +1,503 @@
 <div class="container-fluid">
     <app-pagetitle title="Templates" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    <p class="text-right"><button class="btn btn-primary mo-mb-2 ml-1" data-toggle="collapse"
+            (click)="isCollapsed = !isCollapsed">
+            Add New Template
+        </button></p>
+    <br>
+    <div class="collapse" id="collapseExample" [ngbCollapse]="isCollapsed">
 
-    <div class="row" id="needTosend">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <form [formGroup]='contentForm'>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Template Name</label>
-                                    <input type="text" class="form-control" formControlName='templateName'>
+        <div class="row" id="needTosend">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]='contentForm'>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Template Name</label>
+                                        <input type="text" class="form-control" formControlName='templateName'>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" *ngIf='container.length !== 0'>
+                                    <div class="form-group">
+                                        <p class="text-right">
+                                            <button class="btn btn-primary w-md waves-effect waves-light ban_con_btn"
+                                                placement="top" ngbTooltip="Preview and save"
+                                                (click)='previewOpen(preview)'>
+                                                Preview Template
+                                            </button>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6" *ngIf='container.length !== 0'>
-                                <div class="form-group">
-                                    <p class="text-right">
-                                        <button class="btn btn-primary w-md waves-effect waves-light ban_con_btn"
-                                            placement="top" ngbTooltip="Preview and save"
-                                            (click)='previewOpen(preview)'>
-                                            Preview Template
-                                        </button>
-                                    </p>
+                        </form>
+                        <br>
+                        <div *ngIf='container.length !== 0'>
+                            <div *ngFor="let list of container; index as i" class='col-md-6 card-body custom-card'>
+                                <div class="col-md-12" style="display: flex; padding: 0px;">
+                                    <div class="col-md-11" style="padding: 0px;">
+                                        <span class='spanTo'
+                                            style="font-size: 20px; padding: 0px;">{{list.textHead}}</span>
+                                    </div>
+                                    <div class="col-md-1" style="padding: 0px; text-align: right;"
+                                        (click)='onRemove(i)'>
+                                        <span class="ri-close-line"
+                                            style="font-size: 20px; cursor: pointer; padding: 0px;"></span>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </form>
-                    <br>
-                    <div *ngIf='container.length !== 0'>
-                        <div *ngFor="let list of container; index as i" class='col-md-6 card-body custom-card'>
-                            <div class="col-md-12" style="display: flex; padding: 0px;">
-                                <div class="col-md-11" style="padding: 0px;">
-                                    <span class='spanTo' style="font-size: 20px; padding: 0px;">{{list.textHead}}</span>
-                                </div>
-                                <div class="col-md-1" style="padding: 0px; text-align: right;" (click)='onRemove(i)'>
-                                    <span class="ri-close-line"
-                                        style="font-size: 20px; cursor: pointer; padding: 0px;"></span>
-                                </div>
-                            </div>
-                            <p>{{list.textContent}}</p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Template Content</label>
-                        </div>
-                    </div>
-                    <br>
-                    <form [formGroup]="templateContent">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Header</label>
-                                    <input type="text" class="form-control" formControlName='textHead'>
-                                </div>
-                                <div class="form-group">
-                                    <label>Content</label>
-                                    <input type="text" class="form-control" formControlName='textContent'>
-                                </div>
-                                <div class="form-group">
-                                    <label>Project_Three</label>
-                                    <ng-select formControlName="project_Three">
-                                        <ng-option *ngFor="let subscriber of projectDetails" [value]="subscriber">
-                                            {{subscriber.title}}
-                                        </ng-option>
-                                    </ng-select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Project_One</label>
-                                    <ng-select formControlName="project_One">
-                                        <ng-option *ngFor="let subscriber of projectDetails" [value]="subscriber">
-                                            {{subscriber.title}}
-                                        </ng-option>
-                                    </ng-select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Project_Two</label>
-                                    <ng-select formControlName="project_Two">
-                                        <ng-option *ngFor="let subscriber of projectDetails" [value]="subscriber">
-                                            {{subscriber.title}}
-                                        </ng-option>
-                                    </ng-select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Learn More URL</label>
-                                    <input type="text" class="form-control" formControlName='learnMore_URL'>
-                                </div>
+                                <p>{{list.textContent}}</p>
                             </div>
                         </div>
                         <br>
-                        <div class="col-md-12 text-center aligin_Button" (click)='onSubmitContent()' placement="top"
-                            ngbTooltip="Add template content">
-                            <span class="ri-add-circle-fill" style="font-size: 45px; cursor: pointer;">
-                            </span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Template Content</label>
+                            </div>
                         </div>
-                    </form>
-                    <!--Model-->
-                    <ng-template #preview let-modal>
-                        <div class="modal-header">
-                            <button type="button" class="close" (click)="modal.dismiss('Cross click')"
-                                aria-hidden="true"><span class="ri-close-line"></span></button>
-                        </div>
-                        <div class="modal-body">
-                            <!DOCTYPE html>
-                            <html lang="en">
+                        <br>
+                        <form [formGroup]="templateContent">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Header</label>
+                                        <input type="text" class="form-control" formControlName='textHead'>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Content</label>
+                                        <input type="text" class="form-control" formControlName='textContent'>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Project_Three</label>
+                                        <ng-select formControlName="project_Three">
+                                            <ng-option *ngFor="let subscriber of projectDetails" [value]="subscriber">
+                                                {{subscriber.title}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Project_One</label>
+                                        <ng-select formControlName="project_One">
+                                            <ng-option *ngFor="let subscriber of projectDetails" [value]="subscriber">
+                                                {{subscriber.title}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Project_Two</label>
+                                        <ng-select formControlName="project_Two">
+                                            <ng-option *ngFor="let subscriber of projectDetails" [value]="subscriber">
+                                                {{subscriber.title}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Learn More URL</label>
+                                        <input type="text" class="form-control" formControlName='learnMore_URL'>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-12 text-center aligin_Button" (click)='onSubmitContent()' placement="top"
+                                ngbTooltip="Add template content">
+                                <span class="ri-add-circle-fill" style="font-size: 45px; cursor: pointer;">
+                                </span>
+                            </div>
+                        </form>
+                        <!--Model-->
+                        <ng-template #preview let-modal>
+                            <div class="modal-header">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <button class="btn btn-primary w-md waves-effect waves-light"
+                                            (click)="addTemplate()">Save the Template</button>
 
-                            <head>
-                                <script src="https://kit.fontawesome.com/ef9a692198.js"></script>
-                                <style>
-                                    .card {
-                                        background: #fff;
-                                    }
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="close" (click)="modal.dismiss('Cross click')"
+                                            aria-hidden="true"><span class="ri-close-line"></span></button>
+                                    </div>
+                                </div>
 
-                                    p {
-                                        margin-bottom: 5px;
-                                        font-size: 16px;
-                                    }
+                            </div>
+                            <div class="modal-body">
+                                <!DOCTYPE html>
+                                <html lang="en">
 
-                                    .img-fluid {
-                                        max-width: 100%;
-                                        height: auto;
-                                    }
-
-                                    .right {
-                                        text-align: right;
-                                    }
-
-                                    .center {
-                                        text-align: center;
-                                    }
-
-                                    .top_section {
-                                        background: url("assets/images/top.svg") no-repeat;
-                                        background-size: 98%;
-                                        height: 80vh;
-                                    }
-
-                                    .top_section h1 {
-                                        margin-top: 17rem;
-                                        text-align: center;
-                                        color: #fff;
-                                    }
-
-                                    .top_section img {
-                                        margin-top: 12rem;
-                                    }
-
-                                    .below_banner_para {
-                                        padding: 0 60px;
-                                    }
-
-                                    .first_project_list {
-                                        background: url("assets/images/right.svg") no-repeat;
-                                        background-size: 80%;
-                                        background-position: right;
-                                        padding: 0 60px 40px 60px;
-                                    }
-
-                                    .first_project_list h3 {
-                                        margin-top: 5rem;
-                                    }
-
-                                    .cover_back {
-                                        margin: 20px 0;
-                                        box-shadow: -30px -5px 85px #0000001C;
-                                        border-radius: 15px;
-                                    }
-
-                                    .cover_back img {
-                                        border-top-left-radius: 15px;
-                                        border-top-right-radius: 15px;
-                                    }
-
-                                    .content_sec {
-                                        padding: 20px;
-                                        border: 2px solid #70707033;
-                                        border-bottom-left-radius: 15px;
-                                        border-bottom-right-radius: 15px;
-                                        background: #fff;
-                                    }
-
-                                    .content_sec p {
-                                        font-size: 14px;
-                                    }
-
-                                    .second_project_list {
-                                        padding: 0 60px 40px 60px;
-                                    }
-
-                                    .third_project_list {
-                                        background: url("assets/images/left.svg") no-repeat;
-                                        background-size: 80%;
-                                        background-position: left;
-                                        padding: 0 60px 50px 60px;
-                                    }
-
-                                    .third_project_list h3 {
-                                        margin-top: 2rem;
-                                    }
-
-                                    .bottom_sec {
-                                        background: url("assets/images/bottom.svg") no-repeat;
-                                        background-size: 100%;
-                                        padding: 50px 60px 30px 60px;
-                                    }
-
-                                    .bottom_sec h3 {
-                                        color: #fff;
-                                        margin: 0px 0 20px 0;
-                                        font-weight: 500;
-                                    }
-
-                                    .bottom_sec p {
-                                        color: #fff;
-                                        font-weight: 500;
-                                        padding: 0 150px;
-                                    }
-
-                                    ul {
-                                        margin-bottom: 0;
-                                    }
-
-                                    .social_links {
-                                        padding: 20px 0 0 0;
-                                        text-align: center;
-                                    }
-
-                                    .social_links li {
-                                        list-style: none;
-                                        display: inline-block;
-                                        padding: 0 10px;
-                                        font-size: 20px;
-                                        color: #fff;
-                                    }
-
-                                    .ftlink {
-                                        color: #fff;
-                                    }
-
-                                    .copy_right {
-                                        background: #9A999E19;
-                                        padding: 20px 0;
-                                    }
-
-                                    .copy_right p {
-                                        font-size: 12px;
-                                        font-weight: 500;
-                                        color: #000;
-                                    }
-
-                                    @media only screen and (min-width: 1367px) and (max-width: 1499px) {
-                                        .top_section {
-                                            background-size: 97%;
-                                        }
-
-                                        .top_section h1 {
-                                            margin-top: 15rem;
-                                        }
-                                    }
-
-                                    @media only screen and (min-width: 1024px) and (max-width: 1366px) {
-                                        .top_section h1 {
-                                            margin-top: 13rem;
-                                        }
-
-                                        .first_project_list {
-                                            background-size: 88%;
-                                        }
-
-                                        .third_project_list {
-                                            background-size: 88%;
-                                        }
-
-                                        .bottom_sec {
-                                            padding: 20px 0;
+                                <head>
+                                    <script src="https://kit.fontawesome.com/ef9a692198.js"></script>
+                                    <style>
+                                        .card {
+                                            background: #fff;
                                         }
 
                                         p {
-                                            font-size: 14px;
+                                            margin-bottom: 5px;
+                                            font-size: 16px;
                                         }
-                                    }
 
-                                    @media print {
+                                        .img-fluid {
+                                            max-width: 100%;
+                                            height: auto;
+                                        }
+
+                                        .right {
+                                            text-align: right;
+                                        }
+
+                                        .center {
+                                            text-align: center;
+                                        }
+
                                         .top_section {
-                                            height: 30vh;
+                                            background: url("assets/images/top.svg") no-repeat;
+                                            background-size: 98%;
+                                            height: 80vh;
                                         }
 
                                         .top_section h1 {
-                                            margin-top: 14rem;
+                                            margin-top: 17rem;
+                                            text-align: center;
+                                            color: #fff;
                                         }
-                                    }
-                                </style>
-                            </head>
 
-                            <body>
+                                        .top_section img {
+                                            margin-top: 12rem;
+                                        }
 
-                                <!-- ============================================================== -->
-                                <!-- Start Page Content here -->
-                                <!-- ============================================================== -->
+                                        .below_banner_para {
+                                            padding: 0 60px;
+                                        }
 
-                                <div class="content-page">
+                                        .first_project_list {
+                                            background: url("assets/images/right.svg") no-repeat;
+                                            background-size: 80%;
+                                            background-position: right;
+                                            padding: 0 60px 40px 60px;
+                                        }
 
-                                    <!-- Start Content-->
+                                        .first_project_list h3 {
+                                            margin-top: 5rem;
+                                        }
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="card">
-                                                <section class="top_section">
-                                                    <div class="row">
-                                                        <div class="col-md-9">
-                                                            <h1>This week in Fikra</h1>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <img src="https://fikra.app/assets/image/logo_colored.png"
-                                                                class="img-fluid">
-                                                        </div>
-                                                        <div class="col-md-1"></div>
-                                                    </div>
-                                                </section>
+                                        .cover_back {
+                                            margin: 20px 0;
+                                            box-shadow: -30px -5px 85px #0000001C;
+                                            border-radius: 15px;
+                                        }
 
-                                                <section class="first_project_list"
-                                                    *ngFor="let list of container; index as i">
-                                                    <h3>{{list.textHead}}</h3>
-                                                    <p>{{list.textContent}}
-                                                    </p>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="cover_back">
-                                                                <img src="{{list.project_One.basicInfoId.projectImage}}"
+                                        .cover_back img {
+                                            border-top-left-radius: 15px;
+                                            border-top-right-radius: 15px;
+                                        }
+
+                                        .content_sec {
+                                            padding: 20px;
+                                            border: 2px solid #70707033;
+                                            border-bottom-left-radius: 15px;
+                                            border-bottom-right-radius: 15px;
+                                            background: #fff;
+                                        }
+
+                                        .content_sec p {
+                                            font-size: 14px;
+                                        }
+
+                                        .second_project_list {
+                                            padding: 0 60px 40px 60px;
+                                        }
+
+                                        .third_project_list {
+                                            background: url("assets/images/left.svg") no-repeat;
+                                            background-size: 80%;
+                                            background-position: left;
+                                            padding: 0 60px 50px 60px;
+                                        }
+
+                                        .third_project_list h3 {
+                                            margin-top: 2rem;
+                                        }
+
+                                        .bottom_sec {
+                                            background: url("assets/images/bottom.svg") no-repeat;
+                                            background-size: 100%;
+                                            padding: 50px 60px 30px 60px;
+                                        }
+
+                                        .bottom_sec h3 {
+                                            color: #fff;
+                                            margin: 0px 0 20px 0;
+                                            font-weight: 500;
+                                        }
+
+                                        .bottom_sec p {
+                                            color: #fff;
+                                            font-weight: 500;
+                                            padding: 0 150px;
+                                        }
+
+                                        ul {
+                                            margin-bottom: 0;
+                                        }
+
+                                        .social_links {
+                                            padding: 20px 0 0 0;
+                                            text-align: center;
+                                        }
+
+                                        .social_links li {
+                                            list-style: none;
+                                            display: inline-block;
+                                            padding: 0 10px;
+                                            font-size: 20px;
+                                            color: #fff;
+                                        }
+
+                                        .ftlink {
+                                            color: #fff;
+                                        }
+
+                                        .copy_right {
+                                            background: #9A999E19;
+                                            padding: 20px 0;
+                                        }
+
+                                        .copy_right p {
+                                            font-size: 12px;
+                                            font-weight: 500;
+                                            color: #000;
+                                        }
+
+                                        @media only screen and (min-width: 1367px) and (max-width: 1499px) {
+                                            .top_section {
+                                                background-size: 97%;
+                                            }
+
+                                            .top_section h1 {
+                                                margin-top: 15rem;
+                                            }
+                                        }
+
+                                        @media only screen and (min-width: 1024px) and (max-width: 1366px) {
+                                            .top_section h1 {
+                                                margin-top: 13rem;
+                                            }
+
+                                            .first_project_list {
+                                                background-size: 88%;
+                                            }
+
+                                            .third_project_list {
+                                                background-size: 88%;
+                                            }
+
+                                            .bottom_sec {
+                                                padding: 20px 0;
+                                            }
+
+                                            p {
+                                                font-size: 14px;
+                                            }
+                                        }
+
+                                        @media print {
+                                            .top_section {
+                                                height: 30vh;
+                                            }
+
+                                            .top_section h1 {
+                                                margin-top: 14rem;
+                                            }
+                                        }
+                                    </style>
+                                </head>
+
+                                <body>
+
+                                    <!-- ============================================================== -->
+                                    <!-- Start Page Content here -->
+                                    <!-- ============================================================== -->
+
+                                    <div class="content-page">
+
+                                        <!-- Start Content-->
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <section class="top_section">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <h1>This week in Fikra</h1>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <img src="https://fikra.app/assets/image/logo_colored.png"
                                                                     class="img-fluid">
-                                                                <div class="content_sec">
-                                                                    <h4>{{list.project_One.title}}</h4>
-                                                                    <p>{{list.project_One.basicInfoId.decription}}</p>
+                                                            </div>
+                                                            <div class="col-md-1"></div>
+                                                        </div>
+                                                    </section>
+
+                                                    <section class="first_project_list"
+                                                        *ngFor="let list of container; index as i">
+                                                        <h3>{{list.textHead}}</h3>
+                                                        <p>{{list.textContent}}
+                                                        </p>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="cover_back">
+                                                                    <img src="{{list.project_One.basicInfoId.projectImage}}"
+                                                                        class="img-fluid">
+                                                                    <div class="content_sec">
+                                                                        <h4>{{list.project_One.title}}</h4>
+                                                                        <p>{{list.project_One.basicInfoId.decription}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="cover_back">
+                                                                    <img src="{{list.project_Two.basicInfoId.projectImage}}"
+                                                                        class="img-fluid">
+                                                                    <div class="content_sec">
+                                                                        <h4>{{list.project_Two.title}}</h4>
+                                                                        <p>{{list.project_Two.basicInfoId.decription}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="cover_back">
+                                                                    <img src="{{list.project_Three.basicInfoId.projectImage}}"
+                                                                        class="img-fluid">
+                                                                    <div class="content_sec">
+                                                                        <h4>{{list.project_Three.title}}</h4>
+                                                                        <p>{{list.project_Three.basicInfoId.decription}}
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="cover_back">
-                                                                <img src="{{list.project_Two.basicInfoId.projectImage}}"
-                                                                    class="img-fluid">
-                                                                <div class="content_sec">
-                                                                    <h4>{{list.project_Two.title}}</h4>
-                                                                    <p>{{list.project_Two.basicInfoId.decription}}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="cover_back">
-                                                                <img src="{{list.project_Three.basicInfoId.projectImage}}"
-                                                                    class="img-fluid">
-                                                                <div class="content_sec">
-                                                                    <h4>{{list.project_Three.title}}</h4>
-                                                                    <p>{{list.project_Three.basicInfoId.decription}}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <p class="right"><a href="{{list.learnMore_URL}}">Discover
-                                                            More</a></p>
-                                                </section>
+                                                        <p class="right"><a href="{{list.learnMore_URL}}">Discover
+                                                                More</a></p>
+                                                    </section>
 
-                                                <p class="center"><img src="https://fikra.app/favicon.ico"
-                                                        class="img-fluid" width="50px"></p>
+                                                    <p class="center"><img src="https://fikra.app/favicon.ico"
+                                                            class="img-fluid" width="50px"></p>
 
-                                                <section class="bottom_sec">
-                                                    <h3 class="center">Lorem Ipsum</h3>
-                                                    <p class="center">Lorem Ipsum is simply dummy text of the
-                                                        printing and typesetting industry.
-                                                        Lorem
-                                                        Ipsum has been the industry’s standard dummyLorem Ipsum is
-                                                        simply dummy text of
-                                                        the printing and typesetting industry. Lorem Ipsum has been
-                                                        the industry’s standard</p>
-                                                    <ul class="social_links">
-                                                        <li><a class="ftlink" href="https://fikra.app/"><i
-                                                                    class="fab fa-facebook" aria-hidden="true"></i></a>
-                                                        </li>
-                                                        <li><a class="ftlink" href="https://fikra.app/"><i
-                                                                    class="fab fa-instagram" aria-hidden="true"></i></a>
-                                                        </li>
-                                                        <li><a class="ftlink" href="https://fikra.app/"><i
-                                                                    class="fab fa-twitter" aria-hidden="true"></i></a>
-                                                        </li>
-                                                        <li><a class="ftlink" href="https://fikra.app/"><i
-                                                                    class="fab fa-youtube" aria-hidden="true"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </section>
+                                                    <section class="bottom_sec">
+                                                        <h3 class="center">Lorem Ipsum</h3>
+                                                        <p class="center">Lorem Ipsum is simply dummy text of the
+                                                            printing and typesetting industry.
+                                                            Lorem
+                                                            Ipsum has been the industry’s standard dummyLorem Ipsum is
+                                                            simply dummy text of
+                                                            the printing and typesetting industry. Lorem Ipsum has been
+                                                            the industry’s standard</p>
+                                                        <ul class="social_links">
+                                                            <li><a class="ftlink" href="https://fikra.app/"><i
+                                                                        class="fab fa-facebook"
+                                                                        aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li><a class="ftlink" href="https://fikra.app/"><i
+                                                                        class="fab fa-instagram"
+                                                                        aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li><a class="ftlink" href="https://fikra.app/"><i
+                                                                        class="fab fa-twitter"
+                                                                        aria-hidden="true"></i></a>
+                                                            </li>
+                                                            <li><a class="ftlink" href="https://fikra.app/"><i
+                                                                        class="fab fa-youtube"
+                                                                        aria-hidden="true"></i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </section>
 
-                                                <section class="copy_right">
-                                                    <p class="center"><img
-                                                            src="https://fikra.app/assets/image/copyright.svg"
-                                                            width="20px"> 2021
-                                                        Fikra. All right reserved</p>
-                                                </section>
+                                                    <section class="copy_right">
+                                                        <p class="center"><img
+                                                                src="https://fikra.app/assets/image/copyright.svg"
+                                                                width="20px"> 2021
+                                                            Fikra. All right reserved</p>
+                                                    </section>
+                                                </div>
+
                                             </div>
 
                                         </div>
+                                        <!-- end row -->
 
                                     </div>
-                                    <!-- end row -->
 
+                                    <!-- ============================================================== -->
+                                    <!-- End Page content -->
+                                    <!-- ============================================================== -->
+
+                                </body>
+
+                                </html>
+                            </div>
+                        </ng-template>
+                        <!--Model End-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-md-2">
+                        <!-- Table -->
+                        <div class="table-responsive">
+                            <table id="basic-datatable"
+                                class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
+                                <thead>
+                                    <tr>
+                                        <th>Template Name</th>
+                                        <th>Head Name</th>
+                                        <th>Content</th>
+                                        <th>Project One Id</th>
+                                        <th>Project Two Id</th>
+                                        <th>Project Three Id</th>
+                                        <th>Url</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let user of templateDetails">
+                                    <tr *ngFor="let cont of user.content">
+                                        <td>{{user.templateName}}</td>
+                                        <td>{{cont.textHead}}</td>
+                                        <td>{{cont.textContent}}</td>
+                                        <td>{{cont.project_One}}</td>
+                                        <td>{{cont.project_Two}}</td>
+                                        <td>{{cont.project_Three}}</td>
+                                        <td>{{cont.learnMore_URL}}</td>
+                                        <td>
+                                            <a routerLink="/edit_template/{{ user._id}}" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickTempData(user)"><i
+                                                class="mdi mdi-pencil font-size-18"></i></a>  
+                                            <a class="text-danger text-info" ngbTooltip="Delete"><i
+                                                    class="mdi mdi-trash-can font-size-18"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- Pagination -->
+                            <div class="col-sm-12 col-md-5">
+                                <div class="text-md-right float-md-right pagination-rounded">
+                                    <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
+        </ngb-pagination> -->
                                 </div>
-
-                                <!-- ============================================================== -->
-                                <!-- End Page content -->
-                                <!-- ============================================================== -->
-
-                            </body>
-
-                            </html>
+                            </div>
+                            <!-- End Pagination -->
                         </div>
-                    </ng-template>
-                    <!--Model End-->
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>

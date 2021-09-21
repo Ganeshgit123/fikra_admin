@@ -1,12 +1,12 @@
 <div class="container-fluid">
-<app-pagetitle title="Projects" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+   <app-pagetitle title="Projects" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
-<div class="row">
-<div class="col-12">
-<div class="card">
-<div class="card-body">
-<div class="row mb-md-2">
-<!-- <div class="col-sm-12 col-md-2">
+   <div class="row">
+      <div class="col-12">
+         <div class="card">
+            <div class="card-body">
+               <div class="row mb-md-2">
+                  <!-- <div class="col-sm-12 col-md-2">
 <div class="dataTables_length" id="tickets-table_length"><label
 class="d-inline-flex align-items-center">Show
 <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
@@ -18,7 +18,7 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
 <option [ngValue]="100">100</option>
 </select> entries</label></div>
 </div> -->
-<!-- <div class="col-sm-12 col-md-6">
+                  <!-- <div class="col-sm-12 col-md-6">
 <div class="form-group row">
 <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
 <div class="col-md-4">
@@ -30,125 +30,220 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
 </div>
 </div>
 </div> -->
-<!-- Search -->
-<!-- <div class="col-sm-12 col-md-4">
+                  <!-- Search -->
+                  <!-- <div class="col-sm-12 col-md-4">
 <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
 class="d-inline-flex align-items-center">Search:
 <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
 aria-controls="tickets-table"></label></div>
 </div> -->
-<!-- End search -->
-</div>
-<!-- Table -->
-<div class="table-responsive">
-<table id="basic-datatable"
-class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
-<thead>
-<tr>
- <!-- <th>Select</th> -->
-<th>Project Title</th>
-<th>Category</th>
-<th>Launch Date</th>
-<th>User Name</th>
-<th>Goal Amount</th>
-<th>Remaining Duration</th>
-<th>Admin Approval</th>
-<th>Home Page Banner</th>
-<th *ngIf="showAccept === true">Action</th>
-</tr>
-</thead>
-<tbody>
-<tr *ngFor="let proj of projectList  | filter:searchTerm">
-<!-- <td>
+                  <!-- End search -->
+               </div>
+               <!-- Table -->
+               <div class="table-responsive">
+                  <table id="basic-datatable"
+                     class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
+                     <thead>
+                        <tr>
+                           <!-- <th>Select</th> -->
+                           <th>Project Title</th>
+                           <th>Category</th>
+                           <th>Launch Date</th>
+                           <th>User Name</th>
+                           <th>Goal Amount</th>
+                           <th>Remaining Duration</th>
+                           <th>Admin Approval</th>
+                           <th>Home Page Banner</th>
+                           <th *ngIf="showAccept === true">Action</th>
+                           <th>Transactions</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let proj of projectList  | filter:searchTerm">
+                           <!-- <td>
    <p class="text-center"><input  type="checkbox" value="" >
 </td> -->
-<td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
-<td>{{proj.basicInfoId.categoryName}}</td>
-<td>{{proj.basicInfoId.launchDate | date}}</td>
-<td><a routerLink="/view-creators/{{proj.userId._id}}">{{proj.userId.userName}}</a></td>
-<td>{{proj.basicInfoId.goalAmount}}</td>
-<td>{{proj.finalDate}} days</td>
+                           <td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
+                           <td>{{proj.basicInfoId.categoryName}}</td>
+                           <td>{{proj.basicInfoId.launchDate | date}}</td>
+                           <td><a routerLink="/view-creators/{{proj.userId._id}}">{{proj.userId.userName}}</a></td>
+                           <td>{{proj.basicInfoId.goalAmount}}</td>
+                           <td>{{proj.finalDate}} days</td>
 
-<td *ngIf="showAccept === true">
-<select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
-<option>{{proj.aproval_Status}}</option>
-<option>approved</option>
-<option>under_review</option>
-<option>rejected</option>
-</select>
-<select class="apprve_btn" *ngIf="proj.aproval_Status === 'approved'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
-<option>{{proj.aproval_Status}}</option>
-<option>rejected</option>
-</select>
-<select class="review_btn" *ngIf="proj.aproval_Status === 'under_review'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
-<option>{{proj.aproval_Status}}</option>
-<option>approved</option>
-<option>rejected</option>
-</select>
-<select class="reject_btn" *ngIf="proj.aproval_Status === 'rejected'" (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
-<option>{{proj.aproval_Status}}</option>
-</select>
-<span *ngIf="proj.aproval_Status === 'rejected'">
-   <p style="margin: 10px 0;"><strong>Reject Reason:</strong></p>
-   <p>  {{proj.rejection_comment}}</p>
-</span>
-</td>
-<td *ngIf="showAccept !== true">{{proj.aproval_Status}}</td>
-<td>
-   <label class="switch">
-      <input *ngIf="proj._is_On_HomeSlide_ == true"  type="checkbox" checked (change)="onHomeBannerStatus($event,proj._id)">
-      <input *ngIf="proj._is_On_HomeSlide_ !== true" type="checkbox" unchecked (change)="onHomeBannerStatus($event,proj._id)">
-      <span class="slider"></span>
-  </label>
+                           <td *ngIf="showAccept === true">
+                              <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'"
+                                 (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
+                                 <option>{{proj.aproval_Status}}</option>
+                                 <option>approved</option>
+                                 <option>under_review</option>
+                                 <option>rejected</option>
+                              </select>
+                              <select class="apprve_btn" *ngIf="proj.aproval_Status === 'approved'"
+                                 (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
+                                 <option>{{proj.aproval_Status}}</option>
+                                 <option>rejected</option>
+                              </select>
+                              <select class="review_btn" *ngIf="proj.aproval_Status === 'under_review'"
+                                 (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
+                                 <option>{{proj.aproval_Status}}</option>
+                                 <option>approved</option>
+                                 <option>rejected</option>
+                              </select>
+                              <select class="reject_btn" *ngIf="proj.aproval_Status === 'rejected'"
+                                 (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
+                                 <option>{{proj.aproval_Status}}</option>
+                              </select>
+                              <span *ngIf="proj.aproval_Status === 'rejected'">
+                                 <p style="margin: 10px 0;"><strong>Reject Reason:</strong></p>
+                                 <p> {{proj.rejection_comment}}</p>
+                              </span>
+                           </td>
+                           <td *ngIf="showAccept !== true">{{proj.aproval_Status}}</td>
+                           <td>
+                              <label class="switch">
+                                 <input *ngIf="proj._is_On_HomeSlide_ == true" type="checkbox" checked
+                                    (change)="onHomeBannerStatus($event,proj._id)">
+                                 <input *ngIf="proj._is_On_HomeSlide_ !== true" type="checkbox" unchecked
+                                    (change)="onHomeBannerStatus($event,proj._id)">
+                                 <span class="slider"></span>
+                              </label>
 
-</td>
-<td>
-   <a *ngIf="showAccept === true" routerLink="/add_new_bill/proj-{{ proj._id}}//{{proj.userId._id}}" style="padding-right: 10px;">Create Invoice</a>
+                           </td>
+                           <td>
+                              <a *ngIf="showAccept === true"
+                                 routerLink="/add_new_bill/proj-{{ proj._id}}//{{proj.userId._id}}"
+                                 style="padding-right: 10px;">Create Invoice</a>
 
-   <a *ngIf="showAccept === true" class="text-danger text-info" ngbTooltip="Delete" (click)="deleteProject(proj._id)"><i
-     class="mdi mdi-trash-can font-size-18"></i></a>
- </td>
-</tr>
-</tbody>
-</table>
-</div>
-<!-- End table -->
-<div class="row justify-content-md-between align-items-md-center mt-2">
-<!-- <div class="col-sm-12 col-md-5">
+                              <a *ngIf="showAccept === true" class="text-danger text-info" ngbTooltip="Delete"
+                                 (click)="deleteProject(proj._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
+                           </td>
+                           <td>
+                              <button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                                 (click)="viewTrans(trans,proj._id)">View</button>
+                              <ng-template #trans let-modal>
+                                 <div class="modal-header">
+                                    <button type="button" class="close" (click)="modal.dismiss('Cross click')"
+                                       aria-hidden="true">×</button>
+                                 </div>
+                                 <div class="modal-body">
+                                    <div class="row">
+                                       <div class="col-md-2"></div>
+                                       <div class="col-md-3">
+                                          <p><strong>Payable Amount : </strong> {{payableAmount}}</p>
+                                       </div>
+                                       <div class="col-md-3">
+                                          <p><strong>Model Name : </strong> {{modelName}}</p>
+                                       </div>
+                                       <div class="col-md-4" *ngIf="!isEditTrans">
+                                          <button class="btn btn-primary mo-mb-2 ml-1" data-toggle="collapse"
+                                             (click)="isCollapsed = !isCollapsed">
+                                             Add New Transaction
+                                          </button>
+                                       </div>
+                                    </div>
+                                    <br>
+                                    <div class="collapse" id="collapseExample" [ngbCollapse]="isCollapsed">
+                                       <form [formGroup]="addTransData">
+                                          <div class="row">
+                                             <div class="col-md-4">
+                                                <div class="form-group">
+                                                   <label>Payed Amount</label>
+                                                   <input type="text" class="form-control" formControlName="payedAmount">
+                                                </div>
+                                             </div>
+                                             <div class="col-md-4">
+                                                <div class="form-group">
+                                                   <label>Balance Payable</label>
+                                                   <input type="text" class="form-control"
+                                                      formControlName="balancePayable">
+                                                </div>
+                                             </div>
+                                             <div class="col-md-4">
+                                                <div class="form-group">
+                                                   <label>Description</label>
+                                                   <textarea class="form-control" formControlName="description"></textarea>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <br>
+                                          <p class="text-center"><button type="button"
+                                                class="btn btn-primary w-md waves-effect waves-light"
+                                                (click)="onTransSubmit()">Save</button></p>
+                                       </form>
+                                    </div>
+                                    <div class="table-responsive">
+                                       <table id="basic-datatable"
+                                          class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+                                          <thead>
+                                             <tr>
+                                                <th>Payed Amount</th>
+                                                <th>Balance Payable</th>
+                                                <th>Description</th>
+                                                <th>Date</th>
+                                                <th>Action</th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                             <tr *ngFor="let item of transHistory">
+                                                <td>{{item.payedAmount}}</td>
+                                                <td>{{item.balancePayable}}</td>
+                                                <td>{{item.description}}</td>
+                                                <td>{{item.dateTransfer | date}}</td>
+                                                <td>
+                                                   <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="editTrans(item)"><i
+                 class="mdi mdi-pencil font-size-18"></i></a>  
+             <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteTrans(item._id)"><i
+                     class="mdi mdi-trash-can font-size-18"></i></a>     
+                                                </td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                 </div>
+                              </ng-template>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <!-- End table -->
+               <div class="row justify-content-md-between align-items-md-center mt-2">
+                  <!-- <div class="col-sm-12 col-md-5">
 <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
 {{startIndex}} to
 {{endIndex}} of {{totalRecords}}
 entries
 </div>
 </div> -->
-<!-- Pagination -->
-<div class="col-sm-12 col-md-5">
-<div class="text-md-right float-md-right pagination-rounded">
-<!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
+                  <!-- Pagination -->
+                  <div class="col-sm-12 col-md-5">
+                     <div class="text-md-right float-md-right pagination-rounded">
+                        <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
 </ngb-pagination> -->
-</div>
-</div>
-<!-- End Pagination -->
-</div>
-</div>
-</div>
-</div>
-</div>
+                     </div>
+                  </div>
+                  <!-- End Pagination -->
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 
 <ng-template #centerDataModal let-modal>
-<div class="modal-header">
-<h5 class="modal-title mt-0">Rejection Reason</h5>
-<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-</div>
-<div class="modal-body">
-<form [formGroup]="addComment">
-<div class="form-group">
-<label>Reason</label>
-<textarea class="form-control" formControlName="rejection_comment"></textarea>
-</div>
-<br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="rejectReason()">Save</button></p>
-</form>
-</div>
+   <div class="modal-header">
+      <h5 class="modal-title mt-0">Rejection Reason</h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+   </div>
+   <div class="modal-body">
+      <form [formGroup]="addComment">
+         <div class="form-group">
+            <label>Reason</label>
+            <textarea class="form-control" formControlName="rejection_comment"></textarea>
+         </div>
+         <br>
+         <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+               (click)="rejectReason()">Save</button></p>
+      </form>
+   </div>
 </ng-template>
