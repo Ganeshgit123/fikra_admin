@@ -1,0 +1,123 @@
+<div class="container-fluid">    
+   <app-pagetitle title="Reports" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+   
+   <ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
+   <li [ngbNavItem]="1">
+   <a ngbNavLink>
+   <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+   <span class="d-none d-sm-block">Finiancial Report</span>
+   </a>
+   <br>
+   <ng-template ngbNavContent>
+    <div class="card card-body">
+        <div class="table-responsive">
+          <table id="basic-datatable"
+          class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+          <thead>
+          <tr>
+           <th>Year</th>
+           <th>Month</th>
+           <th>Total Keep It All</th>
+           <th>Total All or Nothing</th>
+           <th>Total Amount </th>
+           <th>Total VAT</th>
+           <th>Total Processing Fees</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of financialData">
+            <td>{{item.year}}</td>
+            <td>{{item.month}}</td>
+            <td>{{item.totalKeepitAll}}</td>
+            <td>{{item.totalAllorNothing}}</td>
+            <td>{{item.totalAmount}}</td>
+            <td>{{item.totalVat}}</td>
+            <td>{{item.totalProcessingFee}}</td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+        </div>
+   </ng-template>
+   </li>
+   <li [ngbNavItem]="2">
+   <a ngbNavLink>
+   <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+   <span class="d-none d-sm-block">Wallet Report</span>
+   </a>
+   <ng-template ngbNavContent>
+    <div class="card card-body">
+        <div class="table-responsive">
+          <table id="basic-datatable"
+          class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+          <thead>
+          <tr>
+           <th>User Name</th>
+           <th>User Id</th>
+           <th>First Date</th>
+           <th>Last Date</th>
+           <th>Current Balance</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of walletData">
+            <td>{{item.userName}}</td>
+            <td>{{item.userId}}</td>
+            <td>{{item.firstDate}}</td>
+            <td>{{item.LastDate}}</td>
+            <td>{{item.currentBalance}}</td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+        </div>
+   </ng-template>
+   </li>
+   <li [ngbNavItem]="3">
+   <a ngbNavLink>
+   <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+   <span class="d-none d-sm-block">Special Request Report</span>
+   </a>
+   <ng-template ngbNavContent>
+    <div class="card card-body">
+        <div class="table-responsive">
+          <table id="basic-datatable"
+          class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+          <thead>
+          <tr>
+           <th>Creator Name</th>
+           <th>Special Request Name</th>
+           <th>Bill Amount</th>
+           <th>Amount Received</th>
+           <th>VAT</th>
+           <th>Processing Fees</th>
+           <th>Payment Model Fees</th>
+           <th>Date of Received</th>
+           <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of specialReqData">
+            <td><a routerLink="/view-creators/{{ item.creatorId}}">{{item.creatorName}}<br>{{item.creatorId}}</a></td>
+            <td><a routerLink="/special_requests/{{ item.specialRequestId}}">{{item.specialRequest}}<br>{{item.specialRequestId}}</a></td>
+            <td>{{item.billAmount}}</td>
+            <td>{{item.amountRecived}}</td>
+            <td>{{item.VAT}}</td>
+            <td>{{item.processingFee}}</td>
+            <td>{{item.paymentModelFee}}</td>
+            <td>{{item.dateRecived | date}}</td>
+            <td>{{item.status}}</td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+        </div>
+   </ng-template>
+   </li>
+   </ul>
+   <div [ngbNavOutlet]="justifiednav"></div>
+   
+   
+   
+   </div>
+   

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from '../services/api-call.service';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -26,19 +27,15 @@ export class ProjectsComponent implements OnInit {
   launchDate:any;
   duraDate:any;
   finalDate:any = [];
-  transHistory = [];
-  payableAmount:any;
-  modelName:any;
-  isCollapsed = true;
-  addTransData:FormGroup;
-  projId:any;
-  isEditTrans:any;
-  transId:any;
+  reportProjList: any = [];
+  pledgePaymentList = [];
 
  constructor(
   private apiCall: ApiCallService,
   private formBuilder: FormBuilder,
-  private modalService: NgbModal) {
+  private modalService: NgbModal,
+  private route: ActivatedRoute,
+    private router: Router,) {
  }
 
   ngOnInit(): void {
@@ -46,12 +43,6 @@ export class ProjectsComponent implements OnInit {
 
     this.addComment = this.formBuilder.group({
       rejection_comment: [''],
-    });
-
-    this.addTransData = this.formBuilder.group({
-      description: [''],
-      payedAmount: [''],
-      balancePayable: [''],
     });
 
     this._fetchData();
@@ -91,6 +82,7 @@ export class ProjectsComponent implements OnInit {
 
         })
 
+      
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -291,31 +283,34 @@ export class ProjectsComponent implements OnInit {
         console.log('Error', error)
       } 
     )
+  }  
+
+  reportShow(keepItAll,isAllNothing,reportModel: any,id){
+    this.modalService.open(reportModel, { centered: true,size:'xl' });
+    
+    if(keepItAll == true){
+      this.reportKeepItAll(id);
+    }else if(isAllNothing == true){
+      this.reportAllorNothing(id);
+    }
   }
 
-
-
-  viewTrans(trans: any,id){
-    this.modalService.open(trans, { centered: true,size: 'xl' });
-    this.projId = id;
-    this.fetchTransaction(this.projId);
-  }
-
-  fetchTransaction(id){
+  reportKeepItAll(id){
     let params = {
-      url: "admin/getTransactionAdmin",
+      url: "admin/getProjectReport_KIA",
       projectId : id
     }  
     this.apiCall.projectLikedGetService(params).subscribe((result:any)=>{
       let resu = result.body;
       if(resu.error == false)
       {
-       this.payableAmount = resu.data.payableAmount;
-       this.modelName = resu.data.modelName;
-        this.transHistory = resu.data.transactionHistory;
+
+        this.reportProjList = resu.data;
+        this.pledgePaymentList = resu.data.pledgedPayment;
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+        this.router.navigateByUrl('/projects');
       }
     },(error)=>{
        console.error(error);
@@ -323,118 +318,27 @@ export class ProjectsComponent implements OnInit {
     }); 
   }
 
-  onTransSubmit(){
+  reportAllorNothing(id){
+    let params = {
+      url: "admin/getProjectReport_AON",
+      projectId : id
+    }  
+    this.apiCall.projectLikedGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
 
-    if(this.isEditTrans){
-      this.transEditService(this.addTransData.value)
-      return;
-    }
+        this.reportProjList = resu.data;
+        this.pledgePaymentList = resu.data.pledgedPayment;
 
-    const postData = this.addTransData.value;
-    postData['projectId'] = this.projId;
-    postData['createdBy'] = this.updatedby;
-    postData['userType'] = "admin";
-    postData['role'] = this.role;
-
-    var params = {
-      url: 'admin/addTransactionAdmin',
-      data: postData
-    }
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-          this.modalService.dismissAll();
-          this.isCollapsed = true;
-          this.ngOnInit();
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-        }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
-      } 
-    )
-  }
-
-  editTrans(data){
-
-    this.isCollapsed = false;
-    this.isEditTrans = true;
-
-    this.transId = data['_id']
-    this.addTransData   = this.formBuilder.group({
-      payedAmount: [data['payedAmount']],
-      balancePayable: [data['balancePayable']],
-      description: [data['description']],
-    })
-  }
-
-  transEditService(data){
-    data['projectId'] = this.projId
-    data['transactionId'] = this.transId;
-    data['createdBy'] = this.updatedby;
-    data['userType'] = "admin";
-    data['role'] = this.role;
-
-    var params = {
-      url: 'admin/editTransactionAdmin',
-      data: data
-    }
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          // Success
-          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-          this.isEditTrans = false;
-          this.modalService.dismissAll();
-          this.isCollapsed = true;
-          this.ngOnInit();
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-        }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+        this.router.navigateByUrl('/projects');
       }
-    )
-  }
-
-  onDeleteTrans(id){
-    const object = {}
-
-    object['transactionId'] = id;
-    object['projectId'] = this.projId;
-    object['createdBy'] = this.updatedby;
-   object['userType'] = "admin";
-   object['role'] = this.role;
-
-    var params = {
-     url: 'admin/deleteTransactionAdmin',
-     data: object
-   }
-  //  console.log("da",params)
-   this.apiCall.commonPostService(params).subscribe(
-     (response: any) => {
-       if (response.body.error == false) {
-         // Success
-         this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
-         this.ngOnInit();
-         this.modalService.dismissAll();
-       } else {
-         // Query Error
-         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-       }
-     },
-     (error) => {
-       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-       console.log('Error', error)
-     }
-   )
+    },(error)=>{
+       console.error(error);
+       
+    }); 
   }
 
 }

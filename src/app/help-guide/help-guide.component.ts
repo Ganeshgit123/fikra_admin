@@ -20,6 +20,7 @@ export class HelpGuideComponent implements OnInit {
   isEditQues = false;
   titleIdQuesAns:any;
   quesId:any;
+  quesAnsId:any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -220,6 +221,12 @@ export class HelpGuideComponent implements OnInit {
 
 
   addQuesAnsSubmit(){
+
+    if(this.isEditQues){
+      this.quesAnsEditService(this.addNewQuesAns.value)
+      return;
+    }
+    
     const postData = this.addNewQuesAns.value;
     postData['createdBy'] = this.updatedby;
     postData['userType'] = "admin";
@@ -247,23 +254,48 @@ export class HelpGuideComponent implements OnInit {
     )
   }
 
-  viewQuesAns(data,quesAnsModal: any){
+  viewQuesAns(data,quesdata,quesAnsModal: any){
     this.modalService.open(quesAnsModal, { centered: true });
     this.isEditQues = true;
     this.titleIdQuesAns = data['_id'];
+    this.quesAnsId = quesdata['_id'];
 
-    data.question.forEach((element,index) => {
-        var ques = element.question;
-        var ans = element.answer;
-        this.quesId = element._id;
-
-        this.addNewQuesAns = this.formBuilder.group({
-          question: [ques],
-          answer: [ans],
-          ebookId: [ this.titleIdQuesAns],
-        })
-    });
+    this.addNewQuesAns   = this.formBuilder.group({
+      question: [quesdata['question']],
+      answer: [quesdata['answer']],
+      ebookId: [this.titleIdQuesAns],
+    })
     
+  }
+
+  quesAnsEditService(data){
+    data['questionId'] = this.quesAnsId
+    data['createdBy'] = this.updatedby;
+    data['userType'] = "admin";
+    data['role'] = this.role;
+
+    var params = {
+      url: 'admin/editEbookQuestionAnswer',
+      data: data
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.isEdit = false;
+          this.modalService.dismissAll();
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
   }
 
 
@@ -306,4 +338,37 @@ export class HelpGuideComponent implements OnInit {
       }
     )
   }
+
+  deleteQuesAns(ebookid,queid){
+    const object = {}
+
+    object['questionId'] = queid;
+    object['ebookId'] = ebookid;
+    object['createdBy'] = this.updatedby;
+   object['userType'] = "admin";
+   object['role'] = this.role;
+
+    var params = {
+     url: 'admin/removeQuestionFromEbook',
+     data: object
+   }
+  //  console.log("da",params)
+   this.apiCall.commonPostService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
+  }
+
 }

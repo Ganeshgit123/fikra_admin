@@ -58,6 +58,8 @@ import { CreateProjectComponent } from './create-project/create-project.componen
 import { BankAccountListsComponent } from './creators/bank-account-lists/bank-account-lists.component';
 import { EditTemplateComponent } from './template/edit-template/edit-template.component';
 import { HelpGuideComponent } from './help-guide/help-guide.component';
+import { TransactionComponent } from './projects/transaction/transaction.component';
+import { ReportsComponent } from './reports/reports.component';
 
 const routes: Routes = [
   {
@@ -77,6 +79,7 @@ const routes: Routes = [
       {path: 'recommended_projects',component: RecommendedProjectsComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
       {path: 'view-projects/:id',component: ViewProjectsComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
       {path: 'project_reports',component: ProjectReportsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
+      {path: 'transactions/:id',component: TransactionComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
       
       {path: 'creators',component: CreatorsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_creator_true'}},
       {path: 'view-creators/:id',component: ViewCreatorsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_creator_true'}},
@@ -130,6 +133,9 @@ const routes: Routes = [
       {path: 'template',component: TemplateComponent,canActivate: [AuthGuard],},
       {path: 'edit_template/:id',component: EditTemplateComponent,canActivate: [AuthGuard],},
       {path: 'sms_campaign',component: SmsCampaignComponent,canActivate: [AuthGuard],},
+
+      {path: 'reports',component: ReportsComponent,canActivate: [AuthGuard],},
+
       
     ],
     canActivate: [AuthGuard]

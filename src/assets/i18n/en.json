@@ -201,6 +201,10 @@
     "HELP_GUIDES": {
       "TEXT": "Help Guides"
     },
+    "REPORTS": {
+      "TEXT": "Reports"
+    },
+    
     "LAYOUTS": {
       "TEXT": "Layouts",
       "LIST": {

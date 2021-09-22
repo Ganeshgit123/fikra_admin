@@ -20,9 +20,7 @@ export class ViewInvestorsComponent implements OnInit {
  constructor(private apiCall: ApiCallService,
   private formBuilder: FormBuilder,
   private route: ActivatedRoute,
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Investors' },{ label: 'Investor Details', active: true }];

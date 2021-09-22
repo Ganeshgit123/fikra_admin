@@ -12,6 +12,8 @@ export class BasicInfoComponent implements OnInit {
   projectId:any;
   projectList: any=[];
   basicInfoArray =[];
+  isKeepItAll:any;
+  isAllorNothing:any;
 
  constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
@@ -35,9 +37,11 @@ export class BasicInfoComponent implements OnInit {
       {
          this.projectList = resu.data.basicInfoId;
         //  console.log("list",this.projectList)
-
          this.basicInfoArray.push(this.projectList)
 
+         this.isKeepItAll = resu.data._is_Keep_It_All_;
+         this.isAllorNothing = resu.data._is_All_Nothing_;
+    //  console.log("model",this.isKeepItAll,this.isAllorNothing)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

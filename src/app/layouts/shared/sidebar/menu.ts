@@ -241,6 +241,12 @@ export const MENU: MenuItem[] = [
         link: '/special_requests'
     },
     {
+        id: 43,
+        label: 'MENUITEMS.REPORTS.TEXT',
+        icon: ' ri-file-list-3-fill',
+        link: '/reports'
+    },
+    {
         id: 38,
         label: 'MENUITEMS.TEMPLATES.TEXT',
         icon: ' ri-layout-3-line',
