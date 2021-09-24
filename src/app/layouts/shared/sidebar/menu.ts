@@ -277,6 +277,12 @@ export const MENU: MenuItem[] = [
         link: '/sms_campaign'
     },
     {
+        id: 45,
+        label: 'MENUITEMS.TRANSLATION.TEXT',
+        icon: 'fas fa-language',
+        link: '/translation'
+    },
+    {
         id: 31,
         label: 'MENUITEMS.NOTIFICATIONS.TEXT',
         icon: 'ri-notification-4-line',

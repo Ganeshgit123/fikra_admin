@@ -207,6 +207,9 @@
     "WRITEREQUESTS": {
       "TEXT": "Write Permision Requests"
     },
+    "TRANSLATION": {
+      "TEXT": "Translation"
+    },
     
     "LAYOUTS": {
       "TEXT": "Layouts",

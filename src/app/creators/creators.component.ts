@@ -23,6 +23,7 @@ export class CreatorsComponent implements OnInit {
   respnseData = [];
   adminApprovStat:any;
   adminrejecStat:any;
+  usedPerms:any;
 
   constructor(
   private apiCall: ApiCallService,
@@ -49,7 +50,7 @@ export class CreatorsComponent implements OnInit {
       this.showAccept = creatorPermssion[2].write
       this.approveAccept = creatorPermssion[2]._with_Approval_
       this.permName = creatorPermssion[2].permissionName
-      // console.log("prer",  this.permName)
+      // console.log("prer",  this.approveAccept)
 
     if(this.approveAccept == true){
       this.getAdminApproved();
@@ -184,6 +185,7 @@ export class CreatorsComponent implements OnInit {
         this.respnseData.forEach(element => {
             this.adminApprovStat = element._admin_Responce_Status;
             this.adminrejecStat = element._is_Rejected_;
+            this.usedPerms = element._is_Used_;
             // console.log("da",this.adminApprovStat)
         });
 

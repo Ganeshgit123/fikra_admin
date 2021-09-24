@@ -466,7 +466,7 @@
                                         <th>Project Two Id</th>
                                         <th>Project Three Id</th>
                                         <th>Url</th>
-                                        <th>Action</th>
+                                        <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody *ngFor="let user of templateDetails">
@@ -478,12 +478,12 @@
                                         <td>{{cont.project_Two}}</td>
                                         <td>{{cont.project_Three}}</td>
                                         <td>{{cont.learnMore_URL}}</td>
-                                        <td>
+                                        <!-- <td>
                                             <a routerLink="/edit_template/{{ user._id}}" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickTempData(user)"><i
                                                 class="mdi mdi-pencil font-size-18"></i></a>  
                                             <a class="text-danger text-info" ngbTooltip="Delete"><i
                                                     class="mdi mdi-trash-can font-size-18"></i></a>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 </tbody>
                             </table>

@@ -148,7 +148,7 @@ export class PermissionComponent implements OnInit {
    });
   }
 
-  write_update_change(event, permisionId,read,appr_stat){
+  write_update_change(event, permisionId,read){
     if(event.currentTarget.checked === true){
       var visible = true 
      } else {
@@ -159,7 +159,7 @@ export class PermissionComponent implements OnInit {
     data['permissionId']=permisionId
     data['read'] = read
     data['write'] = visible
-    data['_with_Approval_'] = appr_stat
+    data['_with_Approval_'] = false
     data['createdBy'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;

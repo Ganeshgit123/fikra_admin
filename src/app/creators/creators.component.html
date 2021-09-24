@@ -1,33 +1,8 @@
 <div class="container-fluid">
     <app-pagetitle title="Creators" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
     <div class="row" *ngIf="approveAccept == true" style="padding-bottom: 20px;">
-        <div class="col-md-6"></div>
-        <div class="col-md-6" *ngIf="adminApprovStat == false && adminrejecStat == false">
-            <div class="text-center">
-                <p>If you need a write permission for this page send a Request to SuperAdmin</p>
-                <button class="btn btn-primary" (click)="reqAdmin(adminReqModel)">Request</button>
-                <ng-template #adminReqModel let-modal>
-                    <div class="modal-header">
-                        <button type="button" class="close" (click)="modal.dismiss('Cross click')"
-                            aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-                        <form [formGroup]="changeDesc">
-                            <div class="form-group">
-                                <label>Comments</label>
-                                <textarea class="form-control" formControlName="changesDescription"></textarea>
-                            </div>
-                            <br>
-                            <p class="text-center"><button type="button"
-                                    class="btn btn-primary w-md waves-effect waves-light"
-                                    (click)="onReqSubmit()">Save</button></p>
-                        </form>
-                    </div>
-                </ng-template>
-            </div>
-        </div>
-        <div class="col-md-6" *ngIf="adminApprovStat == true || adminrejecStat == true">
-            <div class="text-center">
+        <div class="col-md-6">
+            <div class="text-center" *ngIf="adminApprovStat == true || adminrejecStat == true">
                 <p>Click here to check the SuperAdmin Resonse</p>
                 <button class="btn btn-primary" (click)="showAdminResponse(responModel)">View</button>
                 <ng-template #responModel let-modal>
@@ -62,6 +37,31 @@
                 </ng-template>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="text-center">
+                <p>If you need a write permission for this page send a Request to SuperAdmin</p>
+                <button class="btn btn-primary" (click)="reqAdmin(adminReqModel)">Request</button>
+                <ng-template #adminReqModel let-modal>
+                    <div class="modal-header">
+                        <button type="button" class="close" (click)="modal.dismiss('Cross click')"
+                            aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="changeDesc">
+                            <div class="form-group">
+                                <label>Comments</label>
+                                <textarea class="form-control" formControlName="changesDescription"></textarea>
+                            </div>
+                            <br>
+                            <p class="text-center"><button type="button"
+                                    class="btn btn-primary w-md waves-effect waves-light"
+                                    (click)="onReqSubmit()">Save</button></p>
+                        </form>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+
     </div>
     <div class="row">
         <div class="col-12">

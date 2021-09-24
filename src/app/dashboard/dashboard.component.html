@@ -1,0 +1,114 @@
+<div class="container-fluid">
+    <app-pagetitle title="Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-body">
+                        <div class="media">
+                            <div class="media-body overflow-hidden">
+                                <p class="text-truncate font-size-14 mb-2">Number of Projects</p>
+                                <h4 class="mb-0">{{projectCount}}</h4>
+                            </div>
+                            <div class="text-primary">
+                                <i class="ri-stack-line font-size-24"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-body">
+                        <div class="media">
+                            <div class="media-body overflow-hidden">
+                                <p class="text-truncate font-size-14 mb-2">No. of Successfull Projects</p>
+                                <h4 class="mb-0">{{successProjCount}}</h4>
+                            </div>
+                            <div class="text-primary">
+                                <i class="far fa-thumbs-up font-size-24"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-body">
+                        <div class="media">
+                            <div class="media-body overflow-hidden">
+                                <p class="text-truncate font-size-14 mb-2">Number of Pledges</p>
+                                <h4 class="mb-0">{{pledgeCount}}</h4>
+                            </div>
+                            <div class="text-primary">
+                                <i class=" fas fa-money-bill-wave font-size-24"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="card">
+                <div class="card-body">
+                    <!-- <div class="float-right d-none d-md-inline-block">
+                        <div class="btn-group mb-2">
+                            <button type="button" class="btn btn-sm btn-light">Today</button>
+                            <button type="button" class="btn btn-sm btn-light active">Weekly</button>
+                            <button type="button" class="btn btn-sm btn-light">Monthly</button>
+                        </div>
+                    </div> -->
+                    <h4 class="card-title mb-4">Projects</h4>
+                    <div>
+                        <apx-chart class="apex-charts" [series]="projectsChart.series" [chart]="projectsChart.chart"
+            [plotOptions]="projectsChart.plotOptions" [yaxis]="projectsChart.yaxis" [grid]="projectsChart.grid"
+            [tooltip]="projectsChart.tooltip" [stroke]="projectsChart.stroke"
+            [dataLabels]="projectsChart.dataLabels" [xaxis]="projectsChart.xaxis" [colors]="projectsChart.colors"
+            [fill]="projectsChart.fill">
+          </apx-chart>  
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <div class="float-right">
+                        <select class="custom-select custom-select-sm">
+                            <option selected>Apr</option>
+                            <option value="1">Mar</option>
+                            <option value="2">Feb</option>
+                            <option value="3">Jan</option>
+                        </select>
+                    </div> -->
+                    <h4 class="card-title mb-4">Users Count</h4>
+
+                    <apx-chart class="apex-charts" [series]="usersData.series" [chart]="usersData.chart"
+                        [legend]="usersData.legend" [colors]="usersData.colors" [labels]="usersData.labels"
+                        [dataLabels]="usersData.dataLabels" [plotOptions]="usersData.plotOptions">
+                    </apx-chart>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="text-center mt-4">
+                                <p class="mb-2 text-truncate"><i
+                                        class="mdi mdi-circle text-primary font-size-10 mr-1"></i> No. of Creators
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center mt-4">
+                                <p class="mb-2 text-truncate"><i
+                                        class="mdi mdi-circle text-success font-size-10 mr-1"></i> No. of Investors
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+
+    <!-- end row -->
+</div>

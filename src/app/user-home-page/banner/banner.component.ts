@@ -43,6 +43,7 @@ export class BannerComponent implements OnInit {
       buttonName: [''],
       buttonName_ar: [''],
       buttonURL: [''],
+      blogURL: [''],
     });
 
     this.addBannerImg = this.formBuilder.group({
@@ -81,6 +82,7 @@ export class BannerComponent implements OnInit {
           buttonName: [resu.data.buttonName,[]],
           buttonName_ar: [resu.data.buttonName_ar,[]],
           buttonURL: [resu.data.buttonURL,[]],
+          blogURL: [resu.data.blogURL,[]],
         });
 
         this.bannerImage = resu.data.bannerImage;

@@ -61,6 +61,7 @@ import { HelpGuideComponent } from './help-guide/help-guide.component';
 import { TransactionComponent } from './projects/transaction/transaction.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ChangeRequestUserComponent } from './roles/change-request-user/change-request-user.component';
+import { TranslationsComponent } from './translations/translations.component';
 
 const routes: Routes = [
   {
@@ -137,8 +138,9 @@ const routes: Routes = [
       {path: 'sms_campaign',component: SmsCampaignComponent,canActivate: [AuthGuard],},
 
       {path: 'reports',component: ReportsComponent,canActivate: [AuthGuard],},
+      {path: 'translation',component: TranslationsComponent,canActivate: [AuthGuard],},
 
-      
+
     ],
     canActivate: [AuthGuard]
     }
