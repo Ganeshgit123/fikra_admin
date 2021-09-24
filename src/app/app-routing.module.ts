@@ -60,6 +60,7 @@ import { EditTemplateComponent } from './template/edit-template/edit-template.co
 import { HelpGuideComponent } from './help-guide/help-guide.component';
 import { TransactionComponent } from './projects/transaction/transaction.component';
 import { ReportsComponent } from './reports/reports.component';
+import { ChangeRequestUserComponent } from './roles/change-request-user/change-request-user.component';
 
 const routes: Routes = [
   {
@@ -124,6 +125,7 @@ const routes: Routes = [
       {path: 'roles',component: RolesComponent, canActivate: [AuthGuard],},
       {path: 'permissions',component: PermissionComponent, canActivate: [AuthGuard],},
       {path: 'admin_users',component: AdminUsersComponent, canActivate: [AuthGuard],},
+      {path: 'user_write_request',component: ChangeRequestUserComponent, canActivate: [AuthGuard],},
       
       {path: 'bill_list',component: BillGenerationComponent, canActivate: [AuthGuard],},
       {path: 'invoice_bill/:id',component: InvoicePreviewComponent, canActivate: [AuthGuard],},

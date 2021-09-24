@@ -44,6 +44,7 @@ export class ViewProjectsComponent implements OnInit {
     
     this.commentForm = this.formBuilder.group({
       adminComment: [''],
+      feildNeedtoEdit: [''],
     });
 
     this.addFeatureForm = this.formBuilder.group({
@@ -195,6 +196,7 @@ export class ViewProjectsComponent implements OnInit {
     data['userType'] = "admin";
     data['role'] = this.role;
     data['adminComment'] = this.commentForm.get('adminComment').value;
+    data['feildNeedtoEdit'] = this.commentForm.get('feildNeedtoEdit').value;
 
     var params = {
       url: 'admin/sendRequestToUser',

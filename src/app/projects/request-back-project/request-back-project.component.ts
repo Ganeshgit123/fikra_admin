@@ -58,7 +58,7 @@ export class RequestBackProjectComponent implements OnInit {
       if(resu.error == false)
       {
          this.projectList = resu.data;
-        //  console.log("list",this.projectList)
+         console.log("list",this.projectList)
         this.projectList.forEach(element => {
           var firstDate = element.basicInfoId.launchDate;
           var endDate = element.basicInfoId.campaignDuation;

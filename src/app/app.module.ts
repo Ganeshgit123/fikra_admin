@@ -14,8 +14,10 @@ import { UiModule } from './shared/ui/ui.module';
 import { WidgetModule } from './shared/widget/widget.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { NgbNavModule, NgbDropdownModule, NgbTooltipModule, NgbPaginationModule, NgbTypeaheadModule,
-  NgbDatepickerModule,NgbCollapseModule,NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbNavModule, NgbDropdownModule, NgbTooltipModule, NgbPaginationModule, NgbTypeaheadModule,
+  NgbDatepickerModule, NgbCollapseModule, NgbAccordionModule
+} from '@ng-bootstrap/ng-bootstrap';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -118,6 +120,7 @@ import { EditTemplateComponent } from './template/edit-template/edit-template.co
 import { HelpGuideComponent } from './help-guide/help-guide.component';
 import { TransactionComponent } from './projects/transaction/transaction.component';
 import { ReportsComponent } from './reports/reports.component';
+import { ChangeRequestUserComponent } from './roles/change-request-user/change-request-user.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -132,16 +135,16 @@ export function createTranslateLoader(http: HttpClient): any {
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent,LoginComponent, 
-    PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent, 
-    UserHomePageComponent, AboutPageComponent, SettingsComponent, CategorySubCategoryComponent, 
+    DashboardComponent, ProjectsComponent, InvestorsComponent, CreatorsComponent, LoginComponent,
+    PrivacyPolicyComponent, CookiePolicyComponent, TermsOfUseComponent,
+    UserHomePageComponent, AboutPageComponent, SettingsComponent, CategorySubCategoryComponent,
     StartAProjectComponent, NewsletterContentComponent, BannerComponent, FeaturedTakingoffComponent,
     CreatorsCornerComponent, ClientLogosComponent, FooterContentComponent, ViewInvestorsComponent, FaqComponent,
-    ViewProjectsComponent, StartBannerComponent, QuoteComponent, 
-    ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent, 
-    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent, 
-    ContentSectionComponent, BasicInfoComponent, RewardsComponent, InvestorFormComponent, 
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, EditNewBillComponent, TemplateComponent, SmsCampaignComponent, CreateProjectComponent, BasicsComponent, StoryComponent, PaymentComponent, PromotionComponent, ProjectConentComponent, RewardContentComponent, FirstTabContentComponent, SecondTabContentComponent, ThirdTabContentComponent, FourthTabContentComponent, BankAccountListsComponent, EditTemplateComponent, HelpGuideComponent, TransactionComponent, ReportsComponent,
+    ViewProjectsComponent, StartBannerComponent, QuoteComponent,
+    ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent,
+    CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent,
+    ContentSectionComponent, BasicInfoComponent, RewardsComponent, InvestorFormComponent,
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, EditNewBillComponent, TemplateComponent, SmsCampaignComponent, CreateProjectComponent, BasicsComponent, StoryComponent, PaymentComponent, PromotionComponent, ProjectConentComponent, RewardContentComponent, FirstTabContentComponent, SecondTabContentComponent, ThirdTabContentComponent, FourthTabContentComponent, BankAccountListsComponent, EditTemplateComponent, HelpGuideComponent, TransactionComponent, ReportsComponent, ChangeRequestUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -151,7 +154,7 @@ export function createTranslateLoader(http: HttpClient): any {
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     LayoutsModule,
     UiModule,
     CKEditorModule,

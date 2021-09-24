@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <app-pagetitle title="Roles" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    <div class="card card-body">
+        <div class="table-responsive">
+            <table id="basic-datatable" class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Write Permission Name</th>
+                        <th>Change Description</th>
+                        <th>Admin Approve Status</th>
+                        <th>Used Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of reqData">
+                        <td>{{item.adminUserId}}</td>
+                        <td>{{item.writePermissionName}}</td>
+                        <td>{{item.changesDescription}}</td>
+                        <td>
+                            <a *ngIf="item._admin_Responce_Status === false" style="padding-right: 10px;"><button
+                                    class="btn btn-success w-md waves-effect waves-light" (click)="onChangeReqStatus(item._id,'approved')">Approve</button></a>
+                            <a *ngIf="item._admin_Responce_Status === true"> <button class="btn btn-primary w-md waves-effect waves-light" (click)="onChangeReqStatus(item._id,'rejected')">
+                                    Reject</button></a>
+                        </td>
+                        <td>{{item._is_Used_}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -204,6 +204,9 @@
     "REPORTS": {
       "TEXT": "Reports"
     },
+    "WRITEREQUESTS": {
+      "TEXT": "Write Permision Requests"
+    },
     
     "LAYOUTS": {
       "TEXT": "Layouts",

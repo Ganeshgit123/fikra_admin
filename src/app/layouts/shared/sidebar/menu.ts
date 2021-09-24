@@ -207,6 +207,12 @@ export const MENU: MenuItem[] = [
                 link: '/permissions',
                 parentId: 32
             },
+            {
+                id: 44,
+                label: 'MENUITEMS.WRITEREQUESTS.TEXT',
+                link: '/user_write_request',
+                parentId: 32
+            },
         ]
     },
     {
