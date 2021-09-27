@@ -15,6 +15,7 @@ export class TranslationsComponent implements OnInit {
   stringData = [];
   isEdit = false;
   contentId:any;
+  searchTerm;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,  } from "@angular/core";
 import { ApiCallService } from "../services/api-call.service";
 import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -9,6 +9,7 @@ import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
   templateUrl: "./subscribers.component.html",
   styleUrls: ["./subscribers.component.scss"],
 })
+
 export class SubscribersComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   updatedby: any;
@@ -17,8 +18,11 @@ export class SubscribersComponent implements OnInit {
   newsletterData:FormGroup;
   subscribersList = [];
   subscriberId = [];
+  templateDetails = [];
+  templateId = '';
   isAllSelect = false;
   htmlElement : any;
+  DataTemplete: any;
   editorData = '<p>Hello, world!</p>';
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -45,6 +49,26 @@ export class SubscribersComponent implements OnInit {
     });
     
     this.fetchSubscribersList();
+    this.fetchTemplateData();
+  }
+
+  changeTemplate(element){
+    this.DataTemplete = this.templateDetails.find(ele => ele._id == element);
+    console.log(this.DataTemplete)
+  }
+
+  fetchTemplateData() {
+    let params = {
+      url: "admin/getAllTemplate",
+    }
+    this.apiCall.commonGetService(params).subscribe((result: any) => {
+      let resu = result.body;
+      if (resu.error == false) {
+        this.templateDetails = resu.data
+      }
+    }, (error) => {
+      console.error(error);
+    });
   }
 
   fetchSubscribersList() {
@@ -107,6 +131,7 @@ export class SubscribersComponent implements OnInit {
   }
 
   onSubmit(){
+    this.htmlElement = document.getElementById('newsletterTemp').outerHTML
     this.newsletterData.value['htmlContent']= this.htmlElement
     this.newsletterData.value['emailIds']= this.subscriberId.join(" | ")
 
@@ -123,6 +148,8 @@ export class SubscribersComponent implements OnInit {
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {
+          this.modalService.dismissAll();
+          this.subscriberId = []
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
         } else {
           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')

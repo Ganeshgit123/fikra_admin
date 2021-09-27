@@ -18,11 +18,14 @@
                         <td>{{item.writePermissionName}}</td>
                         <td>{{item.changesDescription}}</td>
                         <td>
-                            <a *ngIf="item._admin_Responce_Status === false" style="padding-right: 10px;"><button
+                            <span *ngIf="item._admin_Responce_Status == false && item._is_Rejected_ == false "><a style="padding-right: 10px;"><button
                                     class="btn btn-success w-md waves-effect waves-light" (click)="onChangeReqStatus(item._id,'approved')">Approve</button></a>
-                            <a *ngIf="item._admin_Responce_Status === true"> <button class="btn btn-primary w-md waves-effect waves-light" (click)="onChangeReqStatus(item._id,'rejected')">
-                                    Reject</button></a>
+                            <a> <button class="btn btn-primary w-md waves-effect waves-light" (click)="onChangeReqStatus(item._id,'rejected')">
+                                    Reject</button></a></span>
+                            <span *ngIf="item._admin_Responce_Status == true">Approved</span>
+                            <span *ngIf="item._is_Rejected_ == true">Rejected</span>
                         </td>
+                        
                         <td>{{item._is_Used_}}</td>
                     </tr>
                 </tbody>

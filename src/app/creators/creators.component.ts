@@ -17,6 +17,7 @@ export class CreatorsComponent implements OnInit {
   role = sessionStorage.getItem('adminRole');
   getCreateList =[];
   showAccept = true;
+  tempWrite = false;
   approveAccept:boolean;
   changeDesc:FormGroup;
   permName:any;
@@ -161,7 +162,7 @@ export class CreatorsComponent implements OnInit {
       {
 
         this.respnseData = resu.data;
-
+        
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -216,6 +217,7 @@ export class CreatorsComponent implements OnInit {
          // Success
          this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
          this.modalService.dismissAll();
+         this.tempWrite  = true;
          this.ngOnInit();
        } else {
          // Query Error

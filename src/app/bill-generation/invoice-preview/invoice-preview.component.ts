@@ -36,6 +36,11 @@ export class InvoicePreviewComponent implements OnInit {
   dueDays:any;
   billxdate:any;
   invoicedate:any;
+  dueAmt:any;
+  processFeeAmt:any;
+  vatAmt:any;
+  paymentAmt:any;
+
    constructor(
     private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
@@ -61,18 +66,12 @@ export class InvoicePreviewComponent implements OnInit {
          this.billDetails = resu.data;
          this.invoDate = this.billDetails.invoiceData;
          this.invoNo = this.billDetails.invoiceNo;
-         this.totAmt = this.billDetails.totalAmount;
+         this.dueAmt = this.billDetails.dueAmount;
+         this.processFeeAmt = this.billDetails.processing_Fees;
+         this.vatAmt = this.billDetails.VAT;
+         this.paymentAmt = this.billDetails.paymentModel;
          this.discount = this.billDetails.discount;
-
-         var disTot = this.totAmt * this.discount/100;
-              
-         this.discountTot = this.totAmt - disTot;
-
-         this.taxPercent = this.billDetails.VAT_Percent;
-
-         var taxTot = this.discountTot * this.taxPercent/100;
-         
-         this.taxTotal = this.discountTot - taxTot;
+         this.totAmt = this.billDetails.totalAmount; 
 
          this.userSend = this.billDetails._is_Sended_;
          this.billingId = this.billDetails._id;

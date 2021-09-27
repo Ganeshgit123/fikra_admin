@@ -200,24 +200,26 @@
                                     <div class="row">
                                         <div class="col-md-8 col-8">
                                             <p class="text-right"><b>SUBTOTAL : </b></p>
+                                            <p class="text-right"><b>PROCESSING FEES : </b></p>
+                                            <p class="text-right"><b>VAT RATE : </b></p>
+                                            <p class="text-right"><b>PAYMENT MODEL FEES : </b></p>
                                             <p class="text-right"><b>DISCOUNT :</b></p>
-                                            <p class="text-right"><b>SUBTOTAL LESS DISCOUNT :</b></p>
-                                            <p class="text-right"><b>TAX RATE :</b></p>
-                                            <p class="text-right"><b>TOTAL TAX :</b></p>
+                                            <p class="text-right"><b>GRAND TOTAL :</b></p>
                                             <!-- <p class="text-right"><b>SHIPPING/HANDLING :</b></p> -->
                                         </div>
                                         <div class="col-md-4 col-4">
+                                            <p class="text-right"><b>{{dueAmt}}</b></p>
+                                            <p class="text-right"><b>{{processFeeAmt}}</b></p>
+                                            <p class="text-right"><b>{{vatAmt}}</b></p>
+                                            <p class="text-right"><b>{{paymentAmt}}</b></p>
+                                            <p class="text-right"><b>{{discount}}</b></p>
                                             <p class="text-right"><b>{{totAmt}}</b></p>
-                                            <p class="text-right"><b>{{discount}} %</b></p>
-                                            <p class="text-right"><b>{{discountTot}}</b></p>
-                                            <p class="text-right"><b>{{taxPercent}} %</b></p>
-                                            <p class="text-right"><b>{{taxTotal}}</b></p>
                                             <!-- <p class="text-right"><b>0.00</b></p> -->
                                         </div>
                                     </div>
 
                                     <hr>
-                                    <h3 class="text-right">SAR {{taxTotal}}</h3>
+                                    <h3 class="text-right">SAR {{totAmt}}</h3>
                                 </div>
                             </div>
                             <br>

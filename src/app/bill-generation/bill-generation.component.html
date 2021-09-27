@@ -49,9 +49,10 @@
                                         <th>Creator Name</th>
                                         <th>Service Type</th>
                                         <th>Service Name</th>
-                                        <th>Total Amount</th>
+                                        <th>Sub Amount</th>
                                         <th>Due Date</th>
-                                        <th>Due Amount</th>
+                                        <th>Total Amount</th>
+                                        <th>Payment Status</th>
                                         <th>Preview</th>
                                     </tr>
                                 </thead>
@@ -69,9 +70,13 @@
                                             <span *ngIf="user.serviceType === 'specialService'"><a
                                                     routerLink="/special_requests/{{user.serviceId}}">{{user.serviceId}}</a></span>
                                         </td>
-                                        <td>{{user.totalAmount}}</td>
-                                        <td>{{user.dueDate | date}}</td>
                                         <td>{{user.dueAmount}}</td>
+                                        <td>{{user.dueDate | date}}</td>
+                                        <td>{{user.totalAmount}}</td>
+                                        <td>
+                                            <span *ngIf = "user._isPayed_ == true">Payed</span>
+                                            <span *ngIf = "user._isPayed_ !== true">Not Payed</span>
+                                        </td>
                                         <td>
                                             <a routerLink="/invoice_bill/{{user._id}}">Preview</a></td>
                                     </tr>

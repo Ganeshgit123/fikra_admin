@@ -1,9 +1,15 @@
 <div class="container-fluid">
     <app-pagetitle title="Templates" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
-    <p class="text-right"><button class="btn btn-primary mo-mb-2 ml-1" data-toggle="collapse"
+    <p class="text-right">
+        <button class="btn btn-primary mo-mb-2 ml-1" *ngIf='isCollapsed' data-toggle="collapse"
             (click)="isCollapsed = !isCollapsed">
             Add New Template
-        </button></p>
+        </button>
+        <button class="btn btn-primary mo-mb-2 ml-1" *ngIf='!isCollapsed' data-toggle="collapse"
+            (click)="isCollapsed = !isCollapsed">
+            Close
+        </button>
+    </p>
     <br>
     <div class="collapse" id="collapseExample" [ngbCollapse]="isCollapsed">
 
@@ -474,9 +480,9 @@
                                         <td>{{user.templateName}}</td>
                                         <td>{{cont.textHead}}</td>
                                         <td>{{cont.textContent}}</td>
-                                        <td>{{cont.project_One}}</td>
-                                        <td>{{cont.project_Two}}</td>
-                                        <td>{{cont.project_Three}}</td>
+                                        <td>{{cont.project_One.title}}</td>
+                                        <td>{{cont.project_Two.title}}</td>
+                                        <td>{{cont.project_Three.title}}</td>
                                         <td>{{cont.learnMore_URL}}</td>
                                         <!-- <td>
                                             <a routerLink="/edit_template/{{ user._id}}" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickTempData(user)"><i

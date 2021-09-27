@@ -59,12 +59,12 @@
                     </div> -->
                     <h4 class="card-title mb-4">Projects</h4>
                     <div>
-                        <apx-chart class="apex-charts" [series]="projectsChart.series" [chart]="projectsChart.chart"
-            [plotOptions]="projectsChart.plotOptions" [yaxis]="projectsChart.yaxis" [grid]="projectsChart.grid"
-            [tooltip]="projectsChart.tooltip" [stroke]="projectsChart.stroke"
-            [dataLabels]="projectsChart.dataLabels" [xaxis]="projectsChart.xaxis" [colors]="projectsChart.colors"
-            [fill]="projectsChart.fill">
-          </apx-chart>  
+                        <apx-chart class="apex-charts" [series]="projectsChart.series? projectsChart.series : []"
+                            [chart]="projectsChart.chart" [plotOptions]="projectsChart.plotOptions"
+                            [yaxis]="projectsChart.yaxis" [grid]="projectsChart.grid" [tooltip]="projectsChart.tooltip"
+                            [stroke]="projectsChart.stroke" [dataLabels]="projectsChart.dataLabels"
+                            [xaxis]="projectsChart.xaxis" [colors]="projectsChart.colors" [fill]="projectsChart.fill">
+                        </apx-chart>
                     </div>
                 </div>
 
@@ -102,6 +102,32 @@
                                         class="mdi mdi-circle text-success font-size-10 mr-1"></i> No. of Investors
                                 </p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="float-right">
+                        <select class="custom-select custom-select-sm" (click)="VisitClick($event.target.value)">
+                            <option selected value="today">Today</option>
+                            <option value="yesterday">Yesterday</option>
+                            <option value="todaywith_Searchengine">Today With SearchEngine</option>
+                            <option value="last_30_days">Last 30 Days</option>
+                            <option value="last_30_with_browser">Last 30 Days With Browser</option>
+                            <option value="last_30_with_chrome">Last 30 Days With Chrome</option>
+                            <option value="last_30_traffic">Last 30 Days Traffic</option>
+                        </select>
+                    </div>
+                    <h4 class="card-title mb-4">Visitors Count</h4>
+                    <div class="media">
+                        <div class="media-body overflow-hidden">
+                            <p class="text-truncate font-size-14 mb-2">Number of Counts</p>
+                            <h4 class="mb-0">{{totVistors}}</h4>
+                        </div>
+                        <div class="text-primary">
+                            <i class="far fa-eye font-size-24"></i>
                         </div>
                     </div>
                 </div>
