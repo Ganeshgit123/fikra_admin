@@ -285,61 +285,61 @@ export class ProjectsComponent implements OnInit {
     )
   }  
 
-  reportShow(keepItAll,isAllNothing,reportModel: any,id){
-    this.modalService.open(reportModel, { centered: true,size:'xl' });
+  // reportShow(keepItAll,isAllNothing,reportModel: any,id){
+  //   this.modalService.open(reportModel, { centered: true,size:'xl' });
     
-    if(keepItAll == true){
-      this.reportKeepItAll(id);
-    }else if(isAllNothing == true){
-      this.reportAllorNothing(id);
-    }
-  }
+  //   if(keepItAll == true){
+  //     this.reportKeepItAll(id);
+  //   }else if(isAllNothing == true){
+  //     this.reportAllorNothing(id);
+  //   }
+  // }
 
-  reportKeepItAll(id){
-    let params = {
-      url: "admin/getProjectReport_KIA",
-      projectId : id
-    }  
-    this.apiCall.projectLikedGetService(params).subscribe((result:any)=>{
-      let resu = result.body;
-      if(resu.error == false)
-      {
+  // reportKeepItAll(id){
+  //   let params = {
+  //     url: "admin/getProjectReport_KIA",
+  //     projectId : id
+  //   }  
+  //   this.apiCall.projectLikedGetService(params).subscribe((result:any)=>{
+  //     let resu = result.body;
+  //     if(resu.error == false)
+  //     {
 
-        this.reportProjList = resu.data;
-        this.pledgePaymentList = resu.data.pledgedPayment;
+  //       this.reportProjList = resu.data;
+  //       this.pledgePaymentList = resu.data.pledgedPayment;
 
-      }else{
-        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
-        this.router.navigateByUrl('/projects');
-      }
-    },(error)=>{
-       console.error(error);
+  //     }else{
+  //       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+  //       this.router.navigateByUrl('/projects');
+  //     }
+  //   },(error)=>{
+  //      console.error(error);
        
-    }); 
-  }
+  //   }); 
+  // }
 
-  reportAllorNothing(id){
-    let params = {
-      url: "admin/getProjectReport_AON",
-      projectId : id
-    }  
-    this.apiCall.projectLikedGetService(params).subscribe((result:any)=>{
-      let resu = result.body;
-      if(resu.error == false)
-      {
+  // reportAllorNothing(id){
+  //   let params = {
+  //     url: "admin/getProjectReport_AON",
+  //     projectId : id
+  //   }  
+  //   this.apiCall.projectLikedGetService(params).subscribe((result:any)=>{
+  //     let resu = result.body;
+  //     if(resu.error == false)
+  //     {
 
-        this.reportProjList = resu.data;
-        this.pledgePaymentList = resu.data.pledgedPayment;
+  //       this.reportProjList = resu.data;
+  //       this.pledgePaymentList = resu.data.pledgedPayment;
 
-      }else{
-        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
-        this.router.navigateByUrl('/projects');
-      }
-    },(error)=>{
-       console.error(error);
+  //     }else{
+  //       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+  //       this.router.navigateByUrl('/projects');
+  //     }
+  //   },(error)=>{
+  //      console.error(error);
        
-    }); 
-  }
+  //   }); 
+  // }
 
 }
 

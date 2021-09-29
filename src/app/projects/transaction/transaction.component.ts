@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from '../../services/api-call.service';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-transaction',
@@ -23,12 +24,15 @@ export class TransactionComponent implements OnInit {
   isEditTrans:any;
   transId:any;
   projectId:any;
+  fileUpload: any;
+  docUrl:any;
 
   constructor(
   private apiCall: ApiCallService,
   private formBuilder: FormBuilder,
   private modalService: NgbModal,
   private route: ActivatedRoute,
+  private spinner: NgxSpinnerService,
     private router: Router,) {
  }
 
@@ -40,6 +44,7 @@ export class TransactionComponent implements OnInit {
       description: [''],
       payedAmount: [''],
       balancePayable: [''],
+      document: [''],
     });
     this.fetchTransaction();
   }
@@ -73,6 +78,16 @@ export class TransactionComponent implements OnInit {
 
   }
 
+  uploadImageFile(event){
+    const file = event.target.files && event.target.files[0];
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+      }
+      reader.readAsDataURL(event.target.files[0]); 
+      this.fileUpload = file
+      // console.log(this.filesToUpload)
+    }
+
   onTransSubmit(){
 
     if(this.isEditTrans){
@@ -80,29 +95,57 @@ export class TransactionComponent implements OnInit {
       return;
     }
 
-    const postData = this.addTransData.value;
+    var postData = new FormData();
+
+    postData.append('imageToStore', this.fileUpload);
+
+    var params = {
+      url: 'admin/postImagetoS3',
+      data: postData
+    }
+    this.spinner.show();
+
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+
+        if (response.body.error == false) {
+              this.docUrl = response.body.data.Location
+
+              const postData = this.addTransData.value;
+    postData['document'] = this.docUrl;
     postData['projectId'] = this.projectId;
     postData['createdBy'] = this.updatedby;
     postData['userType'] = "admin";
     postData['role'] = this.role;
 
-    var params = {
+    var params1 = {
       url: 'admin/addTransactionAdmin',
       data: postData
     }
-    this.apiCall.commonPostService(params).subscribe(
+
+    this.apiCall.commonPostService(params1).subscribe(
       (response: any) => {
         if (response.body.error == false) {
+
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-          this.modalService.dismissAll();
           this.ngOnInit();
+          this.modalService.dismissAll();
+          this.spinner.hide();
+        } else {
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+          this.spinner.hide();
+        }
+      },
+    )
         } else {
           // Query Error
           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+          this.spinner.hide();
         }
       },
       (error) => {
         this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        this.spinner.hide();
         console.log('Error', error)
       } 
     )

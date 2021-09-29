@@ -54,9 +54,9 @@ aria-controls="tickets-table"></label></div>
                            <th>Remaining Duration</th>
                            <th>Admin Approval</th>
                            <th>Home Page Banner</th>
-                           <th *ngIf="showAccept === true">Action</th>
                            <th>Transactions</th>
-                           <th>Report</th>
+                           <!-- <th>Report</th> -->
+                           <th *ngIf="showAccept === true">Action</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -111,18 +111,15 @@ aria-controls="tickets-table"></label></div>
 
                            </td>
                            <td>
-                              <a *ngIf="showAccept === true"
-                                 routerLink="/add_new_bill/proj-{{ proj._id}}//{{proj.userId._id}}"
-                                 style="padding-right: 10px;">Create Invoice</a>
-
-                              <a *ngIf="showAccept === true" class="text-danger text-info" ngbTooltip="Delete"
-                                 (click)="deleteProject(proj._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
-                           </td>
-                           <td>
-                              <p class="text-center"><a routerLink="/transactions/{{proj._id}}"
+                              <span *ngIf="proj._is_succeed_ === true">
+                                 <p class="text-center"><a routerLink="/transactions/{{proj._id}}"
                                     class="btn btn-primary">View</a></p>
+                              </span>
+                             <span *ngIf="proj._is_succeed_ !== true">
+                                  <p>Project Not Yet Completed</p>
+                             </span>
                            </td>
-                           <td>
+                           <!-- <td>
                               <button class="btn btn-primary"
                                  (click)="reportShow(proj._is_Keep_It_All_,proj._is_All_Nothing_,reportModel,proj._id)">View</button>
                               <ng-template #reportModel let-modal>
@@ -273,6 +270,14 @@ aria-controls="tickets-table"></label></div>
                                        </div>
                                  </div>
                               </ng-template>
+                           </td> -->
+                                 <td>
+                              <!-- <a *ngIf="showAccept === true"
+                                 routerLink="/add_new_bill/proj-{{ proj._id}}//{{proj.userId._id}}"
+                                 style="padding-right: 10px;">Create Invoice</a> -->
+
+                              <a *ngIf="showAccept === true" class="text-danger text-info" ngbTooltip="Delete"
+                                 (click)="deleteProject(proj._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
                            </td>
                         </tr>
                      </tbody>

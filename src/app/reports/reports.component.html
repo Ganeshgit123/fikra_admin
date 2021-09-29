@@ -1,129 +1,210 @@
-<div class="container-fluid">    
-   <app-pagetitle title="Reports" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
-   
-   <ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
-   <li [ngbNavItem]="1">
-   <a ngbNavLink>
-   <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-   <span class="d-none d-sm-block">Finiancial Report</span>
-   </a>
-   <br>
-   <ng-template ngbNavContent>
-    <div class="card card-body">
-      <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export Xl</button></p>
+<div class="container-fluid">
+  <app-pagetitle title="Reports" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
-        <div class="table-responsive">
-          <table id="basic-datatable"
-          class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
-          <thead>
-          <tr>
-           <th>Year</th>
-           <th>Month</th>
-           <th>Total Keep It All</th>
-           <th>Total All or Nothing</th>
-           <th>Total Amount </th>
-           <th>Total VAT</th>
-           <th>Total Processing Fees</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of financialData">
-            <td>{{item.year}}</td>
-            <td>{{item.month}}</td>
-            <td>{{item.totalKeepitAll}}</td>
-            <td>{{item.totalAllorNothing}}</td>
-            <td>{{item.totalAmount}}</td>
-            <td>{{item.totalVat}}</td>
-            <td>{{item.totalProcessingFee}}</td>
-          </tr>
-          </tbody>
-          </table>
+  <ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>
+        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+        <span class="d-none d-sm-block">Business Model Report</span>
+      </a>
+      <ng-template ngbNavContent>
+        <app-model-related-report></app-model-related-report>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>
+        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+        <span class="d-none d-sm-block">Transaction Report</span>
+      </a>
+      <ng-template ngbNavContent>
+        <app-transaction-report></app-transaction-report>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <a ngbNavLink>
+        <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+        <span class="d-none d-sm-block">Special Request Report</span>
+      </a>
+      <ng-template ngbNavContent>
+        <div class="card card-body">
+          <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="archiveSpecialReport()">Archive Report</button></p>
+          <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
+              Xl</button></p>
+
+          <div class="table-responsive" *ngIf = "specialArchieve == false">
+            <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+              <thead>
+                <tr>
+                  <th>No #</th>
+                  <th>Creator Name</th>
+                  <th>Special Request Name</th>
+                  <th>Bill Amount</th>
+                  <th>Amount Received</th>
+                  <th>VAT</th>
+                  <th>Processing Fees</th>
+                  <th>Payment Method</th>
+                  <th>Date of Received</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of specialReqData; index as i">
+                  <td>{{i+1}}</td>
+                  <td><a routerLink="/view-creators/{{ item.creatorId}}">{{item.creatorName}}<br>{{item.creatorId}}</a>
+                  </td>
+                  <td><a
+                      routerLink="/special_requests/{{ item.specialRequestId}}">{{item.specialRequest}}<br>{{item.specialRequestId}}</a>
+                  </td>
+                  <td>{{item.billAmount}}</td>
+                  <td>{{item.amountRecived}}</td>
+                  <td>{{item.VAT}}</td>
+                  <td>{{item.processingFee}}</td>
+                  <td>Doubt</td>
+                  <td>{{item.dateRecived | date}}</td>
+                  <td>
+                    <select (change)="onChangeClosedStatus(item._id,$event.target.value)">
+                                 <option value="pending">Pending</option>
+                                 <option value="under_review">under_review</option>
+                                 <option value="closed">Closed</option>
+                              </select>
+                  </td>
+                </tr>
+                <tr *ngIf="(specialReqData==null) || (specialReqData.length == 0)">
+                  <td class="text-center" colspan="11">
+                     No Data Found
+                  </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-responsive" *ngIf = "specialArchieve == true">
+            <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+              <thead>
+                <tr>
+                  <th>No #</th>
+                  <th>Creator Name</th>
+                  <th>Special Request Name</th>
+                  <th>Bill Amount</th>
+                  <th>Amount Received</th>
+                  <th>VAT</th>
+                  <th>Processing Fees</th>
+                  <th>Payment Method</th>
+                  <th>Date of Received</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of archieveSpecialData; index as i">
+                  <td>{{i+1}}</td>
+                  <td><a routerLink="/view-creators/{{ item.creatorId}}">{{item.creatorName}}<br>{{item.creatorId}}</a>
+                  </td>
+                  <td><a
+                      routerLink="/special_requests/{{ item.specialRequestId}}">{{item.specialRequest}}<br>{{item.specialRequestId}}</a>
+                  </td>
+                  <td>{{item.billAmount}}</td>
+                  <td>{{item.amountRecived}}</td>
+                  <td>{{item.VAT}}</td>
+                  <td>{{item.processingFee}}</td>
+                  <td>Doubt</td>
+                  <td>{{item.dateRecived | date}}</td>
+                  <td>{{item.status}}</td>
+                </tr>
+                <tr *ngIf="(specialReqData==null) || (specialReqData.length == 0)">
+                  <td class="text-center" colspan="11">
+                     No Data Found
+                  </td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-   </ng-template>
-   </li>
-   <li [ngbNavItem]="2">
-   <a ngbNavLink>
-   <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-   <span class="d-none d-sm-block">Wallet Report</span>
-   </a>
-   <ng-template ngbNavContent>
-    <div class="card card-body">
-      <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export Xl</button></p>
+      </ng-template>
+    </li>
 
-        <div class="table-responsive">
-          <table id="basic-datatable"
-          class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
-          <thead>
-          <tr>
-           <th>User Name</th>
-           <th>User Id</th>
-           <th>First Date</th>
-           <th>Last Date</th>
-           <th>Current Balance</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of walletData">
-            <td>{{item.userName}}</td>
-            <td>{{item.userId}}</td>
-            <td>{{item.firstDate}}</td>
-            <td>{{item.LastDate}}</td>
-            <td>{{item.currentBalance}}</td>
-          </tr>
-          </tbody>
-          </table>
+
+    <li [ngbNavItem]="4">
+      <a ngbNavLink>
+        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+        <span class="d-none d-sm-block">Wallet Report</span>
+      </a>
+      <ng-template ngbNavContent>
+        <div class="card card-body">
+          <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
+              Xl</button></p>
+
+          <div class="table-responsive">
+            <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+              <thead>
+                <tr>
+                  <th>No #</th>
+                  <th>Account Name</th>
+                  <th>User Id</th>
+                  <th>First Date</th>
+                  <th>Last Date</th>
+                  <th>Current Balance</th>
+                  <th>Last Checked</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of walletData; index as i">
+                  <td>{{i+1}}</td>
+                  <td>{{item.userName}}</td>
+                  <td>{{item.userId}}</td>
+                  <td>{{item.firstDate}}</td>
+                  <td>{{item.LastDate}}</td>
+                  <td>{{item.currentBalance}}</td>
+                  <td>Doubt</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-   </ng-template>
-   </li>
-   <li [ngbNavItem]="3">
-   <a ngbNavLink>
-   <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-   <span class="d-none d-sm-block">Special Request Report</span>
-   </a>
-   <ng-template ngbNavContent>
-    <div class="card card-body">
-      <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export Xl</button></p>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="5">
+      <a ngbNavLink>
+        <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+        <span class="d-none d-sm-block">Finiancial Report</span>
+      </a>
+      <br>
+      <ng-template ngbNavContent>
+        <div class="card card-body">
+          <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
+              Xl</button></p>
 
-        <div class="table-responsive">
-          <table id="basic-datatable"
-          class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
-          <thead>
-          <tr>
-           <th>Creator Name</th>
-           <th>Special Request Name</th>
-           <th>Bill Amount</th>
-           <th>Amount Received</th>
-           <th>VAT</th>
-           <th>Processing Fees</th>
-           <th>Payment Model Fees</th>
-           <th>Date of Received</th>
-           <th>Status</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of specialReqData">
-            <td><a routerLink="/view-creators/{{ item.creatorId}}">{{item.creatorName}}<br>{{item.creatorId}}</a></td>
-            <td><a routerLink="/special_requests/{{ item.specialRequestId}}">{{item.specialRequest}}<br>{{item.specialRequestId}}</a></td>
-            <td>{{item.billAmount}}</td>
-            <td>{{item.amountRecived}}</td>
-            <td>{{item.VAT}}</td>
-            <td>{{item.processingFee}}</td>
-            <td>{{item.paymentModelFee}}</td>
-            <td>{{item.dateRecived | date}}</td>
-            <td>{{item.status}}</td>
-          </tr>
-          </tbody>
-          </table>
+          <div class="table-responsive">
+            <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Month</th>
+                  <th>Total Keep It All</th>
+                  <th>Total All or Nothing</th>
+                  <th>Total Amount </th>
+                  <th>Total VAT</th>
+                  <th>Total Processing Fees</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of financialData">
+                  <td>{{item.year}}</td>
+                  <td>{{item.month}}</td>
+                  <td>{{item.totalKeepitAll}}</td>
+                  <td>{{item.totalAllorNothing}}</td>
+                  <td>{{item.totalAmount}}</td>
+                  <td>{{item.totalVat}}</td>
+                  <td>{{item.totalProcessingFee}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-   </ng-template>
-   </li>
-   </ul>
-   <div [ngbNavOutlet]="justifiednav"></div>
-   
-   
-   
-   </div>
-   
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="justifiednav"></div>
+
+
+
+</div>

@@ -4,6 +4,26 @@ import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { ApiCallService } from "../services/api-call.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ActivatedRoute, Router } from '@angular/router';
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+
+export class UploadAdapter {
+  private loader;
+  constructor(loader: any) {
+    this.loader = loader;
+  }
+
+  upload() {
+    return this.loader.file
+          .then( file => new Promise( ( resolve, reject ) => {
+                var myReader= new FileReader();
+                myReader.onloadend = (e) => {
+                   resolve({ default: myReader.result });
+                }
+
+                myReader.readAsDataURL(file);
+          } ) );
+ };
+}
 
 @Component({
   selector: "app-template",
@@ -24,7 +44,19 @@ export class TemplateComponent implements OnInit {
   projecTwoId: any;
   projecThreeId: any;
   templateId:any;
+  articleContent:any;
 
+  public Editor = DecoupledEditor;
+  public onReady( editor ) {
+     editor.ui.getEditableElement().parentElement.insertBefore(
+         editor.ui.view.toolbar.element,
+         editor.ui.getEditableElement()
+     );
+     editor.plugins.get('FileRepository').createUploadAdapter = function (loader) {
+      console.log(btoa(loader.file));
+      return new UploadAdapter(loader);
+    };
+ }
   constructor(
     private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -42,13 +74,17 @@ export class TemplateComponent implements OnInit {
       textHead: '',
       textContent: '',
       project_One: null,
+      project_One_Description: '',
       project_Two: null,
+      project_Two_Description: '',
       project_Three: null,
-      learnMore_URL: '',
+      project_Three_Description: '',
+      // learnMore_URL: '',
     });
 
     this.contentForm = this.formBuilder.group({
       templateName: '',
+      blogContent: '',
     });
 
 
@@ -76,15 +112,8 @@ export class TemplateComponent implements OnInit {
   onSubmitContent() {
     if (this.templateContent.value['textHead'] !== '') {
       this.container.push(this.templateContent.value)
-      this.templateContent = this.formBuilder.group({
-        textHead: '',
-        textContent: '',
-        project_One: null,
-        project_Two: null,
-        project_Three: null,
-        learnMore_URL: '',
-      });
-
+      this.articleContent = this.contentForm.value.blogContent;
+      console.log("fe",this.articleContent)
     } else {
       this.contentForm.value.content = []
       this.apiCall.showToast("Can't process with empty Header", 'Error', 'errorToastr')

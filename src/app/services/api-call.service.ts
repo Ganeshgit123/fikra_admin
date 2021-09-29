@@ -230,6 +230,26 @@ export class ApiCallService {
     });
   }
 
+  reportModelGetService(params) {
+    this.accToken = sessionStorage.getItem('access_token');
+    this.updatedby = sessionStorage.getItem('adminId');
+    this.role = sessionStorage.getItem('adminRole');
+
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'auth': this.accToken,
+    });
+    return this.http.get(this.baseUrl + params.url,  {
+      params: new HttpParams()
+      .set('createdBy', this.updatedby)
+      .set('userType', 'admin')
+      .set('role',this.role )
+      .set('model',params.model),
+      headers: httpHeaders,
+      observe: 'response'
+    });
+  }
+
   billGetService(params) {
     this.accToken = sessionStorage.getItem('access_token');
     this.updatedby = sessionStorage.getItem('adminId');

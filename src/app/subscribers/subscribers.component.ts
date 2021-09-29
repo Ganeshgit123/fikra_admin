@@ -65,6 +65,7 @@ export class SubscribersComponent implements OnInit {
       let resu = result.body;
       if (resu.error == false) {
         this.templateDetails = resu.data
+        console.log("temp",this.templateDetails)
       }
     }, (error) => {
       console.error(error);
