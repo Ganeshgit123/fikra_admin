@@ -44,6 +44,7 @@ aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
 class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 <thead>
 <tr>
+  <th>S.No</th>
   <th>Display Name</th>
   <th>Full Name</th>
   <th>Email Id</th>
@@ -53,7 +54,8 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
 </tr>
 </thead>
 <tbody>
-<tr *ngFor="let user of getuserList  | filter:searchTerm">
+<tr *ngFor="let user of getuserList | filter:searchTerm ;let i = index">
+  <td>{{i+1}}</td>
   <td><a routerLink="/view-investors/{{ user._id}}">{{user.userName}}</a></td>
   <td>{{user.fullName}}</td>
   <td>{{user.email}}</td>

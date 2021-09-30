@@ -18,7 +18,7 @@ export class CreatorsComponent implements OnInit {
   getCreateList =[];
   showAccept = true;
   tempWrite = false;
-  approveAccept:boolean;
+  approveAccept = false;
   changeDesc:FormGroup;
   permName:any;
   respnseData = [];
@@ -51,7 +51,7 @@ export class CreatorsComponent implements OnInit {
       this.showAccept = creatorPermssion[2].write
       this.approveAccept = creatorPermssion[2]._with_Approval_
       this.permName = creatorPermssion[2].permissionName
-      // console.log("prer",  this.approveAccept)
+      console.log("prer",  this.approveAccept)
 
     if(this.approveAccept == true){
       this.getAdminApproved();
@@ -229,6 +229,10 @@ export class CreatorsComponent implements OnInit {
        console.log('Error', error)
      }
    )
+  }
+
+  onApproveIndependentStatus(val,id){
+     
   }
 
 }

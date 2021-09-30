@@ -33,45 +33,45 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { TablesModule } from './tables/tables.module';
 import { ProjectsComponent } from './projects/projects.component';
 import { InvestorsComponent } from './investors/investors.component';
 import { CreatorsComponent } from './creators/creators.component';
 import { LoginComponent } from './login/login.component';
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
-import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
-import { UserHomePageComponent } from './user-home-page/user-home-page.component';
-import { AboutPageComponent } from './about-page/about-page.component';
+import { PrivacyPolicyComponent } from './cms/privacy-policy/privacy-policy.component';
+import { CookiePolicyComponent } from './cms/cookie-policy/cookie-policy.component';
+import { TermsOfUseComponent } from './cms/terms-of-use/terms-of-use.component';
+import { UserHomePageComponent } from './cms/user-home-page/user-home-page.component';
+import { AboutPageComponent } from './cms/about-page/about-page.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CategorySubCategoryComponent } from './settings/category-sub-category/category-sub-category.component';
-import { StartAProjectComponent } from './start-a-project/start-a-project.component';
-import { NewsletterContentComponent } from './user-home-page/newsletter-content/newsletter-content.component';
-import { BannerComponent } from './user-home-page/banner/banner.component';
-import { FeaturedTakingoffComponent } from './user-home-page/featured-takingoff/featured-takingoff.component';
-import { CreatorsCornerComponent } from './user-home-page/creators-corner/creators-corner.component';
-import { ClientLogosComponent } from './user-home-page/client-logos/client-logos.component';
-import { FooterContentComponent } from './user-home-page/footer-content/footer-content.component';
+import { StartAProjectComponent } from './cms/start-a-project/start-a-project.component';
 
-import { ViewInvestorsComponent } from './view-investors/view-investors.component';
-import { FaqComponent } from './faq/faq.component';
-import { ViewProjectsComponent } from './view-projects/view-projects.component';
-import { StartBannerComponent } from './start-a-project/start-banner/start-banner.component';
-import { QuoteComponent } from './start-a-project/quote/quote.component';
-import { ProjectQComponent } from './start-a-project/project-q/project-q.component';
-import { VideoSectionComponent } from './start-a-project/video-section/video-section.component';
-import { WhyFikraComponent } from './start-a-project/why-fikra/why-fikra.component';
-import { ViewCreatorsComponent } from './view-creators/view-creators.component';
+import { NewsletterContentComponent } from './cms/user-home-page/newsletter-content/newsletter-content.component';
+import { BannerComponent } from './cms/user-home-page/banner/banner.component';
+import { FeaturedTakingoffComponent } from './cms/user-home-page/featured-takingoff/featured-takingoff.component';
+import { CreatorsCornerComponent } from './cms/user-home-page/creators-corner/creators-corner.component';
+import { ClientLogosComponent } from './cms/user-home-page/client-logos/client-logos.component';
+import { FooterContentComponent } from './cms/user-home-page/footer-content/footer-content.component';
+
+import { ViewInvestorsComponent } from './investors/view-investors/view-investors.component';
+import { FaqComponent } from './cms/faq/faq.component';
+import { ViewProjectsComponent } from './projects/view-projects/view-projects.component';
+import { StartBannerComponent } from './cms/start-a-project/start-banner/start-banner.component';
+import { QuoteComponent } from './cms/start-a-project/quote/quote.component';
+import { ProjectQComponent } from './cms/start-a-project/project-q/project-q.component';
+import { VideoSectionComponent } from './cms/start-a-project/video-section/video-section.component';
+import { WhyFikraComponent } from './cms/start-a-project/why-fikra/why-fikra.component';
+import { ViewCreatorsComponent } from './creators/view-creators/view-creators.component';
 import { CategoriesComponent } from './settings/category-sub-category/categories/categories.component';
 import { SubCategoriesComponent } from './settings/category-sub-category/sub-categories/sub-categories.component';
 import { CountriesComponent } from './settings/country-city/countries/countries.component';
 import { CitiesComponent } from './settings/country-city/cities/cities.component';
 import { CountryCityComponent } from './settings/country-city/country-city.component';
 import { TagsComponent } from './settings/tags/tags.component';
-import { MiddleSectionComponent } from './about-page/middle-section/middle-section.component';
-import { ContentSectionComponent } from './about-page/content-section/content-section.component';
-import { BasicInfoComponent } from './view-projects/basic-info/basic-info.component';
-import { RewardsComponent } from './view-projects/rewards/rewards.component';
+import { MiddleSectionComponent } from './cms/about-page/middle-section/middle-section.component';
+import { ContentSectionComponent } from './cms/about-page/content-section/content-section.component';
+import { BasicInfoComponent } from './projects/view-projects/basic-info/basic-info.component';
+import { RewardsComponent } from './projects/view-projects/rewards/rewards.component';
 
 import { InvestorFormComponent } from './investor-form/investor-form.component';
 import { CreatorsFormComponent } from './creators-form/creators-form.component';
@@ -79,24 +79,24 @@ import { AddInvestorFieldComponent } from './investor-form/add-investor-field/ad
 import { EditInvestorFieldComponent } from './investor-form/edit-investor-field/edit-investor-field.component';
 import { AddCreatorFieldComponent } from './creators-form/add-creator-field/add-creator-field.component';
 import { EditCreatorFieldComponent } from './creators-form/edit-creator-field/edit-creator-field.component';
-import { CreatorHandbookComponent } from './creator-handbook/creator-handbook.component';
+import { CreatorHandbookComponent } from './cms/creator-handbook/creator-handbook.component';
 import { RequestBackProjectComponent } from './projects/request-back-project/request-back-project.component';
 import { RecommendedProjectsComponent } from './projects/recommended-projects/recommended-projects.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
-import { HandbookComponent } from './start-a-project/handbook/handbook.component';
-import { AddHandbookComponent } from './creator-handbook/add-handbook/add-handbook.component';
-import { EditHandbookComponent } from './creator-handbook/edit-handbook/edit-handbook.component';
+import { ContactUsComponent } from './cms/contact-us/contact-us.component';
+import { HandbookComponent } from './cms/start-a-project/handbook/handbook.component';
+import { AddHandbookComponent } from './cms/creator-handbook/add-handbook/add-handbook.component';
+import { EditHandbookComponent } from './cms/creator-handbook/edit-handbook/edit-handbook.component';
 import { SpecialServicesComponent } from './settings/special-services/special-services.component';
 import { SubscribersComponent } from './subscribers/subscribers.component';
 import { SpecialRequestsComponent } from './special-requests/special-requests.component';
-import { CareerComponent } from './career/career.component';
-import { JobsComponent } from './career/jobs/jobs.component';
+import { CareerComponent } from './cms/career/career.component';
+import { JobsComponent } from './cms/career/jobs/jobs.component';
 import { ProjectReportsComponent } from './projects/project-reports/project-reports.component';
-import { LikedProjectsComponent } from './view-projects/liked-projects/liked-projects.component';
+import { LikedProjectsComponent } from './projects/view-projects/liked-projects/liked-projects.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { RolesComponent } from './roles/roles.component';
 import { PermissionComponent } from './roles/permission/permission.component';
-import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminUsersComponent } from './roles/admin-users/admin-users.component';
 import { BillGenerationComponent } from './bill-generation/bill-generation.component';
 import { InvoicePreviewComponent } from './bill-generation/invoice-preview/invoice-preview.component';
 import { CommissionChargesComponent } from './settings/commission-charges/commission-charges.component';
@@ -104,20 +104,20 @@ import { AddNewBillComponent } from './bill-generation/add-new-bill/add-new-bill
 import { EditNewBillComponent } from './bill-generation/edit-new-bill/edit-new-bill.component';
 import { TemplateComponent } from './template/template.component';
 import { SmsCampaignComponent } from './sms-campaign/sms-campaign.component';
-import { CreateProjectComponent } from './create-project/create-project.component';
-import { BasicsComponent } from './project-conent/basics/basics.component';
-import { StoryComponent } from './project-conent/story/story.component';
-import { PaymentComponent } from './project-conent/payment/payment.component';
-import { PromotionComponent } from './project-conent/promotion/promotion.component';
-import { ProjectConentComponent } from './project-conent/project-conent.component';
-import { RewardContentComponent } from './project-conent/reward-content/reward-content.component';
-import { FirstTabContentComponent } from './create-project/first-tab-content/first-tab-content.component';
-import { SecondTabContentComponent } from './create-project/second-tab-content/second-tab-content.component';
-import { ThirdTabContentComponent } from './create-project/third-tab-content/third-tab-content.component';
-import { FourthTabContentComponent } from './create-project/fourth-tab-content/fourth-tab-content.component';
+import { CreateProjectComponent } from './cms/create-project/create-project.component';
+import { BasicsComponent } from './cms/project-conent/basics/basics.component';
+import { StoryComponent } from './cms/project-conent/story/story.component';
+import { PaymentComponent } from './cms/project-conent/payment/payment.component';
+import { PromotionComponent } from './cms/project-conent/promotion/promotion.component';
+import { ProjectConentComponent } from './cms/project-conent/project-conent.component';
+import { RewardContentComponent } from './cms/project-conent/reward-content/reward-content.component';
+import { FirstTabContentComponent } from './cms/create-project/first-tab-content/first-tab-content.component';
+import { SecondTabContentComponent } from './cms/create-project/second-tab-content/second-tab-content.component';
+import { ThirdTabContentComponent } from './cms/create-project/third-tab-content/third-tab-content.component';
+import { FourthTabContentComponent } from './cms/create-project/fourth-tab-content/fourth-tab-content.component';
 import { BankAccountListsComponent } from './creators/bank-account-lists/bank-account-lists.component';
 import { EditTemplateComponent } from './template/edit-template/edit-template.component';
-import { HelpGuideComponent } from './help-guide/help-guide.component';
+import { HelpGuideComponent } from './cms/help-guide/help-guide.component';
 import { TransactionComponent } from './projects/transaction/transaction.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ChangeRequestUserComponent } from './roles/change-request-user/change-request-user.component';
@@ -125,6 +125,8 @@ import { TranslationsComponent } from './translations/translations.component';
 import { TemplateServeComponent } from './subscribers/template-serve/template-serve.component';
 import { TransactionReportComponent } from './reports/transaction-report/transaction-report.component';
 import { ModelRelatedReportComponent } from './reports/model-related-report/model-related-report.component';
+import { RequestPageComponent } from './cms/project-conent/request-page/request-page.component';
+import { CMSComponent } from './cms/cms.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -148,7 +150,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent,
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent,
     ContentSectionComponent, BasicInfoComponent, RewardsComponent, InvestorFormComponent,
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, EditNewBillComponent, TemplateComponent, SmsCampaignComponent, CreateProjectComponent, BasicsComponent, StoryComponent, PaymentComponent, PromotionComponent, ProjectConentComponent, RewardContentComponent, FirstTabContentComponent, SecondTabContentComponent, ThirdTabContentComponent, FourthTabContentComponent, BankAccountListsComponent, EditTemplateComponent, HelpGuideComponent, TransactionComponent, ReportsComponent, ChangeRequestUserComponent, TranslationsComponent, TemplateServeComponent, TransactionReportComponent, ModelRelatedReportComponent,
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, EditNewBillComponent, TemplateComponent, SmsCampaignComponent, CreateProjectComponent, BasicsComponent, StoryComponent, PaymentComponent, PromotionComponent, ProjectConentComponent, RewardContentComponent, FirstTabContentComponent, SecondTabContentComponent, ThirdTabContentComponent, FourthTabContentComponent, BankAccountListsComponent, EditTemplateComponent, HelpGuideComponent, TransactionComponent, ReportsComponent, ChangeRequestUserComponent, TranslationsComponent, TemplateServeComponent, TransactionReportComponent, ModelRelatedReportComponent, RequestPageComponent, CMSComponent,
   ],
   imports: [
     BrowserModule,
@@ -174,7 +176,6 @@ export function createTranslateLoader(http: HttpClient): any {
     PerfectScrollbarModule,
     DndModule,
     FullCalendarModule,
-    TablesModule,
     WidgetModule,
     NgxSpinnerModule,
     NgbAccordionModule,

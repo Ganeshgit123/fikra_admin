@@ -113,20 +113,22 @@ export class PermissionComponent implements OnInit {
   }
 
 
-  read_update_change(event, permisionId,write,appr_stat){
-    console.log(event.currentTarget.checked)
-    if(event.currentTarget.checked === true){
-      var visible = true 
-     } else {
-       var visible = false
-     }
-    
+  permission_update_change(event, permissions,val){
+
+    var change = event.currentTarget.checked
+
     var data= {}
+
+     if(val == 'read'){
+      data['read'] = change
+     } else if (val == 'write'){
+      data['write'] = change
+     } else if(val == 'with_approve'){
+      data['_with_Approval_'] = change
+     }
+     
     data['roleId']=this.roleIdByclick
-    data['permissionId']=permisionId
-    data['read'] = visible
-    data['write'] = write
-    data['_with_Approval_'] = appr_stat
+    data['permissionId']=permissions.permissionId
     data['createdBy'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;
@@ -136,40 +138,7 @@ export class PermissionComponent implements OnInit {
       url: 'admin/updateRolePermissions',
       data: data,  
     }
- console.log("data",params)
-    this.apiCall.commonPostService(params).subscribe((response:any)=>{
-      if(response.body.error == false)
-      {
-        this.apiCall.showToast('Changed Successfully', 'Success', 'successToastr')
-       }
-       else{
-        this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-       }
-   });
-  }
-
-  write_update_change(event, permisionId,read){
-    if(event.currentTarget.checked === true){
-      var visible = true 
-     } else {
-       var visible = false
-     }
-    var data= {}
-    data['roleId']=this.roleIdByclick
-    data['permissionId']=permisionId
-    data['read'] = read
-    data['write'] = visible
-    data['_with_Approval_'] = false
-    data['createdBy'] = this.updatedby;
-    data['userType'] = "admin";
-    data['role'] = this.role;
-
-    var params = 
-    {
-      url: 'admin/updateRolePermissions',
-      data: data,  
-    }
- 
+//  console.log("data",params)
     this.apiCall.commonPostService(params).subscribe((response:any)=>{
       if(response.body.error == false)
       {
