@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router,CanActivate,ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import { ApiCallService } from '../services/api-call.service';
-import Swal from 'sweetalert2';
 
 @Injectable()
 export class RoleGuardService implements CanActivate {

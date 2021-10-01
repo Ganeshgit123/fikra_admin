@@ -38,7 +38,7 @@ export class ChangeRequestUserComponent implements OnInit {
       {
 
         this.reqData = resu.data;
-
+       
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -49,7 +49,9 @@ export class ChangeRequestUserComponent implements OnInit {
   }
 
 
-  onChangeReqStatus(id,status){
+  onChangeReqStatus(vals,status){
+
+     var reqId = vals['_id'] 
 
     if(status == 'approved'){
       var adminApprove = true
@@ -58,20 +60,54 @@ export class ChangeRequestUserComponent implements OnInit {
       var adminApprove = false
       var adminReject = true
     }
+
+    if(adminApprove == true){
+       var apiUrl = vals['APIURL']
+       var pamData = vals['paramsForAPI'
+      ]
+       var newParams = {...pamData[0]}
+
+       newParams['createdBy'] = this.updatedby;
+       newParams['userType'] = "admin";
+       newParams['role'] = this.role;
+       delete(newParams['_id'])
+      var params = {
+        url: apiUrl,
+        data: newParams
+      }
+      // console.log("par",params)
+      this.apiCall.roleBasedPostService(params).subscribe(
+        (response: any) => {
+          if (response.body.error == false) {
+            // Success
+            this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
+            this.ngOnInit();
+          } else {
+            // Query Error
+            this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+          }
+        },
+        (error) => {
+          this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+          console.log('Error', error)
+        }
+      )
+    }
     const object = {}
 
-    object['requestId'] = id;
+    object['requestId'] = reqId;
     object['_is_Admin_Approved_'] = adminApprove;
     object['_is_Admin_Rejected_'] = adminReject;
     object['createdBy'] = this.updatedby;
    object['userType'] = "admin";
    object['role'] = this.role;
 
-    var params = {
+    var params1 = {
      url: 'admin/statusUpdateForRequest',
      data: object
    }
-   this.apiCall.commonPostService(params).subscribe(
+  //  console.log("2ndparms",params1)
+   this.apiCall.commonPostService(params1).subscribe(
      (response: any) => {
        if (response.body.error == false) {
          // Success

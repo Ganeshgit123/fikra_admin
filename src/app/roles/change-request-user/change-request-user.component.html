@@ -11,7 +11,6 @@
                         <th>Value From</th>
                         <th>Value To</th>
                         <th>Admin Approve Status</th>
-                        <th>Used Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,14 +22,12 @@
                         <td>{{item.valueTo}}</td>
                         <td>
                             <span *ngIf="item._is_Admin_Approved_ == false && item._is_Admin_Rejected_ == false "><a style="padding-right: 10px;"><button
-                                    class="btn btn-success w-md waves-effect waves-light" (click)="onChangeReqStatus(item._id,'approved')">Approve</button></a>
-                            <a> <button class="btn btn-primary w-md waves-effect waves-light" (click)="onChangeReqStatus(item._id,'rejected')">
+                                    class="btn btn-success w-md waves-effect waves-light" (click)="onChangeReqStatus(item,'approved')">Approve</button></a>
+                            <a> <button class="btn btn-primary w-md waves-effect waves-light" (click)="onChangeReqStatus(item,'rejected')">
                                     Reject</button></a></span>
                             <span *ngIf="item._is_Admin_Approved_ == true">Approved</span>
                             <span *ngIf="item._is_Admin_Rejected_ == true">Rejected</span>
                         </td>
-                        
-                        <td>{{item._is_Used_}}</td>
                     </tr>
                 </tbody>
             </table>

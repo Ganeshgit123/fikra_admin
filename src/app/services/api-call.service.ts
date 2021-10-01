@@ -305,6 +305,19 @@ export class ApiCallService {
     });
   }
 
+  roleBasedPostService(params){
+    this.accToken = sessionStorage.getItem('access_token');
+   
+    const httpHeaders = new HttpHeaders({
+      // 'Content-Type': 'application/json',
+      'auth': this.accToken,
+    });
+    
+    return this.http.post(params.url, params.data , {      
+      headers: httpHeaders,
+      observe: 'response'
+    });
+  }
 
   commonPostService(params) {
     

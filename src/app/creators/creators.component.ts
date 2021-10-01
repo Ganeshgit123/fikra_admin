@@ -281,7 +281,7 @@ export class CreatorsComponent implements OnInit {
      url: 'admin/requsetToSuperAdminForChange',
      data: object
    }
-   console.log("pa",params)
+  //  console.log("pa",params)
    this.apiCall.commonPostService(params).subscribe(
      (response: any) => {
        if (response.body.error == false) {
