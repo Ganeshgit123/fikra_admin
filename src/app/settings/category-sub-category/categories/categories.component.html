@@ -1,74 +1,97 @@
 <div class="card">
-<div class="card-body">
-<p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCategory(centerDataModal)">Add New</button></p>
-<ng-template #centerDataModal let-modal>
-<div class="modal-header">
-<button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-</div>
-<div class="modal-body">
-<form [formGroup]="addNewCategory">
-<div class="form-group">
-<label>Category Name(EN)</label>
-<input type="text" class="form-control" formControlName="categorieName">
-</div>
-<div class="form-group">
-    <label>Category Name(AR)</label>
-    <input type="text" class="form-control" formControlName="categorieNameAr">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-9">
+                <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                        class="d-inline-flex align-items-center">Search:
+                        <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                            aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+            </div>
+            <div class="col-md-3">
+                <p class="text-right" *ngIf="showAccept === true"><button type="button"
+                        class="btn btn-primary w-md waves-effect waves-light" (click)="addCategory(centerDataModal)">Add
+                        New</button></p>
+            </div>
+        </div>
+        <ng-template #centerDataModal let-modal>
+            <div class="modal-header">
+                <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addNewCategory">
+                    <div class="form-group">
+                        <label>Category Name(EN)</label>
+                        <input type="text" class="form-control" formControlName="categorieName">
+                    </div>
+                    <div class="form-group">
+                        <label>Category Name(AR)</label>
+                        <input type="text" class="form-control" formControlName="categorieNameAr">
+                    </div>
+                    <div class="form-group">
+                        <label>Category Description(EN)</label>
+                        <textarea class="form-control" formControlName="discription"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Category Description(AR)</label>
+                        <textarea class="form-control" formControlName="discriptionAr"></textarea>
+                    </div>
+                    <br>
+                    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                            (click)="addCategorySubmit()">Save</button></p>
+                </form>
+            </div>
+        </ng-template>
+        <div class="table-responsive">
+            <table id="basic-datatable" class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+                <thead>
+                    <tr>
+                        <th>Category Name(EN)</th>
+                        <th>Category Name(AR)</th>
+                        <th>Category Description(EN)</th>
+                        <th>Category Description(AR)</th>
+                        <th>Status</th>
+                        <th *ngIf="showAccept === true">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let item of categList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10;let i = index">
+                        <td>{{item.categorieName}}</td>
+                        <td>{{item.categorieNameAr}}</td>
+                        <td>{{item.discription}}</td>
+                        <td>{{item.discriptionAr}}</td>
+                        <td *ngIf="showAccept === true">
+                            <label class="switch">
+                                <input *ngIf="item._isOn_ === true" type="checkbox" checked
+                                    (change)="onchangeCategStatus($event,item._id)">
+                                <input *ngIf="item._isOn_ === false" type="checkbox" unchecked
+                                    (change)="onchangeCategStatus($event,item._id)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                        <td *ngIf="showAccept !== true">
+                            <span>
+                                <p *ngIf="item._isOn_ === true">ON</p>
+                                <p *ngIf="item._isOn_ !== true">OFF</p>
+                            </span>
+                        </td>
+                        <td *ngIf="showAccept === true">
+                            <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewCategory(item,centerDataModal)"><i
+                                    class="mdi mdi-pencil font-size-18"></i></a>
+                            <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteCateg(item._id)"><i
+                                    class="mdi mdi-trash-can font-size-18"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Pagination -->
+            <div class="col-sm-12 col-md-12">
+                <div class="text-md-right float-md-right pagination-rounded">
+                    <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+                    </ngb-pagination>
+                </div>
+            </div>
+            <!-- End Pagination -->
+        </div>
     </div>
-<div class="form-group">
-<label>Category Description(EN)</label>
-<textarea class="form-control" formControlName="discription"></textarea>
-</div>
-<div class="form-group">
-    <label>Category Description(AR)</label>
-    <textarea class="form-control" formControlName="discriptionAr"></textarea>
-    </div>
-<br>
-<p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addCategorySubmit()">Save</button></p>
-</form>
-</div>
-</ng-template>
-<div class="table-responsive">
-<table id="basic-datatable"
-class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
-<thead>
-<tr>
-<th>Category Name(EN)</th>
-<th>Category Name(AR)</th>
-<th>Category Description(EN)</th>
-<th>Category Description(AR)</th>
-<th>Status</th>
-<th *ngIf="showAccept === true">Action</th>
-</tr>
-</thead>
-<tbody>
-<tr *ngFor="let item of categList">
-<td>{{item.categorieName}}</td>
-<td>{{item.categorieNameAr}}</td>
-<td>{{item.discription}}</td>
-<td>{{item.discriptionAr}}</td>
-<td *ngIf="showAccept === true">
-<label class="switch">
-    <input *ngIf="item._isOn_ === true"  type="checkbox" checked (change)="onchangeCategStatus($event,item._id)">
-    <input *ngIf="item._isOn_ === false" type="checkbox" unchecked (change)="onchangeCategStatus($event,item._id)">
-<span class="slider"></span>
-</label>    
-</td>
-<td *ngIf="showAccept !== true">
-<span>
-    <p *ngIf="item._isOn_ === true">ON</p>
-    <p *ngIf="item._isOn_ !== true">OFF</p>
-</span>
-</td>
-<td *ngIf="showAccept === true">
-<a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewCategory(item,centerDataModal)"><i
-class="mdi mdi-pencil font-size-18"></i></a>
-<a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteCateg(item._id)"><i
-class="mdi mdi-trash-can font-size-18"></i></a>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 </div>

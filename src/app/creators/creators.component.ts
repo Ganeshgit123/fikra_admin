@@ -16,15 +16,19 @@ export class CreatorsComponent implements OnInit {
   updatedby = sessionStorage.getItem('adminId');
   role = sessionStorage.getItem('adminRole');
   getCreateList =[];
-  showAccept = true;
   tempWrite = false;
-  approveAccept = false;
   changeDesc:FormGroup;
   permName:any;
   respnseData = [];
   adminApprovStat:any;
   adminrejecStat:any;
   usedPerms:any;
+  isTimeBasedWirte:boolean;
+  canWrite:boolean;
+  showAccept:boolean;
+  approveAccept:boolean;
+  majorWrite = true;
+  requestWrite = true;
 
   constructor(
   private apiCall: ApiCallService,
@@ -51,11 +55,26 @@ export class CreatorsComponent implements OnInit {
       this.showAccept = creatorPermssion[2].write
       this.approveAccept = creatorPermssion[2]._with_Approval_
       this.permName = creatorPermssion[2].permissionName
-      console.log("prer",  this.approveAccept)
+      this.isTimeBasedWirte = JSON.parse(sessionStorage.getItem('isTimeBasedWirte'));
+      this.canWrite =JSON.parse(sessionStorage.getItem('canWrite'));
+     
+      if(this.showAccept === true && this.approveAccept === false){
+            this.majorWrite = true;
+            console.log("first_condition")
+      }else if(this.isTimeBasedWirte === true && this.canWrite === true){
+        this.majorWrite = true;
+        console.log("second_condition")
+      }else if(this.showAccept == true && this.approveAccept == true){
+        this.requestWrite = true;
+        console.log("request_condition")
+      }else{
+        this.majorWrite = false;
+        console.log("else_condition")
+      }
 
-    if(this.approveAccept == true){
-      this.getAdminApproved();
-    }
+    // if(this.approveAccept == true){
+    //   this.getAdminApproved();
+    // }
     }
   }
 
@@ -232,7 +251,53 @@ export class CreatorsComponent implements OnInit {
   }
 
   onApproveIndependentStatus(val,id){
-     
+
+    if(val.currentTarget.checked === true){
+      var visible = true 
+      var valFrom = false
+      var valTo = true
+     } else {
+       var visible = false
+       var valFrom = true
+       var valTo = false
+     }
+
+    const object = {}
+
+    object['createdBy'] = this.updatedby;
+   object['userType'] = "admin";
+   object['role'] = this.role;
+   object['tabName'] = "Creators";
+   object['feildName'] = "Creative Independent Status";
+   object['valueFrom'] = valFrom;
+   object['valueTo'] = valTo;
+   object['APIURL'] = "https://fikra.app/api/admin/setUserToIndepententSection";
+   object['paramsForAPI'] = {
+     ['creatorId'] : id,
+     ['_is_On_Creative_In_'] : visible,
+   };
+
+    var params = {
+     url: 'admin/requsetToSuperAdminForChange',
+     data: object
+   }
+   console.log("pa",params)
+   this.apiCall.commonPostService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast("Request Sent Successfully", 'Success', 'successToastr')
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
   }
 
 }

@@ -121,10 +121,16 @@ export class PermissionComponent implements OnInit {
 
      if(val == 'read'){
       data['read'] = change
+      data['write'] = null
+      data['_with_Approval_'] = null
      } else if (val == 'write'){
       data['write'] = change
+      data['read'] = null
+      data['_with_Approval_'] = null
      } else if(val == 'with_approve'){
       data['_with_Approval_'] = change
+      data['read'] = null
+      data['write'] = null
      }
      
     data['roleId']=this.roleIdByclick

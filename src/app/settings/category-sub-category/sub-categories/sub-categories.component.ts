@@ -18,6 +18,8 @@ export class SubCategoriesComponent implements OnInit {
   subCateId:any;
   showAccept = true;
   searchTerm;
+  page = 1;
+  total: any;
   
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -80,7 +82,9 @@ export class SubCategoriesComponent implements OnInit {
       if(resu.error == false)
       {
         this.subCateg = resu.list;
-        console.log("res",this.subCateg)
+      this.total = this.subCateg.length
+
+        // console.log("res",this.total)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

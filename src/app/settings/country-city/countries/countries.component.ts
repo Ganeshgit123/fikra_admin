@@ -16,6 +16,9 @@ export class CountriesComponent implements OnInit {
   countryList=[];
   countryId:any;
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -53,6 +56,7 @@ export class CountriesComponent implements OnInit {
       if(resu.error == false)
       {
         this.countryList = resu.data;
+        this.total = this.countryList.length
         // console.log("ef",this.countryList)
 
       }else{

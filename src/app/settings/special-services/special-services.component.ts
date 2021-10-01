@@ -16,6 +16,9 @@ export class SpecialServicesComponent implements OnInit {
   isEdit = false;
   serviceId:any;
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -55,6 +58,7 @@ export class SpecialServicesComponent implements OnInit {
       if(resu.error == false)
       {
         this.serviceList = resu.data;
+        this.total = this.serviceList.length
         // console.log("ef",this.categList)
 
       }else{

@@ -59,7 +59,7 @@ class="table table-bordered dt-responsive nowrap  no-footer dtr-inline">
 </tr>
 </thead>
 <tbody>
-<tr *ngFor="let item of subCateg | filter:searchTerm">
+<tr *ngFor="let item of subCateg | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10;let i = index">
 <td>{{item.categorieId.categorieName}} / {{item.categorieId.categorieNameAr}}</td>
 <td>{{item.subCategorieName}}</td>
 <td>{{item.subCategorieNameAr}}</td>
@@ -87,6 +87,14 @@ class="mdi mdi-trash-can font-size-18"></i></a>
 </tr>
 </tbody>
 </table>
+<!-- Pagination -->
+<div class="col-sm-12 col-md-12">
+    <div class="text-md-right float-md-right pagination-rounded">
+    <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+    </ngb-pagination>
+    </div>
+    </div>
+    <!-- End Pagination -->
 </div>
 </div>
 </div>

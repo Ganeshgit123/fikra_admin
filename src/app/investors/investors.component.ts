@@ -16,7 +16,8 @@ export class InvestorsComponent implements OnInit {
 
  getuserList: any=[];
  getfieldList: any=[];
- 
+ page = 1;
+ total: any;
  searchTerm;
 
  accToken = sessionStorage.getItem('access_token');
@@ -50,7 +51,8 @@ export class InvestorsComponent implements OnInit {
     {
       this.getfieldList = resu.fields;
       this.getuserList = resu.data;
-
+      
+      this.total = this.getuserList.length
     }else{
       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
     }

@@ -15,6 +15,9 @@ export class CategoriesComponent implements OnInit {
   isEdit = false;
   cateId:any;
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -54,6 +57,8 @@ export class CategoriesComponent implements OnInit {
       if(resu.error == false)
       {
         this.categList = resu.list;
+
+        this.total = this.categList.length
         // console.log("ef",this.categList)
 
       }else{

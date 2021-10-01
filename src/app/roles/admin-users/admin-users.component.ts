@@ -35,6 +35,7 @@ export class AdminUsersComponent implements OnInit {
       systemAdminUserName: [''],
       systemAdminPassword: [''],
       systemAdminRoleId: [''],
+      _isTimeBasedWrite_:['']
     });
 
     this.fetchUserData();
@@ -138,6 +139,7 @@ export class AdminUsersComponent implements OnInit {
       systemAdminUserName: [data['systemAdminUserName']],
       systemAdminPassword: [data['systemAdminPassword']],
       systemAdminRoleId: [this.adminRoleId],
+      _isTimeBasedWrite_: [data['_isTimeBasedWrite_']],
     });
 
   }

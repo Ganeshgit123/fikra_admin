@@ -30,7 +30,7 @@ export class ChangeRequestUserComponent implements OnInit {
 
   fetchRequestData(){
     let params = {
-      url: "admin/getAllAdminApprovalRequest",
+      url: "admin/getAllChangeRequestForSuperAdmin",
     }  
     this.apiCall.commonGetService(params).subscribe((result:any)=>{
       let resu = result.body;
@@ -50,16 +50,25 @@ export class ChangeRequestUserComponent implements OnInit {
 
 
   onChangeReqStatus(id,status){
+
+    if(status == 'approved'){
+      var adminApprove = true
+      var adminReject = false
+    }else if(status == 'rejected'){
+      var adminApprove = false
+      var adminReject = true
+    }
     const object = {}
 
     object['requestId'] = id;
-    object['status'] = status;
+    object['_is_Admin_Approved_'] = adminApprove;
+    object['_is_Admin_Rejected_'] = adminReject;
     object['createdBy'] = this.updatedby;
    object['userType'] = "admin";
    object['role'] = this.role;
 
     var params = {
-     url: 'admin/adminStatusApprove',
+     url: 'admin/statusUpdateForRequest',
      data: object
    }
    this.apiCall.commonPostService(params).subscribe(

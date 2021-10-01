@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <app-pagetitle title="Creators" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
-    <div class="row" *ngIf="approveAccept == true && showAccept == true" style="padding-bottom: 20px;">
+    <!-- <div class="row" *ngIf="approveAccept == true && showAccept == true" style="padding-bottom: 20px;">
         <div class="col-md-6" *ngIf="approveAccept == true">
             <div class="text-center">
                 <p>Click here to check the SuperAdmin Resonse</p>
@@ -63,7 +63,7 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -123,21 +123,22 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
                                     <td>{{user.email}}</td>
                                     <td>{{user.mobileNumber}}</td>
                                     <td>
-                                        <label class="switch" *ngIf="showAccept == true && approveAccept == true">
+
+                                        <label class="switch" *ngIf="requestWrite == true">
                                             <input *ngIf="user._is_On_Creative_In_ == true" type="checkbox" checked
                                                 (change)="onApproveIndependentStatus($event,user._id)">
                                             <input *ngIf="user._is_On_Creative_In_ !== true" type="checkbox" unchecked
                                                 (change)="onApproveIndependentStatus($event,user._id)">
                                             <span class="slider"></span>
                                         </label>
-                                        <label class="switch" *ngIf="showAccept == true && approveAccept == false">
+                                        <label class="switch" *ngIf="majorWrite == true && requestWrite == false">
                                             <input *ngIf="user._is_On_Creative_In_ == true" type="checkbox" checked
                                                 (change)="onCretiveIndependentStatus($event,user._id)">
                                             <input *ngIf="user._is_On_Creative_In_ !== true" type="checkbox" unchecked
                                                 (change)="onCretiveIndependentStatus($event,user._id)">
                                             <span class="slider"></span>
                                         </label>
-                                        <span *ngIf="showAccept == false">
+                                        <span *ngIf="majorWrite == false">
                                             <p *ngIf="user._is_On_Creative_In_ == true">ON</p>
                                             <p *ngIf="user._is_On_Creative_In_ !== true">OFF</p>
                                         </span>

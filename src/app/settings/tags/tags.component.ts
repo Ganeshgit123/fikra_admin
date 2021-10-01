@@ -17,6 +17,9 @@ export class TagsComponent implements OnInit {
   deleteStat:any;
   visibleStat:any;
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -54,6 +57,7 @@ export class TagsComponent implements OnInit {
       if(resu.error == false)
       {
         this.tagList = resu.data;
+        this.total = this.tagList.length
         // console.log("ef",this.tagList)
 
       }else{

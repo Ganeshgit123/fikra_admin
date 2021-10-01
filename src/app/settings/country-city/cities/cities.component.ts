@@ -18,6 +18,8 @@ export class CitiesComponent implements OnInit {
   contrid:any;
   showAccept = true;
   searchTerm;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -55,6 +57,12 @@ export class CitiesComponent implements OnInit {
       if(resu.error == false)
       {
         this.countryList = resu.data;
+
+        this.countryList .forEach(element => {
+         var cityLen = element.city
+          this.total = cityLen.length
+        });
+        console.log(this.total)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

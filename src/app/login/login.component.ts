@@ -90,6 +90,8 @@ export class LoginComponent implements OnInit {
        if(res.body.error == false){
          sessionStorage.setItem('access_token', (res.body.token));
          sessionStorage.setItem('adminId', (res.body.adminId));
+         sessionStorage.setItem('isTimeBasedWirte', (res.body.isTimeBasedWrite));
+         sessionStorage.setItem('canWrite', (res.body.canWrite));
 
          if(res.body.role == 's_a_r' ){
           sessionStorage.setItem('adminRole', (res.body.role));
