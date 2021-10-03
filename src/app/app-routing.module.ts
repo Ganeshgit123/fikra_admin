@@ -124,7 +124,7 @@ const routes: Routes = [
 
       {path: 'notifications',component: NotificationsComponent, canActivate: [AuthGuard],},
       {path: 'roles',component: RolesComponent, canActivate: [AuthGuard],},
-      {path: 'permissions',component: PermissionComponent, canActivate: [AuthGuard],},
+      {path: 'permissions/:id',component: PermissionComponent, canActivate: [AuthGuard],},
       {path: 'admin_users',component: AdminUsersComponent, canActivate: [AuthGuard],},
       {path: 'user_write_request',component: ChangeRequestUserComponent, canActivate: [AuthGuard],},
       

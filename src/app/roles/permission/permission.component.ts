@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Form} from '@angular/forms';
 import { ApiCallService } from '../../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-permission',
@@ -16,18 +17,20 @@ export class PermissionComponent implements OnInit {
   userList = [];
   permissionData = [];
   roleIdByclick:any;
-  isRoleClick = false;
   isEdit = false;
   adminUserId:any;
   changeTime:FormGroup;
+  permisId: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+  private route: ActivatedRoute,
     ) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Roles' },{ label: 'Permissions', active: true }];
+    this.route.params.subscribe(params => this.permisId = params.id);
     this.updatedby = sessionStorage.getItem('adminId');
     this.role = sessionStorage.getItem('adminRole');
 
@@ -38,6 +41,8 @@ export class PermissionComponent implements OnInit {
       timeFrom: [''],
       timeTo: [''],
     });
+
+    this.roleClick(this.permisId);
   }
 
   fetchRoleData(){
@@ -62,7 +67,6 @@ export class PermissionComponent implements OnInit {
   }
 
   roleClick(id){
-    this.isRoleClick = true;
     this.roleIdByclick = id
     let params = {
       url: "admin/getAdminUserByRoleId",

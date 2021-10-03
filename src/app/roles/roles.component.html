@@ -31,7 +31,7 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 </thead>
 <tbody>
 <tr  *ngFor="let item of roleData">
-<td>{{item.roleName}}</td>
+<td><a routerLink="/permissions/{{ item._id}}">{{item.roleName}}</a></td>
 <td>
 <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewRole(item,roleCorner)"><i
 class="mdi mdi-pencil font-size-18"></i></a>  

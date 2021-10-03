@@ -323,12 +323,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
                   parentId: 32
               },
               {
-                  id: 34,
-                  label: 'MENUITEMS.PERMISSIONS.TEXT',
-                  link: '/permissions',
-                  parentId: 32
-              },
-              {
                   id: 44,
                   label: 'MENUITEMS.WRITEREQUESTS.TEXT',
                   link: '/user_write_request',

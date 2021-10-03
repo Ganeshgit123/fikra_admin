@@ -27,8 +27,8 @@ export class CreatorsComponent implements OnInit {
   canWrite:boolean;
   showAccept:boolean;
   approveAccept:boolean;
-  majorWrite = true;
-  requestWrite = true;
+  majorWrite:boolean;
+  requestWrite:boolean;
 
   constructor(
   private apiCall: ApiCallService,
@@ -50,6 +50,9 @@ export class CreatorsComponent implements OnInit {
   }
 
   callRolePermission(){
+    if(sessionStorage.getItem('adminRole') == 's_a_r'){
+      this.majorWrite = true;
+    }
     if(sessionStorage.getItem('adminRole') !== 's_a_r'){
       let creatorPermssion = JSON.parse(sessionStorage.getItem('permission'))
       this.showAccept = creatorPermssion[2].write
@@ -57,20 +60,25 @@ export class CreatorsComponent implements OnInit {
       this.permName = creatorPermssion[2].permissionName
       this.isTimeBasedWirte = JSON.parse(sessionStorage.getItem('isTimeBasedWirte'));
       this.canWrite =JSON.parse(sessionStorage.getItem('canWrite'));
-     
-      if(this.showAccept === true && this.approveAccept === false){
+
+     if(this.showAccept == true){
+      if(this.approveAccept == false && this.isTimeBasedWirte == false){
             this.majorWrite = true;
             console.log("first_condition")
       }else if(this.isTimeBasedWirte === true && this.canWrite === true){
         this.majorWrite = true;
         console.log("second_condition")
-      }else if(this.showAccept == true && this.approveAccept == true){
+      }else if(this.approveAccept == true){
         this.requestWrite = true;
         console.log("request_condition")
       }else{
         this.majorWrite = false;
-        console.log("else_condition")
+      console.log("1st_else_condition")
       }
+    }else{
+      this.majorWrite = false;
+      console.log("2nd_else_condition")
+    }
 
     // if(this.approveAccept == true){
     //   this.getAdminApproved();
@@ -100,7 +108,7 @@ export class CreatorsComponent implements OnInit {
    }
 
    onCretiveIndependentStatus(values:any,val){
-
+    //  console.log("ganesh")
     if(values.currentTarget.checked === true){
       var visible = true 
      } else {

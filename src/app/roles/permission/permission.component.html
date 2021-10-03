@@ -2,18 +2,7 @@
     <app-pagetitle title="Permissions" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
     <div class="card">
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Role Title</label>
-                        <select class="form-control" (click)="roleClick($event.target.value)">
-                            <option selected disabled>Select Role</option>
-                            <option *ngFor="let item of roleData" value="{{item._id}}">{{item.roleName}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <p class="text-right" *ngIf="isRoleClick"><button type="button"
+            <p class="text-right"><button type="button"
                     class="btn btn-primary w-md waves-effect waves-light"
                     (click)="viewPermission(permissionModel)">Permission</button></p>
             <ng-template #permissionModel let-modal>
@@ -69,12 +58,13 @@
                     </div>
                 </div>
             </ng-template>
-            <div class="table-responsive" *ngIf="isRoleClick">
+            <div class="table-responsive">
                 <table id="basic-datatable" class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
                     <thead>
                         <tr>
                             <th>Name Of User</th>
                             <th>Email</th>
+                            <th>Time Based User</th>
                             <th>From Time</th>
                             <th>To Time</th>
                             <th>Update Time</th>
@@ -84,10 +74,14 @@
                         <tr *ngFor="let item of userList">
                             <td>{{item.systemAdminName}}</td>
                             <td>{{item.systemAdminUserName}}</td>
+                            <td>
+                                <span *ngIf = "item._isTimeBasedWrite_ == true">Yes</span>
+                                <span *ngIf = "item._isTimeBasedWrite_ == false">No</span>
+                            </td>
                             <td>{{item.timeFrom}}</td>
                             <td>{{item.timeTo}}</td>
                             <td>
-                                <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewTime(item,timeChangeModel)"><i
+                                <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewTime(item,timeChangeModel)" *ngIf = "item._isTimeBasedWrite_ == true"><i
                                         class="mdi mdi-pencil font-size-18"></i></a>
                                 <ng-template #timeChangeModel let-modal>
                                     <div class="modal-header">

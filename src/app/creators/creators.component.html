@@ -123,7 +123,6 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
                                     <td>{{user.email}}</td>
                                     <td>{{user.mobileNumber}}</td>
                                     <td>
-
                                         <label class="switch" *ngIf="requestWrite == true">
                                             <input *ngIf="user._is_On_Creative_In_ == true" type="checkbox" checked
                                                 (change)="onApproveIndependentStatus($event,user._id)">
@@ -131,7 +130,7 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
                                                 (change)="onApproveIndependentStatus($event,user._id)">
                                             <span class="slider"></span>
                                         </label>
-                                        <label class="switch" *ngIf="majorWrite == true && requestWrite == false">
+                                        <label class="switch" *ngIf="majorWrite == true">
                                             <input *ngIf="user._is_On_Creative_In_ == true" type="checkbox" checked
                                                 (change)="onCretiveIndependentStatus($event,user._id)">
                                             <input *ngIf="user._is_On_Creative_In_ !== true" type="checkbox" unchecked
