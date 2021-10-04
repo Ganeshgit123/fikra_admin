@@ -1,0 +1,141 @@
+.switch {
+    position: relative;
+    border: none;
+    height: 1rem;
+    width: 2.2rem;
+    border-radius: 2.5rem;
+    background: transparent;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #F21C471F;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 10px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    width: 11px;
+    height: 11px;
+    top: 2px;
+    left: 3px;
+    background: #F21C47;
+    border-radius: 1.125rem;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #00C8531F;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 0;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    background: #00C853;
+    left: -6px;
+    position: absolute;
+    right: 0;
+  }
+  .approve_btn{
+    color: #00C853;
+    font-weight: 600;
+  }
+.not_verify_btn{
+  color: #F21C47;
+  font-weight: 600;
+}
+select.pend_btn{
+  background: #fff;
+  border: 2px solid #FFC107 ! important;
+  color: #FFC107 ! important;
+  border-radius: 10px;
+  padding: 0px 4px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+select.apprve_btn{
+  background: #fff;
+  border: 2px solid #00C853 ! important;
+  color: #00C853 ! important;
+  border-radius: 10px;
+  padding: 0px 4px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+select:focus{
+  outline: none;
+}
+.list_ul{
+  padding-left: 0;
+  list-style: none;
+}
+.text-info{
+  cursor: pointer;
+}
+.review_btn{
+  background: #fff;
+  border: 2px solid #5664d2 ! important;
+  color: #5664d2 ! important;
+  border-radius: 10px;
+  padding: 0px 4px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.reject_btn{
+  background: #fff;
+  border: 2px solid #F21C47 ! important;
+  color: #F21C47 ! important;
+  border-radius: 10px;
+  padding: 0px 4px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.section_show{
+  text-align: right;
+}
+.sec_show_ul{
+  padding-left: 0;
+}
+.sec_show_ul li{
+  display: inline-block;
+  padding-left: 10px;
+}
+.sec_show_ul li.text{
+  font-weight: bold;
+}
+.green_color{
+  color: #00C853;
+}
+.red_color{
+  color: #F2564D;
+}
+.main_logo{
+  width: 70px;
+  padding-top: 5px;
+}
+.navbar-brand-box p{
+  margin-bottom: 0;
+}
+.reward_a{
+  color: #F21C47 !important;
+}

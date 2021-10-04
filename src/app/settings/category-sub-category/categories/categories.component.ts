@@ -82,7 +82,7 @@ export class CategoriesComponent implements OnInit {
     }
     
         const postData = this.addNewCategory.value;
-        postData['createdby'] = this.updatedby;
+        postData['createdBy'] = this.updatedby;
         postData['userType'] = "admin";
         postData['role'] = this.role;
     

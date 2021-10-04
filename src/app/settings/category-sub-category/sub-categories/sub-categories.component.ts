@@ -156,7 +156,7 @@ export class SubCategoriesComponent implements OnInit {
     }
 
     const postData = this.addNewSubCategory.value;
-    postData['createdby'] = this.updatedby;
+    postData['createdBy'] = this.updatedby;
     postData['userType'] = "admin";
     postData['role'] = this.role;
 

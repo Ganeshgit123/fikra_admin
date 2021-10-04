@@ -87,7 +87,7 @@ export class CitiesComponent implements OnInit {
     }
 
     const postData = this.addNewCity.value;
-    postData['createdby'] = this.updatedby;
+    postData['createdBy'] = this.updatedby;
     postData['userType'] = "admin";
     postData['role'] = this.role;
 
@@ -127,7 +127,7 @@ export class CitiesComponent implements OnInit {
 
   cityEditService(data){
     data['cityId'] = this.cityId
-    data['createdby'] = this.updatedby;
+    data['createdBy'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;
     data['_isDeleted_'] = false;
@@ -172,7 +172,7 @@ export class CitiesComponent implements OnInit {
      object['countryId'] = id
      object['cityName'] = data['cityName']
      object['cityNameAr'] = data['cityNameAr']
-     object['createdby'] = this.updatedby;
+     object['createdBy'] = this.updatedby;
      object['userType'] = "admin";
      object['role'] = this.role;
      object['_isDeleted_'] = data['_isDeleted_'];
@@ -211,7 +211,7 @@ export class CitiesComponent implements OnInit {
     object['countryId'] = id
     object['cityName'] = data['cityName']
     object['cityNameAr'] = data['cityNameAr']
-    object['createdby'] = this.updatedby;
+    object['createdBy'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;
     object['_isDeleted_'] = true;

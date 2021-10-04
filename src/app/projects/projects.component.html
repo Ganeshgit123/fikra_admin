@@ -71,7 +71,36 @@ aria-controls="tickets-table"></label></div>
                            <td>{{proj.basicInfoId.goalAmount}}</td>
                            <td>{{proj.finalDate}} days</td>
 
-                           <td *ngIf="showAccept === true">
+                           <td *ngIf="requestWrite == true">
+                              <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'"
+                                 (change)="onChangeProjRequestWithStatus(proj._id,$event.target.value,centerDataModal)">
+                                 <option>{{proj.aproval_Status}}</option>
+                                 <option>approved</option>
+                                 <option>under_review</option>
+                                 <option>rejected</option>
+                              </select>
+                              <select class="apprve_btn" *ngIf="proj.aproval_Status === 'approved'"
+                                 (change)="onChangeProjRequestWithStatus(proj._id,$event.target.value,centerDataModal)">
+                                 <option>{{proj.aproval_Status}}</option>
+                                 <option>rejected</option>
+                              </select>
+                              <select class="review_btn" *ngIf="proj.aproval_Status === 'under_review'"
+                                 (change)="onChangeProjRequestWithStatus(proj._id,$event.target.value,centerDataModal)">
+                                 <option>{{proj.aproval_Status}}</option>
+                                 <option>approved</option>
+                                 <option>rejected</option>
+                              </select>
+                              <select class="reject_btn" *ngIf="proj.aproval_Status === 'rejected'"
+                                 (change)="onChangeProjRequestWithStatus(proj._id,$event.target.value,centerDataModal)">
+                                 <option>{{proj.aproval_Status}}</option>
+                              </select>
+                              <span *ngIf="proj.aproval_Status === 'rejected'">
+                                 <p style="margin: 10px 0;"><strong>Reject Reason:</strong></p>
+                                 <p> {{proj.rejection_comment}}</p>
+                              </span>
+                           </td>
+
+                           <td *ngIf="majorWrite == true">
                               <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'"
                                  (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
                                  <option>{{proj.aproval_Status}}</option>
@@ -99,15 +128,27 @@ aria-controls="tickets-table"></label></div>
                                  <p> {{proj.rejection_comment}}</p>
                               </span>
                            </td>
-                           <td *ngIf="showAccept !== true">{{proj.aproval_Status}}</td>
+                           <td *ngIf="majorWrite == false">{{proj.aproval_Status}}</td>
                            <td>
-                              <label class="switch">
+                              <label class="switch" *ngIf="requestWrite == true">
+                                 <input *ngIf="proj._is_On_HomeSlide_ == true" type="checkbox" checked
+                                 (change)="onReqBannerStatus($event,proj._id)">
+                              <input *ngIf="proj._is_On_HomeSlide_ !== true" type="checkbox" unchecked
+                                 (change)="onReqBannerStatus($event,proj._id)">
+                              <span class="slider"></span>
+                                 <span class="slider"></span>
+                             </label>
+                              <label class="switch" *ngIf="majorWrite == true">
                                  <input *ngIf="proj._is_On_HomeSlide_ == true" type="checkbox" checked
                                     (change)="onHomeBannerStatus($event,proj._id)">
                                  <input *ngIf="proj._is_On_HomeSlide_ !== true" type="checkbox" unchecked
                                     (change)="onHomeBannerStatus($event,proj._id)">
                                  <span class="slider"></span>
                               </label>
+                              <span *ngIf="majorWrite == false">
+                                 <p *ngIf="proj._is_On_HomeSlide_ == true">ON</p>
+                                 <p *ngIf="proj._is_On_HomeSlide_ !== true">OFF</p>
+                             </span>
 
                            </td>
                            <td>

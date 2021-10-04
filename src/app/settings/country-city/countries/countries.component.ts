@@ -80,7 +80,7 @@ export class CountriesComponent implements OnInit {
     }
 
     const postData = this.addNewCountry.value;
-        postData['createdby'] = this.updatedby;
+        postData['createdBy'] = this.updatedby;
         postData['userType'] = "admin";
         postData['role'] = this.role;
     
@@ -120,7 +120,7 @@ export class CountriesComponent implements OnInit {
 
   countryEditService(data){
     data['countryId'] = this.countryId;
-    data['createdby'] = this.updatedby;
+    data['createdBy'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;
 
@@ -164,7 +164,7 @@ export class CountriesComponent implements OnInit {
      object['countryId'] = id;
      object['_isOn_'] = visible;
      object['_isDeleted_'] = false;
-     object['createdby'] = this.updatedby;
+     object['createdBy'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;
 
@@ -199,7 +199,7 @@ export class CountriesComponent implements OnInit {
     object['countryId'] = id;
     object['_isOn_'] = val;
     object['_isDeleted_'] = true;
-    object['createdby'] = this.updatedby;
+    object['createdBy'] = this.updatedby;
    object['userType'] = "admin";
    object['role'] = this.role;
 

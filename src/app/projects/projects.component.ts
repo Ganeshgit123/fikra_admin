@@ -23,12 +23,18 @@ export class ProjectsComponent implements OnInit {
   addComment:FormGroup;
   projectId: any;
   projectStatus:any;
-  showAccept = true;
   launchDate:any;
   duraDate:any;
   finalDate:any = [];
   reportProjList: any = [];
   pledgePaymentList = [];
+  showAccept:boolean;
+  approveAccept:boolean;
+  majorWrite:boolean;
+  requestWrite:boolean;
+  permName:any;
+  isTimeBasedWirte:boolean;
+  canWrite:boolean;
 
  constructor(
   private apiCall: ApiCallService,
@@ -50,10 +56,36 @@ export class ProjectsComponent implements OnInit {
   }
 
   callRolePermission(){
+    if(sessionStorage.getItem('adminRole') == 's_a_r'){
+      this.majorWrite = true;
+    }
     if(sessionStorage.getItem('adminRole') !== 's_a_r'){
-      let projectPermssion = JSON.parse(sessionStorage.getItem('permission'))
-      this.showAccept = projectPermssion[0].write
-      // console.log("prer", this.showAccept)
+      let creatorPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = creatorPermssion[0].write
+      this.approveAccept = creatorPermssion[0]._with_Approval_
+      this.permName = creatorPermssion[0].permissionName
+      this.isTimeBasedWirte = JSON.parse(sessionStorage.getItem('isTimeBasedWirte'));
+      this.canWrite =JSON.parse(sessionStorage.getItem('canWrite'));
+
+     if(this.showAccept == true){
+      if(this.approveAccept == false && this.isTimeBasedWirte == false){
+            this.majorWrite = true;
+            console.log("first_condition")
+      }else if(this.isTimeBasedWirte === true && this.canWrite === true){
+        this.majorWrite = true;
+        console.log("second_condition")
+      }else if(this.approveAccept == true){
+        this.requestWrite = true;
+        console.log("request_condition")
+      }else{
+        this.majorWrite = false;
+      console.log("1st_else_condition")
+      }
+    }else{
+      this.majorWrite = false;
+      console.log("2nd_else_condition")
+    }
+  
 
     }
   }
@@ -109,7 +141,7 @@ export class ProjectsComponent implements OnInit {
 
     const data = {}
     data['projectId'] = this.projectId
-    data['createdby'] = this.updatedby;
+    data['createdBy'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;
     data['aproval_Status'] = this.projectStatus;
@@ -142,7 +174,7 @@ export class ProjectsComponent implements OnInit {
 
     const data = {}
     data['projectId'] = this.projectId
-    data['createdby'] = this.updatedby;
+    data['createdBy'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;
     data['rejection_comment'] = this.addComment.get('rejection_comment').value;
@@ -285,61 +317,103 @@ export class ProjectsComponent implements OnInit {
     )
   }  
 
-  // reportShow(keepItAll,isAllNothing,reportModel: any,id){
-  //   this.modalService.open(reportModel, { centered: true,size:'xl' });
-    
-  //   if(keepItAll == true){
-  //     this.reportKeepItAll(id);
-  //   }else if(isAllNothing == true){
-  //     this.reportAllorNothing(id);
-  //   }
-  // }
+  onChangeProjRequestWithStatus(id,status,centerDataModal:any){
+    this.projectId = id;
 
-  // reportKeepItAll(id){
-  //   let params = {
-  //     url: "admin/getProjectReport_KIA",
-  //     projectId : id
-  //   }  
-  //   this.apiCall.projectLikedGetService(params).subscribe((result:any)=>{
-  //     let resu = result.body;
-  //     if(resu.error == false)
-  //     {
+      var valFrom = ''
+      var valTo = status;
 
-  //       this.reportProjList = resu.data;
-  //       this.pledgePaymentList = resu.data.pledgedPayment;
+    const object = {}
 
-  //     }else{
-  //       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
-  //       this.router.navigateByUrl('/projects');
-  //     }
-  //   },(error)=>{
-  //      console.error(error);
-       
-  //   }); 
-  // }
+    object['createdBy'] = this.updatedby;
+   object['userType'] = "admin";
+   object['role'] = this.role;
+   object['tabName'] = "Projects";
+   object['feildName'] = "Admin Approval";
+   object['valueFrom'] = valFrom;
+   object['valueTo'] = valTo;
+   object['APIURL'] = "https://fikra.app/api/admin/adminProjectApproval";
+   object['paramsForAPI'] = {
+    ['projectId'] : this.projectId,
+    ['aproval_Status'] : status,
+   };
 
-  // reportAllorNothing(id){
-  //   let params = {
-  //     url: "admin/getProjectReport_AON",
-  //     projectId : id
-  //   }  
-  //   this.apiCall.projectLikedGetService(params).subscribe((result:any)=>{
-  //     let resu = result.body;
-  //     if(resu.error == false)
-  //     {
+    var params = {
+     url: 'admin/requsetToSuperAdminForChange',
+     data: object
+   }
+  //  console.log("pa",params)
+   this.apiCall.commonPostService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast("Request Sent Successfully", 'Success', 'successToastr')
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
+  }
 
-  //       this.reportProjList = resu.data;
-  //       this.pledgePaymentList = resu.data.pledgedPayment;
+  onReqBannerStatus(values:any,id){
+    if(values.currentTarget.checked === true){
 
-  //     }else{
-  //       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
-  //       this.router.navigateByUrl('/projects');
-  //     }
-  //   },(error)=>{
-  //      console.error(error);
-       
-  //   }); 
-  // }
 
+    if(values.currentTarget.checked === true){
+      var visible = true 
+      var valFrom = false
+      var valTo = true
+     } else {
+       var visible = false
+       var valFrom = true
+       var valTo = false
+     }
+
+      const object = {}
+
+      object['createdBy'] = this.updatedby;
+     object['userType'] = "admin";
+     object['role'] = this.role;
+     object['tabName'] = "Projects";
+     object['feildName'] = "Home Page Banner";
+     object['valueFrom'] = valFrom;
+     object['valueTo'] = valTo;
+     object['APIURL'] = "https://fikra.app/api/admin/updateProjectToSlide ";
+     object['paramsForAPI'] = {
+      ['projectId'] : id,
+     };
+  
+      var params = {
+       url: 'admin/requsetToSuperAdminForChange',
+       data: object
+     }
+    //  console.log("pa",params)
+     this.apiCall.commonPostService(params).subscribe(
+       (response: any) => {
+         if (response.body.error == false) {
+           // Success
+           this.apiCall.showToast("Request Sent Successfully", 'Success', 'successToastr')
+           this.ngOnInit();
+         } else {
+           // Query Error
+           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+         }
+       },
+       (error) => {
+         this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+         console.log('Error', error)
+       }
+     )
+     } else {
+     }
+
+     
+  }
 }
 

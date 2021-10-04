@@ -123,6 +123,7 @@ const routes: Routes = [
       {path: 'special_requests/:id',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
 
       {path: 'notifications',component: NotificationsComponent, canActivate: [AuthGuard],},
+      
       {path: 'roles',component: RolesComponent, canActivate: [AuthGuard],},
       {path: 'permissions/:id',component: PermissionComponent, canActivate: [AuthGuard],},
       {path: 'admin_users',component: AdminUsersComponent, canActivate: [AuthGuard],},
@@ -138,6 +139,7 @@ const routes: Routes = [
       {path: 'sms_campaign',component: SmsCampaignComponent,canActivate: [AuthGuard],},
 
       {path: 'reports',component: ReportsComponent,canActivate: [AuthGuard],},
+
       {path: 'translation',component: TranslationsComponent,canActivate: [AuthGuard],},
 
 

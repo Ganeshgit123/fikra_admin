@@ -18,11 +18,11 @@ export class CreatorsComponent implements OnInit {
   getCreateList =[];
   tempWrite = false;
   changeDesc:FormGroup;
-  permName:any;
   respnseData = [];
   adminApprovStat:any;
   adminrejecStat:any;
   usedPerms:any;
+  permName:any;
   isTimeBasedWirte:boolean;
   canWrite:boolean;
   showAccept:boolean;
