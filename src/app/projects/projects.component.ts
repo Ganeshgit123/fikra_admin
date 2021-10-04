@@ -363,18 +363,8 @@ export class ProjectsComponent implements OnInit {
 
   onReqBannerStatus(values:any,id){
     if(values.currentTarget.checked === true){
-
-
-    if(values.currentTarget.checked === true){
-      var visible = true 
       var valFrom = false
       var valTo = true
-     } else {
-       var visible = false
-       var valFrom = true
-       var valTo = false
-     }
-
       const object = {}
 
       object['createdBy'] = this.updatedby;
@@ -411,9 +401,82 @@ export class ProjectsComponent implements OnInit {
        }
      )
      } else {
-     }
+      var valFrom = true
+      var valTo = false
+      const object = {}
 
-     
+      object['createdBy'] = this.updatedby;
+     object['userType'] = "admin";
+     object['role'] = this.role;
+     object['tabName'] = "Projects";
+     object['feildName'] = "Home Page Banner";
+     object['valueFrom'] = valFrom;
+     object['valueTo'] = valTo;
+     object['APIURL'] = "https://fikra.app/api/admin/removeProjectToSlide ";
+     object['paramsForAPI'] = {
+      ['projectId'] : id,
+     };
+  
+      var params = {
+       url: 'admin/requsetToSuperAdminForChange',
+       data: object
+     }
+    //  console.log("pa",params)
+     this.apiCall.commonPostService(params).subscribe(
+       (response: any) => {
+         if (response.body.error == false) {
+           // Success
+           this.apiCall.showToast("Request Sent Successfully", 'Success', 'successToastr')
+           this.ngOnInit();
+         } else {
+           // Query Error
+           this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+         }
+       },
+       (error) => {
+         this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+         console.log('Error', error)
+       }
+     )
+     }
+  }
+
+  deleteReqProject(id){
+   
+    const object = {}
+    object['createdBy'] = this.updatedby;
+    object['userType'] = "admin";
+    object['role'] = this.role;
+    object['tabName'] = "Projects";
+    object['feildName'] = "Delete Action";
+    object['valueFrom'] = '';
+    object['valueTo'] = "Delete";
+    object['APIURL'] = "https://fikra.app/api/admin/removeProjectToSlide ";
+    object['paramsForAPI'] = {
+     ['projectId'] : id,
+    };
+ 
+     var params = {
+      url: 'admin/requsetToSuperAdminForChange',
+      data: object
+    }
+   //  console.log("pa",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast("Request Sent Successfully", 'Success', 'successToastr')
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
   }
 }
 

@@ -12,19 +12,11 @@
                         <input type="text" [disabled]=true class="form-control" value='{{useName}}' />
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" *ngIf = "showProject">
                     <div class="form-group">
-                        <label>Select Project</label>
-                        <div *ngIf=(projectName)>
+                        <label>Project</label>
+                        <div>
                             <input type="text" [disabled]=true class="form-control" value='{{projectName}}' />
-                        </div>
-                        <div *ngIf=(!projectName)>
-                            <ng-select formControlName="projectId" (change)='statusChange()'>
-                                <ng-option *ngFor="let subscriber of projectList" [value]="subscriber._id">
-                                    {{subscriber.title}}
-                                </ng-option>
-                            </ng-select>
-                            <span *ngIf="status" style='color: brown;'>No project found please add project here!</span>
                         </div>
                     </div>
                 </div>

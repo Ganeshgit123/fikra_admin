@@ -133,21 +133,21 @@ aria-controls="tickets-table"></label></div>
                               <label class="switch" *ngIf="requestWrite == true">
                                  <input *ngIf="proj._is_On_HomeSlide_ == true" type="checkbox" checked
                                  (change)="onReqBannerStatus($event,proj._id)">
-                              <input *ngIf="proj._is_On_HomeSlide_ !== true" type="checkbox" unchecked
+                              <input *ngIf="proj._is_On_HomeSlide_ == false" type="checkbox" unchecked
                                  (change)="onReqBannerStatus($event,proj._id)">
                               <span class="slider"></span>
-                                 <span class="slider"></span>
                              </label>
+
                               <label class="switch" *ngIf="majorWrite == true">
                                  <input *ngIf="proj._is_On_HomeSlide_ == true" type="checkbox" checked
                                     (change)="onHomeBannerStatus($event,proj._id)">
-                                 <input *ngIf="proj._is_On_HomeSlide_ !== true" type="checkbox" unchecked
+                                 <input *ngIf="proj._is_On_HomeSlide_ == false" type="checkbox" unchecked
                                     (change)="onHomeBannerStatus($event,proj._id)">
                                  <span class="slider"></span>
                               </label>
                               <span *ngIf="majorWrite == false">
                                  <p *ngIf="proj._is_On_HomeSlide_ == true">ON</p>
-                                 <p *ngIf="proj._is_On_HomeSlide_ !== true">OFF</p>
+                                 <p *ngIf="proj._is_On_HomeSlide_ == false">OFF</p>
                              </span>
 
                            </td>
@@ -160,164 +160,11 @@ aria-controls="tickets-table"></label></div>
                                   <p>Project Not Yet Completed</p>
                              </span>
                            </td>
-                           <!-- <td>
-                              <button class="btn btn-primary"
-                                 (click)="reportShow(proj._is_Keep_It_All_,proj._is_All_Nothing_,reportModel,proj._id)">View</button>
-                              <ng-template #reportModel let-modal>
-                                 <div class="modal-header">
-                                    <button type="button" class="close" (click)="modal.dismiss('Cross click')"
-                                       aria-hidden="true">×</button>
-                                 </div>
-                                 <div class="modal-body">
-                                    <div class="row">
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Creator Name</h6>
-                                             <p class="text-center">{{reportProjList.creatorName}}<br>{{reportProjList.creatorId}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Launch Date</h6>
-                                             <p class="text-center">{{reportProjList.lunchedDate | date}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">End Date</h6>
-                                             <p class="text-center">{{reportProjList.endDate | date}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Project Status</h6>
-                                             <p class="text-center">{{reportProjList.projectStatus}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Goal Amount</h6>
-                                             <p class="text-center">{{reportProjList.goalAmount}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Funded Amount</h6>
-                                             <p class="text-center">{{reportProjList.fundedAmount}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Funded Percentage</h6>
-                                             <p class="text-center">{{reportProjList.fundedPerc}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Business Model</h6>
-                                             <p class="text-center">{{reportProjList.bussinesModel}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Total Pledges</h6>
-                                             <p class="text-center">{{reportProjList.noOfPledge}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Successfull Pledges</h6>
-                                             <p class="text-center">{{reportProjList.noOfSuccessPledge}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">UnSuccessfull Pledges</h6>
-                                             <p class="text-center">{{reportProjList.noOfUnsuccessfullPledge}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">UnProcessed Amount</h6>
-                                             <p class="text-center">{{reportProjList.unProcessedAmount}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">UnProcessed Payment Percentage</h6>
-                                             <p class="text-center">{{reportProjList.percOfUnsuccessProcessedPayment}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Total VAT</h6>
-                                             <p class="text-center">{{reportProjList.totalVatAmount}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Total Processing Fees</h6>
-                                             <p class="text-center">{{reportProjList.totalProcssingFee}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Total Commission</h6>
-                                             <p class="text-center">{{reportProjList.fikraCommission}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Total Amount Received</h6>
-                                             <p class="text-center">{{reportProjList.totalAmountRecived}}</p>
-                                          </div>
-                                       </div>
-                                       <div class="col-md-3">
-                                          <div class="card card-body">
-                                             <h6 class="text-center">Creator Amount</h6>
-                                             <p class="text-center">{{reportProjList.creatorAmount}}</p>
-                                          </div>
-                                       </div>
-                                    </div>
-
-                                    <div class="table-responsive">
-                                       <table id="basic-datatable"
-                                       class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
-                                       <thead>
-                                       <tr>
-                                        <th>VAT %</th>
-                                        <th>VAT Amount</th>
-                                        <th>Processing Fess %</th>
-                                        <th>Processing Fees Amount</th>
-                                        <th>Payment Model %</th>
-                                        <th>Payment Model Amount</th>
-                                        <th>Date of Received</th>
-                                        <th>Payment Status</th>
-                                       </tr>
-                                       </thead>
-                                       <tbody>
-                                       <tr *ngFor="let item of pledgePaymentList">
-                                         <td>{{item.vatPerc}}</td>
-                                         <td>{{item.vat}}</td>
-                                         <td>{{item.processingFeePerc}}</td>
-                                         <td>{{item.processingFee}}</td>
-                                         <td>{{item.paymentModelPerc}}</td>
-                                         <td>{{item.paymentModel}}</td>
-                                         <td>{{item.dateRecived | date}}</td>
-                                         <td>{{item.paymentStatus}}</td>
-                                       </tr>
-                                       </tbody>
-                                       </table>
-                                       </div>
-                                 </div>
-                              </ng-template>
-                           </td> -->
                                  <td>
-                              <!-- <a *ngIf="showAccept === true"
-                                 routerLink="/add_new_bill/proj-{{ proj._id}}//{{proj.userId._id}}"
-                                 style="padding-right: 10px;">Create Invoice</a> -->
+                                    <a *ngIf="requestWrite == true" class="text-danger text-info" ngbTooltip="Delete"
+                                 (click)="deleteReqProject(proj._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
 
-                              <a *ngIf="showAccept === true" class="text-danger text-info" ngbTooltip="Delete"
+                              <a *ngIf="majorWrite == true" class="text-danger text-info" ngbTooltip="Delete"
                                  (click)="deleteProject(proj._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
                            </td>
                         </tr>

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { ApiCallService } from '../../services/api-call.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 @Component({
   selector: 'app-change-request-user',
   templateUrl: './change-request-user.component.html',
@@ -15,12 +13,10 @@ export class ChangeRequestUserComponent implements OnInit {
   role:any;
 
   reqData = [];
-  some:any;
+
   constructor(
   private apiCall: ApiCallService,
-  private formBuilder: FormBuilder,
-  private modalService: NgbModal,
-  ) {
+  private formBuilder: FormBuilder,) {
 
  }
 
@@ -42,11 +38,6 @@ export class ChangeRequestUserComponent implements OnInit {
       {
 
         this.reqData = resu.data;
-         
-        this.reqData.forEach(element => {
-           this.some = element.paramsForAPI[0]
-           console.log("val",this.some)
-        });
        
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -72,7 +63,8 @@ export class ChangeRequestUserComponent implements OnInit {
 
     if(adminApprove == true){
        var apiUrl = vals['APIURL']
-       var pamData = vals['paramsForAPI']
+       var pamData = vals['paramsForAPI'
+      ]
        var newParams = {...pamData[0]}
 
        newParams['createdBy'] = this.updatedby;
@@ -83,7 +75,7 @@ export class ChangeRequestUserComponent implements OnInit {
         url: apiUrl,
         data: newParams
       }
-      console.log("par",params)
+      // console.log("par",params)
       this.apiCall.roleBasedPostService(params).subscribe(
         (response: any) => {
           if (response.body.error == false) {
@@ -131,9 +123,5 @@ export class ChangeRequestUserComponent implements OnInit {
        console.log('Error', error)
      }
    )
-  }
-
-  reqDetailView(reqViewModel){
-      this.modalService.open(reqViewModel, { centered: true });
   }
 }

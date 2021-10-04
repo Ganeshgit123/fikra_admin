@@ -15,7 +15,13 @@ export class SpecialRequestsComponent implements OnInit {
   searchTerm;
   requestsList = [];
   addNewComment:FormGroup;
-  showAccept = true;
+  permName:any;
+  isTimeBasedWirte:boolean;
+  canWrite:boolean;
+  showAccept:boolean;
+  approveAccept:boolean;
+  majorWrite:boolean;
+  requestWrite:boolean;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -38,12 +44,37 @@ export class SpecialRequestsComponent implements OnInit {
   }
 
   callRolePermission(){
-    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
-      let specialRequestPermssion = JSON.parse(sessionStorage.getItem('permission'))
-      this.showAccept = specialRequestPermssion[6].write
-      // console.log("prer", specialRequestPermssion[6])
-
+    if(sessionStorage.getItem('adminRole') == 's_a_r'){
+      this.majorWrite = true;
     }
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let creatorPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = creatorPermssion[6].write
+      this.approveAccept = creatorPermssion[6]._with_Approval_
+      this.permName = creatorPermssion[6].permissionName
+      this.isTimeBasedWirte = JSON.parse(sessionStorage.getItem('isTimeBasedWirte'));
+      this.canWrite =JSON.parse(sessionStorage.getItem('canWrite'));
+
+     if(this.showAccept == true){
+      if(this.approveAccept == false && this.isTimeBasedWirte == false){
+            this.majorWrite = true;
+            console.log("first_condition")
+      }else if(this.isTimeBasedWirte === true && this.canWrite === true){
+        this.majorWrite = true;
+        console.log("second_condition")
+      }else if(this.approveAccept == true){
+        this.requestWrite = true;
+        console.log("request_condition")
+      }else{
+        this.majorWrite = false;
+      console.log("1st_else_condition")
+      }
+    }else{
+      this.majorWrite = false;
+      console.log("2nd_else_condition")
+    }
+    }
+    
   }
 
   fetchRequestList(){
@@ -55,7 +86,7 @@ export class SpecialRequestsComponent implements OnInit {
       if(resu.error == false)
       {
         this.requestsList = resu.data;
-        console.log("ef",this.requestsList)
+        // console.log("ef",this.requestsList)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -97,6 +128,5 @@ export class SpecialRequestsComponent implements OnInit {
         console.log('Error', error)
       } 
     )
-
   }
 }

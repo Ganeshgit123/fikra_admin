@@ -116,7 +116,7 @@ this.billxdate=new Date(this.billDetails.dueDate);
       data: object
     }
 
-    // console.log("par",params)
+    console.log("par",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {

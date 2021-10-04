@@ -14,6 +14,13 @@ export class BillGenerationComponent implements OnInit {
   role:any;
   searchTerm;
   billList = [];
+  permName:any;
+  isTimeBasedWirte:boolean;
+  canWrite:boolean;
+  showAccept:boolean;
+  approveAccept:boolean;
+  majorWrite:boolean;
+  requestWrite:boolean;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -27,7 +34,41 @@ export class BillGenerationComponent implements OnInit {
     this.role = sessionStorage.getItem('adminRole');
 
     this.fetchBillList();
+    this.callRolePermission();
 
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') == 's_a_r'){
+      this.majorWrite = true;
+    }
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let creatorPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = creatorPermssion[10].write
+      this.approveAccept = creatorPermssion[10]._with_Approval_
+      this.permName = creatorPermssion[10].permissionName
+      this.isTimeBasedWirte = JSON.parse(sessionStorage.getItem('isTimeBasedWirte'));
+      this.canWrite =JSON.parse(sessionStorage.getItem('canWrite'));
+
+      if(this.showAccept == true){
+      if(this.approveAccept == false && this.isTimeBasedWirte == false){
+            this.majorWrite = true;
+            console.log("first_condition")
+      }else if(this.isTimeBasedWirte === true && this.canWrite === true){
+        this.majorWrite = true;
+        console.log("second_condition")
+      }else if(this.approveAccept == true){
+        this.requestWrite = true;
+        console.log("request_condition")
+      }else{
+        this.majorWrite = false;
+      console.log("1st_else_condition")
+      }
+    }else{
+      this.majorWrite = false;
+      console.log("2nd_else_condition")
+    }
+    }
   }
 
   fetchBillList(){

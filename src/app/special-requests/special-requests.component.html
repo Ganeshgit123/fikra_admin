@@ -48,9 +48,9 @@
       <th>Comment</th>
       <th>User Name</th>
       <th>Project Id</th>
-      <th *ngIf="showAccept === true">Comment Button</th>
+      <th *ngIf="majorWrite === true || requestWrite == true">Comment Button</th>
       <th>Admin Comment</th>
-      <th *ngIf="showAccept === true">Action</th>
+      <th *ngIf="majorWrite == true || requestWrite == true">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -58,8 +58,11 @@
       <td>{{user.serviceType}}</td>
       <td>{{user.comments}}</td>
       <td><a routerLink="/view-creators/{{user.userId._id}}">{{user.userId.userName}}</a></td>
-      <td><a routerLink="/view-projects/{{user.projectId._id}}">{{user.projectId.title}}</a></td>
-      <td *ngIf="showAccept === true">
+      <td>
+        <span *ngIf = "user.projectId == null">No Projects</span>
+        <span *ngIf = "user.projectId !== null"><a routerLink="/view-projects/{{user.projectId._id}}">{{user.projectId.title}}</a></span>
+      </td>
+      <td *ngIf="majorWrite === true || requestWrite == true">
         <button class="btn btn-primary w-md waves-effect waves-light" (click)="adminComment(centerDataModal)">Comment</button>
         <ng-template #centerDataModal let-modal>
           <div class="modal-header">
@@ -78,7 +81,12 @@
           </ng-template>
       </td>
       <td>{{user.adminComment}}</td>
-      <td> <a *ngIf="showAccept === true" routerLink="/add_new_bill/special-{{ user._id}}/{{user.userId._id}}" style="padding-right: 10px;">Create Invoice</a></td>
+      <td> 
+        <span *ngIf="majorWrite == true || requestWrite == true">
+          <a *ngIf="user.projectId == null" routerLink="/add_new_bill/{{user._id}}/{{user.userId._id}}" style="padding-right: 10px;">Create Invoice</a>
+          <a *ngIf="user.projectId !== null" routerLink="/add_new_bill/{{user._id}}/{{user.userId._id}}/{{user.projectId._id}}" style="padding-right: 10px;">Create Invoice</a>
+        </span>
+        </td>
     </tr>
     </tbody> 
     </table>
