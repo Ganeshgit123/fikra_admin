@@ -35,15 +35,25 @@ export class DashboardComponent implements OnInit {
   investorCount: any;
   projectCount: any;
   successProjCount: any;
+  unSuccessProjectCount: any;
+  noOfSpecialRequest: any;
+  newslettersCount: any;
   pledgeCount: any;
   totVistors:any;
+  yearsList = [];
+  monthList = []
+  params = {
+    monthQuery: "" ,
+    yearQuery: ""
+  }
 
   ngOnInit(): void {
     this.breadCrumbItems = [
       { label: "Fikra" },
       { label: "Dashboard", active: true },
     ];
-
+    this.yearsList = ['2020', '2021', '2022', '2023', '2024', '2025'];
+    this.monthList = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",];
     this.countData();
     this.projectsMonth();
 
@@ -63,6 +73,9 @@ export class DashboardComponent implements OnInit {
           this.investorCount = resu.data.investorCount;
           this.projectCount = resu.data.projectCount;
           this.successProjCount = resu.data.successProjectCount;
+          this.unSuccessProjectCount= resu.data.unSuccessProjectCount;
+          this.noOfSpecialRequest = resu.data.noOfSpecialRequest;
+          this.newslettersCount = resu.data.newslettersCount;
           this.pledgeCount = resu.data.pledgesCount;
           this.usersData = {
             series: [resu.data.creatorCount, resu.data.investorCount],
@@ -181,7 +194,7 @@ export class DashboardComponent implements OnInit {
     let params = {
       url: "admin/getFikraFinancialReport",
     };
-    let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",];
+    let months = this.monthList;
 
     this.apiCall.commonGetService(params).subscribe(
       async (result: any) => {
@@ -291,6 +304,115 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  async projectsMonthWithExpra(extraParams) {
+    let allOr = {
+      name: "Total all or nothing",
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    }
+    let keepIt = {
+      name: "Total keep it all",
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    }
+    let total = {
+      name: "Total amount recived",
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    }
+
+    let params = {
+      url: "admin/getFikraFinancialReport",
+      ...extraParams
+    };
+    let months = this.monthList;
+
+    this.apiCall.commonGetService(params).subscribe(
+      async (result: any) => {
+        let resu = result.body;
+        if (resu.error == false) {
+          await months.reduce(
+            async (promise, element, index) => {
+              let data = resu.data.find(data => data.month == element)
+              console.log(data)
+              if(data != undefined){
+                allOr.data[index] = data.totalAllorNothing;
+                keepIt.data[index] = data.totalKeepitAll;
+                total.data[index] = data.totalAmount;
+              }
+              await promise;
+            },Promise.resolve()
+          )
+          this.projectsChart = {
+            chart: {
+              height: 350,
+              type: "bar",
+              toolbar: {
+                show: false,
+              },
+            },
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                endingShape: "rounded",
+                columnWidth: "45%",
+              },
+            },
+            dataLabels: {
+              enabled: false,
+            },
+            stroke: {
+              show: true,
+              width: 2,
+              colors: ["transparent"],
+            },
+            colors: ["#5664d2", "#505d69", '#db3700'],
+            series: [
+              allOr, keepIt, total
+            ],
+            xaxis: {
+              categories: [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+              ],
+            },
+            yaxis: {
+              title: {
+                text: "numbers",
+              },
+            },
+            fill: {
+              opacity: 1,
+            },
+            grid: {
+              borderColor: "#f1f1f1",
+            },
+            tooltip: {
+              // y: {
+              //     formatter: (val) => {
+              //         return '$ ' + val + ' thousands';
+              //     }
+              // }
+            },
+          };
+        } else {
+          this.apiCall.showToast(resu.message, "Error", "errorToastr");
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
+  }
+
   VisitClick(val){
     this.dayWiseVisitors(val)
   }
@@ -305,9 +427,7 @@ console.log("parms",params)
       let resu = result.body;
       if(resu.error == false)
       {
-         console.log("res",resu.data)
-        this.totVistors = resu.data.totalResults;
-        console.log("permis",this.totVistors)
+        this.totVistors = resu.data.totalsForAllResults['ga:sessions'];
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -316,4 +436,21 @@ console.log("parms",params)
        
     });
   }
+
+  statusChange(val){
+    this.params.monthQuery = val
+    this.projectsMonthWithExpra(this.params)
+  } 
+
+  statusYear(val){
+    this.params.yearQuery = val
+    this.projectsMonthWithExpra(this.params)
+  } 
+
+  statusChangePri(val){
+  } 
+
+  statusYearPri(val){
+  } 
+
 }
