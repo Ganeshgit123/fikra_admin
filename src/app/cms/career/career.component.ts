@@ -40,6 +40,9 @@ export class CareerComponent implements OnInit {
   candidateListData:any;
   jobData:any;
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
 
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -238,6 +241,7 @@ export class CareerComponent implements OnInit {
       {
 
         this.candidateListData = resu.data;
+        this.total = this.candidateListData.length
         // console.log("job",this.candidateListData)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

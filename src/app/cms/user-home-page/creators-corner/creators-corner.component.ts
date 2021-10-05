@@ -20,6 +20,8 @@ export class CreatorsCornerComponent implements OnInit {
   isEdit = false;
   creatorId:any
   imgUrl:any;
+  page = 1;
+  total: any;
 
  constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -61,6 +63,7 @@ export class CreatorsCornerComponent implements OnInit {
         if (response.body.error == false) {
 
         this.createCornerData = response.body.data;
+        this.total = this.createCornerData.length;
 // console.log("dd",this.createCornerData)
       }else{
         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')

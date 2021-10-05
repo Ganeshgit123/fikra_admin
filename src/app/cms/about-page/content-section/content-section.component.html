@@ -1,6 +1,14 @@
 <div class="card">
 <div class="card-body">
-<p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addContents(contentModal)">Add New</button></p>
+<div class="row">
+    <div class="col-md-8">
+        <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+            class="d-inline-flex align-items-center">Search:
+            <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+            aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+    </div>
+    <div class="col-md-4">
+        <p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addContents(contentModal)">Add New</button></p>
 <ng-template #contentModal let-modal>
 <div class="modal-header">
 <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
@@ -39,7 +47,8 @@
 </form>
 </div>
 </ng-template>
-
+    </div>
+</div>
 <div class="table-responsive">
 <table id="basic-datatable"
 class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
@@ -55,7 +64,7 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 </tr>
 </thead>
 <tbody>
-<tr  *ngFor="let item of sectionList">
+<tr  *ngFor="let item of sectionList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
 <td>{{item.secHeadName}}</td>
 <td>{{item.secHeadNameAr}}</td>
 <td>{{item.secContent}}</td>
@@ -81,8 +90,21 @@ class="mdi mdi-pencil font-size-18"></i></a>
 class="mdi mdi-trash-can font-size-18"></i></a>
 </td>
 </tr>
+<tr *ngIf="(sectionList==null) || (sectionList.length == 0)">
+    <td class="text-center" colspan="7">
+       No Data Found
+    </td>
+</tr>
 </tbody>
 </table>
+  <!-- Pagination -->
+  <div class="col-sm-12 col-md-12">
+    <div class="text-md-right float-md-right pagination-rounded">
+        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+        </ngb-pagination>
+    </div>
+</div>
+<!-- End Pagination -->
 </div>
 </div>
 </div>

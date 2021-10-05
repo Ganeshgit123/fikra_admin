@@ -25,6 +25,8 @@ export class RequestBackProjectComponent implements OnInit {
   launchDate:any;
   duraDate:any;
   finalDate:any = [];
+  page = 1;
+  total: any;
 
    constructor(
   private apiCall: ApiCallService,
@@ -58,7 +60,8 @@ export class RequestBackProjectComponent implements OnInit {
       if(resu.error == false)
       {
          this.projectList = resu.data;
-         console.log("list",this.projectList)
+        this.total = this.projectList.length
+        //  console.log("list",this.projectList)
         this.projectList.forEach(element => {
           var firstDate = element.basicInfoId.launchDate;
           var endDate = element.basicInfoId.campaignDuation;

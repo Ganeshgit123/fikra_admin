@@ -1,45 +1,54 @@
 <div class="card">
     <div class="card-body">
-    <p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addJobs(creatorCorner)">Add New</button></p>
-    <!-- Center Modal -->
-    <ng-template #creatorCorner let-modal>
-    <div class="modal-header">
-    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-    </div>
-    <div class="modal-body">
-    <form [formGroup]="addJobData">
-    <div class="form-group">
-    <label>Job Title</label>
-    <input type="text" class="form-control" formControlName="jobTitle">
-    </div>
-    <div class="form-group">
-        <label>Job Description</label>
-    <textarea class="form-control" formControlName="jobDescription"></textarea>
-    </div>
-    <div class="form-group">
-    <label>Job criteria</label>
-    <textarea class="form-control" formControlName="criteria"></textarea>
-    </div>
-    <div class="form-group">
-        <label>Job Role</label>
-    <input type="text" class="form-control" formControlName="jobRole">
+    <div class="row">
+        <div class="col-md-9">
+            <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                class="d-inline-flex align-items-center">Search:
+                <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
         </div>
-        <div class="form-group">
-            <label>Job Openings</label>
-            <input type="text" class="form-control" formControlName="jobVacancies">
-        </div>
-        <div class="form-group">
-            <label>Job Location</label>
-            <select class="form-control" formControlName="location">
-            <option  *ngFor="let item of branchList" value="{{item._id}}">{{item.branchName}}</option>
-            </select>
+        <div class="col-md-3">
+            <p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addJobs(creatorCorner)">Add New</button></p>
+            <!-- Center Modal -->
+            <ng-template #creatorCorner let-modal>
+            <div class="modal-header">
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
             </div>
-    <br>
-    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
-    </form>
+            <div class="modal-body">
+            <form [formGroup]="addJobData">
+            <div class="form-group">
+            <label>Job Title</label>
+            <input type="text" class="form-control" formControlName="jobTitle">
+            </div>
+            <div class="form-group">
+                <label>Job Description</label>
+            <textarea class="form-control" formControlName="jobDescription"></textarea>
+            </div>
+            <div class="form-group">
+            <label>Job criteria</label>
+            <textarea class="form-control" formControlName="criteria"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Job Role</label>
+            <input type="text" class="form-control" formControlName="jobRole">
+                </div>
+                <div class="form-group">
+                    <label>Job Openings</label>
+                    <input type="text" class="form-control" formControlName="jobVacancies">
+                </div>
+                <div class="form-group">
+                    <label>Job Location</label>
+                    <select class="form-control" formControlName="location">
+                    <option  *ngFor="let item of branchList" value="{{item._id}}">{{item.branchName}}</option>
+                    </select>
+                    </div>
+            <br>
+            <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
+            </form>
+            </div>
+            </ng-template>
+        </div>
     </div>
-    </ng-template>
-    
     <div class="table-responsive">
     <table id="basic-datatable"
     class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
@@ -56,7 +65,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr  *ngFor="let item of jobData">
+    <tr  *ngFor="let item of jobData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
     <td>{{item.jobTitle}}</td>
     <td>{{item.jobDescription}}</td>
     <td>{{item.criteria}}</td>
@@ -84,8 +93,21 @@
                 class="mdi mdi-trash-can font-size-18"></i></a>     
     </td>
     </tr>
+    <tr *ngIf="(jobData==null) || (jobData.length == 0)">
+        <td class="text-center" colspan="8">
+           No Data Found
+        </td>
+    </tr>
     </tbody>
     </table>
+    <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
     </div>
     </div>
     </div>

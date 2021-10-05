@@ -29,6 +29,8 @@ export class CreatorsComponent implements OnInit {
   approveAccept:boolean;
   majorWrite:boolean;
   requestWrite:boolean;
+  page = 1;
+  total: any;
 
   constructor(
   private apiCall: ApiCallService,
@@ -96,6 +98,7 @@ export class CreatorsComponent implements OnInit {
       if(resu.error == false)
       {
         this.getCreateList = resu.data;
+        this.total = this.getCreateList.length
       // console.log("fetch",this.getCreateList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

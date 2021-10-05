@@ -16,6 +16,10 @@ export class PromotionComponent implements OnInit {
   fieldDataList:any;
   isEdit = false;
   feildId:any;
+  searchTerm;
+  showAccept = true;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -44,7 +48,15 @@ export class PromotionComponent implements OnInit {
     });
 
     this.fetchBasicsData();
+    this.callRolePermission();
+  }
 
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
   }
 
   fetchBasicsData(){
@@ -66,7 +78,7 @@ export class PromotionComponent implements OnInit {
         });
 
         this.fieldDataList = resu.data.fields;
-
+        this.total = this.fieldDataList.length;
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

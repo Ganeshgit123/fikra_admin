@@ -1,5 +1,5 @@
 <div class="container-fluid">    
-<a routerLink="/investors"><app-pagetitle title="Career Page" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
+<app-pagetitle title="Career Page" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 <ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
 <li [ngbNavItem]="1">
 <a ngbNavLink>
@@ -91,7 +91,14 @@
                 </div>
         </div>
     </div>
-   
+    <div class="row">
+        <div class="col-md-12">
+            <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                class="d-inline-flex align-items-center">Search:
+                <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+        </div>
+    </div>
     <div class="table-responsive">
         <table id="basic-datatable"
         class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
@@ -108,7 +115,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr  *ngFor="let item of candidateListData">
+        <tr  *ngFor="let item of candidateListData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
         <td>{{item.name}}</td>
         <td>{{item.email}}</td>
         <td>{{item.phone}}</td>
@@ -118,8 +125,21 @@
         <td>{{item.experiance}}</td>
         <td>{{item.discription}}</td>
         </tr>
+        <tr *ngIf="(candidateListData==null) || (candidateListData.length == 0)">
+            <td class="text-center" colspan="8">
+               No Data Found
+            </td>
+        </tr>
         </tbody>
         </table>
+        <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
         </div>
     </div>
 </ng-template>

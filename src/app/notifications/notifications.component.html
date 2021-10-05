@@ -2,61 +2,67 @@
     <app-pagetitle title="Notifications" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
     <div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
-                    class="d-inline-flex align-items-center">Search:
-                    <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
-                    aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                            class="d-inline-flex align-items-center">Search:
+                            <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                                aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                </div>
+            </div>
+            <!-- Table -->
+            <div class="table-responsive">
+                <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+                    <thead>
+                        <tr>
+                            <th>Notification Subject</th>
+                            <th>Content</th>
+                            <th>Visited Status</th>
+                            <th *ngIf="showAccept === true">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let user of notificationData | filter:searchTerm | slice: (page-1) * 10 : (page-1) * 10 + 10">
+                            <td>{{user.notiSub}}</td>
+                            <td>{{user.notiContent}}</td>
+                            <td *ngIf="showAccept === true">
+                                <label class="switch">
+                                    <input *ngIf="user._is_Visited_ == true" type="checkbox" checked
+                                        (change)="visitedStatus(user._id)">
+                                    <input *ngIf="user._is_Visited_ !== true" type="checkbox" unchecked
+                                        (change)="visitedStatus(user._id)">
+                                    <span class="slider"></span>
+                                </label>
+                            </td>
+                            <td *ngIf="showAccept !== true">
+                                <span>
+                                    <p *ngIf="user._is_Visited_ == true">ON</p>
+                                    <p *ngIf="user._is_Visited_ !== true">OFF</p>
+                                </span>
+                            </td>
+                            <td *ngIf="showAccept === true">
+                                <a class="text-danger text-info" ngbTooltip="Delete"
+                                    (click)="onDeleteNotification(user._id)"><i
+                                        class="mdi mdi-trash-can font-size-18"></i></a>
+                            </td>
+                        </tr>
+                        <tr *ngIf="(notificationData==null) || (notificationData.length == 0)">
+                            <td class="text-center" colspan="5">
+                                No Data Found
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Pagination -->
+                <div class="col-sm-12 col-md-12">
+                    <div class="text-md-right float-md-right pagination-rounded">
+                        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+                        </ngb-pagination>
+                    </div>
+                </div>
+                <!-- End Pagination -->
             </div>
         </div>
-    <!-- Table -->
-    <div class="table-responsive">
-    <table id="basic-datatable"
-    class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
-    <thead>
-    <tr>
-        <th>Notification Subject</th>
-        <th>Content</th>
-        <th>Visited Status</th>
-        <th *ngIf="showAccept === true">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of notificationData | filter:searchTerm | slice: (page-1) * 10 : (page-1) * 10 + 10">
-        <td>{{user.notiSub}}</td>
-        <td>{{user.notiContent}}</td>
-        <td  *ngIf="showAccept === true">
-            <label class="switch">
-                <input *ngIf="user._is_Visited_ == true"  type="checkbox" checked (change)="visitedStatus(user._id)">
-                <input *ngIf="user._is_Visited_ !== true" type="checkbox" unchecked (change)="visitedStatus(user._id)">
-                <span class="slider"></span>
-            </label>
-        </td>
-        <td *ngIf="showAccept !== true">
-    <span>
-        <p *ngIf="user._is_Visited_ == true">ON</p>
-        <p *ngIf="user._is_Visited_ !== true">OFF</p>
-    </span>
-</td>
-        <td *ngIf="showAccept === true">  
-            <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteNotification(user._id)"><i
-                    class="mdi mdi-trash-can font-size-18"></i></a>     
-        </td>
-    </tr>
-    </tbody>
-    </table>
-    <!-- Pagination -->
-    <div class="col-sm-12 col-md-12">
-        <div class="text-md-right float-md-right pagination-rounded">
-            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
-            </ngb-pagination>
-        </div>
     </div>
-    <!-- End Pagination -->
-    </div>
-    </div>
-    </div>
- 
-    

@@ -20,6 +20,9 @@ export class CreatorHandbookComponent implements OnInit {
   isEdit:any;
   handBookId:any;
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -61,6 +64,8 @@ export class CreatorHandbookComponent implements OnInit {
         if (response.body.error == false) {
 
         this.handBookData = response.body.data;
+        this.total = this.handBookData.length;
+
 // console.log("dd",this.createCornerData)
       }else{
         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')

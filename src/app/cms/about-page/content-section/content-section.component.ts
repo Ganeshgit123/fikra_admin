@@ -20,6 +20,9 @@ export class ContentSectionComponent implements OnInit {
   sectionId:any;
   topStatus:any;
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
 
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -66,6 +69,7 @@ export class ContentSectionComponent implements OnInit {
       if(resu.error == false)
       {
         this.sectionList = resu.data.Sections;
+        this.total = this.sectionList.length
         // console.log("da",this.sectionList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

@@ -16,6 +16,8 @@ export class BankAccountListsComponent implements OnInit {
   role = sessionStorage.getItem('adminRole');
   getRequestList =[];
   showAccept = true;
+  page = 1;
+  total: any;
 
   constructor(
   private apiCall: ApiCallService,
@@ -47,6 +49,7 @@ export class BankAccountListsComponent implements OnInit {
       if(resu.error == false)
       {
         this.getRequestList = resu.data;
+        this.total = this.getRequestList.length
       // console.log("fetch",this.getCreateList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

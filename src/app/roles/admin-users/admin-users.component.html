@@ -2,49 +2,58 @@
     <app-pagetitle title="Admin Users" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
     <div class="card">
         <div class="card-body">
-            <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
-                    (click)="addUsers(userCorner)">Add New</button></p>
-            <!-- Center Modal -->
-            <ng-template #userCorner let-modal>
-                <div class="modal-header">
-                    <button type="button" class="close" (click)="modal.dismiss('Cross click')"
-                        aria-hidden="true">×</button>
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                        class="d-inline-flex align-items-center">Search:
+                        <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                        aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
                 </div>
-                <div class="modal-body">
-                    <form [formGroup]="addUserData">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-control" formControlName="systemAdminName">
-                        </div>
-                        <div class="form-group">
-                            <label>Mail Id</label>
-                            <input type="email" class="form-control" formControlName="systemAdminUserName">
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control" formControlName="systemAdminPassword">
-                        </div>
-                        <div class="form-group">
-                            <label>Admin Role</label>
-                            <select class="form-control" formControlName="systemAdminRoleId">
-                                <option *ngFor="let item of roleData" value="{{item._id}}">{{item.roleName}}</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Time Based Write</label>
-                            <select class="form-control" formControlName="_isTimeBasedWrite_">
-                                <option value="true">Yes</option>
-                                <option value="false">No</option>
-                            </select>
-                        </div>
-                        <br>
-                        <p class="text-center"><button type="button"
-                                class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button>
-                        </p>
-                    </form>
+                <div class="col-md-4">
+                    <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                        (click)="addUsers(userCorner)">Add New</button></p>
+                <!-- Center Modal -->
+                <ng-template #userCorner let-modal>
+                    <div class="modal-header">
+                        <button type="button" class="close" (click)="modal.dismiss('Cross click')"
+                            aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="addUserData">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" formControlName="systemAdminName">
+                            </div>
+                            <div class="form-group">
+                                <label>Mail Id</label>
+                                <input type="email" class="form-control" formControlName="systemAdminUserName">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" formControlName="systemAdminPassword">
+                            </div>
+                            <div class="form-group">
+                                <label>Admin Role</label>
+                                <select class="form-control" formControlName="systemAdminRoleId">
+                                    <option *ngFor="let item of roleData" value="{{item._id}}">{{item.roleName}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Time Based Write</label>
+                                <select class="form-control" formControlName="_isTimeBasedWrite_">
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                            <br>
+                            <p class="text-center"><button type="button"
+                                    class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button>
+                            </p>
+                        </form>
+                    </div>
+                </ng-template>
                 </div>
-            </ng-template>
-
+            </div>
             <div class="table-responsive">
                 <table id="basic-datatable" class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
                     <thead>
@@ -58,7 +67,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of userData">
+                        <tr *ngFor="let item of userData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
                             <td>{{item.systemAdminName}}</td>
                             <td>{{item.systemAdminUserName}}</td>
                             <td>{{item.systemAdminRoleId.roleName}}</td>
@@ -84,8 +93,21 @@
                                         class="mdi mdi-trash-can font-size-18"></i></a>
                             </td>
                         </tr>
+                        <tr *ngIf="(userData==null) || (userData.length == 0)">
+                            <td class="text-center" colspan="6">
+                               No Data Found
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
+                <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
             </div>
         </div>
     </div>

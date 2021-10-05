@@ -52,6 +52,11 @@
                                 <a routerLink="/invoice_bill/{{user._id}}">Preview</a>
                             </td>
                         </tr>
+                        <tr *ngIf="(billList==null) || (billList.length == 0)">
+                            <td class="text-center" colspan="10">
+                               No Data Found
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <!-- Pagination -->

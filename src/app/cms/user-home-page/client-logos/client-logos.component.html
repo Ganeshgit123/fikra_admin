@@ -73,8 +73,8 @@ class="table table-bordered dt-responsive nowrap  no-footer dtr-inline">
 <th>Action</th>
 </tr>
 </thead>
-<tbody *ngFor="let item of clientData">
-<tr *ngIf="item._isDeleted_ == true" >
+<tbody *ngFor="let item of clientData |slice: (page-1) * 10 : (page-1) * 10 + 10">
+<tr *ngIf="item._isDeleted_ == false" >
 <td>{{item.logoName}}</td>
 <td><p class="text-center"><img src="{{item.logoUrl}}" class="img_size"></p></td>
 <td>{{item.logoAlt}}</td>
@@ -93,7 +93,20 @@ class="table table-bordered dt-responsive nowrap  no-footer dtr-inline">
 </td>
 </tr>
 </tbody>
+<tbody *ngIf="(clientData==null) || (clientData.length == 0)">
+    <td class="text-center" colspan="5">
+       No Data Found
+    </td>
+</tbody>
 </table>
+ <!-- Pagination -->
+ <div class="col-sm-12 col-md-12">
+    <div class="text-md-right float-md-right pagination-rounded">
+        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+        </ngb-pagination>
+    </div>
+</div>
+<!-- End Pagination -->
 </div>
 </div>
 </div>

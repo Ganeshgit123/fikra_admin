@@ -45,7 +45,10 @@ export class TemplateComponent implements OnInit {
   projecThreeId: any;
   templateId:any;
   articleContent:any;
+  searchTerm;
   showAccept = true;
+  page = 1;
+  total: any;
 
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -199,6 +202,7 @@ export class TemplateComponent implements OnInit {
       let resu = result.body;
       if (resu.error == false) {
         this.templateDetails = resu.data
+        this.total = this.templateDetails.length
       }
     }, (error) => {
       console.error(error);

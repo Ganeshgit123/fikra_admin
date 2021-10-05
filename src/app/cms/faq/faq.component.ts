@@ -15,7 +15,10 @@ export class FaqComponent implements OnInit {
   faqData:any;
   isEdit = false;
   faqId:any;
+  searchTerm;
   showAccept = true;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -57,6 +60,7 @@ export class FaqComponent implements OnInit {
       {
 
         this.faqData = resu.data;
+        this.total = this.faqData.length
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

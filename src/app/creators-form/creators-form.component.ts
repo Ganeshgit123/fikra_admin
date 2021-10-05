@@ -15,7 +15,10 @@ export class CreatorsFormComponent implements OnInit {
   role = sessionStorage.getItem('adminRole');
 
   creaFieldId:any;
+  searchTerm;
   showAccept = true;
+  page = 1;
+  total: any;
 
   constructor(
     private apiCall: ApiCallService,
@@ -44,6 +47,7 @@ export class CreatorsFormComponent implements OnInit {
        if(resu.error == false)
        {
          this.getCreatorData = resu.data;
+        this.total = this.getCreatorData.length
         //  console.log("dafa",this.getCreatorData)
        }else{
          this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

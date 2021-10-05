@@ -1,44 +1,15 @@
 <div class="container-fluid">
     <app-pagetitle title="Projects" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
-    
-    <div class="row">
-    <div class="col-12">
-    <div class="card">
-    <div class="card-body">
-    <div class="row mb-md-2">
-    <!-- <div class="col-sm-12 col-md-2">
-    <div class="dataTables_length" id="tickets-table_length"><label
-    class="d-inline-flex align-items-center">Show
-    <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
-    [(ngModel)]="pageSize"
-    class="custom-select custom-select-sm form-control form-control-sm mx-2">
-    <option [ngValue]="10">10</option>
-    <option [ngValue]="25">25</option>
-    <option [ngValue]="50">50</option>
-    <option [ngValue]="100">100</option>
-    </select> entries</label></div>
-    </div> -->
-    <!-- <div class="col-sm-12 col-md-6">
-    <div class="form-group row">
-    <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
-    <div class="col-md-4">
-    <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
-    </div>
-    <label for="example-date-input1" class="col-md-2 col-form-label text-center">End Date</label>
-    <div class="col-md-4">
-    <input class="form-control" type="date" value="2019-08-19" id="example-date-input1">
-    </div>
-    </div>
-    </div> -->
-    <!-- Search -->
-    <!-- <div class="col-sm-12 col-md-4">
-    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
-    class="d-inline-flex align-items-center">Search:
-    <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
-    aria-controls="tickets-table"></label></div>
-    </div> -->
-    <!-- End search -->
-    </div>
+
+    <div class="card card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                    class="d-inline-flex align-items-center">Search:
+                    <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                    aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+            </div>
+        </div>
     <!-- Table -->
     <div class="table-responsive">
     <table id="basic-datatable"
@@ -55,7 +26,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let proj of projectList">
+    <tr *ngFor="let proj of projectList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
     <td><a routerLink="/view-projects/{{proj._id}}">{{proj.title}}</a></td>
     <td>{{proj.basicInfoId.categoryName}}</td>
     <td>{{proj.basicInfoId.launchDate | date}}</td>
@@ -67,30 +38,24 @@
         class="mdi mdi-trash-can font-size-18"></i></a>
     </td>
     </tr>
+    <tr *ngIf="(projectList==null) || (projectList.length == 0)">
+        <td class="text-center" colspan="7">
+           No Data Found
+        </td>
+    </tr>
     </tbody>
     </table>
+        <!-- Pagination -->
+        <div class="col-sm-12 col-md-12">
+            <div class="text-md-right float-md-right pagination-rounded">
+                <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+                </ngb-pagination>
+            </div>
+        </div>
+        <!-- End Pagination -->
     </div>
     <!-- End table -->
-    <div class="row justify-content-md-between align-items-md-center mt-2">
-    <!-- <div class="col-sm-12 col-md-5">
-    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
-    {{startIndex}} to
-    {{endIndex}} of {{totalRecords}}
-    entries
-    </div>
-    </div> -->
-    <!-- Pagination -->
-    <div class="col-sm-12 col-md-5">
-    <div class="text-md-right float-md-right pagination-rounded">
-    <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
-    </ngb-pagination> -->
     </div>
     </div>
-    <!-- End Pagination -->
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+
     

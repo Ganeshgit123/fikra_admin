@@ -17,6 +17,9 @@ export class WhyFikraComponent implements OnInit {
   whyFikraId:any;
   whyFikraStatus:any;
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -56,6 +59,7 @@ export class WhyFikraComponent implements OnInit {
       {
 
         this.whyFikraList = resu.data.whyFikra;
+        this.total = this.whyFikraList.length
         
         this.whyFikraStatus = resu.data._is_why_Fikra_on_;
 

@@ -11,6 +11,10 @@ export class RequestPageComponent implements OnInit {
   updatedby:any;
   role:any;
   addRequestContent: FormGroup;
+  searchTerm;
+  showAccept = true;
+  page = 1;
+  total: any;
 
  constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService    ) { }
@@ -33,8 +37,17 @@ export class RequestPageComponent implements OnInit {
       });
   
       this.fetchRequestData();
+    this.callRolePermission();
     }
   
+    callRolePermission(){
+      if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+        let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+        this.showAccept = contentPermssion[3].write
+        // console.log("prer", contentPermssion[3])
+      }
+    }
+    
     fetchRequestData(){
       let params = {
         url: "admin/getProjectRequestPageCMS",

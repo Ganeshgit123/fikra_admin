@@ -18,6 +18,11 @@ export class ContactUsComponent implements OnInit {
   branchId:any;
   contactListData:any;
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
+  searchTerm1;
+  total1: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -64,6 +69,7 @@ export class ContactUsComponent implements OnInit {
       {
 
         this.branchData = resu.data;
+        this.total = this.branchData.length
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -240,6 +246,7 @@ export class ContactUsComponent implements OnInit {
       {
 
         this.contactListData = resu.data;
+        this.total1 = this.contactListData.length
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

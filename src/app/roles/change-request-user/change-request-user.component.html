@@ -1,6 +1,14 @@
 <div class="container-fluid">
     <app-pagetitle title="Roles" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
     <div class="card card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                    class="d-inline-flex align-items-center">Search:
+                    <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                    aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+            </div>
+        </div>
         <div class="table-responsive">
             <table id="basic-datatable" class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
                 <thead>
@@ -14,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of reqData">
+                    <tr *ngFor="let item of reqData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
                         <td>{{item.adminUserId}}</td>
                         <td>{{item.tabName}}</td>
                         <td>{{item.feildName}}</td>
@@ -29,8 +37,21 @@
                             <span *ngIf="item._is_Admin_Rejected_ == true">Rejected</span>
                         </td>
                     </tr>
+                    <tr *ngIf="(reqData==null) || (reqData.length == 0)">
+                        <td class="text-center" colspan="6">
+                           No Data Found
+                        </td>
+                    </tr>
                 </tbody>
             </table>
+            <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
         </div>
     </div>
 </div>

@@ -17,6 +17,9 @@ export class RolesComponent implements OnInit {
   roleData:any;
   isEdit = false;
   roleId:any;
+  searchTerm;
+  page = 1;
+  total: any;
 
    constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -45,6 +48,7 @@ export class RolesComponent implements OnInit {
       {
 
         this.roleData = resu.data;
+        this.total = this.roleData.length
         // console.log("data",this.roleData)
 
       }else{

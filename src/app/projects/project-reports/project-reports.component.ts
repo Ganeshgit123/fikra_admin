@@ -22,6 +22,8 @@ export class ProjectReportsComponent implements OnInit {
   permName:any;
   isTimeBasedWirte:boolean;
   canWrite:boolean;
+  page = 1;
+  total: any;
 
    constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -81,6 +83,7 @@ export class ProjectReportsComponent implements OnInit {
       if(resu.error == false)
       {
         this.reportedList = resu.data;
+        this.total = this.reportedList.length
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

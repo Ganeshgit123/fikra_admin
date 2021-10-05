@@ -33,55 +33,64 @@
                 </div>
             </div>
             <br>
-            <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+            <p *ngIf="showAccept === true" class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
                     (click)="onSubmit()">Save</button></p>
         </form>
     </div>
 </div>
 
 <div class="card card-body">
-    <p class="text-right">
-        <button type="button" class="btn btn-primary w-md waves-effect waves-light"
-            (click)="addPaymentFields(paymentField)">Add New</button>
-    </p>
-    <!-- Center Modal -->
-    <ng-template #paymentField let-modal>
-        <div class="modal-header">
-            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    <div class="row">
+        <div class="col-md-8">
+            <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                class="d-inline-flex align-items-center">Search:
+                <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
         </div>
-        <div class="modal-body">
-            <form [formGroup]="addPaymentFieildData">
-                <div class="form-group">
-                    <label>Field Heading(EN)</label>
-                    <input type="text" class="form-control" formControlName="feildHead">
+        <div class="col-md-4">
+            <p class="text-right" *ngIf="showAccept === true">
+                <button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                    (click)="addPaymentFields(paymentField)">Add New</button>
+            </p>
+            <!-- Center Modal -->
+            <ng-template #paymentField let-modal>
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
                 </div>
-                <div class="form-group">
-                    <label>Field Heading(AR)</label>
-                    <input type="text" class="form-control" formControlName="feildHead_Ar">
+                <div class="modal-body">
+                    <form [formGroup]="addPaymentFieildData">
+                        <div class="form-group">
+                            <label>Field Heading(EN)</label>
+                            <input type="text" class="form-control" formControlName="feildHead">
+                        </div>
+                        <div class="form-group">
+                            <label>Field Heading(AR)</label>
+                            <input type="text" class="form-control" formControlName="feildHead_Ar">
+                        </div>
+                        <div class="form-group">
+                            <label>Field Description(EN)</label>
+                            <textarea class="form-control" formControlName="feildDescription"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Field Description(AR)</label>
+                            <textarea class="form-control" formControlName="feildDescription_Ar"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Field Message(EN)</label>
+                            <textarea class="form-control" formControlName="feildMessage"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Field Message(AR)</label>
+                            <textarea class="form-control" formControlName="feildMessage_Ar"></textarea>
+                        </div>
+                        <br>
+                        <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                                (click)="onPaymentFieldSubmit()">Save</button></p>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label>Field Description(EN)</label>
-                    <textarea class="form-control" formControlName="feildDescription"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Field Description(AR)</label>
-                    <textarea class="form-control" formControlName="feildDescription_Ar"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Field Message(EN)</label>
-                    <textarea class="form-control" formControlName="feildMessage"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Field Message(AR)</label>
-                    <textarea class="form-control" formControlName="feildMessage_Ar"></textarea>
-                </div>
-                <br>
-                <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
-                        (click)="onPaymentFieldSubmit()">Save</button></p>
-            </form>
+            </ng-template>
         </div>
-    </ng-template>
-
+    </div>
     <div class="table-responsive">
         <table id="basic-datatable" class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
             <thead>
@@ -92,25 +101,38 @@
                     <th>Field Description(AR)</th>
                     <th>Field Message(EN)</th>
                     <th>Field Message(AR)</th>
-                    <th>Action</th>
+                    <th *ngIf="showAccept === true">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of fieldDataList">
+                <tr *ngFor="let item of fieldDataList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
                     <td>{{item.feildHead}}</td>
                     <td>{{item.feildHead_Ar}}</td>
                     <td>{{item.feildDescription}}</td>
                     <td>{{item.feildDescription_Ar}}</td>
                     <td>{{item.feildMessage}}</td>
                     <td>{{item.feildMessage_Ar}}</td>
-                    <td>
+                    <td *ngIf="showAccept === true">
                         <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewPaymentField(item,paymentField)"><i
                                 class="mdi mdi-pencil font-size-18"></i></a>
                         <a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete"
                             (click)="onDeletePaymentField(item._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
                     </td>
                 </tr>
+                <tr *ngIf="(fieldDataList==null) || (fieldDataList.length == 0)">
+                    <td class="text-center" colspan="7">
+                       No Data Found
+                    </td>
+                </tr>
             </tbody>
         </table>
+           <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
     </div>
 </div>

@@ -24,11 +24,12 @@
                                         <label>Template Name</label>
                                         <input type="text" class="form-control" formControlName='templateName'>
                                     </div>
-                                        <div class="form-group">
-                                            <label>Articles</label>
-                                            <ckeditor [editor]="Editor" formControlName="blogContent" (ready)="onReady($event)">
-                                            </ckeditor>
-                                        </div>
+                                    <div class="form-group">
+                                        <label>Articles</label>
+                                        <ckeditor [editor]="Editor" formControlName="blogContent"
+                                            (ready)="onReady($event)">
+                                        </ckeditor>
+                                    </div>
                                 </div>
                                 <div class="col-md-4" *ngIf='container.length !== 0'>
                                     <div class="form-group">
@@ -102,23 +103,22 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Content</label>
-                                        <textarea  class="form-control"
-                                        formControlName='textContent'></textarea>
+                                        <textarea class="form-control" formControlName='textContent'></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label>Project One Description</label>
-                                        <textarea  class="form-control"
-                                        formControlName='project_One_Description'></textarea>
+                                        <textarea class="form-control"
+                                            formControlName='project_One_Description'></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label>Project Two Description</label>
-                                        <textarea  class="form-control"
-                                        formControlName='project_Two_Description'></textarea>
+                                        <textarea class="form-control"
+                                            formControlName='project_Two_Description'></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label>Project Three Description</label>
-                                        <textarea  class="form-control"
-                                        formControlName='project_Three_Description'></textarea>
+                                        <textarea class="form-control"
+                                            formControlName='project_Three_Description'></textarea>
                                     </div>
                                     <!-- <div class="form-group">
                                         <label>Learn More URL</label>
@@ -133,7 +133,7 @@
                                 </span>
                             </div>
                         </form>
-                        
+
                         <!--Model-->
                         <ng-template #preview let-modal>
                             <div class="modal-header">
@@ -202,12 +202,15 @@
                                         .first_project_list {
                                             padding: 0 60px 40px 60px;
                                         }
+
                                         .first_project_list h3 {
                                             margin-top: 5rem;
                                         }
+
                                         .first_project_list p {
                                             font-size: 14px;
                                         }
+
                                         .cover_back {
                                             margin: 20px 0;
                                             box-shadow: -30px -5px 85px #0000001C;
@@ -360,8 +363,10 @@
                                                                     </div>
                                                                 </div>
                                                                 <p>{{list.project_One_Description}}</p>
-                                                                  <p class="right"><a href="https://fikra.app/projectview/{{list.project_One._id}}" target="_blank">Read
-                                                                More</a></p>
+                                                                <p class="right"><a
+                                                                        href="https://fikra.app/projectview/{{list.project_One._id}}"
+                                                                        target="_blank">Read
+                                                                        More</a></p>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="cover_back">
@@ -374,8 +379,10 @@
                                                                     </div>
                                                                 </div>
                                                                 <p>{{list.project_Two_Description}}</p>
-                                                                <p class="right"><a href="https://fikra.app/projectview/{{list.project_Two._id}}" target="_blank">Read
-                                                                    More</a></p>
+                                                                <p class="right"><a
+                                                                        href="https://fikra.app/projectview/{{list.project_Two._id}}"
+                                                                        target="_blank">Read
+                                                                        More</a></p>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="cover_back">
@@ -388,14 +395,16 @@
                                                                     </div>
                                                                 </div>
                                                                 <p>{{list.project_Three_Description}}</p>
-                                                                <p class="right"><a href="https://fikra.app/projectview/{{list.project_Three._id}}" target="_blank">Read
-                                                                    More</a></p>
+                                                                <p class="right"><a
+                                                                        href="https://fikra.app/projectview/{{list.project_Three._id}}"
+                                                                        target="_blank">Read
+                                                                        More</a></p>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <p [innerHtml]='articleContent'></p>
-                                                         </div>
-                                                      
+                                                        </div>
+
                                                     </section>
 
                                                     <p class="center"><img src="https://fikra.app/favicon.ico"
@@ -462,57 +471,65 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row mb-md-2">
-                        <!-- Table -->
-                        <div class="table-responsive">
-                            <table id="basic-datatable"
-                                class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
-                                <thead>
-                                    <tr>
-                                        <th>Template Name</th>
-                                        <th>Head Name</th>
-                                        <th>Content</th>
-                                        <th>Project One Id</th>
-                                        <th>Project Two Id</th>
-                                        <th>Project Three Id</th>
-                                        <th>Url</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody *ngFor="let user of templateDetails">
-                                    <tr *ngFor="let cont of user.content">
-                                        <td>{{user.templateName}}</td>
-                                        <td>{{cont.textHead}}</td>
-                                        <td>{{cont.textContent}}</td>
-                                        <td>{{cont.project_One.title}}</td>
-                                        <td>{{cont.project_Two.title}}</td>
-                                        <td>{{cont.project_Three.title}}</td>
-                                        <td>{{cont.learnMore_URL}}</td>
-                                        <td>
 
-                                            <!-- <a routerLink="/edit_template/{{ user._id}}" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickTempData(user)"><i
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                        class="d-inline-flex align-items-center">Search:
+                        <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                        aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                </div>
+            </div>
+            <!-- Table -->
+            <div class="table-responsive">
+                <table id="basic-datatable"
+                    class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
+                    <thead>
+                        <tr>
+                            <th>Template Name</th>
+                            <th>Head Name</th>
+                            <th>Content</th>
+                            <th>Project One Id</th>
+                            <th>Project Two Id</th>
+                            <th>Project Three Id</th>
+                            <th>Url</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let user of templateDetails | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
+                        <tr *ngFor="let cont of user.content">
+                            <td>{{user.templateName}}</td>
+                            <td>{{cont.textHead}}</td>
+                            <td>{{cont.textContent}}</td>
+                            <td>{{cont.project_One.title}}</td>
+                            <td>{{cont.project_Two.title}}</td>
+                            <td>{{cont.project_Three.title}}</td>
+                            <td>{{cont.learnMore_URL}}</td>
+                            <td>
+
+                                <!-- <a routerLink="/edit_template/{{ user._id}}" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickTempData(user)"><i
                                                 class="mdi mdi-pencil font-size-18"></i></a>  
                                             <a class="text-danger text-info" ngbTooltip="Delete"><i
                                                     class="mdi mdi-trash-can font-size-18"></i></a> -->
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- Pagination -->
-                            <div class="col-sm-12 col-md-5">
-                                <div class="text-md-right float-md-right pagination-rounded">
-                                    <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
-        </ngb-pagination> -->
-                                </div>
-                            </div>
-                            <!-- End Pagination -->
-                        </div>
-                    </div>
-                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="(templateDetails==null) || (templateDetails.length == 0)">
+                            <td class="text-center" colspan="8">
+                               No Data Found
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
             </div>
         </div>
     </div>

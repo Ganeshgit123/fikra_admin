@@ -54,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of serviceList">
+                    <tr *ngFor="let item of serviceList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
                         <td>{{item.specialReqestName}}</td>
                         <td>{{item.specialReqestNameAr}}</td>
                         <td>{{item.requestDescription}}</td>
@@ -80,6 +80,11 @@
                             <a class="text-danger text-info" ngbTooltip="Delete"
                                 (click)="deleteService(item._id,item._is_On_)"><i
                                     class="mdi mdi-trash-can font-size-18"></i></a>
+                        </td>
+                    </tr>
+                    <tr *ngIf="(serviceList==null) || (serviceList.length == 0)">
+                        <td class="text-center" colspan="5">
+                           No Data Found
                         </td>
                     </tr>
                 </tbody>

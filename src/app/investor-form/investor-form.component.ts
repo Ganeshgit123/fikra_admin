@@ -16,7 +16,11 @@ export class InvestorFormComponent implements OnInit {
 
   getfieldData:any=[];
   fieldId:any;
+  searchTerm;
   showAccept = true;
+  page = 1;
+  total: any;
+
 
   constructor(
     private apiCall: ApiCallService,
@@ -46,6 +50,7 @@ export class InvestorFormComponent implements OnInit {
        if(resu.error == false)
        {
          this.getfieldData = resu.data;
+        this.total = this.getfieldData.length
         //  console.log("dafa",this.getfieldData)
        }else{
          this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

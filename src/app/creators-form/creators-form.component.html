@@ -1,98 +1,80 @@
-<div class="row">
-    <div class="col-12">
+<div class="container-fluid">
     <div class="card">
-    <div class="card-body">
-        <div class="form-group">
-            <p class="text-right" *ngIf="showAccept === true"><a routerLink="/add-creator-field" class="btn btn-primary w-md waves-effect waves-light">Add New</a></p>
-        </div>
-    <!-- <div class="row mb-md-2">
-    <div class="col-sm-12 col-md-8">
-    <div class="dataTables_length" id="tickets-table_length"><label
-    class="d-inline-flex align-items-center">Show
-    <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
-    [(ngModel)]="pageSize"
-    class="custom-select custom-select-sm form-control  form-control-sm mx-2">
-    <option [ngValue]="10">10</option>
-    <option [ngValue]="25">25</option>
-    <option [ngValue]="50">50</option>
-    <option [ngValue]="100">100</option>
-    </select> entries</label></div>
-    </div>
-    Search
-    <div class="col-sm-12 col-md-4">
-    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
-    class="d-inline-flex align-items-center">Search:
-    <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
-    aria-controls="tickets-table"></label></div>
-    </div>
-    End search
-    </div> -->
-    <!-- Table -->
-    <div class="table-responsive">
-    
-    <table id="basic-datatable"
-    class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
-    <thead>
-        <tr>
-            <th>Label(EN)</th>
-            <th>Label(AR)</th>
-            <th>Input Type</th>
-            <th>Placeholder(EN)</th>
-            <th>Placeholder(AR)</th>
-            <th>Form ControlName</th>
-            <th>Value</th>
-            <th>Required</th>
-            <th *ngIf="showAccept === true">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of getCreatorData;">
-            <td>{{item.fieldName}}</td>
-            <td>{{item.fieldName_Ar}}</td>
-            <td *ngIf = "!(item.fieldType == 'select' || item.fieldType == 'radio')">{{item.fieldType}}
-                <span></span>
-            </td>
-            <td  *ngIf = "item.fieldType == 'select' || item.fieldType == 'radio'">{{item.fieldType}}
-                <tr *ngFor="let items of item.dropDown;let ii = index">
-                    <span>options - {{items.displayName}} (value - {{items.value}})<br>
-                        options - {{items.displayName_Ar}}</span>
-                        <hr style="margin: 5px 0;">
-                </tr>
-            </td>
-            <td>{{item.placeholder}}</td>
-            <td>{{item.placeholder_Ar}}</td>
-            <td>{{item.fieldId}}</td>
-            <td>{{item.defauldValue}}</td>
-            <td>{{item._is_Mandatory_}}</td>
-            <td *ngIf="showAccept === true">
-                <a routerLink="/edit-creator-field/{{item._id}}" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickCreateField(item)"><i
-                    class="mdi mdi-pencil font-size-18"></i></a>  
-                <!-- <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteFaqStatus(true,item._id,item._is_visible_)"><i
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                            class="d-inline-flex align-items-center">Search:
+                            <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                                aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p class="text-right" *ngIf="showAccept === true"><a routerLink="/add-creator-field"
+                                class="btn btn-primary w-md waves-effect waves-light">Add New</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Table -->
+            <div class="table-responsive">
+
+                <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+                    <thead>
+                        <tr>
+                            <th>Label(EN)</th>
+                            <th>Label(AR)</th>
+                            <th>Input Type</th>
+                            <th>Placeholder(EN)</th>
+                            <th>Placeholder(AR)</th>
+                            <th>Form ControlName</th>
+                            <th>Value</th>
+                            <th>Required</th>
+                            <th *ngIf="showAccept === true">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of getCreatorData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
+                            <td>{{item.fieldName}}</td>
+                            <td>{{item.fieldName_Ar}}</td>
+                            <td *ngIf="!(item.fieldType == 'select' || item.fieldType == 'radio')">{{item.fieldType}}
+                                <span></span>
+                            </td>
+                            <td *ngIf="item.fieldType == 'select' || item.fieldType == 'radio'">{{item.fieldType}}
+                        <tr *ngFor="let items of item.dropDown;let ii = index">
+                            <span>options - {{items.displayName}} (value - {{items.value}})<br>
+                                options - {{items.displayName_Ar}}</span>
+                            <hr style="margin: 5px 0;">
+                        </tr>
+                        </td>
+                        <td>{{item.placeholder}}</td>
+                        <td>{{item.placeholder_Ar}}</td>
+                        <td>{{item.fieldId}}</td>
+                        <td>{{item.defauldValue}}</td>
+                        <td>{{item._is_Mandatory_}}</td>
+                        <td *ngIf="showAccept === true">
+                            <a routerLink="/edit-creator-field/{{item._id}}" class="mr-3 text-info" ngbTooltip="Edit"
+                                (click)="clickCreateField(item)"><i class="mdi mdi-pencil font-size-18"></i></a>
+                            <!-- <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteFaqStatus(true,item._id,item._is_visible_)"><i
                         class="mdi mdi-trash-can font-size-18"></i></a>  -->
-            </td>
-            </tr>
-    </tbody>
-    </table>
-    </div>
-    <!-- End table -->
-    <div class="row justify-content-md-between align-items-md-center mt-2">
-    <!-- <div class="col-sm-12 col-md-5">
-    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">Showing
-    {{startIndex}} to
-    {{endIndex}} of {{totalRecords}}
-    entries
-    </div>
-    </div> -->
-    <!-- Pagination -->
-    <div class="col-sm-12 col-md-5">
+                        </td>
+                        </tr>
+                        <tr *ngIf="(getCreatorData==null) || (getCreatorData.length == 0)">
+                            <td class="text-center" colspan="10">
+                               No Data Found
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- End table -->
+           <!-- Pagination -->
+  <div class="col-sm-12 col-md-12">
     <div class="text-md-right float-md-right pagination-rounded">
-    <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
-    </ngb-pagination> -->
+        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+        </ngb-pagination>
     </div>
+</div>
+<!-- End Pagination -->
+        </div>
     </div>
-    <!-- End Pagination -->
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+</div>

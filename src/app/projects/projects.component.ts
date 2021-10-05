@@ -35,6 +35,8 @@ export class ProjectsComponent implements OnInit {
   permName:any;
   isTimeBasedWirte:boolean;
   canWrite:boolean;
+  page = 1;
+  total: any;
 
  constructor(
   private apiCall: ApiCallService,
@@ -100,6 +102,7 @@ export class ProjectsComponent implements OnInit {
       if(resu.error == false)
       {
          this.projectList = resu.data;
+        this.total = this.projectList.length
         
           this.projectList.forEach(element => {
             var firstDate = element.basicInfoId.launchDate;

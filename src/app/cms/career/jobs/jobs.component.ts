@@ -17,6 +17,9 @@ export class JobsComponent implements OnInit {
   jobId:any;
   branchList = [];
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -78,6 +81,7 @@ export class JobsComponent implements OnInit {
       if(resu.error == false)
       {
         this.jobData = resu.data;
+        this.total = this.jobData.length
         // console.log("ef",this.branchList)
 
       }else{

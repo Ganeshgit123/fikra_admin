@@ -562,6 +562,11 @@
                                     class="mdi mdi-trash-can font-size-18"></i></a>
                         </td>
                     </tr>
+                    <tr *ngIf="(countryList==null) || (countryList.length == 0)">
+                        <td class="text-center" colspan="5">
+                           No Data Found
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <!-- Pagination -->

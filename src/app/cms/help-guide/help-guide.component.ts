@@ -21,6 +21,13 @@ export class HelpGuideComponent implements OnInit {
   titleIdQuesAns:any;
   quesId:any;
   quesAnsId:any;
+  searchTerm;
+  quesList = [];
+  showAccept = true;
+  page = 1;
+  total: any;
+  searchTerm1;
+  total1: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -43,7 +50,14 @@ export class HelpGuideComponent implements OnInit {
     });
 
     this.fetchTitleList();
-    
+    this.callRolePermission(); 
+  }
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
   }
 
   fetchTitleList(){
@@ -55,7 +69,7 @@ export class HelpGuideComponent implements OnInit {
       if(resu.error == false)
       {
         this.titleList = resu.data;
-        // console.log("ef",this.titleList)
+        this.total = this.titleList.length;
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

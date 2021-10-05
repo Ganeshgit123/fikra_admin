@@ -18,6 +18,9 @@ export class ProjectQComponent implements OnInit {
   quesAndAnId:any;
   questionStatus:any;
   showAccept = true;
+  searchTerm;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbModal,
@@ -66,6 +69,7 @@ export class ProjectQComponent implements OnInit {
         });
 
         this.quesAndAnsList = resu.data.questions[0].questionBody;
+        this.total = this.quesAndAnsList.length
         
         this.questionStatus = resu.data._is_question_on_;
 

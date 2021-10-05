@@ -58,7 +58,7 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 </tr>
 </thead>
 <tbody>
-<tr  *ngFor="let item of createCornerData">
+<tr  *ngFor="let item of createCornerData |slice: (page-1) * 10 : (page-1) * 10 + 10">
 <td><img src="{{item.blogImage}}" class="img_size"></td>
 <td>{{item.headName}}</td>
 <td>{{item.headName_ar}}</td>
@@ -79,8 +79,21 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
         class="mdi mdi-trash-can font-size-18"></i></a>
 </td>
 </tr>
+<tr *ngIf="(createCornerData==null) || (createCornerData.length == 0)">
+    <td class="text-center" colspan="8">
+       No Data Found
+    </td>
+</tr>
 </tbody>
 </table>
+ <!-- Pagination -->
+ <div class="col-sm-12 col-md-12">
+    <div class="text-md-right float-md-right pagination-rounded">
+        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+        </ngb-pagination>
+    </div>
+</div>
+<!-- End Pagination -->
 </div>
 </div>
 </div>

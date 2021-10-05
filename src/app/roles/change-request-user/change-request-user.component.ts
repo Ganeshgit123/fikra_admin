@@ -13,6 +13,8 @@ export class ChangeRequestUserComponent implements OnInit {
   role:any;
 
   reqData = [];
+  page = 1;
+  total: any;
 
   constructor(
   private apiCall: ApiCallService,
@@ -38,6 +40,7 @@ export class ChangeRequestUserComponent implements OnInit {
       {
 
         this.reqData = resu.data;
+        this.total = this.reqData.length
        
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

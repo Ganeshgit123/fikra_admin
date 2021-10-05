@@ -12,6 +12,7 @@ export class CreateProjectComponent implements OnInit {
   updatedby: any;
   role: any;
   commonNotes: FormGroup;
+  showAccept = true;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -28,8 +29,15 @@ export class CreateProjectComponent implements OnInit {
     });
 
     this.fetchNotesData();
+    this.callRolePermission();
   }
-
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
+  }
   fetchNotesData() {
     let params = {
       url: "admin/getCreateProjectPageCMS",

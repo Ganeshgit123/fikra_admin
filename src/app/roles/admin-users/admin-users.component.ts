@@ -18,6 +18,9 @@ export class AdminUsersComponent implements OnInit {
   isEdit = false;
   adminUserId:any;
   adminRoleId:any;
+  searchTerm;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -75,7 +78,8 @@ export class AdminUsersComponent implements OnInit {
       {
 
         this.userData = resu.data;
-        console.log("user",this.userData)
+        this.total = this.userData.length
+        // console.log("user",this.userData)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

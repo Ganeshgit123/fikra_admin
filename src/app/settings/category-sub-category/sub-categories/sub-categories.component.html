@@ -85,6 +85,11 @@ class="mdi mdi-pencil font-size-18"></i></a>
 class="mdi mdi-trash-can font-size-18"></i></a>
 </td>
 </tr>
+<tr *ngIf="(subCateg==null) || (subCateg.length == 0)">
+    <td class="text-center" colspan="7">
+       No Data Found
+    </td>
+</tr>
 </tbody>
 </table>
 <!-- Pagination -->

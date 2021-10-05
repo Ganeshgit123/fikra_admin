@@ -15,22 +15,32 @@
     <ng-template ngbNavContent>
         <div class="card">
             <div class="card-body">
-            <p class="text-right" ><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addTitle(helpTilteModal)">Add New</button></p>
-            <ng-template #helpTilteModal let-modal>
-            <div class="modal-header">
-            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                        class="d-inline-flex align-items-center">Search:
+                        <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                        aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                </div>
+                <div class="col-md-4">
+                    <p *ngIf="showAccept === true" class="text-right" ><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addTitle(helpTilteModal)">Add New</button></p>
+                    <ng-template #helpTilteModal let-modal>
+                    <div class="modal-header">
+                    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                    <form [formGroup]="addNewTitle">
+                    <div class="form-group">
+                    <label>Help Guide Title(EN)</label>
+                    <input type="text" class="form-control" formControlName="title">
+                    </div>
+                    <br>
+                    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addTitleSubmit()">Save</button></p>
+                    </form>
+                    </div>
+                    </ng-template>
+                </div>
             </div>
-            <div class="modal-body">
-            <form [formGroup]="addNewTitle">
-            <div class="form-group">
-            <label>Help Guide Title(EN)</label>
-            <input type="text" class="form-control" formControlName="title">
-            </div>
-            <br>
-            <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addTitleSubmit()">Save</button></p>
-            </form>
-            </div>
-            </ng-template>
             <div class="table-responsive">
             <table id="basic-datatable"
             class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
@@ -39,29 +49,48 @@
             <th>Title(EN)</th>
             <th>Tilte(AR)</th>
             <th>Status</th>
-            <th>Action</th>
+            <th *ngIf="showAccept === true">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let item of titleList">
+            <tr *ngFor="let item of titleList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
             <td>{{item.title}}</td>
             <td></td>
-            <td>
+            <td *ngIf="showAccept === true">
             <label class="switch">
                 <input *ngIf="item._is_On_ === true"  type="checkbox" checked (change)="onchangeTitleStatus($event,item._id)">
                 <input *ngIf="item._is_On_ === false" type="checkbox" unchecked (change)="onchangeTitleStatus($event,item._id)">
             <span class="slider"></span>
             </label>    
             </td>
-            <td>
+            <td *ngIf="showAccept !== true">
+                <span>
+                    <p *ngIf="item._is_On_ == true">ON</p>
+                    <p *ngIf="item._is_On_ !== true">OFF</p>
+                </span>
+            </td>
+            <td *ngIf="showAccept === true">
             <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewTitle(item,helpTilteModal)"><i
             class="mdi mdi-pencil font-size-18"></i></a>
             <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteTitle(item._id)"><i
             class="mdi mdi-trash-can font-size-18"></i></a>
             </td>
             </tr>
+            <tr *ngIf="(titleList==null) || (titleList.length == 0)">
+                <td class="text-center" colspan="4">
+                   No Data Found
+                </td>
+            </tr>
             </tbody>
             </table>
+               <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
             </div>
             </div>
             </div>
@@ -75,32 +104,42 @@
     <ng-template ngbNavContent>
         <div class="card">
             <div class="card-body">
-            <p class="text-right" ><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addQuesAns(quesAnsModal)">Add New</button></p>
-            <ng-template #quesAnsModal let-modal>
-            <div class="modal-header">
-            <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-            <form [formGroup]="addNewQuesAns">
-                <div class="form-group">
-                    <label>Tilte</label>
-                    <select class="form-control" formControlName="ebookId">
-                    <option  *ngFor="let item of titleList" value="{{item._id}}">{{item.title}}</option>
-                    </select>
-                    </div>
-            <div class="form-group">
-            <label>Question(EN)</label>
-            <input type="text" class="form-control" formControlName="question">
-            </div>
-            <div class="form-group">
-                <label>Answer(EN)</label>
-                <textarea class="form-control" formControlName="answer"></textarea>
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                        class="d-inline-flex align-items-center">Search:
+                        <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                        aria-controls="tickets-table" [(ngModel)]="searchTerm1"></label></div>
                 </div>
-            <br>
-            <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addQuesAnsSubmit()">Save</button></p>
-            </form>
+                <div class="col-md-4">
+                    <p *ngIf="showAccept === true" class="text-right" ><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addQuesAns(quesAnsModal)">Add New</button></p>
+                    <ng-template #quesAnsModal let-modal>
+                    <div class="modal-header">
+                    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                    <form [formGroup]="addNewQuesAns">
+                        <div class="form-group">
+                            <label>Tilte</label>
+                            <select class="form-control" formControlName="ebookId">
+                            <option  *ngFor="let item of titleList" value="{{item._id}}">{{item.title}}</option>
+                            </select>
+                            </div>
+                    <div class="form-group">
+                    <label>Question(EN)</label>
+                    <input type="text" class="form-control" formControlName="question">
+                    </div>
+                    <div class="form-group">
+                        <label>Answer(EN)</label>
+                        <textarea class="form-control" formControlName="answer"></textarea>
+                        </div>
+                    <br>
+                    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addQuesAnsSubmit()">Save</button></p>
+                    </form>
+                    </div>
+                    </ng-template>
+                </div>
             </div>
-            </ng-template>
             <div class="table-responsive">
             <table id="basic-datatable"
             class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
@@ -112,32 +151,51 @@
             <th>Answer(EN)</th>
             <th>Answer(AR)</th>
             <th>Status</th>
-            <th>Action</th>
+            <th *ngIf="showAccept === true">Action</th>
             </tr>
             </thead>
             <tbody *ngFor="let item of titleList">
-            <tr *ngFor="let ques of item.question">
+            <tr *ngFor="let ques of item.question | filter:searchTerm1 |slice: (page-1) * 10 : (page-1) * 10 + 10">
             <td>{{item.title}}</td>
             <td>{{ques.question}}</td>
             <td></td>
             <td>{{ques.answer}}</td>
             <td></td>
-            <td>
+            <td *ngIf="showAccept === true">
             <label class="switch">
                 <input *ngIf="ques._is_On_ === true"  type="checkbox" checked (change)="onchangeQuesAnsStatus($event,item._id,ques._id)">
                 <input *ngIf="ques._is_On_ === false" type="checkbox" unchecked (change)="onchangeQuesAnsStatus($event,item._id,ques._id)">
             <span class="slider"></span>
             </label>    
             </td>
-            <td>
+            <td *ngIf="showAccept !== true">
+                <span>
+                    <p *ngIf="ques._is_On_ == true">ON</p>
+                    <p *ngIf="ques._is_On_ !== true">OFF</p>
+                </span>
+            </td>
+            <td *ngIf="showAccept === true">
             <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewQuesAns(item,ques,quesAnsModal)"><i
             class="mdi mdi-pencil font-size-18"></i></a>
             <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteQuesAns(item._id,ques._id)"><i
             class="mdi mdi-trash-can font-size-18"></i></a>
             </td>
             </tr>
+            <tr *ngIf="(item.question==null) || (item.question.length == 0)">
+                <td class="text-center" colspan="7">
+                   No Data Found
+                </td>
+            </tr>
             </tbody>
             </table>
+            <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total1" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
             </div>
             </div>
             </div>

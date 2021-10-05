@@ -15,6 +15,7 @@ export class ThirdTabContentComponent implements OnInit {
   imagePreview = null;
   fileUpload: any;
   imgUrl:any;
+  showAccept = true;
 
  constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -38,9 +39,15 @@ export class ThirdTabContentComponent implements OnInit {
     });
 
     this.fetchSecondTabData();
-
+    this.callRolePermission();
   }
-
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
+  }
   fetchSecondTabData(){
     let params = {
       url: "admin/getCreateProjectPageCMS",

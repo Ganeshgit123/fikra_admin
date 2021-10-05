@@ -2,6 +2,15 @@
 <app-pagetitle title="Roles List" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 <div class="card">
 <div class="card-body">
+
+<div class="row">
+    <div class="col-md-8">
+        <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+            class="d-inline-flex align-items-center">Search:
+            <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+            aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+    </div>
+    <div class="col-md-4">
 <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addRole(roleCorner)">Add New</button></p>
 <!-- Center Modal -->
 <ng-template #roleCorner let-modal>
@@ -19,7 +28,8 @@
 </form>
 </div>
 </ng-template>
-
+    </div>
+</div>
 <div class="table-responsive">
 <table id="basic-datatable"
 class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
@@ -30,7 +40,7 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 </tr>
 </thead>
 <tbody>
-<tr  *ngFor="let item of roleData">
+<tr  *ngFor="let item of roleData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
 <td><a routerLink="/permissions/{{ item._id}}">{{item.roleName}}</a></td>
 <td>
 <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewRole(item,roleCorner)"><i
@@ -39,8 +49,21 @@ class="mdi mdi-pencil font-size-18"></i></a>
 class="mdi mdi-trash-can font-size-18"></i></a>     
 </td>
 </tr>
+<tr *ngIf="(roleData==null) || (roleData.length == 0)">
+    <td class="text-center" colspan="2">
+       No Data Found
+    </td>
+</tr>
 </tbody>
 </table>
+ <!-- Pagination -->
+ <div class="col-sm-12 col-md-12">
+    <div class="text-md-right float-md-right pagination-rounded">
+        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+        </ngb-pagination>
+    </div>
+</div>
+<!-- End Pagination -->
 </div>
 </div>
 </div>

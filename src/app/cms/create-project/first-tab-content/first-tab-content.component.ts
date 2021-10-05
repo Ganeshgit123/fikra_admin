@@ -15,6 +15,7 @@ export class FirstTabContentComponent implements OnInit {
   imagePreview = null;
   fileUpload: any;
   imgUrl:any;
+  showAccept = true;
 
  constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -42,9 +43,15 @@ export class FirstTabContentComponent implements OnInit {
     });
 
     this.fetchFirstTabData();
-
+    this.callRolePermission();
   }
-
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[3].write
+      // console.log("prer", contentPermssion[3])
+    }
+  }
   fetchFirstTabData(){
     let params = {
       url: "admin/getCreateProjectPageCMS",
