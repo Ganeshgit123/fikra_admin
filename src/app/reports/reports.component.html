@@ -26,13 +26,14 @@
         <span class="d-none d-sm-block">Special Request Report</span>
       </a>
       <ng-template ngbNavContent>
-        <div class="card card-body">
-          <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="archiveSpecialReport()">Archive Report</button></p>
-          <p *ngIf="showAccept === true" class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
-              Xl</button></p>
+        <div class="card card-body" *ngIf="specialArchieve == false">
+          <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+              (click)="archiveSpecialReport()">Archive Report</button></p>
+          <p *ngIf="showAccept === true" class="text-right"><button type="button"
+              class="btn btn-primary w-md waves-effect waves-light" (click)="specialNormalExport()">Export</button></p>
 
-          <div class="table-responsive" *ngIf = "specialArchieve == false">
-            <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+          <div class="table-responsive">
+            <table id="specialReqReport" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
               <thead>
                 <tr>
                   <th>No #</th>
@@ -63,23 +64,30 @@
                   <td>{{item.dateRecived | date}}</td>
                   <td>
                     <select (change)="onChangeClosedStatus(item._id,$event.target.value)">
-                                 <option value="pending">Pending</option>
-                                 <option value="under_review">under_review</option>
-                                 <option value="closed">Closed</option>
-                              </select>
+                      <option value="pending">Pending</option>
+                      <option value="under_review">under_review</option>
+                      <option value="closed">Closed</option>
+                    </select>
                   </td>
                 </tr>
                 <tr *ngIf="(specialReqData==null) || (specialReqData.length == 0)">
                   <td class="text-center" colspan="11">
-                     No Data Found
+                    No Data Found
                   </td>
-              </tr>
+                </tr>
               </tbody>
             </table>
           </div>
+        </div>
 
-          <div class="table-responsive" *ngIf = "specialArchieve == true">
-            <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+        <div class="card card-body" *ngIf="specialArchieve == true">
+          <p *ngIf="showAccept === true" class="text-right"><button type="button"
+              class="btn btn-primary w-md waves-effect waves-light" (click)="specialArchieveExport()">Export</button>
+          </p>
+
+          <div class="table-responsive">
+            <table id="specialArchieveReqTable"
+              class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
               <thead>
                 <tr>
                   <th>No #</th>
@@ -110,11 +118,11 @@
                   <td>{{item.dateRecived | date}}</td>
                   <td>{{item.status}}</td>
                 </tr>
-                <tr *ngIf="(specialReqData==null) || (specialReqData.length == 0)">
+                <tr *ngIf="(archieveSpecialData==null) || (archieveSpecialData.length == 0)">
                   <td class="text-center" colspan="11">
-                     No Data Found
+                    No Data Found
                   </td>
-              </tr>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -130,11 +138,11 @@
       </a>
       <ng-template ngbNavContent>
         <div class="card card-body">
-          <p *ngIf="showAccept === true" class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
-              Xl</button></p>
+          <p *ngIf="showAccept === true" class="text-right"><button type="button"
+              class="btn btn-primary w-md waves-effect waves-light" (click)="walletReportExp()">Export</button></p>
 
           <div class="table-responsive">
-            <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+            <table id="walletRepTable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
               <thead>
                 <tr>
                   <th>No #</th>
@@ -156,6 +164,11 @@
                   <td>{{item.currentBalance}}</td>
                   <td>Doubt</td>
                 </tr>
+                <tr *ngIf="(walletData==null) || (walletData.length == 0)">
+                  <td class="text-center" colspan="7">
+                    No Data Found
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -170,11 +183,11 @@
       <br>
       <ng-template ngbNavContent>
         <div class="card card-body">
-          <p *ngIf="showAccept === true" class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
-              Xl</button></p>
+          <p *ngIf="showAccept === true" class="text-right"><button type="button"
+              class="btn btn-primary w-md waves-effect waves-light" (click)="financiExpoReprt()">Export</button></p>
 
           <div class="table-responsive">
-            <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+            <table id="financExpoTable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
               <thead>
                 <tr>
                   <th>Year</th>
@@ -195,6 +208,11 @@
                   <td>{{item.totalAmount}}</td>
                   <td>{{item.totalVat}}</td>
                   <td>{{item.totalProcessingFee}}</td>
+                </tr>
+                <tr *ngIf="(financialData==null) || (financialData.length == 0)">
+                  <td class="text-center" colspan="7">
+                    No Data Found
+                  </td>
                 </tr>
               </tbody>
             </table>

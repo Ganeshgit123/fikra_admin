@@ -12,12 +12,12 @@
 
 <diV class="card card-body">
     <p *ngIf="showAccept === true" class="text-right">
-        <button type="button" class="btn btn-primary w-md waves-effect waves-light">Export Xl</button>
+        <button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="exportexcel()">Export</button>
     </p>
    
          <div class="table-responsive">
            <table id="basic-datatable"
-           class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+           class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline" id="excel-table">
            <thead>
            <tr>
             <th>No #</th>
@@ -57,6 +57,7 @@
              <td>{{item.projectStatus}}</td>
              <td>{{item.goalAmount}}</td>
              <td>{{item.fundedAmount}}</td>
+             <td>{{item.fundedPerc}}</td>
              <td>{{item.noOfPledge}}</td>
              <td>{{item.bussinesModel}}</td>
              <td>

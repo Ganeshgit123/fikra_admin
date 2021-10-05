@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../../services/api-call.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-model-related-report',
@@ -9,7 +10,7 @@ import { ApiCallService } from '../../services/api-call.service';
 export class ModelRelatedReportComponent implements OnInit {
   allorNothingData = [];
   showAccept = true;
-
+  fileName= 'BusinessModelReport.xlsx';
   constructor(private apiCall: ApiCallService,
     ) { }
 
@@ -98,6 +99,27 @@ if(resu.error == false)
  
 });
 }
+  }
+
+  exportexcel(): void
+  {
+    if(this.allorNothingData.length > 0){
+/* pass here the table id */
+let element = document.getElementById('excel-table');
+const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+/* generate workbook and add the worksheet */
+const wb: XLSX.WorkBook = XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+/* save to file */  
+XLSX.writeFile(wb, this.fileName);
+
+    }else{
+      this.apiCall.showToast("No Data Found", 'Error', 'errorToastr')
+
+    }
+    
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../../services/api-call.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-transaction-report',
@@ -11,6 +12,8 @@ export class TransactionReportComponent implements OnInit {
   archievedFiniceData = [];
   archieve = false;
   showAccept = true;
+  fileName= 'TransactionReport.xlsx';
+  fileName1= 'TransactionArchieveReport.xlsx';
 
   constructor(private apiCall: ApiCallService,
     ) { }
@@ -69,5 +72,39 @@ export class TransactionReportComponent implements OnInit {
         }
       }
 
+      normalExport(): void
+      {
+        if(this.transactionRelData.length > 0){
+    let element = document.getElementById('normalTrans-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+    
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    
+    XLSX.writeFile(wb, this.fileName);
+    
+        }else{
+      this.apiCall.showToast("No Data Found", 'Error', 'errorToastr')
+        }
+      }
+
+      archieveExport(): void
+      {
+        if(this.archievedFiniceData.length > 0){
+    /* pass here the table id */
+    let element = document.getElementById('archieveTrans-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+    
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName1);
+    
+        }else{
+      this.apiCall.showToast("No Data Found", 'Error', 'errorToastr')
+        }
+      }
 
 }
