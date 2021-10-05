@@ -16,6 +16,9 @@ export class TranslationsComponent implements OnInit {
   isEdit = false;
   contentId:any;
   searchTerm;
+  showAccept = true;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -34,7 +37,15 @@ export class TranslationsComponent implements OnInit {
     });
 
     this.fetchStringData();
+    this.callRolePermission();
+  }
 
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[12].write
+      // console.log("prer", contentPermssion[12])
+    }
   }
 
   fetchStringData(){
@@ -47,6 +58,7 @@ export class TranslationsComponent implements OnInit {
       {
 
         this.stringData = resu.data;
+        this.total = this.stringData.length
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

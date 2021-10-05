@@ -14,6 +14,7 @@ export class SmsCampaignComponent implements OnInit {
   role:any;
   addUsers:FormGroup;
   getuserList = [];
+  showAccept = true;
 
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
@@ -29,6 +30,15 @@ export class SmsCampaignComponent implements OnInit {
       message: [''],
     });
     this._fetchData();
+    this.callRolePermission();
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[11].write
+      // console.log("prer", contentPermssion[11])
+    }
   }
 
   _fetchData() {

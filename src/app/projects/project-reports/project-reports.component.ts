@@ -15,7 +15,13 @@ export class ProjectReportsComponent implements OnInit {
   searchTerm;
   reportedList = [];
   adminStatus:any;
-  showAccept = true;
+  showAccept:boolean;
+  approveAccept:boolean;
+  majorWrite:boolean;
+  requestWrite:boolean;
+  permName:any;
+  isTimeBasedWirte:boolean;
+  canWrite:boolean;
 
    constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -33,10 +39,35 @@ export class ProjectReportsComponent implements OnInit {
   }
 
   callRolePermission(){
+    if(sessionStorage.getItem('adminRole') == 's_a_r'){
+      this.majorWrite = true;
+    }
     if(sessionStorage.getItem('adminRole') !== 's_a_r'){
-      let projectPermssion = JSON.parse(sessionStorage.getItem('permission'))
-      this.showAccept = projectPermssion[0].write
-      // console.log("prer", this.showAccept)
+      let creatorPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = creatorPermssion[0].write
+      this.approveAccept = creatorPermssion[0]._with_Approval_
+      this.permName = creatorPermssion[0].permissionName
+      this.isTimeBasedWirte = JSON.parse(sessionStorage.getItem('isTimeBasedWirte'));
+      this.canWrite =JSON.parse(sessionStorage.getItem('canWrite'));
+
+     if(this.showAccept == true){
+      if(this.approveAccept == false && this.isTimeBasedWirte == false){
+            this.majorWrite = true;
+            console.log("first_condition")
+      }else if(this.isTimeBasedWirte === true && this.canWrite === true){
+        this.majorWrite = true;
+        console.log("second_condition")
+      }else if(this.approveAccept == true){
+        this.requestWrite = true;
+        console.log("request_condition")
+      }else{
+        this.majorWrite = false;
+      console.log("1st_else_condition")
+      }
+    }else{
+      this.majorWrite = false;
+      console.log("2nd_else_condition")
+    }
 
     }
   }
@@ -60,9 +91,7 @@ export class ProjectReportsComponent implements OnInit {
     });
   }
 
-  onChangeReportStatus(id,status,){
-
-
+  onChangeReportStatus(id,status){
     const data = {}
     data['reportId'] = id
     data['createdBy'] = this.updatedby;
@@ -91,6 +120,49 @@ export class ProjectReportsComponent implements OnInit {
         console.log('Error', error)
       }
     )
+  }
+
+  onChangeReportRequestStatus(id,val){
+    
+    var valFrom = ''
+    var valTo = val;
+
+  const object = {}
+
+  object['createdBy'] = this.updatedby;
+ object['userType'] = "admin";
+ object['role'] = this.role;
+ object['tabName'] = "Projects -> Reported Projecrs";
+ object['feildName'] = "Admin Status Change";
+ object['valueFrom'] = valFrom;
+ object['valueTo'] = valTo;
+ object['APIURL'] = "https://fikra.app/api/admin/updateReportStatus";
+ object['paramsForAPI'] = {
+  ['reportId'] : id,
+  ['status'] : val,
+ };
+
+  var params = {
+   url: 'admin/requsetToSuperAdminForChange',
+   data: object
+ }
+//  console.log("pa",params)
+ this.apiCall.commonPostService(params).subscribe(
+   (response: any) => {
+     if (response.body.error == false) {
+       // Success
+       this.apiCall.showToast("Request Sent Successfully", 'Success', 'successToastr')
+       this.ngOnInit();
+     } else {
+       // Query Error
+       this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+     }
+   },
+   (error) => {
+     this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+     console.log('Error', error)
+   }
+ )
   }
 
 }

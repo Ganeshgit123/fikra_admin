@@ -2,29 +2,38 @@
   <a routerLink="/projects">
     <app-pagetitle title="Project" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
   </a>
-  <div class="card">
-    <div class="card-body" *ngIf="showAccept === true">
-      <div class="row">
-        <div class="col-md-3">
-          <div *ngIf="recommend == true">
-            <button class="btn btn-success w-md waves-effect waves-light"
-              (click)="onchangeRecommednStatus('false')">Recommended</button>
-          </div>
-          <div *ngIf="recommend == false">
-            <button class="btn btn-primary w-md waves-effect waves-light" (click)="onchangeRecommednStatus('true')">Not
-              Recommended</button>
-          </div>
+  <div class="card card-body" *ngIf="majorWrite == true || requestWrite == true">
+    <div class="row">
+      <div class="col-md-3" *ngIf="majorWrite == true">
+        <div *ngIf="recommend == true">
+          <button class="btn btn-success w-md waves-effect waves-light"
+            (click)="onchangeRecommednStatus('false')">Recommended</button>
         </div>
-
-        <div class="col-md-6">
-          <div *ngIf="feature == true">
-            <button class="btn btn-success w-md waves-effect waves-light">Featured</button>
-          </div>
-          <div *ngIf="feature == false">
-            <button class="btn btn-primary w-md waves-effect waves-light" (click)="addFeature(centerDataModal)">Not
-              Featured</button>
-            <!-- Center Modal -->
-            <ng-template #centerDataModal let-modal>
+        <div *ngIf="recommend == false">
+          <button class="btn btn-primary w-md waves-effect waves-light" (click)="onchangeRecommednStatus('true')">Not
+            Recommended</button>
+        </div>
+      </div>
+      <div class="col-md-3" *ngIf="requestWrite == true">
+        <div *ngIf="recommend == true">
+          <button class="btn btn-success w-md waves-effect waves-light"
+            (click)="onchangeRequestRecommednStatus('false')">Recommended</button>
+        </div>
+        <div *ngIf="recommend == false">
+          <button class="btn btn-primary w-md waves-effect waves-light" (click)="onchangeRequestRecommednStatus('true')">Not
+            Recommended</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div *ngIf="feature == true">
+          <button class="btn btn-success w-md waves-effect waves-light">Featured</button>
+        </div>
+        <div *ngIf="feature == false">
+          <button class="btn btn-primary w-md waves-effect waves-light" (click)="addFeature(centerDataModal)">Not
+            Featured</button>
+        </div>
+             <!-- Center Modal -->
+             <ng-template #centerDataModal let-modal>
               <div class="modal-header">
                 <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
               </div>
@@ -39,14 +48,13 @@
                     <input class="form-control" type="date" formControlName="toDate">
                   </div>
                   <br>
-                  <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                  <p *ngIf="majorWrite == true" class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
                       (click)="addFeatureSubmit()">Save</button></p>
+                  <p *ngIf="requestWrite == true" class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                        (click)="addFeatureReqSubmit()">Save</button></p>
                 </form>
               </div>
             </ng-template>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -106,13 +114,13 @@
                 </div>
               </ng-template>
             </li>
-            <li [ngbNavItem]="5" *ngIf="showAccept === true">
+            <li [ngbNavItem]="5" *ngIf="majorWrite == true || requestWrite == true">
               <a ngbNavLink class="mb-2">
                 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                 <span class="d-none d-sm-block">Request Back</span>
               </a>
               <ng-template ngbNavContent>
-                <form [formGroup]="commentForm" (ngSubmit)="commentSubmit()">
+                <form [formGroup]="commentForm">
                   <div class="form-group">
                     <label>Category Name</label>
                     <select class="form-control" formControlName="feildNeedtoEdit">
@@ -126,8 +134,10 @@
                     <textarea class="form-control" formControlName="adminComment"></textarea>
                   </div>
                   <br>
-                  <p class="text-center"><button
-                      class="btn btn-primary w-md waves-effect waves-light ban_con_btn">Save</button></p>
+                  <p *ngIf="majorWrite == true" class="text-center"><button
+                      class="btn btn-primary w-md waves-effect waves-light ban_con_btn" (click)="commentSubmit()">Save</button></p>
+                  <p *ngIf="requestWrite == true" class="text-center"><button
+                        class="btn btn-primary w-md waves-effect waves-light ban_con_btn" (click)="commentRequestSubmit()">Save</button></p>
                 </form>
               </ng-template>
             </li>
@@ -145,8 +155,10 @@
                     </ng-select>
                   </div>
                   <br>
-                  <p class="text-center" *ngIf="showAccept === true"><button type="button"
+                  <p class="text-center" *ngIf="majorWrite === true"><button type="button"
                       class="btn btn-primary w-md waves-effect waves-light" (click)="addTagSubmit()">Save</button></p>
+                  <p class="text-center" *ngIf="requestWrite === true"><button type="button"
+                        class="btn btn-primary w-md waves-effect waves-light" (click)="addTagRequestSubmit()">Save</button></p>
                 </form>
               </ng-template>
             </li>

@@ -8,11 +8,21 @@ import { ApiCallService } from '../../services/api-call.service';
 })
 export class ModelRelatedReportComponent implements OnInit {
   allorNothingData = [];
+  showAccept = true;
 
   constructor(private apiCall: ApiCallService,
     ) { }
 
   ngOnInit(): void {
+    this.callRolePermission();
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[7].write
+      // console.log("prer", contentPermssion[7])
+    }
   }
 
   modelRelatedGetApi(value,arch){

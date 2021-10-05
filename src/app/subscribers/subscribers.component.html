@@ -99,7 +99,7 @@
                 ">
                 <thead>
                   <tr>
-                    <th>
+                    <th *ngIf="showAccept === true">
                       <div class="selectAll" (click)='onSelectAll()'>
                         <span *ngIf='isAllSelect && subscriberId.length !== 0; else templateName'><u>Deselect
                             All</u></span>
@@ -115,7 +115,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let user of subscribersList | filter: searchTerm">
-                    <td>
+                    <td *ngIf="showAccept === true">
                       <input type="checkbox" [checked]='subscriberId.indexOf(user.email) !== -1'
                         (change)="onInputChange(user.email)" />
                     </td>

@@ -1,98 +1,67 @@
 <div class="container-fluid">
     <app-pagetitle title="Bills" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row mb-md-2">
-                        <!-- <div class="col-sm-12 col-md-2">
-    <div class="dataTables_length" id="tickets-table_length"><label
-    class="d-inline-flex align-items-center">Show
-    <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
-    [(ngModel)]="pageSize"
-    class="custom-select custom-select-sm form-control form-control-sm mx-2">
-    <option [ngValue]="10">10</option>
-    <option [ngValue]="25">25</option>
-    <option [ngValue]="50">50</option>
-    <option [ngValue]="100">100</option>
-    </select> entries</label></div>
-    </div> -->
-                        <!-- <div class="col-sm-12 col-md-6">
-        <div class="form-group row">
-            <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
-            <div class="col-md-4">
-              <input class="form-control" type="date"  id="example-date-input">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                            class="d-inline-flex align-items-center">Search:
+                            <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                                aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                </div>
             </div>
-            <label for="example-date-input1" class="col-md-2 col-form-label text-center">End Date</label>
-            <div class="col-md-4">
-              <input class="form-control" type="date" id="example-date-input1">
-            </div>
-          </div>
-    </div> -->
-                        <!-- Search -->
-                        <!-- <div class="col-sm-12 col-md-4">
-                            <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
-                                    class="d-inline-flex align-items-center">Search:
-                                    <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
-                                        aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
-                        </div> -->
-                        <!-- End search -->
-                        <!-- Table -->
-                        <div class="table-responsive">
-                            <table id="basic-datatable"
-                                class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
-                                <thead>
-                                    <tr>
-                                        <th>Invoice No</th>
-                                        <th>Invoice Date</th>
-                                        <th>Creator Name</th>
-                                        <th>Service Type</th>
-                                        <th>Service Name</th>
-                                        <th>Sub Amount</th>
-                                        <th>Due Date</th>
-                                        <th>Total Amount</th>
-                                        <th>Payment Status</th>
-                                        <th>Preview</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let user of billList  | filter:searchTerm">
-                                        <td>{{user.invoiceNo}}</td>
-                                        <td>{{user.invoiceData | date}}</td>
-                                        <td><a
-                                                routerLink="/view-creators/{{user.userId._id}}">{{user.userId.userName}}</a>
-                                        </td>
-                                        <td>{{user.serviceType}}</td>
-                                        <td>
-                                            <span *ngIf="user.serviceType === 'project'"><a
-                                                    routerLink="/view-projects/{{user.projectId._id}}">{{user.projectId.title}}</a></span>
-                                            <span *ngIf="user.serviceType === 'specialService'"><a
-                                                    routerLink="/special_requests/{{user.serviceId}}">{{user.serviceId}}</a></span>
-                                        </td>
-                                        <td>{{user.dueAmount}}</td>
-                                        <td>{{user.dueDate | date}}</td>
-                                        <td>{{user.totalAmount}}</td>
-                                        <td>
-                                            <span *ngIf = "user._isPayed_ == true">Payed</span>
-                                            <span *ngIf = "user._isPayed_ !== true">Not Payed</span>
-                                        </td>
-                                        <td>
-                                            <a routerLink="/invoice_bill/{{user._id}}">Preview</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- Pagination -->
-                            <div class="col-sm-12 col-md-5">
-                                <div class="text-md-right float-md-right pagination-rounded">
-                                    <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
-    </ngb-pagination> -->
-                                </div>
-                            </div>
-                            <!-- End Pagination -->
-                        </div>
+            <div class="table-responsive">
+                <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
+                    <thead>
+                        <tr>
+                            <th>Invoice No</th>
+                            <th>Invoice Date</th>
+                            <th>Creator Name</th>
+                            <th>Service Type</th>
+                            <th>Service Name</th>
+                            <th>Sub Amount</th>
+                            <th>Due Date</th>
+                            <th>Total Amount</th>
+                            <th>Payment Status</th>
+                            <th>Preview</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let user of billList  | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
+                            <td>{{user.invoiceNo}}</td>
+                            <td>{{user.invoiceData | date}}</td>
+                            <td><a routerLink="/view-creators/{{user.userId._id}}">{{user.userId.userName}}</a>
+                            </td>
+                            <td>{{user.serviceType}}</td>
+                            <td>
+                                <span *ngIf="user.serviceType === 'project'"><a
+                                        routerLink="/view-projects/{{user.projectId._id}}">{{user.projectId.title}}</a></span>
+                                <span *ngIf="user.serviceType === 'specialService'"><a
+                                        routerLink="/special_requests/{{user.serviceId}}">{{user.serviceId}}</a></span>
+                            </td>
+                            <td>{{user.dueAmount}}</td>
+                            <td>{{user.dueDate | date}}</td>
+                            <td>{{user.totalAmount}}</td>
+                            <td>
+                                <span *ngIf="user._isPayed_ == true">Payed</span>
+                                <span *ngIf="user._isPayed_ !== true">Not Payed</span>
+                            </td>
+                            <td>
+                                <a routerLink="/invoice_bill/{{user._id}}">Preview</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Pagination -->
+                <div class="col-sm-12 col-md-12">
+                    <div class="text-md-right float-md-right pagination-rounded">
+                        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+                        </ngb-pagination>
                     </div>
                 </div>
+                <!-- End Pagination -->
             </div>
         </div>
     </div>

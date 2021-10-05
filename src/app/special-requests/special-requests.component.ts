@@ -22,6 +22,8 @@ export class SpecialRequestsComponent implements OnInit {
   approveAccept:boolean;
   majorWrite:boolean;
   requestWrite:boolean;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -86,6 +88,7 @@ export class SpecialRequestsComponent implements OnInit {
       if(resu.error == false)
       {
         this.requestsList = resu.data;
+        this.total = this.requestsList.length
         // console.log("ef",this.requestsList)
 
       }else{

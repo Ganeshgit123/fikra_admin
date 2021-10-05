@@ -54,7 +54,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of requestsList  | filter:searchTerm">
+    <tr *ngFor="let user of requestsList  | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
       <td>{{user.serviceType}}</td>
       <td>{{user.comments}}</td>
       <td><a routerLink="/view-creators/{{user.userId._id}}">{{user.userId.userName}}</a></td>
@@ -90,14 +90,14 @@
     </tr>
     </tbody> 
     </table>
-    <!-- Pagination -->
-    <div class="col-sm-12 col-md-5">
+   <!-- Pagination -->
+   <div class="col-sm-12 col-md-12">
     <div class="text-md-right float-md-right pagination-rounded">
-    <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="page" [pageSize]="pageSize">
-    </ngb-pagination> -->
+        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+        </ngb-pagination>
     </div>
-    </div>
-    <!-- End Pagination -->
+</div>
+<!-- End Pagination -->
     </div>
     </div>
     </div>

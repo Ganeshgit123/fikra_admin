@@ -121,28 +121,28 @@ const routes: Routes = [
       {path: 'subscribers',component: SubscribersComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_subscribers_true'}},
       {path: 'special_requests',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
       {path: 'special_requests/:id',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
-
-      {path: 'notifications',component: NotificationsComponent, canActivate: [AuthGuard],},
       
       {path: 'roles',component: RolesComponent, canActivate: [AuthGuard],},
       {path: 'permissions/:id',component: PermissionComponent, canActivate: [AuthGuard],},
       {path: 'admin_users',component: AdminUsersComponent, canActivate: [AuthGuard],},
       {path: 'user_write_request',component: ChangeRequestUserComponent, canActivate: [AuthGuard],},
       
-      {path: 'bill_list',component: BillGenerationComponent, canActivate: [AuthGuard],},
-      {path: 'invoice_bill/:id',component: InvoicePreviewComponent, canActivate: [AuthGuard],},
-      {path: 'add_new_bill/:id/:user_id/:project_id',component: AddNewBillComponent, canActivate: [AuthGuard],},
-      {path: 'add_new_bill/:id/:user_id',component: AddNewBillComponent, canActivate: [AuthGuard],},
-      {path: 'edit_new_bill/:id',component: EditNewBillComponent,canActivate: [AuthGuard],},
+      {path: 'bill_list',component: BillGenerationComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
+      {path: 'invoice_bill/:id',component: InvoicePreviewComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
+      {path: 'add_new_bill/:id/:user_id/:project_id',component: AddNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
+      {path: 'add_new_bill/:id/:user_id',component: AddNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
+      {path: 'edit_new_bill/:id',component: EditNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
 
-      {path: 'template',component: TemplateComponent,canActivate: [AuthGuard],},
-      {path: 'edit_template/:id',component: EditTemplateComponent,canActivate: [AuthGuard],},
-      {path: 'sms_campaign',component: SmsCampaignComponent,canActivate: [AuthGuard],},
+      {path: 'template',component: TemplateComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_templates_true'}},
+      {path: 'edit_template/:id',component: TemplateComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_templates_true'}},
 
-      {path: 'reports',component: ReportsComponent,canActivate: [AuthGuard],},
+      {path: 'sms_campaign',component: SmsCampaignComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_smsCampaign_true'}},
 
-      {path: 'translation',component: TranslationsComponent,canActivate: [AuthGuard],},
+      {path: 'reports',component: ReportsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_reports_true'}},
 
+      {path: 'translation',component: TranslationsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_translation_true'}},
+
+      {path: 'notifications',component: NotificationsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_notification_true'}},
 
     ],
     canActivate: [AuthGuard]

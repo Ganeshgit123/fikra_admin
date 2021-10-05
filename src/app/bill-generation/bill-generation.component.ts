@@ -21,6 +21,8 @@ export class BillGenerationComponent implements OnInit {
   approveAccept:boolean;
   majorWrite:boolean;
   requestWrite:boolean;
+  page = 1;
+  total: any;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -80,6 +82,8 @@ export class BillGenerationComponent implements OnInit {
       if(resu.error == false)
       {
         this.billList = resu.data;
+        this.total = this.billList.length
+
         console.log("ef",this.billList)
 
       }else{

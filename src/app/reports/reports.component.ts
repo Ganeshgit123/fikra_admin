@@ -15,6 +15,7 @@ export class ReportsComponent implements OnInit {
   specialReqData = [];
   specialArchieve = false;
   archieveSpecialData = [];
+  showAccept = true;
 
   constructor(private apiCall: ApiCallService,
     ) { }
@@ -25,6 +26,15 @@ export class ReportsComponent implements OnInit {
     this.specialRequestReport();
     this.financialReport();
     this.walletReport();
+    this.callRolePermission();
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[7].write
+      // console.log("prer", contentPermssion[7])
+    }
   }
 
   specialRequestReport(){

@@ -65,7 +65,7 @@ export class TransactionComponent implements OnInit {
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
-        this.router.navigateByUrl('/projects');
+        // this.router.navigateByUrl('/projects');
       }
     },(error)=>{
        console.error(error);

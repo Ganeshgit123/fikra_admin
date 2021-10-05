@@ -22,7 +22,13 @@ export class ViewProjectsComponent implements OnInit {
   addFeatureForm:FormGroup;
   homeStatus:any;
   projectList: any=[];
-  showAccept = true;
+  showAccept:boolean;
+  approveAccept:boolean;
+  majorWrite:boolean;
+  requestWrite:boolean;
+  permName:any;
+  isTimeBasedWirte:boolean;
+  canWrite:boolean;
 
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
@@ -62,10 +68,36 @@ export class ViewProjectsComponent implements OnInit {
   }
 
   callRolePermission(){
+    if(sessionStorage.getItem('adminRole') == 's_a_r'){
+      this.majorWrite = true;
+    }
     if(sessionStorage.getItem('adminRole') !== 's_a_r'){
-      let projectPermssion = JSON.parse(sessionStorage.getItem('permission'))
-      this.showAccept = projectPermssion[0].write
-      // console.log("prer", this.showAccept)
+      let creatorPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = creatorPermssion[0].write
+      this.approveAccept = creatorPermssion[0]._with_Approval_
+      this.permName = creatorPermssion[0].permissionName
+      this.isTimeBasedWirte = JSON.parse(sessionStorage.getItem('isTimeBasedWirte'));
+      this.canWrite =JSON.parse(sessionStorage.getItem('canWrite'));
+
+     if(this.showAccept == true){
+      if(this.approveAccept == false && this.isTimeBasedWirte == false){
+            this.majorWrite = true;
+            console.log("first_condition")
+      }else if(this.isTimeBasedWirte === true && this.canWrite === true){
+        this.majorWrite = true;
+        console.log("second_condition")
+      }else if(this.approveAccept == true){
+        this.requestWrite = true;
+        console.log("request_condition")
+      }else{
+        this.majorWrite = false;
+      console.log("1st_else_condition")
+      }
+    }else{
+      this.majorWrite = false;
+      console.log("2nd_else_condition")
+    }
+
     }
   }
 
@@ -256,8 +288,6 @@ export class ViewProjectsComponent implements OnInit {
     )
   }
 
-
-
   _fetchStory(){
     let params = {
       url: "admin/getProjectListById",
@@ -278,6 +308,178 @@ export class ViewProjectsComponent implements OnInit {
        console.error(error);
        
     });
+  }
+
+  onchangeRequestRecommednStatus(val){
+
+    if(val == 'true'){
+      var valFrom = true
+      var valTo = false
+    }else{
+       valFrom = false
+       valTo = true
+    }
+  const object = {}
+
+  object['createdBy'] = this.updatedby;
+ object['userType'] = "admin";
+ object['role'] = this.role;
+ object['tabName'] = "View Projects";
+ object['feildName'] = "Recommended";
+ object['valueFrom'] = valFrom;
+ object['valueTo'] = valTo;
+ object['APIURL'] = "https://fikra.app/api/admin/addAsRecommended";
+ object['paramsForAPI'] = {
+  ['projectId'] : this.projectId,
+  ['_is_Recommeded_'] : val,
+ };
+
+  var params = {
+   url: 'admin/requsetToSuperAdminForChange',
+   data: object
+ }
+//  console.log("pa",params)
+ this.apiCall.commonPostService(params).subscribe(
+   (response: any) => {
+     if (response.body.error == false) {
+       // Success
+       this.apiCall.showToast("Request Sent Successfully", 'Success', 'successToastr')
+       this.ngOnInit();
+     } else {
+       // Query Error
+       this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+     }
+   },
+   (error) => {
+     this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+     console.log('Error', error)
+   }
+ )
+  }
+
+  addFeatureReqSubmit(){
+   
+  const object = {}
+
+  object['createdBy'] = this.updatedby;
+ object['userType'] = "admin";
+ object['role'] = this.role;
+ object['tabName'] = "View Projects";
+ object['feildName'] = "Featured Project";
+ object['valueFrom'] = "Mark as Featured Project";
+ object['valueTo'] = "";
+ object['APIURL'] = "https://fikra.app/api/admin/addToFeaturedProject";
+ object['paramsForAPI'] = {
+  ...this.addFeatureForm.value,
+  ['projectId'] : this.projectId
+ };
+
+  var params = {
+   url: 'admin/requsetToSuperAdminForChange',
+   data: object
+ }
+//  console.log("pa",params)
+ this.apiCall.commonPostService(params).subscribe(
+   (response: any) => {
+     if (response.body.error == false) {
+       // Success
+       this.apiCall.showToast("Request Sent Successfully", 'Success', 'successToastr')
+       this.ngOnInit();
+       this.modalService.dismissAll();
+     } else {
+       // Query Error
+       this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+     }
+   },
+   (error) => {
+     this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+     console.log('Error', error)
+   }
+ )
+  }
+
+  commentRequestSubmit(){
+    const object = {}
+
+  object['createdBy'] = this.updatedby;
+ object['userType'] = "admin";
+ object['role'] = this.role;
+ object['tabName'] = "View Projects";
+ object['feildName'] = "Request Back";
+ object['valueFrom'] = "Project Change request to creator";
+ object['valueTo'] = "";
+ object['APIURL'] = "https://fikra.app/api/admin/sendRequestToUser";
+ object['paramsForAPI'] = {
+    ['projectId'] : this.projectId,
+    ['adminComment'] : this.commentForm.get('adminComment').value,
+    ['feildNeedtoEdit'] : this.commentForm.get('feildNeedtoEdit').value,
+ };
+
+  var params = {
+   url: 'admin/requsetToSuperAdminForChange',
+   data: object
+ }
+//  console.log("pa",params)
+ this.apiCall.commonPostService(params).subscribe(
+   (response: any) => {
+     if (response.body.error == false) {
+       // Success
+       this.apiCall.showToast("Request Sent Successfully", 'Success', 'successToastr')
+       this.ngOnInit();
+     } else {
+       // Query Error
+       this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+     }
+   },
+   (error) => {
+     this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+     console.log('Error', error)
+   }
+ )
+  }
+
+  addTagRequestSubmit(){
+
+    const tagValue = this.addTags.value.tagsArray
+
+
+    const object = {tagsArray:[]}
+
+  object['createdBy'] = this.updatedby;
+ object['userType'] = "admin";
+ object['role'] = this.role;
+ object['tabName'] = "View Projects";
+ object['feildName'] = "Tagged";
+ object['valueFrom'] = "Add Tags";
+ object['valueTo'] = "";
+ object['APIURL'] = "https://fikra.app/api/admin/addTagstoProjects";
+ object['paramsForAPI'] = {
+  ['projectId'] : this.projectId,
+  ['tagsArray'] : tagValue.join('|')
+ };
+
+  var params = {
+   url: 'admin/requsetToSuperAdminForChange',
+   data: object
+ }
+//  console.log("pa",params)
+ this.apiCall.commonPostService(params).subscribe(
+   (response: any) => {
+     if (response.body.error == false) {
+       // Success
+       this.apiCall.showToast("Request Sent Successfully", 'Success', 'successToastr')
+       this.ngOnInit();
+       this.modalService.dismissAll();
+     } else {
+       // Query Error
+       this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+     }
+   },
+   (error) => {
+     this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+     console.log('Error', error)
+   }
+ )
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <app-pagetitle title="Templates" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
-    <p class="text-right">
+    <p *ngIf="showAccept === true" class="text-right">
         <button class="btn btn-primary mo-mb-2 ml-1" *ngIf='isCollapsed' data-toggle="collapse"
             (click)="isCollapsed = !isCollapsed">
             Add New Template

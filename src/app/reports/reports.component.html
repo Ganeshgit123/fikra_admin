@@ -28,7 +28,7 @@
       <ng-template ngbNavContent>
         <div class="card card-body">
           <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="archiveSpecialReport()">Archive Report</button></p>
-          <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
+          <p *ngIf="showAccept === true" class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
               Xl</button></p>
 
           <div class="table-responsive" *ngIf = "specialArchieve == false">
@@ -130,7 +130,7 @@
       </a>
       <ng-template ngbNavContent>
         <div class="card card-body">
-          <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
+          <p *ngIf="showAccept === true" class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
               Xl</button></p>
 
           <div class="table-responsive">
@@ -170,7 +170,7 @@
       <br>
       <ng-template ngbNavContent>
         <div class="card card-body">
-          <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
+          <p *ngIf="showAccept === true" class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light">Export
               Xl</button></p>
 
           <div class="table-responsive">

@@ -40,6 +40,7 @@ export class InvoicePreviewComponent implements OnInit {
   processFeeAmt:any;
   vatAmt:any;
   paymentAmt:any;
+  showAccept = true;
 
    constructor(
     private apiCall: ApiCallService,
@@ -51,6 +52,15 @@ export class InvoicePreviewComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => this.billId = params.id);
     this.billDetailbyId();
+    this.callRolePermission();
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[10].write
+      // console.log("prer", contentPermssion[10])
+    }
   }
 
   billDetailbyId(){

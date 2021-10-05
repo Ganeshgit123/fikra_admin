@@ -63,9 +63,9 @@ export class RequestBackProjectComponent implements OnInit {
           var firstDate = element.basicInfoId.launchDate;
           var endDate = element.basicInfoId.campaignDuation;
 
-          this.launchDate =new Date(firstDate);
           this.duraDate =new Date(endDate);
-         var Days = Math.abs(this.duraDate - this.launchDate);
+          var today = new Date();
+         var Days = Math.abs(this.duraDate - today.getTime());
          var remainDate = Math.ceil(Days / (1000 * 60 * 60 * 24)); 
 
         element.finalDate = remainDate

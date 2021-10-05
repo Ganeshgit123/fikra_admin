@@ -59,7 +59,25 @@
       <td><a routerLink="/view-creators/{{user.aboutProjectId.userId._id}}">{{user.aboutProjectId.userId.userName}}</a></td>
       <td><a routerLink="/view-projects/{{user.aboutProjectId._id}}">{{user.aboutProjectId.title}}</a></td>
       <td>{{user.reportComment}}</td>
-      <td *ngIf="showAccept === true">
+      <td *ngIf="requestWrite === true">
+        <select class="pend_btn" *ngIf="user.adminStatus === 'pending'" (change)="onChangeReportRequestStatus(user._id,$event.target.value)">
+          <option>{{user.adminStatus}}</option>
+          <option>approved</option>
+          <option>under_review</option>
+          </select>
+          <select class="apprve_btn" *ngIf="user.adminStatus === 'approved'" (change)="onChangeReportRequestStatus(user._id,$event.target.value)">
+            <option>{{user.adminStatus}}</option>
+            <option>pending</option>
+            <option>under_review</option>
+            </select>
+            <select class="review_btn" *ngIf="user.adminStatus === 'under_review'" (change)="onChangeReportRequestStatus(user._id,$event.target.value)">
+              <option>{{user.adminStatus}}</option>
+              <option>approved</option>
+              <option>pending</option>
+              </select>
+        </td>
+
+      <td *ngIf="majorWrite === true">
         <select class="pend_btn" *ngIf="user.adminStatus === 'pending'" (change)="onChangeReportStatus(user._id,$event.target.value)">
           <option>{{user.adminStatus}}</option>
           <option>approved</option>
@@ -76,7 +94,7 @@
               <option>pending</option>
               </select>
         </td>
-        <td *ngIf="showAccept !== true">{{user.adminStatus}}</td>
+        <td *ngIf="majorWrite == false">{{user.adminStatus}}</td>
     </tr>
     </tbody> 
     </table>

@@ -41,15 +41,15 @@
     <th>Key Name</th>
     <th>English</th>
     <th>Arabic</th>
-    <th>Action</th>
+    <th *ngIf="showAccept === true">Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr  *ngFor="let item of stringData | filter:searchTerm">
+    <tr  *ngFor="let item of stringData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
     <td>{{item.key}}</td>
     <td>{{item.en}}</td>
     <td>{{item.ar}}</td>
-    <td>
+    <td *ngIf="showAccept === true">
         <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewStrings(item,stringModel)"><i
             class="mdi mdi-pencil font-size-18"></i></a>  
         <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteContent(item._id)"><i
@@ -58,6 +58,14 @@
     </tr>
     </tbody>
     </table>
+    <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
     </div>
     </div>
     </div>

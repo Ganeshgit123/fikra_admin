@@ -45,6 +45,7 @@ export class TemplateComponent implements OnInit {
   projecThreeId: any;
   templateId:any;
   articleContent:any;
+  showAccept = true;
 
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -87,11 +88,19 @@ export class TemplateComponent implements OnInit {
       blogContent: '',
     });
 
-
     this.fetchTemplateData();
 
-
     this.getProjectInfo();
+    this.callRolePermission();
+
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[8].write
+      // console.log("prer", contentPermssion[8])
+    }
   }
 
   getProjectInfo() {

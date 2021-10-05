@@ -23,6 +23,8 @@ export class SubscribersComponent implements OnInit {
   isAllSelect = false;
   htmlElement : any;
   DataTemplete: any;
+  showAccept = true;
+
   editorData = '<p>Hello, world!</p>';
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -50,6 +52,15 @@ export class SubscribersComponent implements OnInit {
     
     this.fetchSubscribersList();
     this.fetchTemplateData();
+    this.callRolePermission();
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[9].write
+      console.log("prer", contentPermssion[9])
+    }
   }
 
   changeTemplate(element){

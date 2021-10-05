@@ -12,6 +12,10 @@ export class NotificationsComponent implements OnInit {
   updatedby:any;
   role:any;
   notificationData:any;
+  showAccept = true;
+  page = 1;
+  total: any;
+
   constructor(
   private apiCall: ApiCallService,) {
 
@@ -23,6 +27,15 @@ export class NotificationsComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Notification List', active: true }];
 
     this.fetchNotificationData();
+    this.callRolePermission();
+  }
+
+  callRolePermission(){
+    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+      let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+      this.showAccept = contentPermssion[13].write
+      // console.log("prer", contentPermssion[13])
+    }
   }
 
   fetchNotificationData(){
@@ -35,6 +48,7 @@ export class NotificationsComponent implements OnInit {
       {
 
         this.notificationData = resu.notification;
+        this.total = this.notificationData.length
         // console.log("data",this.notificationData)
 
       }else{
