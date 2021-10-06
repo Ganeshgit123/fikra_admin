@@ -141,7 +141,7 @@ export class AdminUsersComponent implements OnInit {
     this.addUserData = this.formBuilder.group({
       systemAdminName: [data['systemAdminName']],
       systemAdminUserName: [data['systemAdminUserName']],
-      systemAdminPassword: [data['systemAdminPassword']],
+      systemAdminPassword: [''],
       systemAdminRoleId: [this.adminRoleId],
       _isTimeBasedWrite_: [data['_isTimeBasedWrite_']],
     });

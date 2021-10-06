@@ -11,6 +11,8 @@ export class ModelRelatedReportComponent implements OnInit {
   allorNothingData = [];
   showAccept = true;
   fileName= 'BusinessModelReport.xlsx';
+  searchTerm;
+  
   constructor(private apiCall: ApiCallService,
     ) { }
 

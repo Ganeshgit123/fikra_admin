@@ -14,7 +14,9 @@ export class TransactionReportComponent implements OnInit {
   showAccept = true;
   fileName= 'TransactionReport.xlsx';
   fileName1= 'TransactionArchieveReport.xlsx';
-
+  normatransSearch;
+  transArchieveSearch;
+  
   constructor(private apiCall: ApiCallService,
     ) { }
 

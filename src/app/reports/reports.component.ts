@@ -21,7 +21,13 @@ export class ReportsComponent implements OnInit {
   fileName1 = 'specialRequestArchieveReport.xlsx';
   wallReportName = 'walletReport.xlsx';
   financialReportName = 'financialReport.xlsx';
-
+  searchTerm;
+  page = 1;
+  specialReqDataTotal:any;
+  speicalArchieveSearch;
+  walletSearch;
+  finacialSearch;
+  
   constructor(private apiCall: ApiCallService,
   ) { }
 
@@ -50,7 +56,7 @@ export class ReportsComponent implements OnInit {
       let resu = result.body;
       if (resu.error == false) {
         this.specialReqData = resu.data;
-
+        this.specialReqDataTotal = this.specialReqData.length
       } else {
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

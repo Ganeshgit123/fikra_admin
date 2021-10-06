@@ -29,7 +29,7 @@
         <div class="col-md-12">
             <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
                 class="d-inline-flex align-items-center">Search:
-                <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                <input type="text" class="form-control form-control-sm ml-2"
                 aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
         </div>
     </div>
@@ -38,6 +38,7 @@
     class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
     <thead>
     <tr>
+        <th>S.No</th>
     <th>Key Name</th>
     <th>English</th>
     <th>Arabic</th>
@@ -45,7 +46,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr  *ngFor="let item of stringData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
+    <tr  *ngFor="let item of stringData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10; let i = index">
+    <td>{{i+1}}</td>
     <td>{{item.key}}</td>
     <td>{{item.en}}</td>
     <td>{{item.ar}}</td>

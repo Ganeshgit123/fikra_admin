@@ -7,8 +7,17 @@
 </div>
 
 <div class="card card-body" *ngIf ="archieve === false">
- <p *ngIf="showAccept === true" class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="normalExport()">Export</button></p>
-
+ <div class="row">
+    <div class="col-md-8">
+        <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+            class="d-inline-flex align-items-center">Search:
+            <input type="text" class="form-control form-control-sm ml-2"
+            aria-controls="tickets-table" [(ngModel)]="normatransSearch"></label></div>
+    </div>
+    <div class="col-md-4">
+        <p *ngIf="showAccept === true" class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="normalExport()">Export</button></p>
+    </div>
+</div>
       <div class="table-responsive">
         <table id="basic-datatable"
         class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline" id="normalTrans-table">
@@ -30,7 +39,7 @@
         </tr>
         </thead>
         <tbody>
-       <tr *ngFor="let item of transactionRelData; index as i">
+       <tr *ngFor="let item of transactionRelData | filter:normatransSearch; index as i">
           <td>{{i+1}}</td>
           <td><a routerLink="/view-projects/{{ item.projectId._id}}">{{item.projectId._id}}</a></td>
           <td><a routerLink="/view-creators/{{item.creatorId._id}}">{{item.creatorId.userName}}</a></td>
@@ -65,8 +74,18 @@
 </div>
    
 <div class="card card-body" *ngIf ="archieve === true">
-    <p *ngIf="showAccept === true" class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="archieveExport()">Export</button></p>   
-<div class="table-responsive">
+    <div class="row">
+        <div class="col-md-8">
+            <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                class="d-inline-flex align-items-center">Search:
+                <input type="text" class="form-control form-control-sm ml-2"
+                aria-controls="tickets-table" [(ngModel)]="transArchieveSearch"></label></div>
+        </div>
+        <div class="col-md-4">
+            <p *ngIf="showAccept === true" class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="archieveExport()">Export</button></p>   
+        </div>
+    </div>
+    <div class="table-responsive">
     <table id="basic-datatable"
     class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline" id="archieveTrans-table">
     <thead>
@@ -87,7 +106,7 @@
     </tr>
     </thead>
     <tbody>
-   <tr *ngFor="let item of archievedFiniceData; index as i">
+   <tr *ngFor="let item of archievedFiniceData | filter:transArchieveSearch; index as i">
     <td>{{i+1}}</td>
       <td><a routerLink="/view-projects/{{ item.projectId._id}}">{{item.projectId._id}}</a></td>
       <td><a routerLink="/view-creators/{{item.creatorId._id}}">{{item.creatorId.userName}}</a></td>

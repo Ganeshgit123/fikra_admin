@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { LanguageService } from '../../../core/services/language.service';
-import { environment } from '../../../../environments/environment';
 import { ApiCallService } from '../../../services/api-call.service';
 
 @Component({
@@ -27,7 +26,7 @@ export class TopbarComponent implements OnInit {
   sessionNotiData:any;
   lat : any;
   lng : any;
-
+  intervalId:any;
   listLang = [
     { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
   ];
@@ -52,11 +51,11 @@ export class TopbarComponent implements OnInit {
     this.cookieValue = this.cookiesService.get('lang');
     const val = this.listLang.filter(x => x.lang === this.cookieValue);
     this.countryName = val.map(element => element.text);
-    if (val.length === 0) {
-      if (this.flagvalue === undefined) { this.valueset = 'assets/images/flags/us.jpg'; }
-    } else {
-      this.flagvalue = val.map(element => element.flag);
-    }
+    // if (val.length === 0) {
+    //   if (this.flagvalue === undefined) { this.valueset = 'assets/images/flags/us.jpg'; }
+    // } else {
+    //   this.flagvalue = val.map(element => element.flag);
+    // }
 
     this.getPosition().subscribe(pos => {
       this.lat = pos.coords.latitude
@@ -65,7 +64,7 @@ export class TopbarComponent implements OnInit {
       // console.log("lng",this.lng);
    });
 
-    setInterval(() => {
+  this.intervalId = setInterval(() => {
       this.fetchSessionNotifyData();
   }, 5000);
 
@@ -161,7 +160,6 @@ export class TopbarComponent implements OnInit {
     this.apiCall.commonGetService(params).subscribe((result: any) => {
       let resu = result.body;
       if (resu.error == false) {
-
         this.sessionNotiData = resu.notification.length;       
       } else {
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -262,6 +260,7 @@ export class TopbarComponent implements OnInit {
         if (response.body.error == false) {
           // Success
           this.apiCall.showToast("Logout Successfully", 'Success', 'successToastr')
+          clearInterval(this.intervalId);
           sessionStorage.clear();
           this.router.navigate(['/']);
         } else {

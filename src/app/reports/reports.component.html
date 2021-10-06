@@ -28,10 +28,19 @@
       <ng-template ngbNavContent>
         <div class="card card-body" *ngIf="specialArchieve == false">
           <p class="text-right"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
-              (click)="archiveSpecialReport()">Archive Report</button></p>
-          <p *ngIf="showAccept === true" class="text-right"><button type="button"
-              class="btn btn-primary w-md waves-effect waves-light" (click)="specialNormalExport()">Export</button></p>
-
+            (click)="archiveSpecialReport()">Archive Report</button></p>
+              <div class="row">
+                <div class="col-md-8">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                        class="d-inline-flex align-items-center">Search:
+                        <input type="text" class="form-control form-control-sm ml-2"
+                        aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                </div>
+                <div class="col-md-4">
+                <p *ngIf="showAccept === true" class="text-right"><button type="button"
+                    class="btn btn-primary w-md waves-effect waves-light" (click)="specialNormalExport()">Export</button></p>
+                </div>
+            </div>
           <div class="table-responsive">
             <table id="specialReqReport" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
               <thead>
@@ -81,10 +90,19 @@
         </div>
 
         <div class="card card-body" *ngIf="specialArchieve == true">
-          <p *ngIf="showAccept === true" class="text-right"><button type="button"
-              class="btn btn-primary w-md waves-effect waves-light" (click)="specialArchieveExport()">Export</button>
-          </p>
-
+          <div class="row">
+            <div class="col-md-8">
+                <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                    class="d-inline-flex align-items-center">Search:
+                    <input type="text" class="form-control form-control-sm ml-2"
+                    aria-controls="tickets-table" [(ngModel)]="speicalArchieveSearch"></label></div>
+            </div>
+            <div class="col-md-4">
+              <p *ngIf="showAccept === true" class="text-right"><button type="button"
+                class="btn btn-primary w-md waves-effect waves-light" (click)="specialArchieveExport()">Export</button>
+            </p>
+            </div>
+        </div>
           <div class="table-responsive">
             <table id="specialArchieveReqTable"
               class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
@@ -103,7 +121,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of archieveSpecialData; index as i">
+                <tr *ngFor="let item of archieveSpecialData | filter:speicalArchieveSearch , index as i">
                   <td>{{i+1}}</td>
                   <td><a routerLink="/view-creators/{{ item.creatorId}}">{{item.creatorName}}<br>{{item.creatorId}}</a>
                   </td>
@@ -138,9 +156,18 @@
       </a>
       <ng-template ngbNavContent>
         <div class="card card-body">
-          <p *ngIf="showAccept === true" class="text-right"><button type="button"
-              class="btn btn-primary w-md waves-effect waves-light" (click)="walletReportExp()">Export</button></p>
-
+              <div class="row">
+                <div class="col-md-8">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                        class="d-inline-flex align-items-center">Search:
+                        <input type="text" class="form-control form-control-sm ml-2"
+                        aria-controls="tickets-table" [(ngModel)]="walletSearch"></label></div>
+                </div>
+                <div class="col-md-4">
+                  <p *ngIf="showAccept === true" class="text-right"><button type="button"
+                    class="btn btn-primary w-md waves-effect waves-light" (click)="walletReportExp()">Export</button></p>
+                </div>
+            </div>
           <div class="table-responsive">
             <table id="walletRepTable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
               <thead>
@@ -155,7 +182,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of walletData; index as i">
+                <tr *ngFor="let item of walletData | filter:walletSearch; index as i">
                   <td>{{i+1}}</td>
                   <td>{{item.userName}}</td>
                   <td>{{item.userId}}</td>
@@ -183,13 +210,23 @@
       <br>
       <ng-template ngbNavContent>
         <div class="card card-body">
-          <p *ngIf="showAccept === true" class="text-right"><button type="button"
-              class="btn btn-primary w-md waves-effect waves-light" (click)="financiExpoReprt()">Export</button></p>
-
+              <div class="row">
+                <div class="col-md-8">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                        class="d-inline-flex align-items-center">Search:
+                        <input type="text" class="form-control form-control-sm ml-2"
+                        aria-controls="tickets-table" [(ngModel)]="finacialSearch"></label></div>
+                </div>
+                <div class="col-md-4">
+                  <p *ngIf="showAccept === true" class="text-right"><button type="button"
+                    class="btn btn-primary w-md waves-effect waves-light" (click)="financiExpoReprt()">Export</button></p>
+                </div>
+            </div>
           <div class="table-responsive">
             <table id="financExpoTable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
               <thead>
                 <tr>
+                  <td>S.No</td>
                   <th>Year</th>
                   <th>Month</th>
                   <th>Total Keep It All</th>
@@ -200,7 +237,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of financialData">
+                <tr *ngFor="let item of financialData| filter:walletSearch;let i = index">
+                  <td>{{i+1}}</td>
                   <td>{{item.year}}</td>
                   <td>{{item.month}}</td>
                   <td>{{item.totalKeepitAll}}</td>

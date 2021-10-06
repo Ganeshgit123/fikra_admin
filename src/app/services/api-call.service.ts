@@ -82,7 +82,7 @@ export class ApiCallService {
     });
     return this.http.get(this.baseUrl + params.url,  {
       params: new HttpParams()
-      .set('updatedby', this.updatedby)
+      .set('createdBy', this.updatedby)
       .set('userType', 'admin')
       .set('role',this.role ),
       headers: httpHeaders,
@@ -283,7 +283,7 @@ export class ApiCallService {
     return this.http.get(this.baseUrl + params.url,  {
       params: new HttpParams()
       .set('role',this.role )
-      .set('updatedby', this.updatedby)
+      .set('createdBy', this.updatedby)
       .set('userType', 'admin')
       .set('userId',params.userId)
       .set('userRole',params.userRole),

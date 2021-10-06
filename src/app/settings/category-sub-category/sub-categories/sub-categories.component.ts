@@ -115,7 +115,7 @@ export class SubCategoriesComponent implements OnInit {
   SubcategoryEditService(data){
     
     data['_id'] = this.subCateId
-    data['updatedby'] = this.updatedby;
+    data['createdBy'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;
     data['processName'] = "edit";
@@ -186,7 +186,7 @@ export class SubCategoriesComponent implements OnInit {
     const data = {}
     
         data['_id'] = id
-        data['updatedby'] = this.updatedby;
+        data['createdBy'] = this.updatedby;
         data['userType'] = "admin";
         data['role'] = this.role;
         data['processName'] = "delete";
@@ -229,7 +229,7 @@ export class SubCategoriesComponent implements OnInit {
      object['_id'] = id;
      object['processName'] = "edit";
      object['_isOn_'] = visible;
-     object['updatedby'] = this.updatedby;
+     object['createdBy'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;
 

@@ -100,7 +100,7 @@ export class RequestBackProjectComponent implements OnInit {
     console.log("id",id)
    const data = {}
   data['projectId'] = id
-  data['updatedby'] = this.updatedby;
+  data['createdBy'] = this.updatedby;
   data['userType'] = "admin";
   data['role'] = this.role;
 
