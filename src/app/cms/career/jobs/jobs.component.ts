@@ -32,9 +32,13 @@ export class JobsComponent implements OnInit {
 
     this.addJobData = this.formBuilder.group({
       jobTitle: [''],
+      jobTitleAr: [''],
       jobDescription: [''],
+      jobDescriptionAr: [''],
       criteria: [''],
+      criteriaAr: [''],
       jobRole: [''],
+      jobRoleAr: [''],
       jobVacancies: [''],
       location: [''],
     });
@@ -82,7 +86,7 @@ export class JobsComponent implements OnInit {
       {
         this.jobData = resu.data;
         this.total = this.jobData.length
-        // console.log("ef",this.branchList)
+        // console.log("ef",this.jobData)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -106,9 +110,13 @@ export class JobsComponent implements OnInit {
     this.jobId = data['_id']
     this.addJobData   = this.formBuilder.group({
       jobTitle: [data['jobTitle']],
+      jobTitleAr: [data['jobTitleAr']],
       jobDescription: [data['jobDescription']],
+      jobDescriptionAr: [data['jobDescriptionAr']],
       criteria: [data['criteria']],
+      criteriaAr: [data['criteriaAr']],
       jobRole: [data['jobRole']],
+      jobRoleAr: [data['jobRoleAr']],
       jobVacancies: [data['jobVacancies']],
       location: [data['location']],
     })

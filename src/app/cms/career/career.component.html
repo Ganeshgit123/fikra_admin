@@ -86,6 +86,7 @@
             <div class="form-group">
                 <label>Job Title</label>
                 <select class="form-control" (click)="jobclick($event.target.value)">
+                    <option selected disabled>Select Job Title</option>
                 <option  *ngFor="let item of jobData" value="{{item._id}}">{{item.jobTitle}}</option>
                 </select>
                 </div>

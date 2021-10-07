@@ -16,7 +16,7 @@ type="ball-scale-multiple">
            <p><strong>Model Name : </strong> {{modelName}}</p>
         </div>
         <div class="col-md-4">
-           <p class="text-right"><button class="btn btn-primary mo-mb-2 ml-1"
+           <p class="text-right" *ngIf="majorWrite == true || requestWrite == true"><button class="btn btn-primary mo-mb-2 ml-1"
               (click)="addTrans(transData)">
               Add New Transaction
            </button></p>
@@ -63,7 +63,8 @@ type="ball-scale-multiple">
              <th>Balance Payable</th>
              <th>Description</th>
              <th>Date</th>
-             <th>Action</th>
+             <th>Document</th>
+             <th *ngIf="majorWrite == true || requestWrite == true">Action</th>
           </tr>
        </thead>
        <tbody>
@@ -72,11 +73,12 @@ type="ball-scale-multiple">
              <td>{{item.balancePayable}}</td>
              <td>{{item.description}}</td>
              <td>{{item.dateTransfer | date}}</td>
-             <td>
+             <td>{{item.document}}</td>
+             <td *ngIf="majorWrite == true || requestWrite == true">
                 <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="editTrans(item,transData)"><i
 class="mdi mdi-pencil font-size-18"></i></a>  
-<a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteTrans(item._id)"><i
-class="mdi mdi-trash-can font-size-18"></i></a>     
+<!-- <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteTrans(item._id)"><i
+class="mdi mdi-trash-can font-size-18"></i></a>      -->
              </td>
           </tr>
        </tbody>

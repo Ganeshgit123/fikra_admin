@@ -32,7 +32,7 @@ export class TagsComponent implements OnInit {
 
     this.addTags = this.formBuilder.group({
       tagName: [''],
-      tagColor: [''],
+      tagNameAr: [''],
     });
 
     this.fetchTagList();
@@ -117,7 +117,7 @@ export class TagsComponent implements OnInit {
     this.visibleStat = data['_is_visible_'];
     this.addTags   = this.formBuilder.group({
       tagName: [data['tagName']],
-      tagColor: [data['tagColor']],
+      tagNameAr: [data['tagNameAr']],
     })
   }
 
@@ -174,7 +174,7 @@ export class TagsComponent implements OnInit {
     object['_is_Deleted_'] = deleteTag;
     object['_is_visible_'] = data['_is_visible_'];
     object['tagName'] = data['tagName'];
-    object['tagColor'] = data['tagColor'];
+    object['tagNameAr'] = data['tagNameAr'];
 
     var params = {
       url: 'admin/editTags',
@@ -217,7 +217,7 @@ export class TagsComponent implements OnInit {
     object['_is_Deleted_'] = data['_is_Deleted_'];;
     object['_is_visible_'] = visible
     object['tagName'] = data['tagName'];
-    object['tagColor'] = data['tagColor'];
+    object['tagNameAr'] = data['tagNameAr'];
 
      var params = {
       url: 'admin/editTags',

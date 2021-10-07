@@ -17,21 +17,37 @@
             <div class="modal-body">
             <form [formGroup]="addJobData">
             <div class="form-group">
-            <label>Job Title</label>
+            <label>Job Title (EN)</label>
             <input type="text" class="form-control" formControlName="jobTitle">
             </div>
             <div class="form-group">
-                <label>Job Description</label>
+                <label>Job Title (AR)</label>
+                <input type="text" class="form-control" formControlName="jobTitleAr">
+                </div>
+            <div class="form-group">
+                <label>Job Description (EN)</label>
             <textarea class="form-control" formControlName="jobDescription"></textarea>
             </div>
             <div class="form-group">
-            <label>Job criteria</label>
+                <label>Job Description (AR)</label>
+            <textarea class="form-control" formControlName="jobDescriptionAr"></textarea>
+            </div>
+            <div class="form-group">
+            <label>Job criteria (EN)</label>
             <textarea class="form-control" formControlName="criteria"></textarea>
             </div>
             <div class="form-group">
-                <label>Job Role</label>
+                <label>Job criteria (AR)</label>
+                <textarea class="form-control" formControlName="criteriaAr"></textarea>
+                </div>
+            <div class="form-group">
+                <label>Job Role (EN)</label>
             <input type="text" class="form-control" formControlName="jobRole">
                 </div>
+                <div class="form-group">
+                    <label>Job Role (AR)</label>
+                <input type="text" class="form-control" formControlName="jobRoleAr">
+                    </div>
                 <div class="form-group">
                     <label>Job Openings</label>
                     <input type="text" class="form-control" formControlName="jobVacancies">
@@ -54,10 +70,14 @@
     class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
     <thead>
     <tr>
-    <th>Job Title</th>
-    <th>Job Description</th>
-    <th>criteria</th>
-    <th>Role</th>
+    <th>Job Title(EN)</th>
+    <th>Job Title(AR)</th>
+    <th>Job Description(EN)</th>
+    <th>Job Description(AR)</th>
+    <th>criteria(EN)</th>
+    <th>criteria(AR)</th>
+    <th>Role(EN)</th>
+    <th>Role(AR)</th>
     <th>Vacancies</th>
     <th>Location</th>
     <th>Status</th>
@@ -67,9 +87,13 @@
     <tbody>
     <tr  *ngFor="let item of jobData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
     <td>{{item.jobTitle}}</td>
+    <td>{{item.jobTitleAr}}</td>
     <td>{{item.jobDescription}}</td>
+    <td>{{item.jobDescriptionAr}}</td>
     <td>{{item.criteria}}</td>
+    <td>{{item.criteriaAr}}</td>
     <td>{{item.jobRole}}</td>
+    <td>{{item.jobRoleAr}}</td>
     <td>{{item.jobVacancies}}</td>
     <td>{{item.location}}</td>
     <td *ngIf="showAccept === true">

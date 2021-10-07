@@ -29,13 +29,21 @@
         <div class="modal-body">
         <form [formGroup]="addBranchData">
         <div class="form-group">
-        <label>Branch Name</label>
+        <label>Branch Name(EN)</label>
         <input type="text" class="form-control" formControlName="branchName">
         </div>
         <div class="form-group">
-        <label>Address</label>
+            <label>Branch Name(AR)</label>
+            <input type="text" class="form-control" formControlName="branchNameAr">
+            </div>
+        <div class="form-group">
+        <label>Address(EN)</label>
         <textarea class="form-control" formControlName="address"></textarea>
         </div>
+        <div class="form-group">
+            <label>Address(AR)</label>
+            <textarea class="form-control" formControlName="addressAr"></textarea>
+            </div>
         <div class="form-group">
         <label>Latitude</label>
         <input type="text" class="form-control" formControlName="lat">
@@ -68,8 +76,10 @@
 class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <thead>
 <tr>
-<th>Branch Name</th>
-<th>Address</th>
+<th>Branch Name(EN)</th>
+<th>Branch Name(AR)</th>
+<th>Address(EN)</th>
+<th>Address(AR)</th>
 <th>Latitude</th>
 <th>Longitude</th>
 <th>Email</th>
@@ -82,7 +92,9 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <tbody>
 <tr  *ngFor="let item of branchData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
 <td>{{item.branchName}}</td>
+<td>{{item.branchNameAr}}</td>
 <td>{{item.address}}</td>
+<td>{{item.addressAr}}</td>
 <td>{{item.lat}}</td>
 <td>{{item.long}}</td>
 <td>{{item.email}}</td>

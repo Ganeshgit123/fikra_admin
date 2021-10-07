@@ -41,11 +41,14 @@ export class HelpGuideComponent implements OnInit {
 
     this.addNewTitle = this.formBuilder.group({
       title: [''],
+      titleAr: [''],
     });
 
     this.addNewQuesAns = this.formBuilder.group({
       question: [''],
+      questionAr: [''],
       answer: [''],
+      answerAr: [''],
       ebookId: [''],
     });
 
@@ -70,7 +73,7 @@ export class HelpGuideComponent implements OnInit {
       {
         this.titleList = resu.data;
         this.total = this.titleList.length;
-
+      //  console.log("book",this.titleList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -122,6 +125,7 @@ export class HelpGuideComponent implements OnInit {
     this.titleId = data['_id'];
     this.addNewTitle = this.formBuilder.group({
       title: [data['title']],
+      titleAr: [data['titleAr']],
     })
   }
 
@@ -276,7 +280,9 @@ export class HelpGuideComponent implements OnInit {
 
     this.addNewQuesAns   = this.formBuilder.group({
       question: [quesdata['question']],
+      questionAr: [quesdata['questionAr']],
       answer: [quesdata['answer']],
+      answerAr: [quesdata['answerAr']],
       ebookId: [this.titleIdQuesAns],
     })
     

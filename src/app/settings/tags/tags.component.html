@@ -20,12 +20,12 @@
             <div class="modal-body">
                 <form [formGroup]="addTags">
                     <div class="form-group">
-                        <label>Tag Name</label>
+                        <label>Tag Name (EN)</label>
                         <input type="text" class="form-control" formControlName="tagName">
                     </div>
                     <div class="form-group">
-                        <label>Tag Color</label>
-                        <input class="form-control" type="color" formControlName="tagColor">
+                        <label>Tag Name (AR)</label>
+                        <input type="text" class="form-control" formControlName="tagNameAr">
                     </div>
                     <br>
                     <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
@@ -37,8 +37,8 @@
             <table id="basic-datatable" class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
                 <thead>
                     <tr>
-                        <th>Tag Name</th>
-                        <th>Tag Color</th>
+                        <th>Tag Name(EN)</th>
+                        <th>Tag Name(AR)</th>
                         <th>Status</th>
                         <th *ngIf="showAccept === true">Action</th>
                     </tr>
@@ -47,7 +47,7 @@
                     <tr
                         *ngFor="let item of tagList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10;let i = index">
                         <td>{{item.tagName}}</td>
-                        <td [style.color]="(item.tagColor)">{{item.tagColor}}</td>
+                        <td>{{item.tagNameAr}}</td>
                         <td *ngIf="showAccept === true">
                             <label class="switch">
                                 <input *ngIf="item._is_visible_ === true" type="checkbox" checked

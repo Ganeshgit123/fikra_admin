@@ -36,7 +36,9 @@ export class ContactUsComponent implements OnInit {
 
     this.addBranchData = this.formBuilder.group({
       branchName: [''],
+      branchNameAr: [''],
       address: [''],
+      addressAr: [''],
       lat: [''],
       long: [''],
       email: [''],
@@ -129,7 +131,9 @@ export class ContactUsComponent implements OnInit {
     this.branchId = data['_id']
     this.addBranchData   = this.formBuilder.group({
       branchName: [data['branchName']],
+      branchNameAr: [data['branchNameAr']],
       address: [data['address']],
+      addressAr: [data['addressAr']],
       lat: [data['lat']],
       long: [data['long']],
       email: [data['email']],
