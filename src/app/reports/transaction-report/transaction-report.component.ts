@@ -33,7 +33,9 @@ export class TransactionReportComponent implements OnInit {
   }
 
   transactionGetApiCall(value){
-    let params = {
+    if(value == 'allOrNothing' || value == 'keepItAll'){
+      this.archieve = false;
+     let params = {
           url: "admin/getTransactionAdminReport",
           model : value
         }  
@@ -52,6 +54,7 @@ export class TransactionReportComponent implements OnInit {
            console.error(error);
            
         }); 
+      }
 
         if(value == 'archieved'){
           this.archieve = true;

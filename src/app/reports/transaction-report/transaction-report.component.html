@@ -50,14 +50,14 @@
           <td>{{item.creatorId.accountNumber}}</td>
           <td>{{item.creatorId.iban}}</td>
           <td>
-            <tr *ngFor="let trans of item.transactionHistory">
-                <td>{{trans.payedAmount}}</td>
-               </tr>
+               <span *ngFor="let trans of item.transactionHistory" class="text-center">
+                <p class="rep_p">{{trans.payedAmount}},</p>
+              </span>
           </td>
           <td>
-              <tr *ngFor="let trans of item.transactionHistory">
-               <td>{{trans.dateTransfer | date}}</td>
-              </tr>
+            <span *ngFor="let trans of item.transactionHistory" class="text-center">
+                <p class="rep_p">{{trans.dateTransfer | date}},</p>
+              </span>
           </td>
           <td>Doubt</td>
           <td>{{item.payableAmount}}</td>
@@ -117,19 +117,19 @@
       <td>{{item.creatorId.accountNumber}}</td>
       <td>{{item.creatorId.iban}}</td>
       <td>
-        <tr *ngFor="let trans of item.transactionHistory">
-            <td>{{trans.payedAmount}}</td>
-           </tr>
+           <span *ngFor="let trans of item.transactionHistory" class="text-center">
+            <p class="rep_p">{{trans.payedAmount}},</p>
+          </span>
       </td>
       <td>
-          <tr *ngFor="let trans of item.transactionHistory">
-           <td>{{trans.dateTransfer | date}}</td>
-          </tr>
+          <span *ngFor="let trans of item.transactionHistory" class="text-center">
+            <p class="rep_p">{{trans.dateTransfer | date}},</p>
+          </span>
       </td>
       <td>Doubt</td>
       <td>{{item.payableAmount}}</td>
     </tr>
-    <tr *ngIf="(transactionRelData==null) || (transactionRelData.length == 0)">
+    <tr *ngIf="(archievedFiniceData==null) || (archievedFiniceData.length == 0)">
         <td class="text-center" colspan="13">
            No Data Found
         </td>

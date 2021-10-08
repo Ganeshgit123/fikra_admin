@@ -4,8 +4,8 @@
     <button class="btn btn-primary w-md waves-effect waves-light" (click)="modelRelatedGetApi('allOrNothing','')" style="margin-right: 40px;">All Or Nothing</button>
     <button class="btn btn-primary w-md waves-effect waves-light" (click)="modelRelatedGetApi('keepItAll','')" style="margin-right: 40px;">Keep It All</button>
 
-   <button class="btn btn-primary w-md waves-effect waves-light" (click)="modelRelatedGetApi('allOrNothing','AONarchieve')" style="margin-right: 40px;">Archieve All Or Nothing</button>
-  <button class="btn btn-primary w-md waves-effect waves-light" (click)="modelRelatedGetApi('keepItAll','KIParchieve')">Archieve Keep It ALL</button>
+   <button class="btn btn-primary w-md waves-effect waves-light" (click)="modelRelatedGetApi('','AONarchieve')" style="margin-right: 40px;">Archieve All Or Nothing</button>
+  <button class="btn btn-primary w-md waves-effect waves-light" (click)="modelRelatedGetApi('','KIParchieve')">Archieve Keep It ALL</button>
 
 </p>
 </div>
@@ -71,25 +71,25 @@
              <td>{{item.noOfPledge}}</td>
              <td>{{item.bussinesModel}}</td>
              <td>
-               <tr *ngFor="let trans of item.pledgedPayment">
-                   <td>{{trans.paymentMethod}}</td>
-                  </tr>
+                   <span *ngFor="let trans of item.pledgedPayment" class="text-center">
+                     <p class="rep_p">{{trans.paymentMethod}},</p>
+                   </span>
              </td>
              <td>Doubt</td>
              <td>
-                <tr *ngFor="let trans of item.pledgedPayment">
-                    <td>{{trans.vat}}</td>
-                   </tr>
+              <span *ngFor="let trans of item.pledgedPayment" class="text-center">
+                <p class="rep_p">{{trans.vat}},</p>
+              </span>
               </td>
               <td>
-                <tr *ngFor="let trans of item.pledgedPayment">
-                    <td>{{trans.processingFee}}</td>
-                   </tr>
+                <span *ngFor="let trans of item.pledgedPayment" class="text-center">
+                  <p class="rep_p">{{trans.processingFee}},</p>
+                </span>
               </td>
              <td>
-                <tr *ngFor="let trans of item.pledgedPayment">
-                    <td>{{trans.dateRecived}}</td>
-                   </tr>
+              <span *ngFor="let trans of item.pledgedPayment" class="text-center">
+                <p class="rep_p">{{trans.dateRecived}}</p>
+              </span>
               </td>
               <td>{{item.noOfSuccessPledge}}</td>
               <td>{{item.unProcessedAmount}}</td>

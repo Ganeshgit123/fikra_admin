@@ -110,16 +110,13 @@ export class ProjectsComponent implements OnInit {
               // console.log("first",firstDate)
               // console.log("end",endDate)
             // this.launchDate =new Date(firstDate);
-            this.duraDate =new Date(endDate);
+            this.duraDate =new Date(firstDate);
             var today = new Date();
            var Days = Math.abs(this.duraDate - today.getTime());
-           var remainDate = Math.ceil(Days / (1000 * 60 * 60 * 24)); 
+           var remainDate = element._is_succeed_ || (today >= element.basicInfoId.launchDate)? 0 : Math.ceil(Days / (1000 * 60 * 60 * 24)); 
           element.finalDate = remainDate
 
         })
-
-      
-
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

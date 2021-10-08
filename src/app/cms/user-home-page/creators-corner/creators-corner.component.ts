@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder} from '@angular/forms';
 import { ApiCallService } from '../../../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 declare var $:any;
 
 @Component({
@@ -25,7 +26,8 @@ export class CreatorsCornerComponent implements OnInit {
 
  constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
     ) { }
 
   ngOnInit(): void {
@@ -84,9 +86,7 @@ export class CreatorsCornerComponent implements OnInit {
       }
       reader.readAsDataURL(event.target.files[0]); 
       this.fileUpload = file
-      // console.log(this.filesToUpload)
-    } else {
-      // Not valild image
+      // console.log(this.fileUpload)
     }
   }
 
@@ -103,7 +103,6 @@ export class CreatorsCornerComponent implements OnInit {
 
   addCreators(creatorCorner: any){
     this.modalService.open(creatorCorner, { centered: true });
-
   }
 
 
@@ -113,6 +112,7 @@ export class CreatorsCornerComponent implements OnInit {
       this.creatorEditService(this.addCreatorData.value)
       return;
     }
+    this.spinner.show();
 
     var postData = new FormData();
     postData.append('headName', this.addCreatorData.get('headName').value);
@@ -133,13 +133,14 @@ export class CreatorsCornerComponent implements OnInit {
 
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
-        console.log("res",response)
+        // console.log("res",response)
 
         if (response.body.error == false) {
      
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.modalService.dismissAll();
           this.imagePreview = null;
+          this.spinner.hide();
           this.ngOnInit();
         } else {
           // Query Error
@@ -148,6 +149,7 @@ export class CreatorsCornerComponent implements OnInit {
       },
       (error) => {
         this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        this.spinner.hide();
         console.log('Error', error)
       } 
     )
@@ -173,6 +175,7 @@ export class CreatorsCornerComponent implements OnInit {
 
     creatorEditService(data){
       if(this.fileUpload){
+        console.log("gganesh")
         var postData = new FormData();
     
         postData.append('imageToStore', this.fileUpload);
@@ -181,6 +184,7 @@ export class CreatorsCornerComponent implements OnInit {
           url: 'admin/postImagetoS3',
           data: postData
         }
+        this.spinner.show();
     
         this.apiCall.commonPostService(params).subscribe(
           (response: any) => {
@@ -188,7 +192,36 @@ export class CreatorsCornerComponent implements OnInit {
             if (response.body.error == false) {
                   this.imgUrl = response.body.data.Location
                       data['blogImage'] = this.imgUrl;
-              
+                      data['createdBy'] = this.updatedby;
+                      data['userType'] = "admin";
+                      data['role'] = this.role;
+                      data['blogId'] = this.creatorId;
+                    
+                    var params1 = {
+                    url: 'admin/updateCreatorContent',
+                    data: data
+                    }
+                    // console.log("img",params1)
+                    this.apiCall.commonPutService(params1).subscribe(
+                    (response: any) => {
+                    if (response.body.error == false) {
+                    
+                    this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+                    this.modalService.dismissAll();
+                    this.imagePreview = null;
+                    this.ngOnInit();
+                    this.spinner.hide();
+                    this.addCreatorData.reset();
+                    } else {
+                    this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+                    }
+                    },
+                    (error) => {
+                    this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+                    this.spinner.hide();
+                    console.log('Error', error)
+                    } 
+                    )
                 } else {
               // Query Error
               this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
@@ -199,37 +232,42 @@ export class CreatorsCornerComponent implements OnInit {
             console.log('Error', error)
           } 
         )
+        }else{
+          data['blogImage'] = this.imagePreview;
+          data['createdBy'] = this.updatedby;
+          data['userType'] = "admin";
+          data['role'] = this.role;
+          data['blogId'] = this.creatorId;
+        
+        var params1 = {
+        url: 'admin/updateCreatorContent',
+        data: data
+        }
+        // console.log("img",params1)
+        this.apiCall.commonPutService(params1).subscribe(
+        (response: any) => {
+        if (response.body.error == false) {
+        
+        this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+        this.modalService.dismissAll();
+        this.imagePreview = null;
+        this.ngOnInit();
+        this.spinner.hide();
+        this.addCreatorData.reset();
+        } else {
+        this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+        },
+        (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        this.spinner.hide();
+        console.log('Error', error)
+        } 
+        )
         }
   
       // console.log("lol",this.imgUrl)
-      data['blogImage'] = this.imagePreview;
-      data['createdBy'] = this.updatedby;
-      data['userType'] = "admin";
-      data['role'] = this.role;
-      data['blogId'] = this.creatorId;
-    
-    var params1 = {
-    url: 'admin/updateCreatorContent',
-    data: data
-    }
-    // console.log("img",params1)
-    this.apiCall.commonPutService(params1).subscribe(
-    (response: any) => {
-    if (response.body.error == false) {
-    
-    this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-    this.modalService.dismissAll();
-    this.imagePreview = null;
-    this.ngOnInit();
-    } else {
-    this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-    }
-    },
-    (error) => {
-    this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-    console.log('Error', error)
-    } 
-    )
+     
     }
 
     onchangeBlogStatus(values:any,id){

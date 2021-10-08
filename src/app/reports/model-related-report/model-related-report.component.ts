@@ -29,7 +29,7 @@ export class ModelRelatedReportComponent implements OnInit {
   }
 
   modelRelatedGetApi(value,arch){
-    console.log("ddd",value,arch)
+    // console.log("ddd",value,arch)
     if(value == 'allOrNothing'){
       let params = {
         url: "admin/getProjectReport_AON_Live",
@@ -92,7 +92,7 @@ let resu = result.body;
 if(resu.error == false)
 {
   this.allorNothingData = resu.data; 
-
+console.log("data",this.allorNothingData)
 }else{
   this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
 }

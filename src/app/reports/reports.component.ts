@@ -33,10 +33,6 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Reports' }, { label: 'Lists', active: true }];
-
-    this.specialRequestReport();
-    this.financialReport();
-    this.walletReport();
     this.callRolePermission();
   }
 

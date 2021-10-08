@@ -33,6 +33,9 @@
               "src/styles.scss",
               "src/assets/scss/mystyle.scss"
             ],
+            "allowedCommonJsDependencies": [
+              "lodash"
+           ],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -59,8 +62,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "3mb",
+                  "maximumError": "8mb"
                 },
                 {
                   "type": "anyComponentStyle",

@@ -1,87 +1,89 @@
-<a routerLink="/projects"><app-pagetitle title="Transactions" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a>
+<a routerLink="/projects">
+   <app-pagetitle title="Transactions" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+</a>
 <div class="card card-body">
-   <ngx-spinner
-bdColor="rgba(51,51,51,0.8)"
-size="medium"
-color="#fff"
-type="ball-scale-multiple">
-<p style="font-size: 20px; color: white">Loading...</p>
-</ngx-spinner>
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-3">
-           <p><strong>Payable Amount : </strong> {{payableAmount}}</p>
-        </div>
-        <div class="col-md-3">
-           <p><strong>Model Name : </strong> {{modelName}}</p>
-        </div>
-        <div class="col-md-4">
-           <p class="text-right" *ngIf="majorWrite == true || requestWrite == true"><button class="btn btn-primary mo-mb-2 ml-1"
-              (click)="addTrans(transData)">
-              Add New Transaction
-           </button></p>
-        </div>
-     </div>
-     <ng-template #transData let-modal>
-        <div class="modal-header">
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
-        </div>
-        <div class="modal-body">
-            <form [formGroup]="addTransData">
+   <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+      <p style="font-size: 20px; color: white">Loading...</p>
+   </ngx-spinner>
+   <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-3">
+         <p><strong>Payable Amount : </strong> {{payableAmount}}</p>
+      </div>
+      <div class="col-md-3">
+         <p><strong>Model Name : </strong> {{modelName}}</p>
+      </div>
+      <div class="col-md-3" *ngIf='!payableAmount'>
+         <p style='color: green'><strong>Completed</strong></p>
+      </div>
+      <div class="col-md-4" *ngIf='payableAmount'>
+         <p class="text-right" *ngIf="majorWrite == true || requestWrite == true"><button class="btn btn-primary mo-mb-2 ml-1" (click)="addTrans(transData)">
+               Add New Transaction
+            </button></p>
+      </div>
+   </div>
+   <ng-template #transData let-modal>
+      <div class="modal-header">
+         <button type="button" class="close" (click)="closeModel()" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+         <label>Need to Pay: <span style='color: green'>{{payableAmount}}</span></label>
+         <br>
+         <br>
+         <form >
 
-                      <div class="form-group">
-                         <label>Payed Amount</label>
-                         <input type="text" class="form-control" formControlName="payedAmount">
-                      </div>
-                      <div class="form-group">
-                         <label>Balance Payable</label>
-                         <input type="text" class="form-control"
-                            formControlName="balancePayable">
-                      </div>
-                      <div class="form-group">
-                         <label>Description</label>
-                         <textarea class="form-control" formControlName="description"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <input formControlName="document" type="file" (change)="uploadImageFile($event)">
-                    </div>
+            <div class="form-group">
+               <label>Payed Amount</label>
+               <input type="number" id="payedAmount" class="form-control" [value]="addTransData.payedAmount" (focusout)="onChangeValue($event)">
+            </div>
+            <div class="form-group">
+               <label>Balance Payable</label>
+               <input type='number' id="balancePayable" class="form-control" [value]='addTransData.balancePayable'>
+            </div>
+            <div class="form-group">
+               <label>Description</label>
+               <textarea class="form-control" id="description" [value]='addTransData.description' (input)="onChangeValue($event)"></textarea>
+            </div>
+            <div class="form-group">
+               <label>Total Paied Amount</label>
+               <input class="form-control" type='number' id="totalPaid" [value]='addTransData.totalPaid'>
+            </div>
+            <div class="form-group">
+               <input type="file" (change)="uploadImageFile($event)">
+            </div>
 
-                <br>
-                <p class="text-center"><button type="button"
-                      class="btn btn-primary w-md waves-effect waves-light"
-                      (click)="onTransSubmit()">Save</button></p>
-             </form>
-        </div>
-        </ng-template>
+            <br>
+            <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                  (click)="onTransSubmit()">Save</button></p>
+         </form>
+      </div>
+   </ng-template>
 
-<div class="table-responsive">
-    <table id="basic-datatable"
-       class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
-       <thead>
-          <tr>
-             <th>Payed Amount</th>
-             <th>Balance Payable</th>
-             <th>Description</th>
-             <th>Date</th>
-             <th>Document</th>
-             <th *ngIf="majorWrite == true || requestWrite == true">Action</th>
-          </tr>
-       </thead>
-       <tbody>
-          <tr *ngFor="let item of transHistory">
-             <td>{{item.payedAmount}}</td>
-             <td>{{item.balancePayable}}</td>
-             <td>{{item.description}}</td>
-             <td>{{item.dateTransfer | date}}</td>
-             <td>{{item.document}}</td>
-             <td *ngIf="majorWrite == true || requestWrite == true">
-                <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="editTrans(item,transData)"><i
-class="mdi mdi-pencil font-size-18"></i></a>  
-<!-- <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteTrans(item._id)"><i
-class="mdi mdi-trash-can font-size-18"></i></a>      -->
-             </td>
-          </tr>
-       </tbody>
-    </table>
- </div>
+   <div class="table-responsive">
+      <table id="basic-datatable" class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+         <thead>
+            <tr>
+               <th>Payed Amount</th>
+               <th>Balance Payable</th>
+               <th>Description</th>
+               <th>Document</th>
+               <th>Date</th>
+               <!-- <th *ngIf="majorWrite == true || requestWrite == true">Action</th> -->
+            </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let item of transHistory">
+               <td>{{item.payedAmount}}</td>
+               <td>{{item.balancePayable}}</td>
+               <td>{{item.description}}</td>
+               <td><a href="{{item.document}}" target="_blank">{{item.document}}</a></td>
+               <td>{{item.dateTransfer | date}}</td>
+               <!-- <td *ngIf="majorWrite == true || requestWrite == true">
+                  <a class="mr-3 text-info" ngbTooltip="Edit" (click)="editTrans(item, transData)"><i
+                        class="mdi mdi-pencil font-size-18"></i></a>
+               </td> -->
+            </tr>
+         </tbody>
+      </table>
+   </div>
 </div>
