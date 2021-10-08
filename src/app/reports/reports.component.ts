@@ -185,7 +185,7 @@ export class ReportsComponent implements OnInit {
 
   walletReportExp(): void {
 
-    if (this.archieveSpecialData.length > 0) {
+    if (this.walletData.length > 0) {
       let element = document.getElementById('walletRepTable');
       const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 

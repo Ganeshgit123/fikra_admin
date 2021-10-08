@@ -161,8 +161,35 @@ export class CareerComponent implements OnInit {
   
           if (response.body.error == false) {
                 this.imgUrl = response.body.data.Location
+                    const data = this.addCareer.value;
                     data['careerImage'] = this.imgUrl;
-            
+                    data['createdBy'] = this.updatedby;
+                    data['userType'] = "admin";
+                    data['role'] = this.role;
+                  
+                  var params1 = {
+                  url: 'admin/postCareerContent',
+                  data: data
+                  }
+                  // console.log("img",params1)
+                  this.apiCall.commonPostService(params1).subscribe(
+                  (response: any) => {
+                  if (response.body.error == false) {
+                  
+                  this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+                  this.imagePreview = null;
+                  this.ngOnInit();
+                  this.spinner.hide();
+                  } else {
+                  this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+                  }
+                  },
+                  (error) => {
+                  this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+                  this.spinner.hide();
+                  console.log('Error', error)
+                  } 
+                  )
               } else {
             // Query Error
             this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
@@ -175,38 +202,37 @@ export class CareerComponent implements OnInit {
           console.log('Error', error)
         } 
       )
+      }else{
+        const data = this.addCareer.value;
+        data['careerImage'] = this.imagePreview;
+        data['createdBy'] = this.updatedby;
+        data['userType'] = "admin";
+        data['role'] = this.role;
+      
+      var params1 = {
+      url: 'admin/postCareerContent',
+      data: data
       }
-
-    console.log("lol",this.imgUrl)
-    const data = this.addCareer.value;
-    data['careerImage'] = this.imagePreview;
-    data['createdBy'] = this.updatedby;
-    data['userType'] = "admin";
-    data['role'] = this.role;
-  
-  var params1 = {
-  url: 'admin/postCareerContent',
-  data: data
-  }
-  console.log("img",params1)
-  this.apiCall.commonPostService(params1).subscribe(
-  (response: any) => {
-  if (response.body.error == false) {
-  
-  this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-  this.imagePreview = null;
-  this.ngOnInit();
-  this.spinner.hide();
-  } else {
-  this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-  }
-  },
-  (error) => {
-  this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-  this.spinner.hide();
-  console.log('Error', error)
-  } 
-  )
+      // console.log("img",params1)
+      this.apiCall.commonPostService(params1).subscribe(
+      (response: any) => {
+      if (response.body.error == false) {
+      
+      this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+      this.imagePreview = null;
+      this.ngOnInit();
+      this.spinner.hide();
+      } else {
+      this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+      }
+      },
+      (error) => {
+      this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+      this.spinner.hide();
+      console.log('Error', error)
+      } 
+      )
+      }
   }
   
 

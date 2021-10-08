@@ -64,14 +64,12 @@ export class RequestBackProjectComponent implements OnInit {
         //  console.log("list",this.projectList)
         this.projectList.forEach(element => {
           var firstDate = element.basicInfoId.launchDate;
-          var endDate = element.basicInfoId.campaignDuation;
 
-          this.duraDate =new Date(endDate);
-          var today = new Date();
-         var Days = Math.abs(this.duraDate - today.getTime());
-         var remainDate = Math.ceil(Days / (1000 * 60 * 60 * 24)); 
-
-        element.finalDate = remainDate
+          this.duraDate =new Date(firstDate);
+            var today = new Date();
+           var Days = Math.abs(this.duraDate - today.getTime());
+           var remainDate = element._is_succeed_ || (today >= element.basicInfoId.launchDate)? 0 : Math.ceil(Days / (1000 * 60 * 60 * 24)); 
+          element.finalDate = remainDate
 
       })
 

@@ -186,10 +186,10 @@
                   <td>{{i+1}}</td>
                   <td>{{item.userName}}</td>
                   <td>{{item.userId}}</td>
-                  <td>{{item.firstDate}}</td>
-                  <td>{{item.LastDate}}</td>
+                  <td>{{item.firstDate | date}}</td>
+                  <td>{{item.LastDate | date}}</td>
                   <td>{{item.currentBalance}}</td>
-                  <td>Doubt</td>
+                  <td>{{item.LastDate | date}}</td>
                 </tr>
                 <tr *ngIf="(walletData==null) || (walletData.length == 0)">
                   <td class="text-center" colspan="7">

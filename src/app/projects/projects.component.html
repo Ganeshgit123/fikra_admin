@@ -20,7 +20,7 @@
                            <th>Project Title</th>
                            <th>Category</th>
                            <th>Launch Date</th>
-                           <th>End Date</th>
+                           <!-- <th>End Date</th> -->
                            <th>User Name</th>
                            <th>Goal Amount</th>
                            <th>Remaining Duration</th>
@@ -38,7 +38,7 @@
                            <td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
                            <td>{{proj.basicInfoId.categoryName}}</td>
                            <td>{{proj.basicInfoId.launchDate | date}}</td>
-                           <td>{{proj.basicInfoId.campaignDuation | date}}</td>
+                           <!-- <td>{{proj.basicInfoId.campaignDuation | date}}</td> -->
                            <td><a routerLink="/view-creators/{{proj.userId._id}}">{{proj.userId.userName}}</a></td>
                            <td>{{proj.basicInfoId.goalAmount}}</td>
                            <td>{{proj.finalDate}} days</td>

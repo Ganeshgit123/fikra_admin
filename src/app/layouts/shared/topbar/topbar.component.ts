@@ -160,7 +160,7 @@ export class TopbarComponent implements OnInit {
     this.apiCall.commonGetService(params).subscribe((result: any) => {
       let resu = result.body;
       if (resu.error == false) {
-        this.sessionNotiData = resu.notification.length;       
+        this.sessionNotiData = resu.notification;  
       } else {
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
         if(resu.error.msg == 'jwt expired' || resu.error.msg == 'Your token has been expired'){

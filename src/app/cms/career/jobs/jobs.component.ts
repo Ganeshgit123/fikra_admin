@@ -86,7 +86,7 @@ export class JobsComponent implements OnInit {
       {
         this.jobData = resu.data;
         this.total = this.jobData.length
-        // console.log("ef",this.jobData)
+        console.log("ef",this.jobData)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -108,6 +108,7 @@ export class JobsComponent implements OnInit {
     this.isEdit = true;
 
     this.jobId = data['_id']
+  
     this.addJobData   = this.formBuilder.group({
       jobTitle: [data['jobTitle']],
       jobTitleAr: [data['jobTitleAr']],
@@ -118,7 +119,7 @@ export class JobsComponent implements OnInit {
       jobRole: [data['jobRole']],
       jobRoleAr: [data['jobRoleAr']],
       jobVacancies: [data['jobVacancies']],
-      location: [data['location']],
+      location: [data['location']._id],
     })
   }
 

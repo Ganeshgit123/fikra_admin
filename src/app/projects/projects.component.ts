@@ -106,9 +106,7 @@ export class ProjectsComponent implements OnInit {
         
           this.projectList.forEach(element => {
             var firstDate = element.basicInfoId.launchDate;
-            var endDate = element.basicInfoId.campaignDuation;
               // console.log("first",firstDate)
-              // console.log("end",endDate)
             // this.launchDate =new Date(firstDate);
             this.duraDate =new Date(firstDate);
             var today = new Date();

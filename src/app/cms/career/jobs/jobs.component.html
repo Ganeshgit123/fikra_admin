@@ -95,7 +95,7 @@
     <td>{{item.jobRole}}</td>
     <td>{{item.jobRoleAr}}</td>
     <td>{{item.jobVacancies}}</td>
-    <td>{{item.location}}</td>
+    <td>{{item.location.branchName}}</td>
     <td *ngIf="showAccept === true">
         <label class="switch">
             <input *ngIf="item._is_On_ == true"  type="checkbox" checked (change)="onchangeJobStatus($event,item._id)">
