@@ -215,7 +215,7 @@ export class CitiesComponent implements OnInit {
     object['userType'] = "admin";
     object['role'] = this.role;
     object['_isDeleted_'] = true;
-    object['_isOn_'] = data['_isOn_'];
+    object['_isOn_'] = false;
 
    var params = {
      url: 'admin/updateCityCountryId',

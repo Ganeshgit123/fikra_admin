@@ -24,6 +24,12 @@ export class ContactUsComponent implements OnInit {
   searchTerm1;
   total1: any;
 
+  addInquiryData:FormGroup;
+  inquiryData = [];
+  inquryTot:any;
+  enquiryEdit = false;
+  enquiryId:any;
+
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     private modalService: NgbModal
@@ -35,8 +41,8 @@ export class ContactUsComponent implements OnInit {
     this.role = sessionStorage.getItem('adminRole');
 
     this.addBranchData = this.formBuilder.group({
-      branchName: [''],
-      branchNameAr: [''],
+      // branchName: [''],
+      // branchNameAr: [''],
       address: [''],
       addressAr: [''],
       lat: [''],
@@ -46,8 +52,13 @@ export class ContactUsComponent implements OnInit {
       phone: [''],
     });
 
+    this.addInquiryData = this.formBuilder.group({
+      enquiryName: [''],
+      enquiryName_Ar: [''],
+    });
+
     this.fetchBranchData();
-    
+    this.inquiryList();
     this.fetchContactListData();
     this.callRolePermission();
 
@@ -72,6 +83,7 @@ export class ContactUsComponent implements OnInit {
 
         this.branchData = resu.data;
         this.total = this.branchData.length
+        // console.log("tt",this.total)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -130,8 +142,8 @@ export class ContactUsComponent implements OnInit {
 
     this.branchId = data['_id']
     this.addBranchData   = this.formBuilder.group({
-      branchName: [data['branchName']],
-      branchNameAr: [data['branchNameAr']],
+      // branchName: [data['branchName']],
+      // branchNameAr: [data['branchNameAr']],
       address: [data['address']],
       addressAr: [data['addressAr']],
       lat: [data['lat']],
@@ -261,4 +273,106 @@ export class ContactUsComponent implements OnInit {
     });
   }
 
+  addInquiry(InquiryCorner: any){
+    this.modalService.open(InquiryCorner, { centered: true });
+  }
+
+  onInquirySubmit(){
+
+    if(this.enquiryEdit){
+      this.InquiryEditService(this.addInquiryData.value)
+      return;
+    }
+
+    const postData = this.addInquiryData.value;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+
+    var params = {
+      url: 'admin/addNewEnquiry',
+      data: postData
+    }
+    // console.log("fefe",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.modalService.dismissAll();
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
+  }
+
+  inquiryList(){
+    let params = {
+      url: "admin/getAllEnquiry",
+    }  
+    this.apiCall.commonGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+
+        this.inquiryData = resu.data;
+        this.inquryTot = this.branchData.length
+        // console.log("tt",this.total)
+
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
+    });
+  }
+
+  viewInquiry(data,InquiryCorner: any){
+    this.modalService.open(InquiryCorner, { centered: true });
+
+    this.enquiryEdit = true;
+
+    this.enquiryId = data['_id']
+    this.addInquiryData   = this.formBuilder.group({
+      enquiryName: [data['enquiryName']],
+      enquiryName_Ar: [data['enquiryName_Ar']],
+    })
+  }
+
+  InquiryEditService(data){
+    data['enquiryId'] = this.enquiryId
+    data['createdBy'] = this.updatedby;
+    data['userType'] = "admin";
+    data['role'] = this.role;
+
+    var params = {
+      url: 'admin/editEnquiryData',
+      data: data
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          // Success
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.enquiryEdit = false;
+          this.modalService.dismissAll();
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
 }

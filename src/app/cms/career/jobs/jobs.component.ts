@@ -40,7 +40,7 @@ export class JobsComponent implements OnInit {
       jobRole: [''],
       jobRoleAr: [''],
       jobVacancies: [''],
-      location: [''],
+      // location: [''],
     });
     this.fetchbranchData();
     this.fetchJobData();
@@ -119,7 +119,7 @@ export class JobsComponent implements OnInit {
       jobRole: [data['jobRole']],
       jobRoleAr: [data['jobRoleAr']],
       jobVacancies: [data['jobVacancies']],
-      location: [data['location']._id],
+      // location: [data['location']._id],
     })
   }
 
@@ -224,11 +224,11 @@ export class JobsComponent implements OnInit {
     )
   }
 
-  onDeleteJobStatus(val,id,visible){
+  onDeleteJobStatus(val,id){
     const object = {}
 
     object['jobsId'] = id;
-    object['_is_On_'] = visible;
+    object['_is_On_'] = false;
     object['_is_Deleted_'] = val;
     object['createdBy'] = this.updatedby;
    object['userType'] = "admin";

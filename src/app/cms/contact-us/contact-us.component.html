@@ -1,26 +1,21 @@
 <div class="container-fluid">    
-<a routerLink="/investors"><app-pagetitle title="Contact Page" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
-<div class="card">
-<div class="card-body">
+<app-pagetitle title="Contact Page" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+
 <ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
 <li [ngbNavItem]="1">
 <a ngbNavLink>
 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-<span class="d-none d-sm-block">Branch Details</span>
+<span class="d-none d-sm-block">Location</span>
 </a>
 <br>
 <ng-template ngbNavContent>
 <div class="card">
 <div class="card-body">
 <div class="row">
-    <div class="col-md-8">
-        <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
-            class="d-inline-flex align-items-center">Search:
-            <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
-            aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
-    </div>
-    <div class="col-md-4">
-        <p class="text-right" *ngIf="showAccept === true"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addBranch(branchCorner)">Add New</button></p>
+    <div class="col-md-12">
+        <p class="text-right" *ngIf="total == 0">
+            <button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addBranch(branchCorner)">Add New</button>
+        </p>
         <!-- Center Modal -->
         <ng-template #branchCorner let-modal>
         <div class="modal-header">
@@ -28,14 +23,14 @@
         </div>
         <div class="modal-body">
         <form [formGroup]="addBranchData">
-        <div class="form-group">
+        <!-- <div class="form-group">
         <label>Branch Name(EN)</label>
         <input type="text" class="form-control" formControlName="branchName">
         </div>
         <div class="form-group">
             <label>Branch Name(AR)</label>
             <input type="text" class="form-control" formControlName="branchNameAr">
-            </div>
+            </div> -->
         <div class="form-group">
         <label>Address(EN)</label>
         <textarea class="form-control" formControlName="address"></textarea>
@@ -76,8 +71,8 @@
 class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <thead>
 <tr>
-<th>Branch Name(EN)</th>
-<th>Branch Name(AR)</th>
+<!-- <th>Branch Name(EN)</th>
+<th>Branch Name(AR)</th> -->
 <th>Address(EN)</th>
 <th>Address(AR)</th>
 <th>Latitude</th>
@@ -85,14 +80,14 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <th>Email</th>
 <th>Fax</th>
 <th>Phone No.</th>
-<th>Status</th>
+<!-- <th>Status</th> -->
 <th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
 <tbody>
 <tr  *ngFor="let item of branchData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
-<td>{{item.branchName}}</td>
-<td>{{item.branchNameAr}}</td>
+<!-- <td>{{item.branchName}}</td>
+<td>{{item.branchNameAr}}</td> -->
 <td>{{item.address}}</td>
 <td>{{item.addressAr}}</td>
 <td>{{item.lat}}</td>
@@ -100,7 +95,7 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <td>{{item.email}}</td>
 <td>{{item.fax}}</td>
 <td>{{item.phone}}</td>
-<td *ngIf="showAccept === true">
+<!-- <td *ngIf="showAccept === true">
 <label class="switch">
     <input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeBranchStatus($event,item._id)">
     <input *ngIf="item._is_on_ !== true" type="checkbox" unchecked (change)="onchangeBranchStatus($event,item._id)">
@@ -112,12 +107,12 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
     <p *ngIf="item._is_on_ == true">ON</p>
     <p *ngIf="item._is_on_ !== true">OFF</p>
 </span>
-</td>
+</td> -->
 <td *ngIf="showAccept === true">
 <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewBrach(item,branchCorner)"><i
     class="mdi mdi-pencil font-size-18"></i></a>  
-<a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteBranch(item._id)"><i
-        class="mdi mdi-trash-can font-size-18"></i></a>     
+<!-- <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteBranch(item._id)"><i
+        class="mdi mdi-trash-can font-size-18"></i></a>      -->
 </td>
 </tr>
 <tr *ngIf="(branchData==null) || (branchData.length == 0)">
@@ -127,25 +122,99 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 </tr>
 </tbody>
 </table>
-<!-- Pagination -->
-<div class="col-sm-12 col-md-12">
-    <div class="text-md-right float-md-right pagination-rounded">
-        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
-        </ngb-pagination>
-    </div>
-</div>
-<!-- End Pagination -->
 </div>
 </div>
 </div>
 </ng-template>
 </li>
 <li [ngbNavItem]="2">
+    <a ngbNavLink (click)="inquiryList()">
+    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+    <span class="d-none d-sm-block">Type of Inquries</span>
+    </a>
+    <ng-template ngbNavContent>
+        <div class="card card-body">
+   
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                        class="d-inline-flex align-items-center">Search:
+                        <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                        aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                </div>
+                <div class="col-md-4">
+                    <p class="text-right">
+                        <button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addInquiry(InquiryCorner)">Add New</button>
+                    </p>
+                    <!-- Center Modal -->
+                    <ng-template #InquiryCorner let-modal>
+                    <div class="modal-header">
+                    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                    <form [formGroup]="addInquiryData">
+                    <div class="form-group">
+                    <label>Enquiry Name(EN)</label>
+                    <textarea class="form-control" formControlName="enquiryName"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Enquiry Name (AR)</label>
+                        <textarea class="form-control" formControlName="enquiryName_Ar"></textarea>
+                        </div>
+                    <br>
+                    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onInquirySubmit()">Save</button></p>
+                    </form>
+                    </div>
+                    </ng-template>        
+                </div>
+            </div>
+            <div class="table-responsive">
+            <table id="basic-datatable"
+            class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+            <thead>
+            <tr>
+            <!-- <th>Branch Name(EN)</th>
+            <th>Branch Name(AR)</th> -->
+            <th>Enquiry Name(EN)</th>
+            <th>Enquiry NAme (AR)</th>
+            <th *ngIf="showAccept === true">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr  *ngFor="let item of inquiryData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
+            <td>{{item.enquiryName}}</td>
+            <td>{{item.enquiryName_Ar}}</td>
+            <td *ngIf="showAccept === true">
+            <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewInquiry(item,InquiryCorner)"><i
+                class="mdi mdi-pencil font-size-18"></i></a>  
+            </td>
+            </tr>
+            <tr *ngIf="(inquiryData==null) || (inquiryData.length == 0)">
+                <td class="text-center" colspan="9">
+                   No Data Found
+                </td>
+            </tr>
+            </tbody>
+            </table>
+            <!-- Pagination -->
+<div class="col-sm-12 col-md-12">
+    <div class="text-md-right float-md-right pagination-rounded">
+        <ngb-pagination [collectionSize]="inquryTot" [(page)]="page" [pageSize]="10">
+        </ngb-pagination>
+    </div>
+</div>
+<!-- End Pagination -->
+            </div>
+            </div>
+    </ng-template>
+    </li>
+<li [ngbNavItem]="3">
 <a ngbNavLink>
 <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
 <span class="d-none d-sm-block">Contact Form List</span>
 </a>
 <ng-template ngbNavContent>
+    <div class="card card-body">
     <div class="row">
         <div class="col-md-12">
             <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
@@ -166,7 +235,7 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
         <th>City</th>
         <th>Message</th>
         <th>Inquiry Type</th>
-        <th>Inquiry Message</th>
+        <th>Other</th>
         </tr>
         </thead>
         <tbody>
@@ -196,12 +265,10 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
     </div>
     <!-- End Pagination -->
         </div>
+        </div>
 </ng-template>
 </li>
+
 </ul>
 <div [ngbNavOutlet]="justifiednav"></div>
-</div>
-</div>
-
-
 </div>

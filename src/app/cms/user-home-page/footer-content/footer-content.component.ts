@@ -43,7 +43,7 @@ export class FooterContentComponent implements OnInit {
       twetterURL: [''],
       youtubeURL: [''],
       contactEmail: [''],
-      contactNumber: [''],
+      // contactNumber: [''],
     });
 
     this.addFooterLabelData = this.formBuilder.group({
@@ -102,7 +102,7 @@ export class FooterContentComponent implements OnInit {
           twetterURL: [resu.data.twetterURL,[]],
           youtubeURL: [resu.data.youtubeURL,[]],
           contactEmail: [resu.data.contactEmail,[]],
-          contactNumber: [resu.data.contactNumber,[]],
+          // contactNumber: [resu.data.contactNumber,[]],
         });
 
       }else{

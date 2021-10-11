@@ -52,12 +52,12 @@
                     <label>Job Openings</label>
                     <input type="text" class="form-control" formControlName="jobVacancies">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>Job Location</label>
                     <select class="form-control" formControlName="location">
                     <option  *ngFor="let item of branchList" value="{{item._id}}">{{item.branchName}}</option>
                     </select>
-                    </div>
+                    </div> -->
             <br>
             <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
             </form>
@@ -79,7 +79,7 @@
     <th>Role(EN)</th>
     <th>Role(AR)</th>
     <th>Vacancies</th>
-    <th>Location</th>
+    <!-- <th>Location</th> -->
     <th>Status</th>
     <th *ngIf="showAccept === true">Action</th>
     </tr>
@@ -95,7 +95,7 @@
     <td>{{item.jobRole}}</td>
     <td>{{item.jobRoleAr}}</td>
     <td>{{item.jobVacancies}}</td>
-    <td>{{item.location.branchName}}</td>
+    <!-- <td>{{item.location.branchName}}</td> -->
     <td *ngIf="showAccept === true">
         <label class="switch">
             <input *ngIf="item._is_On_ == true"  type="checkbox" checked (change)="onchangeJobStatus($event,item._id)">
@@ -113,7 +113,7 @@
     <td *ngIf="showAccept === true">
         <a  class="mr-3 text-info" ngbTooltip="Edit" (click)="viewJobs(item,creatorCorner)"><i
             class="mdi mdi-pencil font-size-18"></i></a>  
-        <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteJobStatus(true,item._id,item._is_On_)"><i
+        <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteJobStatus(true,item._id)"><i
                 class="mdi mdi-trash-can font-size-18"></i></a>     
     </td>
     </tr>
