@@ -72,6 +72,7 @@ export class FaqComponent implements OnInit {
   }
 
   addFaq(creatorCorner: any){
+    this.addFaqData.reset();
     this.modalService.open(creatorCorner, { centered: true });
 
   }

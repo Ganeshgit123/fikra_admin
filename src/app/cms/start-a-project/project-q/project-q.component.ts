@@ -83,6 +83,7 @@ export class ProjectQComponent implements OnInit {
   }
 
   addQuesAndAns(addQuesAns: any){
+    this.addQues.reset();
     this.modalService.open(addQuesAns, { centered: true });
   }
 

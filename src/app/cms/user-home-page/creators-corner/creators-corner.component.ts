@@ -102,6 +102,8 @@ export class CreatorsCornerComponent implements OnInit {
 
 
   addCreators(creatorCorner: any){
+    this.addCreatorData.reset();
+    this.imagePreview = null;
     this.modalService.open(creatorCorner, { centered: true });
   }
 
@@ -140,6 +142,7 @@ export class CreatorsCornerComponent implements OnInit {
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.modalService.dismissAll();
           this.imagePreview = null;
+          this.addCreatorData.reset();
           this.spinner.hide();
           this.ngOnInit();
         } else {

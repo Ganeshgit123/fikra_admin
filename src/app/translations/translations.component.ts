@@ -70,6 +70,7 @@ export class TranslationsComponent implements OnInit {
   }
 
   addString(stringModel: any){
+    this.addStringData.reset();
     this.modalService.open(stringModel, { centered: true });
 
   }

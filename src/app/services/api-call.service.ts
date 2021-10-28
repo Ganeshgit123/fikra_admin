@@ -197,7 +197,7 @@ export class ApiCallService {
 
     const httpHeaders = new HttpHeaders({
       "Content-Type": "application/json",
-      auth: this.accToken,
+      'auth': this.accToken,
     });
     return this.http.get(this.baseUrl + params.url, {
       params: new HttpParams()

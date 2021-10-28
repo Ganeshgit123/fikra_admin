@@ -70,6 +70,7 @@ export class TagsComponent implements OnInit {
   }
 
   addTagsModal(centerDataModal: any){
+    this.addTags.reset();
     this.modalService.open(centerDataModal, { centered: true });
   }
 

@@ -73,7 +73,8 @@ export class WhyFikraComponent implements OnInit {
   }
 
   addFikra(addWhyFikra: any){
-    this.modalService.open(addWhyFikra, { centered: true });
+    this.whyFikra.reset();
+    this.modalService.open(addWhyFikra, { centered: true,size:'xl' });
   }
 
   whyFikraSubmit(){
@@ -112,7 +113,7 @@ export class WhyFikraComponent implements OnInit {
   }
 
   viewWhyFikra(data,addWhyFikra: any){
-    this.modalService.open(addWhyFikra, { centered: true });
+    this.modalService.open(addWhyFikra, { centered: true,size:'xl' });
 
     this.isEdit = true;
 

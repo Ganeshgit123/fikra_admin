@@ -61,6 +61,7 @@ export class RolesComponent implements OnInit {
   }
 
   addRole(roleCorner: any){
+    this.addNewRole.reset();
     this.modalService.open(roleCorner, { centered: true });
   }
 

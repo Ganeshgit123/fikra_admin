@@ -81,6 +81,8 @@ export class ContentSectionComponent implements OnInit {
   }
 
   addContents(contentModal: any){
+    this.addContenteSection.reset();
+    this.imagePreview = null;
     this.modalService.open(contentModal, { centered: true });
 
   }
@@ -122,6 +124,7 @@ export class ContentSectionComponent implements OnInit {
       this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
       this.modalService.dismissAll();
           this.imagePreview = null;
+          this.addContenteSection.reset();
           this.ngOnInit();
     } else {
       // Query Error
@@ -176,6 +179,7 @@ export class ContentSectionComponent implements OnInit {
        this.isEdit = false;
        this.modalService.dismissAll();
        this.imagePreview = null;
+       this.addContenteSection.reset();
        this.ngOnInit();
      } else {
        // Query Error

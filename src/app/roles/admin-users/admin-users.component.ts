@@ -90,6 +90,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   addUsers(userCorner: any){
+    this.addUserData.reset();
     this.modalService.open(userCorner, { centered: true });
 
   }

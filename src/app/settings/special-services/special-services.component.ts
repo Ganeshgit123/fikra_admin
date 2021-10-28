@@ -71,6 +71,7 @@ export class SpecialServicesComponent implements OnInit {
   }
 
   addService(centerDataModal: any){
+    this.addNewService.reset();
     this.modalService.open(centerDataModal, { centered: true });
   }
 

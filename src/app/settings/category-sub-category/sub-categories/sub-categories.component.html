@@ -79,7 +79,7 @@ class="table table-bordered dt-responsive nowrap  no-footer dtr-inline">
 </span>
 </td>
 <td *ngIf="showAccept === true">
-<a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewSubCategory(item,subCategoryModal)"><i
+<a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewSubCategory(item.categorieId._id,item,subCategoryModal)"><i
 class="mdi mdi-pencil font-size-18"></i></a>
 <a class="text-danger text-info" ngbTooltip="Delete" (click)="deleteSubCateg(item._id)"><i
 class="mdi mdi-trash-can font-size-18"></i></a>

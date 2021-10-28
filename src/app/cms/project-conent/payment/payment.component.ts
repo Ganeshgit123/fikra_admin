@@ -116,6 +116,7 @@ export class PaymentComponent implements OnInit {
   }
 
   addPaymentFields(paymentField: any){
+    this.addPaymentFieildData.reset();
     this.modalService.open(paymentField, { centered: true });
   }
 

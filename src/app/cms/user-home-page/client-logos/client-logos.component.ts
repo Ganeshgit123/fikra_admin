@@ -119,6 +119,8 @@ export class ClientLogosComponent implements OnInit {
 
 
   addCreators(creatorCorner: any){
+    this.addClientLogo.reset();
+    this.imagePreview = null;
     this.modalService.open(creatorCorner, { centered: true });
 
   }
@@ -154,6 +156,7 @@ export class ClientLogosComponent implements OnInit {
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.modalService.dismissAll();
           this.imagePreview = null;
+          this.addClientLogo.reset();
           this.ngOnInit();
         } else {
           // Query Error

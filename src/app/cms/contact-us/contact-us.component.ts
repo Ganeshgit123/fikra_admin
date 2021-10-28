@@ -96,6 +96,7 @@ export class ContactUsComponent implements OnInit {
 
 
   addBranch(branchCorner: any){
+    this.addBranchData.reset();
     this.modalService.open(branchCorner, { centered: true });
 
   }
@@ -274,6 +275,7 @@ export class ContactUsComponent implements OnInit {
   }
 
   addInquiry(InquiryCorner: any){
+    this.addInquiryData.reset();
     this.modalService.open(InquiryCorner, { centered: true });
   }
 

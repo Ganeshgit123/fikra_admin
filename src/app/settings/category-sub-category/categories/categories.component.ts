@@ -71,6 +71,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   addCategory(centerDataModal: any){
+    this.addNewCategory.reset();
     this.modalService.open(centerDataModal, { centered: true });
   }
   

@@ -118,6 +118,7 @@ export class PromotionComponent implements OnInit {
   }
 
   addPromotionFields(promotionField: any){
+    this.addPromotionFieildData.reset();
     this.modalService.open(promotionField, { centered: true });
   }
 

@@ -140,6 +140,7 @@ export class BannerComponent implements OnInit {
   }
 
   addBannner(centerDataModal: any){
+    this.addBannerImg.reset();
     this.modalService.open(centerDataModal, { centered: true });
 
   }

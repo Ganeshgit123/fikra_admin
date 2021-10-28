@@ -98,6 +98,7 @@ export class JobsComponent implements OnInit {
   }
 
   addJobs(creatorCorner: any){
+    this.addJobData.reset();
     this.modalService.open(creatorCorner, { centered: true });
 
   }

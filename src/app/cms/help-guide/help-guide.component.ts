@@ -84,6 +84,7 @@ export class HelpGuideComponent implements OnInit {
   }
 
   addTitle(helpTilteModal: any){
+    this.addNewTitle.reset();
     this.modalService.open(helpTilteModal, { centered: true });
   }
 
@@ -234,6 +235,7 @@ export class HelpGuideComponent implements OnInit {
   }
 
   addQuesAns(quesAnsModal: any){
+    this.addNewQuesAns.reset();
     this.modalService.open(quesAnsModal, { centered: true });
   }
 

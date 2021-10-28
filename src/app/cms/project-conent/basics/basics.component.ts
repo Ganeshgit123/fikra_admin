@@ -118,6 +118,7 @@ export class BasicsComponent implements OnInit {
   }
 
   addBasicFields(basicField: any){
+    this.addBaiscFieildData.reset();
     this.modalService.open(basicField, { centered: true });
   }
 

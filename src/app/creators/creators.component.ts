@@ -150,6 +150,7 @@ export class CreatorsComponent implements OnInit {
   }
 
   reqAdmin(adminReqModel:any){
+    this.changeDesc.reset();
     this.modalService.open(adminReqModel, { centered: true });
   }
 

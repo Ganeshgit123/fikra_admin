@@ -20,7 +20,7 @@ export class SubCategoriesComponent implements OnInit {
   searchTerm;
   page = 1;
   total: any;
-  
+  catId:any;
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     private modalService: NgbModal
@@ -96,15 +96,18 @@ export class SubCategoriesComponent implements OnInit {
   }
 
   addSubCategory(subCategoryModal: any){
+    this.addNewSubCategory.reset();
     this.modalService.open(subCategoryModal, { centered: true });
   }
 
-  viewSubCategory(data,subCategoryModal: any){
+  viewSubCategory(id,data,subCategoryModal: any){
+    console.log(data)
     this.modalService.open(subCategoryModal, { centered: true });
     this.isEdit = true;
     this.subCateId = data['_id'];
+    this.catId = id;
     this.addNewSubCategory   = this.formBuilder.group({
-      categorieId: [data['categorieId']],
+      categorieId: [this.catId],
       subCategorieName: [data['subCategorieName']],
       subCategorieNameAr: [data['subCategorieNameAr']],
       discription: [data['discription']],
