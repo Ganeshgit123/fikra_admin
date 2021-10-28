@@ -37,7 +37,9 @@ export class ProjectsComponent implements OnInit {
   canWrite:boolean;
   page = 1;
   total: any;
-
+  projSelectId = [];
+  isAllSelect = false;
+  
  constructor(
   private apiCall: ApiCallService,
   private formBuilder: FormBuilder,
@@ -476,6 +478,54 @@ export class ProjectsComponent implements OnInit {
         console.log('Error', error)
       }
     )
+  }
+
+  removeItemOnce(arr, value) {
+    var index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  }
+
+  removeItemAll(arr, value) {
+    var i = 0;
+    while (i < arr.length) {
+      if (arr[i] === value) {
+        arr.splice(i, 1);
+      } else {
+        ++i;
+      }
+    }
+    return arr;
+  }
+
+  onInputChange(id) {
+    let index = this.projSelectId.indexOf(id);
+    if (index > -1) {
+      this.projSelectId = this.removeItemOnce(this.projSelectId, id);
+    } else {
+      this.projSelectId.push(id);
+    }
+    
+    if(this.projSelectId.length == this.projectList.length){
+      this.isAllSelect = true
+    }else{
+      this.isAllSelect = false 
+    }
+  }
+
+  async onSelectAll(){
+    this.isAllSelect = !this.isAllSelect;
+    if(this.isAllSelect){
+      //selection
+        await this.projectList.map(async(element) => {
+          await this.projSelectId.push(element._id)
+        });
+    }else{
+      //deselection
+      this.projSelectId = [];
+    }
   }
 }
 

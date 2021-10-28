@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { ApiCallService } from '../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AngularCsv } from 'angular7-csv/dist/Angular-csv'
 
 @Component({
   selector: 'app-creators',
@@ -31,6 +32,7 @@ export class CreatorsComponent implements OnInit {
   requestWrite:boolean;
   page = 1;
   total: any;
+  creatorcsvOptions: any;
 
   constructor(
   private apiCall: ApiCallService,
@@ -309,6 +311,53 @@ export class CreatorsComponent implements OnInit {
        console.log('Error', error)
      }
    )
+  }
+
+  exportList(){
+    let params = {
+      url: "admin/getCreatorList",
+    }  
+    this.apiCall.userGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+        this.getCreateList = resu.data;
+        if(resu.data.length > 0){
+          this.exportCreatorMailData(resu.data)
+        }
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
+    });
+   }
+  
+   exportCreatorMailData(data){
+    if(data.length > 0){
+      var bulkArray = []
+      data.forEach(element => {
+        var obj = {}
+        obj['Email Id'] = element.email
+  
+        bulkArray.push(obj)
+      })
+  
+      this.creatorcsvOptions = {
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalseparator: '.',
+        showLabels: true,
+        showTitle: true,
+        title: 'Backers Email Id',
+        useBom: true,
+        noDownload: false,
+        headers: ["Email Id"]
+      };
+      new  AngularCsv(bulkArray, "Backers Email Id", this.creatorcsvOptions);
+  
+    }
   }
 
 }

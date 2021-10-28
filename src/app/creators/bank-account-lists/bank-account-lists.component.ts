@@ -86,7 +86,7 @@ export class BankAccountListsComponent implements OnInit {
       {
         this.getRequestList = resu.data;
         this.getReqTotal = this.getRequestList.length
-      // console.log("fetch",this.getCreateList)
+      console.log("fetch",this.getRequestList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -197,7 +197,6 @@ export class BankAccountListsComponent implements OnInit {
       {
         this.getVerifyBankList = resu.data;
         this.verifyBankTotal = this.getRequestList.length
-      // console.log("fetch",this.getCreateList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

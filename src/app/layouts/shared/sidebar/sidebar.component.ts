@@ -4,7 +4,6 @@ import { Router, NavigationEnd } from '@angular/router';
 
 import { EventService } from '../../../core/services/event.service';
 
-
 import { MenuItem } from './menu.model';
 
 @Component({
@@ -139,25 +138,25 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           icon: 'ri-stack-fill',
           subItems: [
               {
-                  id: 22,
+                  id: 4,
                   label: 'MENUITEMS.PROJECTS_LIST.TEXT',
                   link: '/projects',
                   parentId: 3
               },
               {
-                  id: 23,
+                  id: 5,
                   label: 'MENUITEMS.REQUESTED_LIST.TEXT',
                   link: '/requested_projects',
                   parentId: 3
               },
               {
-                  id: 24,
+                  id: 6,
                   label: 'MENUITEMS.RECOMMENDED_LIST.TEXT',
                   link: '/recommended_projects',
                   parentId: 3
               },
               {
-                  id: 30,
+                  id: 7,
                   label: 'MENUITEMS.PROJECT_REPORTS.TEXT',
                   link: '/project_reports',
                   parentId: 3
@@ -165,240 +164,240 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           ]
       },
       {
-          id: 4,
+          id: 8,
           label: 'MENUITEMS.INVESTORS.TEXT',
           icon: 'mdi mdi-account-cash',
           link: '/investors'
       },
       {
-          id: 6,
+          id: 9,
           label: 'MENUITEMS.CREATORS.TEXT',
           icon: 'mdi mdi-account-cog',
           subItems: [
               {
-                  id: 40,
+                  id: 10,
                   label: 'MENUITEMS.CREATORS_LIST.TEXT',
                   link: '/creators',
-                  parentId: 6
+                  parentId: 9
               },
               {
                   id: 41,
                   label: 'MENUITEMS.BANK_REQUESTS.TEXT',
                   link: '/bank_ac_request_lists',
-                  parentId: 6
+                  parentId: 9
               },
           ]
       },
       {
-          id: 7,
+          id: 11,
           label: 'MENUITEMS.CMS.TEXT',
           icon: 'mdi mdi-file-document-edit',
           subItems: [
               {
-                  id: 8,
+                  id: 12,
                   label: 'MENUITEMS.HOMEPAGE.TEXT',
                   link: '/home_page',
-                  parentId: 6
-              },
-              {
-                  id: 9,
-                  label: 'MENUITEMS.ABOUTPAGE.TEXT',
-                  link: '/about_page',
-                  parentId: 6
-              },
-              {
-                  id: 10,
-                  label: 'MENUITEMS.STARTPROJECT.TEXT',
-                  link: '/start_project_page',
-                  parentId: 6
-              },
-              {
-                  id: 10,
-                  label: 'MENUITEMS.CREATEPROJECT.TEXT',
-                  link: '/create_project',
-                  parentId: 6
-              },
-              {
-                  id: 10,
-                  label: 'MENUITEMS.PROJECTCONTENT.TEXT',
-                  link: '/project_content',
-                  parentId: 6
-              },
-              {
-                  id: 24,
-                  label: 'MENUITEMS.CREATOR_HANDBOOK.TEXT',
-                  link: '/creator_handbook',
-                  parentId: 6
-              },
-              {
-                  id: 25,
-                  label: 'MENUITEMS.CONTACT_US.TEXT',
-                  link: '/contact',
-                  parentId: 6
-              },
-              {
-                  id: 29,
-                  label: 'MENUITEMS.CAREER.TEXT',
-                  link: '/career',
-                  parentId: 6
-              },
-              {
-                  id: 11,
-                  label: 'MENUITEMS.FAQ.TEXT',
-                  link: '/faq',
-                  parentId: 6
-              },
-              {
-                  id: 42,
-                  label: 'MENUITEMS.HELP_GUIDES.TEXT',
-                  link: '/help_guide',
-                  parentId: 6
-              },
-              {
-                  id: 12,
-                  label: 'MENUITEMS.PRIVACYPOLICY.TEXT',
-                  link: '/privacy',
-                  parentId: 6
+                  parentId: 11
               },
               {
                   id: 13,
-                  label: 'MENUITEMS.COOKIEPOLICY.TEXT',
-                  link: '/cookie_policy',
-                  parentId: 6
+                  label: 'MENUITEMS.ABOUTPAGE.TEXT',
+                  link: '/about_page',
+                  parentId: 11
               },
               {
                   id: 14,
+                  label: 'MENUITEMS.STARTPROJECT.TEXT',
+                  link: '/start_project_page',
+                  parentId: 11
+              },
+              {
+                  id: 15,
+                  label: 'MENUITEMS.CREATEPROJECT.TEXT',
+                  link: '/create_project',
+                  parentId: 11
+              },
+              {
+                  id: 16,
+                  label: 'MENUITEMS.PROJECTCONTENT.TEXT',
+                  link: '/project_content',
+                  parentId: 11
+              },
+              {
+                  id: 17,
+                  label: 'MENUITEMS.CREATOR_HANDBOOK.TEXT',
+                  link: '/creator_handbook',
+                  parentId: 11
+              },
+              {
+                  id: 18,
+                  label: 'MENUITEMS.CONTACT_US.TEXT',
+                  link: '/contact',
+                  parentId: 11
+              },
+              {
+                  id: 19,
+                  label: 'MENUITEMS.CAREER.TEXT',
+                  link: '/career',
+                  parentId: 11
+              },
+              {
+                  id: 20,
+                  label: 'MENUITEMS.FAQ.TEXT',
+                  link: '/faq',
+                  parentId: 11
+              },
+              {
+                  id: 21,
+                  label: 'MENUITEMS.HELP_GUIDES.TEXT',
+                  link: '/help_guide',
+                  parentId: 11
+              },
+              {
+                  id: 22,
+                  label: 'MENUITEMS.PRIVACYPOLICY.TEXT',
+                  link: '/privacy',
+                  parentId: 11
+              },
+              {
+                  id: 23,
+                  label: 'MENUITEMS.COOKIEPOLICY.TEXT',
+                  link: '/cookie_policy',
+                  parentId: 11
+              },
+              {
+                  id: 24,
                   label: 'MENUITEMS.TERMSOFUSE.TEXT',
                   link: '/terms_of_use',
-                  parentId: 6
+                  parentId: 11
               },
           ]
       },
       {
-          id: 15,
+          id: 25,
           label: 'MENUITEMS.SETTINGS.TEXT',
           icon: 'ri-settings-5-line',
           subItems: [
               {
-                  id: 37,
+                  id: 26,
                   label: 'MENUITEMS.COMMISSION_CHARGES.TEXT',
                   link: '/commission_charges',
-                  parentId: 13
+                  parentId: 25
               },
               {
-                  id: 16,
+                  id: 27,
                   label: 'MENUITEMS.CATEGORY_SUB_CATEGORY.TEXT',
                   link: '/category_sub_category',
-                  parentId: 13
+                  parentId: 25
               },
               {
-                  id: 17,
+                  id: 28,
                   label: 'MENUITEMS.COUNTRY_CITY.TEXT',
                   link: '/country_city',
-                  parentId: 13
+                  parentId: 25
               },
               {
-                  id: 18,
+                  id: 29,
                   label: 'MENUITEMS.TAGGS.TEXT',
                   link: '/tags',
-                  parentId: 13
+                  parentId: 25
               },
               {
-                  id: 26,
+                  id: 30,
                   label: 'MENUITEMS.SPECIAL_SERVICES.TEXT',
                   link: '/special_services',
-                  parentId: 13
+                  parentId: 25
               },
           ]
       },
       {
-          id: 32,
+          id: 31,
           label: 'MENUITEMS.ROLES & PERMISSION.TEXT',
           icon: '  fas fa-user-lock',
           subItems: [
               {
-                  id: 33,
+                  id: 32,
                   label: 'MENUITEMS.ROLES.TEXT',
                   link: '/roles',
-                  parentId: 32
+                  parentId: 31
               },
               {
-                  id: 44,
+                  id: 33,
                   label: 'MENUITEMS.WRITEREQUESTS.TEXT',
                   link: '/user_write_request',
-                  parentId: 32
+                  parentId: 31
               },
+              {
+                id: 34,
+                label: 'MENUITEMS.ADMIN_USERS.TEXT',
+                link: '/admin_users',
+                parentId: 31
+            },
           ]
       },
       {
           id: 35,
-          label: 'MENUITEMS.ADMIN_USERS.TEXT',
-          icon: 'mdi mdi-account-cog',
-          link: '/admin_users'
-      },
-      {
-          id: 19,
           label: 'MENUITEMS.SIGNUPFORM.TEXT',
           icon: 'ri-eraser-fill',
           subItems: [
               {
-                  id: 20,
+                  id: 36,
                   label: 'MENUITEMS.INVESTORS_FORM.TEXT',
                   link: '/investor_form',
-                  parentId: 19
+                  parentId: 35
               },
               {
-                  id: 21,
+                  id: 37,
                   label: 'MENUITEMS.CREATORS_FORM.TEXT',
                   link: '/creator_form',
-                  parentId: 19
+                  parentId: 35
               },
           ]
       },
       {
-          id: 27,
+          id: 38,
           label: 'MENUITEMS.SPECIAL_REQUESTS.TEXT',
           icon: ' ri-external-link-fill',
           link: '/special_requests'
       },
       {
-          id: 43,
+          id: 39,
           label: 'MENUITEMS.REPORTS.TEXT',
           icon: ' ri-file-list-3-fill',
           link: '/reports'
       },
       {
-          id: 38,
+          id: 40,
           label: 'MENUITEMS.TEMPLATES.TEXT',
           icon: ' ri-layout-3-line',
           link: '/template'
       },
       {
-          id: 28,
+          id: 41,
           label: 'MENUITEMS.SUBSCRIBERS.TEXT',
           icon: ' ri-user-shared-fill',
           link: '/subscribers'
       },
       {
-          id: 36,
+          id: 42,
           label: 'MENUITEMS.INVOICE_BILL.TEXT',
           icon: 'fas fa-file-invoice',
           link: '/bill_list'
       },
       {
-          id: 39,
+          id: 43,
           label: 'MENUITEMS.SMSCAMPAIGN.TEXT',
           icon: ' ri-message-2-line',
           link: '/sms_campaign'
       },
       {
-          id: 45,
+          id: 44,
           label: 'MENUITEMS.TRANSLATION.TEXT',
           icon: 'fas fa-language',
           link: '/translation'
       },
       {
-          id: 31,
+          id: 45,
           label: 'MENUITEMS.NOTIFICATIONS.TEXT',
           icon: 'ri-notification-4-line',
           link: '/notifications'

@@ -39,26 +39,131 @@ export class DashboardComponent implements OnInit {
   noOfSpecialRequest: any;
   newslettersCount: any;
   pledgeCount: any;
-  totVistors:any;
+  totVistors: any;
   yearsList = [];
-  monthList = []
+  monthList = [];
   params = {
-    monthQuery: "" ,
-    yearQuery: ""
-  }
+    monthQuery: "",
+    yearQuery: "",
+  };
+  delayProject = [];
+  delayProjtotal: any;
+  highlyActiveInvestor = [];
+  highlyActiveCreator = [];
+  CreatorReduce = [];
+  InvestorReduce = [];
+  creatorCou = 5;
+  investorCou = 5;
 
   ngOnInit(): void {
     this.breadCrumbItems = [
       { label: "Fikra" },
       { label: "Dashboard", active: true },
     ];
-    this.yearsList = ['2020', '2021', '2022', '2023', '2024', '2025'];
-    this.monthList = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",];
+    this.delayedProject();
+    this.yearsList = ["2020", "2021", "2022", "2023", "2024", "2025"];
+    this.monthList = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
     this.countData();
     this.projectsMonth();
 
-    const data = 'today'
-    this.dayWiseVisitors(data)
+    const data = "today";
+    this.dayWiseVisitors(data);
+    const extraParams = {};
+    this.getHighlyActive(extraParams);
+  }
+
+  paginate(array, page_size, page_number) {
+    return array.slice((page_number - 1) * page_size, page_number * page_size);
+  }
+
+  paginationNext(data) {
+    if (data === "creator") {
+      this.creatorCou += 5;
+      this.CreatorReduce = this.paginate(
+        this.highlyActiveCreator,
+        this.creatorCou,
+        1
+      );
+    } else {
+      this.investorCou += 5;
+      this.InvestorReduce = this.paginate(
+        this.highlyActiveInvestor,
+        this.investorCou,
+        1
+      );
+    }
+  }
+
+  paginationLess(data) {
+    if (data === "creator") {
+      this.creatorCou = 5;
+      this.CreatorReduce = this.paginate(
+        this.highlyActiveCreator,
+        this.creatorCou,
+        1
+      );
+    } else {
+      this.investorCou = 5;
+      this.InvestorReduce = this.paginate(
+        this.highlyActiveInvestor,
+        this.investorCou,
+        1
+      );
+    }
+  }
+
+  getHighlyActive(extraParams) {
+    let params = {
+      url: "admin/getAdminDashboardContentForHighActive",
+      ...extraParams,
+    };
+    this.apiCall.getHighlyActiveUser(params).subscribe(
+      (result: any) => {
+        let resu = result.body;
+        if (resu.error == false) {
+          this.highlyActiveCreator = resu.data.highlyActiveCreator;
+          this.highlyActiveCreator.map((data) => {
+            data.fullName.length > 10
+              ? (data.fullName = data.fullName.slice(0, 10) + "...")
+              : "";
+          });
+          this.CreatorReduce = this.paginate(
+            this.highlyActiveCreator,
+            this.creatorCou,
+            1
+          );
+          this.highlyActiveInvestor = resu.data.highlyActiveInvestor;
+          this.highlyActiveInvestor.map((data) => {
+            data.fullName.length > 10
+              ? (data.fullName = data.fullName.slice(0, 10) + "...")
+              : "";
+          });
+          this.InvestorReduce = this.paginate(
+            this.highlyActiveInvestor,
+            this.investorCou,
+            1
+          );
+        } else {
+          this.apiCall.showToast(resu.message, "Error", "errorToastr");
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   countData() {
@@ -73,7 +178,7 @@ export class DashboardComponent implements OnInit {
           this.investorCount = resu.data.investorCount;
           this.projectCount = resu.data.projectCount;
           this.successProjCount = resu.data.successProjectCount;
-          this.unSuccessProjectCount= resu.data.unSuccessProjectCount;
+          this.unSuccessProjectCount = resu.data.unSuccessProjectCount;
           this.noOfSpecialRequest = resu.data.noOfSpecialRequest;
           this.newslettersCount = resu.data.newslettersCount;
           this.pledgeCount = resu.data.pledgesCount;
@@ -101,7 +206,7 @@ export class DashboardComponent implements OnInit {
             },
             colors: ["#FF594E", "#1cbb8c"],
           };
-          
+
           this.projectsChart = {
             chart: {
               height: 350,
@@ -130,7 +235,7 @@ export class DashboardComponent implements OnInit {
               {
                 name: "Total all or nothing",
                 data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-              }
+              },
             ],
             xaxis: {
               categories: [
@@ -181,15 +286,15 @@ export class DashboardComponent implements OnInit {
     let allOr = {
       name: "Total all or nothing",
       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    }
+    };
     let keepIt = {
       name: "Total keep it all",
       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    }
+    };
     let total = {
       name: "Total amount recived",
       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    }
+    };
 
     let params = {
       url: "admin/getFikraFinancialReport",
@@ -200,37 +305,33 @@ export class DashboardComponent implements OnInit {
       async (result: any) => {
         let resu = result.body;
         if (resu.error == false) {
-          await months.reduce(
-            async (promise, element, index) => {
-          //     {
-          //       "year": "2021",
-          //       "month": "Sep",
-          //       "totalKeepitAll": 0,
-          //       "totalAllorNothing": 100,
-          //       "totalAmount": 1300,
-          //       "totalVat": 100,
-          //       "totalProcessingFee": 100
-          //   },
-          //   {
-          //     "year": "2021",
-          //     "month": "Feb",
-          //     "totalKeepitAll": 50,
-          //     "totalAllorNothing": 0,
-          //     "totalAmount": 1300,
-          //     "totalVat": 100,
-          //     "totalProcessingFee": 100
-          // },
-              let data = resu.data.find(data => data.month == element)
-              console.log(data)
-              if(data != undefined){
-                allOr.data[index] = data.totalAllorNothing;
-                keepIt.data[index] = data.totalKeepitAll;
-                total.data[index] = data.totalAmount;
-              }
-              await promise;
-            },Promise.resolve()
-          )
-          console.log(keepIt)
+          await months.reduce(async (promise, element, index) => {
+            //     {
+            //       "year": "2021",
+            //       "month": "Sep",
+            //       "totalKeepitAll": 0,
+            //       "totalAllorNothing": 100,
+            //       "totalAmount": 1300,
+            //       "totalVat": 100,
+            //       "totalProcessingFee": 100
+            //   },
+            //   {
+            //     "year": "2021",
+            //     "month": "Feb",
+            //     "totalKeepitAll": 50,
+            //     "totalAllorNothing": 0,
+            //     "totalAmount": 1300,
+            //     "totalVat": 100,
+            //     "totalProcessingFee": 100
+            // },
+            let data = resu.data.find((data) => data.month == element);
+            if (data != undefined) {
+              allOr.data[index] = data.totalAllorNothing;
+              keepIt.data[index] = data.totalKeepitAll;
+              total.data[index] = data.totalAmount;
+            }
+            await promise;
+          }, Promise.resolve());
           this.projectsChart = {
             chart: {
               height: 350,
@@ -254,10 +355,8 @@ export class DashboardComponent implements OnInit {
               width: 2,
               colors: ["transparent"],
             },
-            colors: ["#5664d2", "#505d69", '#db3700'],
-            series: [
-              allOr, keepIt, total
-            ],
+            colors: ["#5664d2", "#505d69", "#db3700"],
+            series: [allOr, keepIt, total],
             xaxis: {
               categories: [
                 "Jan",
@@ -301,26 +400,25 @@ export class DashboardComponent implements OnInit {
         console.error(error);
       }
     );
-
   }
 
   async projectsMonthWithExpra(extraParams) {
     let allOr = {
       name: "Total all or nothing",
       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    }
+    };
     let keepIt = {
       name: "Total keep it all",
       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    }
+    };
     let total = {
       name: "Total amount recived",
       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    }
+    };
 
     let params = {
       url: "admin/getFikraFinancialReport",
-      ...extraParams
+      ...extraParams,
     };
     let months = this.monthList;
 
@@ -328,18 +426,16 @@ export class DashboardComponent implements OnInit {
       async (result: any) => {
         let resu = result.body;
         if (resu.error == false) {
-          await months.reduce(
-            async (promise, element, index) => {
-              let data = resu.data.find(data => data.month == element)
-              console.log(data)
-              if(data != undefined){
-                allOr.data[index] = data.totalAllorNothing;
-                keepIt.data[index] = data.totalKeepitAll;
-                total.data[index] = data.totalAmount;
-              }
-              await promise;
-            },Promise.resolve()
-          )
+          await months.reduce(async (promise, element, index) => {
+            let data = resu.data.find((data) => data.month == element);
+            console.log(data);
+            if (data != undefined) {
+              allOr.data[index] = data.totalAllorNothing;
+              keepIt.data[index] = data.totalKeepitAll;
+              total.data[index] = data.totalAmount;
+            }
+            await promise;
+          }, Promise.resolve());
           this.projectsChart = {
             chart: {
               height: 350,
@@ -363,10 +459,8 @@ export class DashboardComponent implements OnInit {
               width: 2,
               colors: ["transparent"],
             },
-            colors: ["#5664d2", "#505d69", '#db3700'],
-            series: [
-              allOr, keepIt, total
-            ],
+            colors: ["#5664d2", "#505d69", "#db3700"],
+            series: [allOr, keepIt, total],
             xaxis: {
               categories: [
                 "Jan",
@@ -410,47 +504,74 @@ export class DashboardComponent implements OnInit {
         console.error(error);
       }
     );
-
   }
 
-  VisitClick(val){
-    this.dayWiseVisitors(val)
+  VisitClick(val) {
+    this.dayWiseVisitors(val);
   }
 
-  dayWiseVisitors(data){
+  dayWiseVisitors(data) {
     let params = {
       url: "admin/getTodayDayVisitors",
-      query : data
-    }  
-console.log("parms",params)
-    this.apiCall.visitorGetService(params).subscribe((result:any)=>{
-      let resu = result.body;
-      if(resu.error == false)
-      {
-        this.totVistors = resu.data.totalsForAllResults['ga:sessions'];
-      }else{
-        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      query: data,
+    };
+    this.apiCall.visitorGetService(params).subscribe(
+      (result: any) => {
+        let resu = result.body;
+        if (resu.error == false) {
+          this.totVistors = resu.data.totalsForAllResults["ga:sessions"];
+        } else {
+          this.apiCall.showToast(resu.message, "Error", "errorToastr");
+        }
+      },
+      (error) => {
+        console.error(error);
       }
-    },(error)=>{
-       console.error(error);
-       
-    });
+    );
   }
 
-  statusChange(val){
-    this.params.monthQuery = val
-    this.projectsMonthWithExpra(this.params)
-  } 
+  statusChangeActive(val) {
+    this.params.monthQuery = val;
+    this.getHighlyActive(this.params);
+  }
 
-  statusYear(val){
-    this.params.yearQuery = val
-    this.projectsMonthWithExpra(this.params)
-  } 
+  statusYearActive(val) {
+    this.params.yearQuery = val;
+    this.getHighlyActive(this.params);
+  }
 
-  statusChangePri(val){
-  } 
+  statusChange(val) {
+    this.params.monthQuery = val;
+    this.projectsMonthWithExpra(this.params);
+  }
 
-  statusYearPri(val){
-  } 
+  statusYear(val) {
+    this.params.yearQuery = val;
+    this.projectsMonthWithExpra(this.params);
+  }
 
+  statusChangePri(val) {}
+
+  statusYearPri(val) {}
+
+  delayedProject() {
+    let params = {
+      url: "admin/getSesstionAdmin",
+    };
+    this.apiCall.commonGetService(params).subscribe(
+      (result: any) => {
+        let resu = result.body;
+        if (resu.error == false) {
+          this.delayProject = resu.delayedProject;
+          this.delayProjtotal = this.delayProject.length;
+          // console.log("data", this.delayProjtotal)
+        } else {
+          this.apiCall.showToast(resu.message, "Error", "errorToastr");
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 }

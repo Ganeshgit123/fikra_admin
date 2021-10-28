@@ -16,7 +16,15 @@
                      class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
                      <thead>
                         <tr>
-                           <!-- <th>Select</th> -->
+                           <th *ngIf="majorWrite === true">
+                              <div class="selectAll" (click)='onSelectAll()'>
+                                <span *ngIf='isAllSelect && projSelectId.length !== 0; else templateName'><u>Deselect
+                                    All</u></span>
+                              </div>
+                              <ng-template #templateName>
+                                <u>Select All</u>
+                              </ng-template>
+                            </th>
                            <th>Project Title</th>
                            <th>Category</th>
                            <th>Launch Date</th>
@@ -32,9 +40,10 @@
                      </thead>
                      <tbody>
                         <tr *ngFor="let proj of projectList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
-                           <!-- <td>
-   <p class="text-center"><input  type="checkbox" value="" >
-</td> -->
+                           <td *ngIf="majorWrite === true">
+                              <input type="checkbox" [checked]='projSelectId.indexOf(proj._id) !== -1'
+                                (change)="onInputChange(proj._id)" />
+                            </td>
                            <td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
                            <td>{{proj.basicInfoId.categoryName}}</td>
                            <td>{{proj.basicInfoId.launchDate | date}}</td>

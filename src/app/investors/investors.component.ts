@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 
 import { ApiCallService } from '../services/api-call.service';
-
+import { AngularCsv } from 'angular7-csv/dist/Angular-csv'
 
 @Component({
   selector: 'app-investors',
@@ -19,6 +19,7 @@ export class InvestorsComponent implements OnInit {
  page = 1;
  total: any;
  searchTerm;
+ investorcsvOptions: any;
 
  accToken = sessionStorage.getItem('access_token');
 
@@ -51,7 +52,7 @@ export class InvestorsComponent implements OnInit {
     {
       this.getfieldList = resu.fields;
       this.getuserList = resu.data;
-      
+      // console.log("dd",this.getuserList)
       this.total = this.getuserList.length
     }else{
       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -64,4 +65,50 @@ export class InvestorsComponent implements OnInit {
 
  }
 
+ exportList(){
+  let params = {
+    url: "admin/getInvestorList",
+  }  
+  this.apiCall.userGetService(params).subscribe((result:any)=>{
+    let resu = result.body;
+    if(resu.error == false)
+    {
+      this.getuserList = resu.data;
+      if(resu.data.length > 0){
+        this.exportInvestorMailData(resu.data)
+      }
+    }else{
+      this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+    }
+  },(error)=>{
+     console.error(error);
+     
+  });
+ }
+
+ exportInvestorMailData(data){
+  if(data.length > 0){
+    var bulkArray = []
+    data.forEach(element => {
+      var obj = {}
+      obj['Email Id'] = element.email
+
+      bulkArray.push(obj)
+    })
+
+    this.investorcsvOptions = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: true,
+      title: 'Investors Email Id',
+      useBom: true,
+      noDownload: false,
+      headers: ["Email Id"]
+    };
+    new  AngularCsv(bulkArray, "Investors Email Id", this.investorcsvOptions);
+
+  }
+}
 }

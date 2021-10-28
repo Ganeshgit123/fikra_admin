@@ -43,7 +43,9 @@ export class BannerComponent implements OnInit {
       buttonName: [''],
       buttonName_ar: [''],
       buttonURL: [''],
-      blogURL: [''],
+      blogURL1: [''],
+      blogURL2: [''],
+      blogURL3: [''],
     });
 
     this.addBannerImg = this.formBuilder.group({
@@ -73,7 +75,7 @@ export class BannerComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
-
+       console.log("fef",resu.data)
         this.bannerLeftCont = this.formBuilder.group({
           bannerLeftContents: [resu.data.bannerLeftContents,[]],
           bannerLeftContents_ar: [resu.data.bannerLeftContents_ar,[]],
@@ -82,7 +84,9 @@ export class BannerComponent implements OnInit {
           buttonName: [resu.data.buttonName,[]],
           buttonName_ar: [resu.data.buttonName_ar,[]],
           buttonURL: [resu.data.buttonURL,[]],
-          blogURL: [resu.data.blogURL,[]],
+          blogURL1: [resu.data.blogURL1,[]],
+          blogURL2: [resu.data.blogURL2,[]],
+          blogURL3: [resu.data.blogURL3,[]],
         });
 
         this.bannerImage = resu.data.bannerImage;

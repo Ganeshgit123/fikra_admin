@@ -25,8 +25,10 @@
         <th>Display Name</th>
         <th>Email Id</th>
         <th>Mobile Number</th>
+        <th>Bank Name</th>
         <th>Bank A/C Number</th>
         <th>IBAN No.</th>
+        <th>Bank Certificate</th>
         <th>Status</th>
     </tr>
     </thead>
@@ -36,8 +38,10 @@
         <td>{{user.userName}}</td>
         <td>{{user.email}}</td>
         <td>{{user.mobileNumber}}</td>
+        <td>{{user.bankName}}</td>
         <td>{{user.accountNumber}}</td>
         <td>{{user.iban}}</td>
+        <td><a href="{{user.certificateUpload}}">{{user.certificateUpload}}</a></td>
         <td>
             <label class="switch" *ngIf="requestWrite == true">
                 <input *ngIf="user._is_On_Creative_In_ == true" type="checkbox" checked
@@ -58,7 +62,7 @@
         </td>
     </tr>
     <tr *ngIf="(getVerifyBankList==null) || (getVerifyBankList.length == 0)">
-        <td class="text-center" colspan="7">
+        <td class="text-center" colspan="9">
            No Data Found
         </td>
     </tr>
@@ -94,8 +98,10 @@
         <th>Display Name</th>
         <th>Email Id</th>
         <th>Mobile Number</th>
+        <th>Bank Name</th>
         <th>Bank A/C Number</th>
         <th>IBAN No.</th>
+        <th>Bank Certificate</th>
         <th>Status</th>
     </tr>
     </thead>
@@ -105,8 +111,10 @@
         <td>{{user.userName}}</td>
         <td>{{user.email}}</td>
         <td>{{user.mobileNumber}}</td>
+        <td>{{user.bankName}}</td>
         <td>{{user.accountNumber}}</td>
         <td>{{user.iban}}</td>
+        <td><a href="{{user.certificateUpload}}">{{user.certificateUpload}}</a></td>
         <td>
             <label class="switch" *ngIf="requestWrite == true">
                 <input *ngIf="user._is_On_Creative_In_ == true" type="checkbox" checked
@@ -127,7 +135,7 @@
         </td>
     </tr>
     <tr *ngIf="(getRequestList==null) || (getRequestList.length == 0)">
-        <td class="text-center" colspan="7">
+        <td class="text-center" colspan="9">
            No Data Found
         </td>
     </tr>

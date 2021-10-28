@@ -6,18 +6,6 @@
 <div class="card">
 <div class="card-body">
 <div class="row mb-md-2">
-<!-- <div class="col-sm-12 col-md-2">
-<div class="dataTables_length" id="tickets-table_length"><label
-class="d-inline-flex align-items-center">Show
-<select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
-[(ngModel)]="pageSize"
-class="custom-select custom-select-sm form-control form-control-sm mx-2">
-<option [ngValue]="10">10</option>
-<option [ngValue]="25">25</option>
-<option [ngValue]="50">50</option>
-<option [ngValue]="100">100</option>
-</select> entries</label></div>
-</div> -->
 <div class="col-sm-12 col-md-6">
     <!-- <div class="form-group row">
         <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
@@ -36,6 +24,10 @@ class="custom-select custom-select-sm form-control form-control-sm mx-2">
 class="d-inline-flex align-items-center">Search:
 <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
 aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+</div>
+<div class="col-sm-12 col-md-2">
+ <p class="text-right"> <button type="button" class="btn btn-primary w-md waves-effect waves-light"
+  (click)="exportList();">Download Email Id's</button></p>
 </div>
 <!-- End search -->
 <!-- Table -->

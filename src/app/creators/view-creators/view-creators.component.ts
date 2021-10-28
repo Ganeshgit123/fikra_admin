@@ -44,7 +44,7 @@ export class ViewCreatorsComponent implements OnInit {
           }
           
           this.pasDel = removeItinerary('password')
-
+          console.log("pas",this.pasDel)
         } else {
           this.apiCall.showToast(resu.message, "Error", "errorToastr");
         }

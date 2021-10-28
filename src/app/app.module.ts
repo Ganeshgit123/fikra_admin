@@ -16,7 +16,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import {
   NgbNavModule, NgbDropdownModule, NgbTooltipModule, NgbPaginationModule, NgbTypeaheadModule,
-  NgbDatepickerModule, NgbCollapseModule, NgbAccordionModule
+  NgbDatepickerModule, NgbCollapseModule, NgbAccordionModule,NgbAlertModule
 } from '@ng-bootstrap/ng-bootstrap';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -179,6 +179,7 @@ export function createTranslateLoader(http: HttpClient): any {
     WidgetModule,
     NgxSpinnerModule,
     NgbAccordionModule,
+    NgbAlertModule,
     NgbCollapseModule,
     ToastrModule.forRoot(),
     TranslateModule.forRoot({

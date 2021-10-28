@@ -1,6 +1,16 @@
 <div class="container-fluid">
     <app-pagetitle title="Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
-
+    <div class="row" *ngIf="delayProjtotal !== 0">
+        <div class="col-md-6">
+            <div *ngFor="let proj of delayProject">
+                <h6>Pending Project Reviews</h6>
+                <ngb-alert [dismissible]="false" type="secondary">
+                    Project Title : <a routerLink="/projects/">{{proj.title}}</a>&nbsp;&nbsp;
+                    <span>Created Date : {{proj.createdAt | date}}</span>
+                </ngb-alert>
+            </div>
+        </div>
+    </div>
     <br>
     <br>
     <div class="row">
@@ -23,7 +33,7 @@
             </ng-select>
         </div>
     </div>
-    
+
     <br>
     <div class="row">
         <div class="col-xl-8">
@@ -155,9 +165,11 @@
                     </div> -->
                     <h4 class="card-title mb-4">Users Count</h4>
 
-                    <apx-chart class="apex-charts" [series]="usersData ? usersData.series : []" [chart]="usersData ? usersData.chart : []"
-                        [legend]="usersData ? usersData.legend : []" [colors]="usersData ? usersData.colors : []" [labels]="usersData ? usersData.labels : []"
-                        [dataLabels]="usersData ? usersData.dataLabels : []" [plotOptions]="usersData ? usersData.plotOptions : []">
+                    <apx-chart class="apex-charts" [series]="usersData ? usersData.series : []"
+                        [chart]="usersData ? usersData.chart : []" [legend]="usersData ? usersData.legend : []"
+                        [colors]="usersData ? usersData.colors : []" [labels]="usersData ? usersData.labels : []"
+                        [dataLabels]="usersData ? usersData.dataLabels : []"
+                        [plotOptions]="usersData ? usersData.plotOptions : []">
                     </apx-chart>
                     <div class="row">
                         <div class="col-6">
@@ -215,10 +227,16 @@
                     <h4 class="card-title mb-4">Projects</h4>
                     <div>
                         <apx-chart class="apex-charts" [series]="projectsChart? projectsChart.series : []"
-                            [chart]="projectsChart ? projectsChart.chart : []" [plotOptions]="projectsChart ? projectsChart.plotOptions : []"
-                            [yaxis]="projectsChart ? projectsChart.yaxis : []" [grid]="projectsChart ? projectsChart.grid : []" [tooltip]="projectsChart ? projectsChart.tooltip : []"
-                            [stroke]="projectsChart ? projectsChart.stroke : []" [dataLabels]="projectsChart ? projectsChart.dataLabels : []"
-                            [xaxis]="projectsChart ? projectsChart.xaxis : []" [colors]="projectsChart ? projectsChart.colors : []" [fill]="projectsChart ? projectsChart.fill : []">
+                            [chart]="projectsChart ? projectsChart.chart : []"
+                            [plotOptions]="projectsChart ? projectsChart.plotOptions : []"
+                            [yaxis]="projectsChart ? projectsChart.yaxis : []"
+                            [grid]="projectsChart ? projectsChart.grid : []"
+                            [tooltip]="projectsChart ? projectsChart.tooltip : []"
+                            [stroke]="projectsChart ? projectsChart.stroke : []"
+                            [dataLabels]="projectsChart ? projectsChart.dataLabels : []"
+                            [xaxis]="projectsChart ? projectsChart.xaxis : []"
+                            [colors]="projectsChart ? projectsChart.colors : []"
+                            [fill]="projectsChart ? projectsChart.fill : []">
                         </apx-chart>
                     </div>
                 </div>
@@ -226,6 +244,121 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <!-- Highly Active Creator -->
+    <div class="row">
+        <div class="col-xl-8">
+            <label>Highly Active</label>
+        </div>
+        <div class="col-xl-2">
+            <ng-select (change)='statusChangeActive($event)' placeholder="Month">
+                <ng-option *ngFor="let month of monthList" [value]="month">
+                    {{month}}
+                </ng-option>
+            </ng-select>
+        </div>
+        <div class="col-xl-2">
+            <ng-select (change)='statusYearActive($event)' placeholder="Year">
+                <ng-option *ngFor="let years of yearsList" [value]="years">
+                    {{years}}
+                </ng-option>
+            </ng-select>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Creator - ({{highlyActiveCreator.length || 0}})</h4>
+                            <table id="basic-datatable"
+                                class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
+                                <thead>
+                                    <tr>
+                                        <th>Creator Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let creators of CreatorReduce">
+                                        <td><a routerLink="/view-creators/{{ creators._id}}">{{creators.fullName}}</a>
+                                        </td>
+                                        <td>{{creators.email.slice(0, 10)}}...</td>
+                                        <td>{{creators.phoneNumber || creators.mobileNumber}}</td>
+                                    </tr>
+                                    <tr *ngIf="(CreatorReduce==null) || (CreatorReduce.length == 0)">
+                                        <td class="text-center" colspan="11">
+                                            No Data Found
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="col-xl-12" style="text-align: center;"
+                                *ngIf='CreatorReduce.length != highlyActiveCreator.length'>
+                                <button type="button" class="btn btn-sm btn-light"
+                                    (click)="paginationNext('creator')">Load More</button>
+                            </div>
+                            <div class="col-xl-12" style="text-align: center;"
+                                *ngIf='CreatorReduce.length == highlyActiveCreator.length'>
+                                <button type="button" class="btn btn-sm btn-light"
+                                    (click)="paginationLess('creator')">Show Less</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Investor - ({{highlyActiveInvestor.length || 0}})</h4>
+                            <table id="basic-datatable"
+                                class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
+                                <thead>
+                                    <tr>
+                                        <th>Creator Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let Investor of InvestorReduce">
+                                        <td><a routerLink="/view-investors/{{ Investor._id}}">{{Investor.fullName}}</a>
+                                        </td>
+                                        <td>{{Investor.email.slice(0, 10)}}...</td>
+                                        <td>{{Investor.phoneNumber || Investor.mobileNumber}}</td>
+                                    </tr>
+                                    <tr *ngIf="(InvestorReduce==null) || (InvestorReduce.length == 0)">
+                                        <td class="text-center" colspan="11">
+                                            No Data Found
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="col-xl-12" style="text-align: center;"
+                                *ngIf='InvestorReduce.length != highlyActiveInvestor.length'>
+                                <button type="button" class="btn btn-sm btn-light"
+                                    (click)="paginationNext('investor')">Load More</button>
+                            </div>
+                            <div class="col-xl-12" style="text-align: center;"
+                                *ngIf='InvestorReduce.length == highlyActiveInvestor.length'>
+                                <button type="button" class="btn btn-sm btn-light"
+                                    (click)="paginationLess('investor')">Show Less</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- end row -->
 
     <!-- end row -->
