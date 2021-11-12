@@ -69,10 +69,6 @@
                             <div class="col">
                                 <h6 class="m-0">{{ 'HEADER.NOTIFICATIONS.TITLE' | translate}} </h6>
                             </div>
-                            <div class="col-auto">
-                                <a routerLink="/notifications" class="small">{{ 'HEADER.NOTIFICATIONS.VIEW_ALL' |
-                                    translate}}</a>
-                            </div>
                         </div>
                     </div>
                     <perfect-scrollbar style="position: relative; height: 230px;">
@@ -84,10 +80,9 @@
                                     </span>
                                 </div>
                                 <div class="media-body">
-                                    <h6 class="mt-0 mb-1">{{item.notiSub}}</h6>
+                                    <h6 class="mt-0 mb-1"><a href="#{{item?.redirectURL}}"> {{item.notiSub}}</a></h6>
                                     <div class="font-size-12 text-muted">
-                                        <p class="mb-1">{{item.notiContent}} <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteNotification(item._id)"><i
-                                            class="mdi mdi-trash-can font-size-14" style="float: right;"></i></a></p>
+                                        <p class="mb-1">{{item.notiContent}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -98,10 +93,9 @@
                                     </span>
                                 </div>
                                 <div class="media-body">
-                                    <h6 class="mt-0 mb-1">{{item.notiSub}}</h6>
+                                    <h6 class="mt-0 mb-1"><a href="#{{item?.redirectURL}}"> {{item.notiSub}}</a></h6>
                                     <div class="font-size-12 text-muted">
-                                        <p class="mb-1">{{item.notiContent}} <a class="text-danger text-info" ngbTooltip="Delete" (click)=" (item._id)"><i
-                                            class="mdi mdi-trash-can font-size-14" style="float: right;"></i></a></p>
+                                        <p class="mb-1">{{item.notiContent}}</p>
                                         
                                     </div>
                                 </div>

@@ -296,12 +296,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
                   link: '/country_city',
                   parentId: 25
               },
-              {
-                  id: 29,
-                  label: 'MENUITEMS.TAGGS.TEXT',
-                  link: '/tags',
-                  parentId: 25
-              },
+              // {
+              //     id: 29,
+              //     label: 'MENUITEMS.TAGGS.TEXT',
+              //     link: '/tags',
+              //     parentId: 25
+              // },
               {
                   id: 30,
                   label: 'MENUITEMS.SPECIAL_SERVICES.TEXT',

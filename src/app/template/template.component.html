@@ -6,7 +6,7 @@
             Add New Template
         </button>
         <button class="btn btn-primary mo-mb-2 ml-1" *ngIf='!isCollapsed' data-toggle="collapse"
-            (click)="isCollapsed = !isCollapsed">
+            (click)="onClosed()">
             Close
         </button>
     </p>
@@ -140,7 +140,7 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <button class="btn btn-primary w-md waves-effect waves-light"
-                                            (click)="addTemplate()">Save the Template</button>
+                                            (click)="addTemplate()">{{ editStatus ? 'Update Template' : 'Save the Template'}}</button>
 
                                     </div>
                                     <div class="col-md-4">
@@ -477,9 +477,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
-                        class="d-inline-flex align-items-center">Search:
-                        <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
-                        aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                            class="d-inline-flex align-items-center">Search:
+                            <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+                                aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
                 </div>
             </div>
             <!-- Table -->
@@ -498,7 +498,8 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let user of templateDetails | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
+                    <tbody
+                        *ngFor="let user of templateDetails | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
                         <tr *ngFor="let cont of user.content">
                             <td>{{user.templateName}}</td>
                             <td>{{cont.textHead}}</td>
@@ -508,28 +509,30 @@
                             <td>{{cont.project_Three.title}}</td>
                             <td>{{cont.learnMore_URL}}</td>
                             <td>
-
-                                <!-- <a routerLink="/edit_template/{{ user._id}}" class="mr-3 text-info" ngbTooltip="Edit" (click)="clickTempData(user)"><i
-                                                class="mdi mdi-pencil font-size-18"></i></a>  
-                                            <a class="text-danger text-info" ngbTooltip="Delete"><i
-                                                    class="mdi mdi-trash-can font-size-18"></i></a> -->
+                                <a class="mr-3 text-info" ngbTooltip="Edit" 
+                                (click)="clickTempData(user)">
+                                    <i class="mdi mdi-pencil font-size-18"></i>
+                                </a>
+                                <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleted(user)">
+                                    <i class="mdi mdi-trash-can font-size-18"></i>
+                                </a>
                             </td>
                         </tr>
                         <tr *ngIf="(templateDetails==null) || (templateDetails.length == 0)">
                             <td class="text-center" colspan="8">
-                               No Data Found
+                                No Data Found
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <!-- Pagination -->
-    <div class="col-sm-12 col-md-12">
-        <div class="text-md-right float-md-right pagination-rounded">
-            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
-            </ngb-pagination>
-        </div>
-    </div>
-    <!-- End Pagination -->
+                <div class="col-sm-12 col-md-12">
+                    <div class="text-md-right float-md-right pagination-rounded">
+                        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+                        </ngb-pagination>
+                    </div>
+                </div>
+                <!-- End Pagination -->
             </div>
         </div>
     </div>

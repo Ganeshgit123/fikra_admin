@@ -13,8 +13,12 @@ export class SmsCampaignComponent implements OnInit {
   updatedby:any;
   role:any;
   addUsers:FormGroup;
+  groupUsers:FormGroup;
   getuserList = [];
+  queryContainer = false;
   showAccept = true;
+  selectValue: string[];
+  manShow = false;
 
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
@@ -29,8 +33,16 @@ export class SmsCampaignComponent implements OnInit {
       mobileNumbers: [''],
       message: [''],
     });
+  
+    this.groupUsers = this.formBuilder.group({
+      manualNumbersArray: [''],
+      message: [''],
+      querys: [],
+    });
+
     this._fetchData();
     this.callRolePermission();
+    this.selectValue = ['_creator_', '_investor_','_admin_users_','_manual_'];
   }
 
   callRolePermission(){
@@ -97,4 +109,21 @@ export class SmsCampaignComponent implements OnInit {
     )
   }
 
+  // sllVal(val){
+  //   console.log("v",val)
+  //  if(val === 'manu_arr')
+  //      this.manShow = true;
+  //      console.log("ganesh")
+  // }
+
+  someChange(val){
+    if(val.find(data => data == '_manual_') != undefined){
+      this.queryContainer = true
+    }else{
+      this.queryContainer = false
+    }
+  }
+  addGroupSubmit(){
+
+  }
 }

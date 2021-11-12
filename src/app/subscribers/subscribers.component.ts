@@ -65,7 +65,7 @@ export class SubscribersComponent implements OnInit {
 
   changeTemplate(element){
     this.DataTemplete = this.templateDetails.find(ele => ele._id == element);
-    console.log(this.DataTemplete)
+    console.log("dd",this.DataTemplete)
   }
 
   fetchTemplateData() {
@@ -147,31 +147,31 @@ export class SubscribersComponent implements OnInit {
     this.newsletterData.value['htmlContent']= this.htmlElement
     this.newsletterData.value['emailIds']= this.subscriberId.join(" | ")
 
-    const postData = this.newsletterData.value;
-    postData['createdBy'] = this.updatedby;
-    postData['userType'] = "admin";
-    postData['role'] = this.role;
+    // const postData = this.newsletterData.value;
+    // postData['createdBy'] = this.updatedby;
+    // postData['userType'] = "admin";
+    // postData['role'] = this.role;
 
-    var params = {
-      url: 'admin/sendNewsletterToUser',
-      data: postData
-    }
+    // var params = {
+    //   url: 'admin/sendNewsletterToUser',
+    //   data: postData
+    // }
     
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          this.modalService.dismissAll();
-          this.subscriberId = []
-          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-        } else {
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-        }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
-      } 
-    )
+    // this.apiCall.commonPostService(params).subscribe(
+    //   (response: any) => {
+    //     if (response.body.error == false) {
+    //       this.modalService.dismissAll();
+    //       this.subscriberId = []
+    //       this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+    //     } else {
+    //       this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+    //     }
+    //   },
+    //   (error) => {
+    //     this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+    //     console.log('Error', error)
+    //   } 
+    // )
   }
 
   async onSelectAll(){

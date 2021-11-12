@@ -3,25 +3,29 @@
     <div class="card-body">
     <div class="row">
         <div class="col-md-12">
-            <form [formGroup]="addUsers">
+            <form [formGroup]="groupUsers">
                 <div class="form-group">
-                <label>Add Investors</label>
-                <ng-select [items]="getuserList"
+                <label>Select Users</label>
+                <ng-select [items]="selectValue" (change)="someChange($event)"
                 bindLabel="userName"
                 bindValue="userName"
                 placeholder="Select Users"
                 appendTo="body"
                 multiple="true"
-                formControlName="mobileNumbers"
+                formControlName="querys"
                 >
                 </ng-select> 
+                </div>
+                <div class="form-group" *ngIf = "queryContainer">
+                    <label for="name">Enter Manual Numbers:</label>
+                    <input type="text" class="form-control" formControlName="manualNumbersArray"/>
                 </div>
                 <div class="form-group">
                     <label>SMS Content</label>
                     <textarea class="form-control" formControlName="message"></textarea>
                 </div>
                 <br>
-                <p *ngIf="showAccept === true" class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addUsersSubmit()">Send SMS</button></p>
+                <p *ngIf="showAccept === true" class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addGroupSubmit()">Send SMS</button></p>
                 </form>
         </div>
     </div>

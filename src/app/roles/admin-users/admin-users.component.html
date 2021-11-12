@@ -33,6 +33,21 @@
                                 <input type="password" class="form-control" formControlName="systemAdminPassword">
                             </div>
                             <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="number" class="form-control" formControlName="phoneNumber">
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select class="form-control" formControlName="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input type="text" class="form-control" formControlName="location">
+                            </div>
+                            <div class="form-group">
                                 <label>Admin Role</label>
                                 <select class="form-control" formControlName="systemAdminRoleId">
                                     <option *ngFor="let item of roleData" value="{{item._id}}">{{item.roleName}}</option>
@@ -60,7 +75,11 @@
                         <tr>
                             <th>Name</th>
                             <th>Mail Id</th>
+                            <th>Phone No.</th>
+                            <th>Gender</th>
+                            <th>Location</th>
                             <th>Role Name</th>
+                            <th>Starting Date</th>
                             <th>Time Based Status</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -70,7 +89,11 @@
                         <tr *ngFor="let item of userData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
                             <td>{{item.systemAdminName}}</td>
                             <td>{{item.systemAdminUserName}}</td>
+                            <td>{{item.phoneNumber}}</td>
+                            <td>{{item.gender}}</td>
+                            <td>{{item.location}}</td>
                             <td>{{item.systemAdminRoleId.roleName}}</td>
+                            <td>{{item.createdAt | date}}</td>
                             <td>
                                 <span  *ngIf="item._isTimeBasedWrite_ == true">Yes</span>
                                 <span  *ngIf="item._isTimeBasedWrite_ == false">No</span>

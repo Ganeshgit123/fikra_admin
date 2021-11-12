@@ -37,6 +37,9 @@ export class AdminUsersComponent implements OnInit {
       systemAdminName: [''],
       systemAdminUserName: [''],
       systemAdminPassword: [''],
+      phoneNumber: [''],
+      gender: [''],
+      location: [''],
       systemAdminRoleId: [''],
       _isTimeBasedWrite_:['']
     });
@@ -144,6 +147,9 @@ export class AdminUsersComponent implements OnInit {
       systemAdminUserName: [data['systemAdminUserName']],
       systemAdminPassword: [''],
       systemAdminRoleId: [this.adminRoleId],
+      phoneNumber: [data['phoneNumber']],
+      gender: [data['gender']],
+      location: [data['location']],
       _isTimeBasedWrite_: [data['_isTimeBasedWrite_']],
     });
 

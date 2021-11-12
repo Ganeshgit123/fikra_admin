@@ -41,7 +41,7 @@ export class ChangeRequestUserComponent implements OnInit {
 
         this.reqData = resu.data;
         this.total = this.reqData.length
-      //  console.log("ss",this.reqData)
+       console.log("ss",this.reqData)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

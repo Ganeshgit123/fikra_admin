@@ -49,6 +49,7 @@ export class TemplateComponent implements OnInit {
   showAccept = true;
   page = 1;
   total: any;
+  editStatus = false;
 
   public Editor = DecoupledEditor;
   public onReady( editor ) {
@@ -57,7 +58,6 @@ export class TemplateComponent implements OnInit {
          editor.ui.getEditableElement()
      );
      editor.plugins.get('FileRepository').createUploadAdapter = function (loader) {
-      console.log(btoa(loader.file));
       return new UploadAdapter(loader);
     };
  }
@@ -83,7 +83,6 @@ export class TemplateComponent implements OnInit {
       project_Two_Description: '',
       project_Three: null,
       project_Three_Description: '',
-      // learnMore_URL: '',
     });
 
     this.contentForm = this.formBuilder.group({
@@ -102,7 +101,6 @@ export class TemplateComponent implements OnInit {
     if(sessionStorage.getItem('adminRole') !== 's_a_r'){
       let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
       this.showAccept = contentPermssion[8].write
-      // console.log("prer", contentPermssion[8])
     }
   }
 
@@ -125,7 +123,6 @@ export class TemplateComponent implements OnInit {
     if (this.templateContent.value['textHead'] !== '') {
       this.container.push(this.templateContent.value)
       this.articleContent = this.contentForm.value.blogContent;
-      console.log("fe",this.articleContent)
     } else {
       this.contentForm.value.content = []
       this.apiCall.showToast("Can't process with empty Header", 'Error', 'errorToastr')
@@ -167,9 +164,10 @@ export class TemplateComponent implements OnInit {
       postData['createdBy'] = this.updatedby;
       postData['userType'] = "admin";
       postData['role'] = this.role;
+      postData['templateId'] = this.contentForm.value._id;
 
       var params = {
-        url: 'admin/addTemplateContent',
+        url: this.editStatus ? 'admin/editTemplateContent' : 'admin/addTemplateContent',
         data: postData
       }
       // console.log("data",params)
@@ -211,10 +209,51 @@ export class TemplateComponent implements OnInit {
   }
 
   clickTempData(item){
-    // console.log("item",item)
-    this.templateId = item._id
-    item.isEdit = true
-    this.apiCall.templateValue(item)
-   }
+    this.isCollapsed = !this.isCollapsed 
+    this.container = item.content;
+    this.editStatus = true;
+    this.contentForm = this.formBuilder.group(item);
+  }
 
+  onClosed(){
+    this.editStatus = false;
+    this.container = []
+    this.isCollapsed = !this.isCollapsed;
+    this.contentForm = this.formBuilder.group({
+      templateName: '',
+      blogContent: '',
+    });
+  }
+
+  onDeleted(item){
+
+    let postData = {}
+      postData['createdBy'] = this.updatedby;
+      postData['userType'] = "admin";
+      postData['role'] = this.role;
+      postData['templateId'] = item._id;
+
+    var params = {
+      url: "/admin/deleteTemplate",
+      data: postData
+    }
+
+    console.log("data",params)
+
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.ngOnInit();
+          this.isCollapsed = true;
+        } else {
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      }
+    )
+  }
 }

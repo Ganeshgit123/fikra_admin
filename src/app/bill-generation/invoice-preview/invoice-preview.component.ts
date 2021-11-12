@@ -40,6 +40,7 @@ export class InvoicePreviewComponent implements OnInit {
   processFeeAmt:any;
   vatAmt:any;
   paymentAmt:any;
+  finalDate:any;
   showAccept = true;
 
    constructor(
@@ -86,13 +87,18 @@ export class InvoicePreviewComponent implements OnInit {
          this.userSend = this.billDetails._is_Sended_;
          this.billingId = this.billDetails._id;
 
-         this.dueDays = this.billDetails.dueDate - this.billDetails.invoiceData
+         this.finalDate = this.billDetails.dueDate;
 
 this.billxdate=new Date(this.billDetails.dueDate);
     this.invoicedate=new Date(this.billDetails.invoiceData);
-    var Days = Math.abs(this.invoicedate - this.billxdate);
-    this.dueDays = Math.ceil(Days / (1000 * 60 * 60 * 24));
-    
+    // var Days = Math.abs(this.invoicedate - this.billxdate);
+    // this.dueDays = Math.ceil(Days / (1000 * 60 * 60 * 24));
+    var today = new Date();
+    var Days = Math.abs(this.billxdate - today.getTime());
+    this.dueDays = today >= this.billxdate ? 0 : Math.ceil(Days / (1000 * 60 * 60 * 24))
+
+    var today = new Date();
+    var Days = Math.abs(this.billxdate - today.getTime());
          this.billAddress = resu.address;
         this.billName = this.billAddress.fullName;
         this.addressOne = this.billAddress.Address_one;
@@ -126,7 +132,7 @@ this.billxdate=new Date(this.billDetails.dueDate);
       data: object
     }
 
-    console.log("par",params)
+    // console.log("par",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
         if (response.body.error == false) {

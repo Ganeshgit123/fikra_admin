@@ -25,7 +25,7 @@
                     <tbody>
                         <tr
                             *ngFor="let user of notificationData | filter:searchTerm | slice: (page-1) * 10 : (page-1) * 10 + 10">
-                            <td>{{user.notiSub}}</td>
+                            <td><a href="#{{user.redirectURL ? user.redirectURL : '/notifications'}}">{{user.notiSub}}</a></td>
                             <td>{{user.notiContent}}</td>
                             <td *ngIf="showAccept === true">
                                 <label class="switch">

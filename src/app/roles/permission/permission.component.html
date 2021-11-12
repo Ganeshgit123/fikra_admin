@@ -65,6 +65,8 @@
                             <th>Name Of User</th>
                             <th>Email</th>
                             <th>Time Based User</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
                             <th>From Time</th>
                             <th>To Time</th>
                             <th>Update Time</th>
@@ -78,6 +80,8 @@
                                 <span *ngIf = "item._isTimeBasedWrite_ == true">Yes</span>
                                 <span *ngIf = "item._isTimeBasedWrite_ == false">No</span>
                             </td>
+                            <td>{{item.dateFrom}}</td>
+                            <td>{{item.dateTo}}</td>
                             <td>{{item.timeFrom}}</td>
                             <td>{{item.timeTo}}</td>
                             <td>
@@ -90,6 +94,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <form [formGroup]="changeTime">
+                                            <div class="form-group">
+                                                <label>Start Date</label>
+                                                <input class="form-control" type="date" formControlName="dateFrom">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>End Date</label>
+                                                <input class="form-control" type="date" formControlName="dateTo">
+                                            </div>
                                             <div class="form-group">
                                                 <label>Time From</label>
                                                 <input class="form-control" type="time" formControlName="timeFrom">

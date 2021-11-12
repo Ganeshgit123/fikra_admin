@@ -44,7 +44,7 @@ export class ViewCreatorsComponent implements OnInit {
           }
           
           this.pasDel = removeItinerary('password')
-          console.log("pas",this.pasDel)
+          // console.log("pas",this.pasDel)
         } else {
           this.apiCall.showToast(resu.message, "Error", "errorToastr");
         }
@@ -66,6 +66,7 @@ export class ViewCreatorsComponent implements OnInit {
         let resu = result.body;
         if (resu.error == false) {
           this.getCreatorList = resu.data;
+          // console.log("ff",this.getCreatorList)
         } else {
           this.apiCall.showToast(resu.message, "Error", "errorToastr");
         }

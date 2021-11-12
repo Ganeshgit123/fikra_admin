@@ -38,6 +38,8 @@ export class PermissionComponent implements OnInit {
 
     
     this.changeTime = this.formBuilder.group({
+      dateFrom: [''],
+      dateTo: [''],
       timeFrom: [''],
       timeTo: [''],
     });
@@ -168,6 +170,8 @@ export class PermissionComponent implements OnInit {
 
     this.adminUserId = data['_id']
     this.changeTime   = this.formBuilder.group({
+      dateFrom: [data['dateFrom']],
+      dateTo: [data['dateTo']],
       timeFrom: [data['timeFrom']],
       timeTo: [data['timeTo']],
     })
