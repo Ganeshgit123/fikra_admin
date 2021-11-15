@@ -153,15 +153,20 @@
                         </div>
 
                     </div>
-                </div>
+                </div>  
             </div>
 
 
 
 
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="!invoiceCurId">
                 <p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light"
                         (click)="onSubmit()">Save</button></p>
+            </div>
+
+            <div class="col-md-12" *ngIf="invoiceCurId">
+                <p class="text-center"><button class="btn btn-primary w-md waves-effect waves-light"
+                        (click)="onSubmit()">Edit</button></p>
             </div>
         </form>
     </div>

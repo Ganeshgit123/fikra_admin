@@ -130,6 +130,7 @@ const routes: Routes = [
       {path: 'bill_list',component: BillGenerationComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
       {path: 'invoice_bill/:id',component: InvoicePreviewComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
       {path: 'add_new_bill/:id/:user_id/:project_id',component: AddNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
+      {path: 'add_new_bill/:id/:user_id/:project_id/:invoice_Id',component: AddNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
       {path: 'add_new_bill/:id/:user_id',component: AddNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
       {path: 'edit_new_bill/:id',component: EditNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
 

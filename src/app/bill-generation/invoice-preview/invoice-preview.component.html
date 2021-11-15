@@ -77,12 +77,13 @@
 
         @media print {
             thead>tr {
-            background-color: auto;
-            color: #000;
-        }
-        thead>tr>th{
-            border: 1px solid #7f7f7f;;
-        }
+                background-color: auto;
+                color: #000;
+            }
+
+            thead>tr>th {
+                border: 1px solid #7f7f7f;
+            }
         }
     </style>
 </head>
@@ -230,9 +231,14 @@
                                 <div class="float-right" *ngIf="showAccept === true">
                                     <a href="javascript:window.print()" class="btn btn-dark waves-effect waves-light"><i
                                             class="fa fa-print"></i></a>&nbsp;&nbsp;
-                                      <span *ngIf="userSend == false">    
-                                    <a href="#" class="btn btn-primary waves-effect waves-light" (click)="billSendSubmit(billingId)">Submit</a>
-                                </span>  
+                                    <span *ngIf="userSend == false" style='margin-right: 10px;'> 
+                                        <a class="btn btn-primary waves-effect waves-light"
+                                            style="background-color: white; color: black;" (click)="editBill(billingId)">Edit</a>
+                                    </span>
+                                    <span *ngIf="userSend == false">
+                                        <a class="btn btn-primary waves-effect waves-light"
+                                            (click)="billSendSubmit(billingId)">Send</a>
+                                    </span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

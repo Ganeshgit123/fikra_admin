@@ -4,10 +4,38 @@
          <div class="card card-body">
             <div class="row">
                <div class="col-md-12">
-                   <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                  <div class="col-md-3">
+                     <div *ngIf="currentStatus && majorWrite === true">
+                        <select class="pend_btn" *ngIf="currentStatus === 'pending'"
+                           (change)="onChangeNeedtoUpdate($event.target.value, centerDataModal)">
+                           <option>{{currentStatus}}</option>
+                           <option>approved</option>
+                           <option>under_review</option>
+                           <option>rejected</option>
+                        </select>
+                        <select class="apprve_btn" *ngIf="currentStatus === 'approved'"
+                           (change)="onChangeNeedtoUpdate($event.target.value, centerDataModal)">
+                           <option>{{currentStatus}}</option>
+                           <option>rejected</option>
+                        </select>
+                        <select class="review_btn" *ngIf="currentStatus === 'under_review'"
+                           (change)="onChangeNeedtoUpdate($event.target.value, centerDataModal)">
+                           <option>{{currentStatus}}</option>
+                           <option>approved</option>
+                           <option>rejected</option>
+                        </select>
+                        <select class="reject_btn" *ngIf="currentStatus === 'rejected'"
+                           (change)="onChangeNeedtoUpdate($event.target.value, centerDataModal)">
+                           <option>{{currentStatus}}</option>
+                        </select>
+                     </div>
+                  </div>
+                   <div class="col-md-9" id="tickets-table_filter" class="dataTables_filter text-md-right">
+                      <label
                        class="d-inline-flex align-items-center">Search:
                        <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
-                       aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                       aria-controls="tickets-table" [(ngModel)]="searchTerm"></label>
+                  </div>
                </div>
            </div>
                <!-- Table -->
@@ -22,7 +50,7 @@
                                     All</u></span>
                               </div>
                               <ng-template #templateName>
-                                <u>Select All</u>
+                                <u *ngIf="currentStatus">Select All</u>
                               </ng-template>
                             </th>
                            <th>Project Title</th>
@@ -39,11 +67,11 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr *ngFor="let proj of projectList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
+                        <tr *ngFor="let proj of projectSecondaryList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
                            <td *ngIf="majorWrite === true">
-                              <input type="checkbox" [checked]='projSelectId.indexOf(proj._id) !== -1'
+                              <input type="checkbox" [checked]='((projSelectId !== [] && projSelectId.indexOf(proj._id) !== -1) || false)'
                                 (change)="onInputChange(proj._id)" />
-                            </td>
+                           </td>
                            <td><a routerLink="/view-projects/{{ proj._id}}">{{proj.title}}</a></td>
                            <td>{{proj.basicInfoId.categoryName}}</td>
                            <td>{{proj.basicInfoId.launchDate | date}}</td>
@@ -75,7 +103,7 @@
                                  (change)="onChangeProjRequestWithStatus(proj._id,$event.target.value,centerDataModal)">
                                  <option>{{proj.aproval_Status}}</option>
                               </select>
-                              <span *ngIf="proj.aproval_Status === 'rejected'">
+                              <span *ngIf="proj.aproval_Status === 'rejected' && proj.rejection_comment !== null">
                                  <p style="margin: 10px 0;"><strong>Reject Reason:</strong></p>
                                  <p> {{proj.rejection_comment}}</p>
                               </span>
@@ -104,7 +132,7 @@
                                  (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
                                  <option>{{proj.aproval_Status}}</option>
                               </select>
-                              <span *ngIf="proj.aproval_Status === 'rejected'">
+                              <span *ngIf="proj.aproval_Status === 'rejected'  && proj.rejection_comment !== null ">
                                  <p style="margin: 10px 0;"><strong>Reject Reason:</strong></p>
                                  <p> {{proj.rejection_comment}}</p>
                               </span>
@@ -149,7 +177,7 @@
                                  (click)="deleteProject(proj._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
                            </td>
                         </tr>
-                        <tr *ngIf="(projectList==null) || (projectList.length == 0)">
+                        <tr *ngIf="(projectSecondaryList==null) || (projectSecondaryList.length == 0)">
                            <td class="text-center" colspan="11">
                               No Data Found
                            </td>
