@@ -79,7 +79,6 @@ export class TopbarComponent implements OnInit {
     this.apiCall.commonGetService(params).subscribe((result: any) => {
       let resu = result.body;
       if (resu.error == false) {
-
         this.notificationData = resu.notification;
         // console.log("data", this.notificationData)
 

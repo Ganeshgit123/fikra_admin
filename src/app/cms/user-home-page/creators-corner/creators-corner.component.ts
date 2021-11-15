@@ -178,7 +178,7 @@ export class CreatorsCornerComponent implements OnInit {
 
     creatorEditService(data){
       if(this.fileUpload){
-        console.log("gganesh")
+        // console.log("ganesh")
         var postData = new FormData();
     
         postData.append('imageToStore', this.fileUpload);
@@ -195,47 +195,21 @@ export class CreatorsCornerComponent implements OnInit {
             if (response.body.error == false) {
                   this.imgUrl = response.body.data.Location
                       data['blogImage'] = this.imgUrl;
-                      data['createdBy'] = this.updatedby;
-                      data['userType'] = "admin";
-                      data['role'] = this.role;
-                      data['blogId'] = this.creatorId;
-                    
-                    var params1 = {
-                    url: 'admin/updateCreatorContent',
-                    data: data
-                    }
-                    // console.log("img",params1)
-                    this.apiCall.commonPutService(params1).subscribe(
-                    (response: any) => {
-                    if (response.body.error == false) {
-                    
-                    this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-                    this.modalService.dismissAll();
-                    this.imagePreview = null;
-                    this.ngOnInit();
-                    this.spinner.hide();
-                    this.addCreatorData.reset();
-                    } else {
-                    this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-                    }
-                    },
-                    (error) => {
-                    this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-                    this.spinner.hide();
-                    console.log('Error', error)
-                    } 
-                    )
+              
                 } else {
               // Query Error
               this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+              this.spinner.hide();
             }
           },
           (error) => {
             this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+            this.spinner.hide();
             console.log('Error', error)
           } 
         )
-        }else{
+        }
+
           data['blogImage'] = this.imagePreview;
           data['createdBy'] = this.updatedby;
           data['userType'] = "admin";
@@ -254,9 +228,9 @@ export class CreatorsCornerComponent implements OnInit {
         this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
         this.modalService.dismissAll();
         this.imagePreview = null;
-        this.ngOnInit();
-        this.spinner.hide();
         this.addCreatorData.reset();
+        this.spinner.hide();
+        this.ngOnInit();
         } else {
         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
         }
@@ -267,7 +241,6 @@ export class CreatorsCornerComponent implements OnInit {
         console.log('Error', error)
         } 
         )
-        }
   
       // console.log("lol",this.imgUrl)
      

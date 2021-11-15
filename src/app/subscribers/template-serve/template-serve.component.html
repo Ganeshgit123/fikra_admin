@@ -1,889 +1,909 @@
 <!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <meta content="telephone=no" name="format-detection">
-    <meta content="width=mobile-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" name="viewport">
-    <meta content="IE=9; IE=8; IE=7; IE=EDGE;" http-equiv="X-UA-Compatible">
-    <title>Email Newsletter01</title>
-    <script src="https://kit.fontawesome.com/ef9a692198.js"></script>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="telephone=no" name="format-detection">
+<meta content="width=mobile-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" name="viewport">
+<meta content="IE=9; IE=8; IE=7; IE=EDGE;" http-equiv="X-UA-Compatible">
+<title>Email Newsletter01</title>
+<script src="https://kit.fontawesome.com/ef9a692198.js"></script>
 
-    <style type="text/css">
-        /**This is to overwrite Outlook.com’s Embedded CSS************/
-        table {
-            border-collapse: separate;
-        }
+<style type="text/css">
+/**This is to overwrite Outlook.com’s Embedded CSS************/
+table {
+border-collapse: separate;
+}
 
-        a,
-        a:link,
-        a:visited {
-            text-decoration: none;
-            color: #00788a
-        }
+a,
+a:link,
+a:visited {
+text-decoration: none;
+color: #00788a
+}
 
-        h2,
-        h2 a,
-        h2 a:visited,
-        h3,
-        h3 a,
-        h3 a:visited,
-        h4,
-        h5,
-        h6,
-        .t_cht {
-            color: #000 !important
-        }
+h2,
+h2 a,
+h2 a:visited,
+h3,
+h3 a,
+h3 a:visited,
+h4,
+h5,
+h6,
+.t_cht {
+color: #000 !important
+}
 
-        p {
-            margin-bottom: 0
-        }
+p {
+margin-bottom: 0
+}
 
-        .ExternalClass p,
-        .ExternalClass span,
-        .ExternalClass font,
-        .ExternalClass td {
-            line-height: 100%
-        }
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td {
+line-height: 100%
+}
 
-        /**This is to center your email in Outlook.com************/
-        .ExternalClass {
-            width: 100%;
-        }
+/**This is to center your email in Outlook.com************/
+.ExternalClass {
+width: 100%;
+}
 
-        /* General Resets */
-        #outlook a {
-            padding: 0;
-        }
+/* General Resets */
+#outlook a {
+padding: 0;
+}
 
-        body,
-        #body-table {
-            height: 100% !important;
-            width: 100% !important;
-            margin: 0 auto;
-            padding: 0;
-            line-height: 100% !important;
-        }
+body,
+#body-table {
+height: 100% !important;
+width: 100% !important;
+margin: 0 auto;
+padding: 0;
+line-height: 100% !important;
+}
 
-        img,
-        a img {
-            border: 0;
-            outline: none;
-            text-decoration: none;
-        }
+img,
+a img {
+border: 0;
+outline: none;
+text-decoration: none;
+}
 
-        .image-fix {
-            display: block;
-        }
+.image-fix {
+display: block;
+}
 
-        table,
-        td {
-            border-collapse: collapse;
-        }
+table,
+td {
+border-collapse: collapse;
+}
 
-        /* Client Specific Resets */
-        .ReadMsgBody {
-            width: 100%;
-        }
+/* Client Specific Resets */
+.ReadMsgBody {
+width: 100%;
+}
 
-        .ExternalClass {
-            width: 100%;
-        }
+.ExternalClass {
+width: 100%;
+}
 
-        .ExternalClass,
-        .ExternalClass p,
-        .ExternalClass span,
-        .ExternalClass font,
-        .ExternalClass td,
-        .ExternalClass div {
-            line-height: 100% !important;
-        }
+.ExternalClass,
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td,
+.ExternalClass div {
+line-height: 100% !important;
+}
 
-        .ExternalClass * {
-            line-height: 100% !important;
-        }
+.ExternalClass * {
+line-height: 100% !important;
+}
 
-        table,
-        /* td {
-            mso-table-lspace: 0pt;
-            mso-table-rspace: 0pt;
-        } */
+table,
+/* td {
+mso-table-lspace: 0pt;
+mso-table-rspace: 0pt;
+} */
 
-        img {
-            outline: none;
-            border: none;
-            text-decoration: none;
-            -ms-interpolation-mode: bicubic;
-        }
+img {
+outline: none;
+border: none;
+text-decoration: none;
+-ms-interpolation-mode: bicubic;
+}
 
-        body,
-        table,
-        td,
-        p,
-        a,
-        li,
-        blockquote {
-            -ms-text-size-adjust: 100%;
-            -webkit-text-size-adjust: 100%;
-        }
+body,
+table,
+td,
+p,
+a,
+li,
+blockquote {
+-ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%;
+}
 
-        body.outlook img {
-            width: auto !important;
-            max-width: none !important;
-        }
+body.outlook img {
+width: auto !important;
+max-width: none !important;
+}
 
-        /* Start Template Styles */
-        /* Main */
-        body {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            margin: 0;
-            padding: 0;
-        }
+/* Start Template Styles */
+/* Main */
+body {
+-webkit-text-size-adjust: 100%;
+-ms-text-size-adjust: 100%;
+margin: 0;
+padding: 0;
+}
 
-        body,
-        #body-table {
-            background-color: #000000;
-            margin: auto !important;
-            margin: 0 auto !important;
-            text-align: center !important;
-        }
+body,
+#body-table {
+background-color: #000000;
+margin: auto !important;
+margin: 0 auto !important;
+text-align: center !important;
+}
 
-        p {
-            padding: 0;
-            margin: 0;
-            line-height: 24px;
-            font-family: Open Sans, sans-serif;
-        }
+p {
+padding: 0;
+margin: 0;
+line-height: 24px;
+font-family: Open Sans, sans-serif;
+}
 
-        a,
-        a:link {
-            color: #1c344d;
-            text-decoration: none !important;
-        }
+a,
+a:link {
+color: #1c344d;
+text-decoration: none !important;
+}
 
-        .footer-link a,
-        .nav-link a {
-            color: #fff6e5;
-        }
+.footer-link a,
+.nav-link a {
+color: #fff6e5;
+}
 
-        /* Yahoo Mail */
-        .thread-item.expanded .thread-body {
-            background-color: #000000 !important;
-        }
+/* Yahoo Mail */
+.thread-item.expanded .thread-body {
+background-color: #000000 !important;
+}
 
-        .thread-item.expanded .thread-body .body,
-        .msg-body {
-            display: block !important;
-        }
+.thread-item.expanded .thread-body .body,
+.msg-body {
+display: block !important;
+}
 
-        #body-table .undoreset table {
-            display: table !important;
-            table-layout: fixed !important;
-        }
+#body-table .undoreset table {
+display: table !important;
+table-layout: fixed !important;
+}
 
-        /* Start Media Queries */
-        @media only screen and (max-width: 640px) {
+/* Start Media Queries */
+@media only screen and (max-width: 640px) {
 
-            a[href^="tel"],
-            a[href^="sms"] {
-                text-decoration: none;
-                pointer-events: none;
-                cursor: default;
-            }
+a[href^="tel"],
+a[href^="sms"] {
+text-decoration: none;
+pointer-events: none;
+cursor: default;
+}
 
-            .mobile_link a[href^="tel"],
-            .mobile_link a[href^="sms"] {
-                text-decoration: default;
-                pointer-events: auto;
-                cursor: default;
-            }
+.mobile_link a[href^="tel"],
+.mobile_link a[href^="sms"] {
+text-decoration: default;
+pointer-events: auto;
+cursor: default;
+}
 
-            *[class].full-width {
-                width: 100% !important;
-            }
+*[class].full-width {
+width: 100% !important;
+}
 
-            *[class].mobile-width {
-                width: 440px !important;
-                padding: 0 4px;
-            }
+*[class].mobile-width {
+width: 440px !important;
+padding: 0 4px;
+}
 
-            *[class].content-width {
-                width: 360px !important;
-            }
+*[class].content-width {
+width: 360px !important;
+}
 
-            *[class].content-width-menu {
-                width: 360px !important;
-            }
+*[class].content-width-menu {
+width: 360px !important;
+}
 
-            *[class].center {
-                text-align: center !important;
-                height: auto !important;
-            }
+*[class].center {
+text-align: center !important;
+height: auto !important;
+}
 
-            *[class].center-stack {
-                padding-bottom: 30px !important;
-                text-align: center !important;
-                height: auto !important;
-            }
+*[class].center-stack {
+padding-bottom: 30px !important;
+text-align: center !important;
+height: auto !important;
+}
 
-            *[class].stack {
-                padding-bottom: 30px !important;
-                height: auto !important;
-            }
+*[class].stack {
+padding-bottom: 30px !important;
+height: auto !important;
+}
 
-            *[class].gallery {
-                padding-bottom: 20px !important;
-            }
+*[class].gallery {
+padding-bottom: 20px !important;
+}
 
-            *[class].fluid-img {
-                height: auto !important;
-                max-width: 600px !important;
-                width: 100% !important;
-            }
+*[class].fluid-img {
+height: auto !important;
+max-width: 600px !important;
+width: 100% !important;
+}
 
-            *[class].block {
-                display: block !important;
-            }
+*[class].block {
+display: block !important;
+}
 
-            *[class].midaling {
-                width: 100% !important;
-                border: none !important;
-            }
-        }
+*[class].midaling {
+width: 100% !important;
+border: none !important;
+}
+}
 
-        @media only screen and (max-width: 480px) {
-            *[class].full-width {
-                width: 100% !important;
-            }
+@media only screen and (max-width: 480px) {
+*[class].full-width {
+width: 100% !important;
+}
 
-            *[class].mobile-width {
-                width: 320px !important;
-                padding: 0 4px;
-            }
+*[class].mobile-width {
+width: 320px !important;
+padding: 0 4px;
+}
 
-            *[class].content-width {
-                width: 240px !important;
-            }
+*[class].content-width {
+width: 240px !important;
+}
 
-            *[class].content-width-menu {
-                width: 320px !important;
-            }
+*[class].content-width-menu {
+width: 320px !important;
+}
 
-            *[class].navlink {
-                font-size: 13px !important;
-            }
+*[class].navlink {
+font-size: 13px !important;
+}
 
-            *[class].center {
-                text-align: center !important;
-                height: auto !important;
-            }
+*[class].center {
+text-align: center !important;
+height: auto !important;
+}
 
-            *[class].center-stack {
-                padding-bottom: 30px !important;
-                text-align: center !important;
-                height: auto !important;
-            }
+*[class].center-stack {
+padding-bottom: 30px !important;
+text-align: center !important;
+height: auto !important;
+}
 
-            *[class].stack {
-                padding-bottom: 30px !important;
-                height: auto !important;
-            }
+*[class].stack {
+padding-bottom: 30px !important;
+height: auto !important;
+}
 
-            *[class].gallery {
-                padding-bottom: 20px !important;
-            }
+*[class].gallery {
+padding-bottom: 20px !important;
+}
 
-            *[class].fluid-img {
-                height: auto !important;
-                max-width: 600px !important;
-                width: 100% !important;
-                min-width: 320px !important;
-            }
+*[class].fluid-img {
+height: auto !important;
+max-width: 600px !important;
+width: 100% !important;
+min-width: 320px !important;
+}
 
-            *[class].midaling {
-                width: 100% !important;
-                border: none !important;
-            }
+*[class].midaling {
+width: 100% !important;
+border: none !important;
+}
 
-            *[class].navlink {
-                width: 600px !important;
-                border: none !important;
-            }
-        }
+*[class].navlink {
+width: 600px !important;
+border: none !important;
+}
+}
 
-        @media only screen and (max-width: 320px) {
-            *[class].full-width {
-                width: 100% !important;
-            }
+@media only screen and (max-width: 320px) {
+*[class].full-width {
+width: 100% !important;
+}
 
-            *[class].mobile-width {
-                width: 100% !important;
-                padding: 0 4px;
-            }
+*[class].mobile-width {
+width: 100% !important;
+padding: 0 4px;
+}
 
-            *[class].content-width {
-                width: 240px !important;
-            }
+*[class].content-width {
+width: 240px !important;
+}
 
-            *[class].center {
-                text-align: center !important;
-                height: auto !important;
-            }
+*[class].center {
+text-align: center !important;
+height: auto !important;
+}
 
-            *[class].center-stack {
-                padding-bottom: 30px !important;
-                text-align: center !important;
-                height: auto !important;
-            }
+*[class].center-stack {
+padding-bottom: 30px !important;
+text-align: center !important;
+height: auto !important;
+}
 
-            *[class].stack {
-                padding-bottom: 30px !important;
-                height: auto !important;
-            }
+*[class].stack {
+padding-bottom: 30px !important;
+height: auto !important;
+}
 
-            *[class].gallery {
-                padding-bottom: 20px !important;
-            }
+*[class].gallery {
+padding-bottom: 20px !important;
+}
 
-            *[class].fluid-img {
-                height: auto !important;
-                max-width: 600px !important;
-                width: 100% !important;
-                min-width: 320px !important;
-            }
+*[class].fluid-img {
+height: auto !important;
+max-width: 600px !important;
+width: 100% !important;
+min-width: 320px !important;
+}
 
-            *[class].midaling {
-                width: 100% !important;
-                border: none !important;
-            }
-        }
-    </style>
+*[class].midaling {
+width: 100% !important;
+border: none !important;
+}
+}
+</style>
 </head>
 
 <body bgcolor="#000000" style="background:#000;" id="newsletterTemp">
 
-    <!-- Start of banner -->
-    <table id="body-table" align="center" width="100%" bgcolor="#e6e5e7" cellspacing="0" cellpadding="0" border="0"
-        style="table-layout:fixed;" *ngFor="let list of DataTemplete; index as i">
-        <tbody>
+<!-- Start of banner -->
+<table id="body-table" align="center" width="100%" bgcolor="#e6e5e7" cellspacing="0" cellpadding="0" border="0"
+style="table-layout:fixed;">
+<tbody>
+<tr>
+<td valign="top" align="center">
+<table width="600" bgcolor="#ffffff" align="center" cellspacing="0" cellpadding="0" border="0"
+class="mobile-width">
+<tbody>
+<tr>
+<td valign="top" bgcolor="#ffffff" align="center">
+<!-- After Menu Start -->
+<table width="600" align="center" cellspacing="0" cellpadding="0" border="0"
+class="mobile-width">
+<tbody>
+<tr>
+<td align="center">
+
+<!-- Section 2 Start / Start Block Content -->
+<table bgcolor="#666666" width="100%" cellspacing="0"
+cellpadding="0" border="0" background="https://fikra.app/fikra_admin/assets/images/top.png"
+style="background-repeat: no-repeat; background-position: center center;background-size: cover;"
+class="full-width">
+<tbody>
+<tr>
+<td height="160" class="front">&nbsp;</td>
+</tr>
+
+<tr>
+<td class="front" height="67">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<!-- Section 2 End / End Block Content -->
+
+<!-- Start Space -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0"
+class="full-width">
+<tbody>
+<tr>
+<td height="35">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<!-- End Space -->
+
+<!-- Section 5 Start -->
+<table width="600" align="center" cellspacing="0" cellpadding="0"
+border="0" class="mobile-width" *ngFor="let list of tempcont; index as i">
+<tbody>
+<tr>
+<td align="center">
+<!-- Start Block Content -->
+<table width="550" align="center" cellspacing="0"
+cellpadding="0" border="0"
+class="content-width">
+<tbody>
+<tr>
+<td align="center">
+
+<!-- Start Space -->
+<table width="100%" cellspacing="0"
+cellpadding="0" border="0"
+class="full-width">
+<tbody>
+    <tr>
+        <td height="20">&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td align="left">{{list.textHead}}</td>
+        </tr>
+        <tr>
+            <td height="5">&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td align="left">{{list.textContent}}</td>
+            </tr>	
             <tr>
-                <td valign="top" align="center">
-                    <table width="600" bgcolor="#ffffff" align="center" cellspacing="0" cellpadding="0" border="0"
-                        class="mobile-width">
-                        <tbody>
-                            <tr>
-                                <td valign="top" bgcolor="#ffffff" align="center">
-                                    <!-- After Menu Start -->
-                                    <table width="600" align="center" cellspacing="0" cellpadding="0" border="0"
-                                        class="mobile-width">
-                                        <tbody>
-                                            <tr>
-                                                <td align="center">
-
-                                                    <!-- Section 2 Start / Start Block Content -->
-                                                    <table bgcolor="#666666" width="100%" cellspacing="0"
-                                                        cellpadding="0" border="0" background="assets/images/top.png"
-                                                        style="background-repeat: no-repeat; background-position: center center;background-size: cover;"
-                                                        class="full-width">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td height="160" class="front">&nbsp;</td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td class="front" height="67">&nbsp;</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <!-- Section 2 End / End Block Content -->
-
-                                                    <!-- Start Space -->
-                                                    <table width="100%" cellspacing="0" cellpadding="0" border="0"
-                                                        class="full-width">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td height="35">&nbsp;</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <!-- End Space -->
-
-                                                    <!-- Section 5 Start -->
-                                                    <table width="600" align="center" cellspacing="0" cellpadding="0"
-                                                        border="0" class="mobile-width">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td align="center">
-                                                                    <!-- Start Block Content -->
-                                                                    <table width="550" align="center" cellspacing="0"
-                                                                        cellpadding="0" border="0"
-                                                                        class="content-width">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td align="center">
-
-                                                                                    <!-- Start Space -->
-                                                                                    <table width="100%" cellspacing="0"
-                                                                                        cellpadding="0" border="0"
-                                                                                        class="full-width">
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td height="20">&nbsp;
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    <!-- End Space -->
-
-                                                                                    <!-- Start Column 1 -->
-                                                                                    <table width="167" align="left"
-                                                                                        cellspacing="0" cellpadding="0"
-                                                                                        border="0" class="full-width">
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td class="center"><img
-                                                                                                        src="{{list.project_One.basicInfoId.projectImage}}"
-                                                                                                        alt=""
-                                                                                                        width="167"
-                                                                                                        height="133"
-                                                                                                        border="0"
-                                                                                                        class="content-width">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td height="24"
-                                                                                                    style="font-size:30px; line-height:30px;">
-                                                                                                    &nbsp;</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td align="left"
-                                                                                                    style="font-size:15px;line-height:15px; color:#8a8a8a; font-weight:bold; font-family: Open Sans, sans-serif;">
-                                                                                                    {{list.project_One.title}}
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td height="16"
-                                                                                                    align="left"></td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td style="font-size:13px; line-height:16px; color:#8a8a8a; font-weight:normal; font-family: Open Sans, sans-serif;"
-                                                                                                    align="left">
-                                                                                                    <span *ngIf='list.project_One_Description == "" '>{{list.project_One.basicInfoId.decription}}</span>
-                                                                                                    <span *ngIf='list.project_One_Description !== "" '>{{list.project_One_Description}}</span>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td height="20"
-                                                                                                    style="font-size:20px;line-height:20px;">
-                                                                                                    &nbsp;</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td align="left">
-                                                                                                    <table align="left"
-                                                                                                        cellspacing="0"
-                                                                                                        cellpadding="0"
-                                                                                                        border="0">
-                                                                                                        <tbody>
-                                                                                                            <tr>
-                                                                                                                <td align="left"
-                                                                                                                    style="border:#F15051 solid 1px; border-radius:4px; background-color: #F15051; display:block; font-family: Open Sans, sans-serif; font-size:12px; font-weight:800;line-height:12px; text-align:center; text-decoration:none; padding-top: 10px; padding-bottom: 10px; width:117px; -webkit-text-size-adjust:none;">
-                                                                                                                    <a style="color:#fff;font-family: Open Sans, sans-serif;font-weight:800;font-size:13px;"
-                                                                                                                        href="https://fikra.app/projectview/{{list.project_One._id}}"
-                                                                                                                        target="_blank">READ
-                                                                                                                        MORE</a>
-                                                                                                                </td>
-                                                                                                            </tr>
-                                                                                                        </tbody>
-                                                                                                    </table>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td
-                                                                                                    class="center-stack">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    <!-- End Column 1 -->
-
-                                                                                    <!-- Start Space -->
-                                                                                    <table align="left" cellspacing="0"
-                                                                                        width="20" height="24"
-                                                                                        cellpadding="0" border="0"
-                                                                                        class="full-width">
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td height="25"
-                                                                                                    style="font-size: 0;line-height: 0;border-collapse: collapse;">
-                                                                                                    <p
-                                                                                                        style="padding-left: 24px;">
-                                                                                                    </p>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    <!-- End Space -->
-
-                                                                                    <!-- Start Column 2 -->
-                                                                                    <table width="167" align="left"
-                                                                                    cellspacing="0" cellpadding="0"
-                                                                                    border="0" class="full-width">
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td class="center"><img
-                                                                                                    src="{{list.project_Two.basicInfoId.projectImage}}"
-                                                                                                    alt=""
-                                                                                                    width="167"
-                                                                                                    height="133"
-                                                                                                    border="0"
-                                                                                                    class="content-width">
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td height="24"
-                                                                                                style="font-size:30px; line-height:30px;">
-                                                                                                &nbsp;</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td align="left"
-                                                                                                style="font-size:15px;line-height:15px; color:#8a8a8a; font-weight:bold; font-family: Open Sans, sans-serif;">
-                                                                                                {{list.project_Two.title}}
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td height="16"
-                                                                                                align="left"></td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td style="font-size:13px; line-height:16px; color:#8a8a8a; font-weight:normal; font-family: Open Sans, sans-serif;"
-                                                                                                align="left">
-                                                                                                <span *ngIf='list.project_Two_Description == "" '>{{list.project_Two.basicInfoId.decription}}</span>
-                                                                                                <span *ngIf='list.project_Two_Description !== "" '>{{list.project_Two_Description}}</span>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td height="20"
-                                                                                                style="font-size:20px;line-height:20px;">
-                                                                                                &nbsp;</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td align="left">
-                                                                                                <table align="left"
-                                                                                                    cellspacing="0"
-                                                                                                    cellpadding="0"
-                                                                                                    border="0">
-                                                                                                    <tbody>
-                                                                                                        <tr>
-                                                                                                            <td align="left"
-                                                                                                                style="border:#F15051 solid 1px; border-radius:4px; background-color: #F15051; display:block; font-family: Open Sans, sans-serif; font-size:12px; font-weight:800;line-height:12px; text-align:center; text-decoration:none; padding-top: 10px; padding-bottom: 10px; width:117px; -webkit-text-size-adjust:none;">
-                                                                                                                <a style="color:#fff;font-family: Open Sans, sans-serif;font-weight:800;font-size:13px;"
-                                                                                                                    href="https://fikra.app/projectview/{{list.project_Two._id}}"
-                                                                                                                    target="_blank">READ
-                                                                                                                    MORE</a>
-                                                                                                            </td>
-                                                                                                        </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td
-                                                                                                class="center-stack">
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                                    <!-- End Column 2 -->
-
-                                                                                    <!-- Start Space -->
-                                                                                    <table align="left" cellspacing="0"
-                                                                                        width="20" height="24"
-                                                                                        cellpadding="0" border="0"
-                                                                                        class="full-width">
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td height="25"
-                                                                                                    style="font-size: 0;line-height: 0;border-collapse: collapse;">
-                                                                                                    <p
-                                                                                                        style="padding-left: 24px;">
-                                                                                                    </p>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    <!-- End Space -->
-                                                                                    <!-- Start Column 3 -->
-                                                                                    <table width="167" align="left"
-                                                                                    cellspacing="0" cellpadding="0"
-                                                                                    border="0" class="full-width">
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td class="center"><img
-                                                                                                    src="{{list.project_Three.basicInfoId.projectImage}}"
-                                                                                                    alt=""
-                                                                                                    width="167"
-                                                                                                    height="133"
-                                                                                                    border="0"
-                                                                                                    class="content-width">
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td height="24"
-                                                                                                style="font-size:30px; line-height:30px;">
-                                                                                                &nbsp;</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td align="left"
-                                                                                                style="font-size:15px;line-height:15px; color:#8a8a8a; font-weight:bold; font-family: Open Sans, sans-serif;">
-                                                                                                {{list.project_Three.title}}
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td height="16"
-                                                                                                align="left"></td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td style="font-size:13px; line-height:16px; color:#8a8a8a; font-weight:normal; font-family: Open Sans, sans-serif;"
-                                                                                                align="left">
-                                                                                                <span *ngIf='list.project_Three_Description == "" '>{{list.project_Three.basicInfoId.decription}}</span>
-                                                                                                <span *ngIf='list.project_Three_Description !== "" '>{{list.project_Three_Description}}</span>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td height="20"
-                                                                                                style="font-size:20px;line-height:20px;">&nbsp;</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td align="left">
-                                                                                                <table align="left"
-                                                                                                    cellspacing="0"
-                                                                                                    cellpadding="0"
-                                                                                                    border="0">
-                                                                                                    <tbody>
-                                                                                                        <tr>
-                                                                                                            <td align="left"
-                                                                                                                style="border:#F15051 solid 1px; border-radius:4px; background-color: #F15051; display:block; font-family: Open Sans, sans-serif; font-size:12px; font-weight:800;line-height:12px; text-align:center; text-decoration:none; padding-top: 10px; padding-bottom: 10px; width:117px; -webkit-text-size-adjust:none;">
-                                                                                                                <a style="color:#fff;font-family: Open Sans, sans-serif;font-weight:800;font-size:13px;"
-                                                                                                                    href="https://fikra.app/projectview/{{list.project_Three._id}}"
-                                                                                                                    target="_blank">READ
-                                                                                                                    MORE</a>
-                                                                                                            </td>
-                                                                                                        </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td
-                                                                                                class="center-stack">
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                                    <!-- End Column 3 -->
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <!-- End Block Content -->
-
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <!-- Section 5 End -->
-
-                                                    <!-- Section 4 Start -->
-                                                    <table width="600" align="center" cellspacing="0" cellpadding="0"
-                                                        border="0" class="mobile-width">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td align="center">
-                                                                    <!-- Start Block Content -->
-                                                                    <table width="550" align="center" cellspacing="0"
-                                                                        cellpadding="0" border="0"
-                                                                        class="content-width">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td align="center">
-                                                                                    <!-- Start Column 1 -->
-                                                                                    <table width="100%" cellspacing="0"
-                                                                                        cellpadding="0" border="0"
-                                                                                        class="full-width">
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td height="20"></td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td [innerHtml]='list.blogContent'></td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    <!-- End Column 1 -->
-
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <!-- End Block Content -->
-
-                                                                    <!-- Start Space -->
-                                                                    <table width="100%" cellspacing="0" cellpadding="0"
-                                                                        border="0" class="full-width">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td height="30">&nbsp;</td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <!-- End Space -->
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <!-- Section 4 End -->
-
-                                                    <!-- Start Space -->
-                                                    <table width="100%" cellspacing="0" cellpadding="0" border="0"
-                                                        class="full-width">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td align="center"><img
-                                                                        src="https://fikra.app/favicon.ico" height="35"
-                                                                        alt="" /></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td height="6"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <!-- End Space -->
-
-                                                    <!-- Section 8 Start -->
-                                                    <table width="600" bgcolor="#666666" width="100%" cellspacing="0"
-                                                        cellpadding="0" border="0" background="assets/images/bottom.svg"
-                                                        style="background-repeat: no-repeat !important; background-position: center center;background-size: cover;"
-                                                        class="full-width">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td align="center">
-                                                                    <!-- Start Block Content -->
-                                                                    <table width="550" align="center" cellspacing="0"
-                                                                        cellpadding="0" border="0"
-                                                                        class="content-width">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td valign="top" td align="center">
-                                                                                    <!-- Start Column 1 -->
-                                                                                    <table align="center"
-                                                                                        cellspacing="0" cellpadding="0"
-                                                                                        border="0" class="full-width"
-                                                                                        width="100%">
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td height="40">&nbsp;
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td style="font-size:28px;color:#ffffff; font-weight:bold; font-family: Open Sans, sans-serif;"
-                                                                                                    align="center">Lorem
-                                                                                                    Ipsum</td>
-                                                                                            </tr>
-
-                                                                                            <tr>
-                                                                                                <td height="18">&nbsp;
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td style="font-size:12px; font-family: Open Sans, sans-serif; line-height:15px; color:#ffffff; font-weight:bold;"
-                                                                                                    align="center">Lorem
-                                                                                                    Ipsum is simply
-                                                                                                    dummy text of the
-                                                                                                    printing and
-                                                                                                    typesetting
-                                                                                                    industry. Lorem
-                                                                                                    Ipsum has been the
-                                                                                                    industry’s standard
-                                                                                                    dummyLorem Ipsum is
-                                                                                                    simply dummy text of
-                                                                                                    the printing and
-                                                                                                    typesetting
-                                                                                                    industry. Lorem
-                                                                                                    Ipsum has been the
-                                                                                                    industry’s standard
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td height="25">&nbsp;
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td width="100%"
-                                                                                                    align="center"
-                                                                                                    height="18"
-                                                                                                    style="line-height:18px; font-size:18px;">
-                                                                                                    <a href="#"><i
-                                                                                                            class="fab fa-facebook"
-                                                                                                            style="color: #fff;"></i></a>&nbsp;&nbsp;
-                                                                                                    <a href="#"><i
-                                                                                                            class="fab fa-instagram"
-                                                                                                            style="color: #fff;"></i></a>&nbsp;&nbsp;
-                                                                                                    <a href="#"><i
-                                                                                                            class="fab fa-twitter"
-                                                                                                            style="color: #fff;"></i></a>&nbsp;&nbsp;
-                                                                                                    <a href="#"><i
-                                                                                                            class="fab fa-youtube"
-                                                                                                            style="color: #fff;"></i></a>
-                                                                                                </td>
-                                                                                            </tr>
-
-                                                                                            <tr>
-                                                                                                <td height="30">&nbsp;
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    <!-- End Column 1 -->
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <!-- End Block Content -->
-
-                                                                    <!-- Start Space -->
-                                                                    <table width="100%" bgcolor="#ecf0f1"
-                                                                        cellspacing="0" cellpadding="0" border="0"
-                                                                        class="full-width">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td height="28" align="center"
-                                                                                    style="font-family: Open Sans, sans-serif;font-size:13px; font-weight:normal; color:#000">
-                                                                                    &copy; 2021 Fikra. All right
-                                                                                    reserved
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <!-- End Space -->
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!-- End Space -->
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <td height="20">&nbsp;
                 </td>
             </tr>
-        </tbody>
-    </table>
+</tbody>
+</table>
+<!-- End Space -->
+
+
+<!-- Start Column 1 -->
+<table width="167" align="left"
+cellspacing="0" cellpadding="0"
+border="0" class="full-width">
+<tbody>
+
+    <tr>
+        <td class="center"><img
+                src="{{list.project_One.basicInfoId.projectImage}}"
+                alt=""
+                width="167"
+                height="133"
+                border="0"
+                class="content-width">
+        </td>
+    </tr>
+    <tr>
+        <td height="24"
+            style="font-size:30px; line-height:30px;">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left"
+            style="font-size:15px;line-height:15px; color:#8a8a8a; font-weight:bold; font-family: Open Sans, sans-serif;">
+            {{list.project_One.title}}
+        </td>
+    </tr>
+    <tr>
+        <td height="16"
+            align="left"></td>
+    </tr>
+    <tr>
+        <td style="font-size:13px; line-height:16px; color:#8a8a8a; font-weight:normal; font-family: Open Sans, sans-serif;"
+            align="left">
+            <span
+                *ngIf='list.project_One_Description == "" '>{{list.project_One.basicInfoId.decription}}</span>
+            <span
+                *ngIf='list.project_One_Description !== "" '>{{list.project_One_Description}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td height="20"
+            style="font-size:20px;line-height:20px;">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left">
+            <table align="left"
+                cellspacing="0"
+                cellpadding="0"
+                border="0">
+                <tbody>
+                    <tr>
+                        <td align="left"
+                            style="border:#F15051 solid 1px; border-radius:4px; background-color: #F15051; display:block; font-family: Open Sans, sans-serif; font-size:12px; font-weight:800;line-height:12px; text-align:center; text-decoration:none; padding-top: 10px; padding-bottom: 10px; width:117px; -webkit-text-size-adjust:none;">
+                            <a style="color:#fff;font-family: Open Sans, sans-serif;font-weight:800;font-size:13px;"
+                                href="https://fikra.app/projectview/{{list.project_One._id}}"
+                                target="_blank">READ
+                                MORE</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td
+            class="center-stack">
+        </td>
+    </tr>
+</tbody>
+</table>
+<!-- End Column 1 -->
+
+<!-- Start Space -->
+<table align="left" cellspacing="0"
+width="20" height="24"
+cellpadding="0" border="0"
+class="full-width">
+<tbody>
+    <tr>
+        <td height="25"
+            style="font-size: 0;line-height: 0;border-collapse: collapse;">
+            <p
+                style="padding-left: 24px;">
+            </p>
+        </td>
+    </tr>
+</tbody>
+</table>
+<!-- End Space -->
+
+<!-- Start Column 2 -->
+<table width="167" align="left"
+cellspacing="0" cellpadding="0"
+border="0" class="full-width">
+<tbody>
+    <tr>
+        <td class="center"><img
+                src="{{list.project_Two.basicInfoId.projectImage}}"
+                alt=""
+                width="167"
+                height="133"
+                border="0"
+                class="content-width">
+        </td>
+    </tr>
+    <tr>
+        <td height="24"
+            style="font-size:30px; line-height:30px;">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left"
+            style="font-size:15px;line-height:15px; color:#8a8a8a; font-weight:bold; font-family: Open Sans, sans-serif;">
+            {{list.project_Two.title}}
+        </td>
+    </tr>
+    <tr>
+        <td height="16"
+            align="left"></td>
+    </tr>
+    <tr>
+        <td style="font-size:13px; line-height:16px; color:#8a8a8a; font-weight:normal; font-family: Open Sans, sans-serif;"
+            align="left">
+            <span
+                *ngIf='list.project_Two_Description == "" '>{{list.project_Two.basicInfoId.decription}}</span>
+            <span
+                *ngIf='list.project_Two_Description !== "" '>{{list.project_Two_Description}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td height="20"
+            style="font-size:20px;line-height:20px;">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left">
+            <table align="left"
+                cellspacing="0"
+                cellpadding="0"
+                border="0">
+                <tbody>
+                    <tr>
+                        <td align="left"
+                            style="border:#F15051 solid 1px; border-radius:4px; background-color: #F15051; display:block; font-family: Open Sans, sans-serif; font-size:12px; font-weight:800;line-height:12px; text-align:center; text-decoration:none; padding-top: 10px; padding-bottom: 10px; width:117px; -webkit-text-size-adjust:none;">
+                            <a style="color:#fff;font-family: Open Sans, sans-serif;font-weight:800;font-size:13px;"
+                                href="https://fikra.app/projectview/{{list.project_Two._id}}"
+                                target="_blank">READ
+                                MORE</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td
+            class="center-stack">
+        </td>
+    </tr>
+</tbody>
+</table>
+<!-- End Column 2 -->
+
+<!-- Start Space -->
+<table align="left" cellspacing="0"
+width="20" height="24"
+cellpadding="0" border="0"
+class="full-width">
+<tbody>
+    <tr>
+        <td height="25"
+            style="font-size: 0;line-height: 0;border-collapse: collapse;">
+            <p
+                style="padding-left: 24px;">
+            </p>
+        </td>
+    </tr>
+</tbody>
+</table>
+<!-- End Space -->
+<!-- Start Column 3 -->
+<table width="167" align="left"
+cellspacing="0" cellpadding="0"
+border="0" class="full-width">
+<tbody>
+    <tr>
+        <td class="center"><img
+                src="{{list.project_Three.basicInfoId.projectImage}}"
+                alt=""
+                width="167"
+                height="133"
+                border="0"
+                class="content-width">
+        </td>
+    </tr>
+    <tr>
+        <td height="24"
+            style="font-size:30px; line-height:30px;">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left"
+            style="font-size:15px;line-height:15px; color:#8a8a8a; font-weight:bold; font-family: Open Sans, sans-serif;">
+            {{list.project_Three.title}}
+        </td>
+    </tr>
+    <tr>
+        <td height="16"
+            align="left"></td>
+    </tr>
+    <tr>
+        <td style="font-size:13px; line-height:16px; color:#8a8a8a; font-weight:normal; font-family: Open Sans, sans-serif;"
+            align="left">
+            <span
+                *ngIf='list.project_Three_Description == "" '>{{list.project_Three.basicInfoId.decription}}</span>
+            <span
+                *ngIf='list.project_Three_Description !== "" '>{{list.project_Three_Description}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td height="20"
+            style="font-size:20px;line-height:20px;">
+            &nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left">
+            <table align="left"
+                cellspacing="0"
+                cellpadding="0"
+                border="0">
+                <tbody>
+                    <tr>
+                        <td align="left"
+                            style="border:#F15051 solid 1px; border-radius:4px; background-color: #F15051; display:block; font-family: Open Sans, sans-serif; font-size:12px; font-weight:800;line-height:12px; text-align:center; text-decoration:none; padding-top: 10px; padding-bottom: 10px; width:117px; -webkit-text-size-adjust:none;">
+                            <a style="color:#fff;font-family: Open Sans, sans-serif;font-weight:800;font-size:13px;"
+                                href="https://fikra.app/projectview/{{list.project_Three._id}}"
+                                target="_blank">READ
+                                MORE</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td
+            class="center-stack">
+        </td>
+    </tr>
+</tbody>
+</table>
+<!-- End Column 3 -->
+<!-- Start Space -->
+<table width="100%" cellspacing="0"
+cellpadding="0" border="0"
+class="full-width">
+<tbody>
+    <tr>
+        <td height="40">&nbsp;
+        </td>
+    </tr>
+</tbody>
+</table>
+<!-- End Space -->
+</td>
+</tr>
+</tbody>
+</table>
+<!-- End Block Content -->
+
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Section 5 End -->
+
+<!-- Section 4 Start -->
+<table width="600" align="center" cellspacing="0" cellpadding="0" border="0" class="mobile-width">
+<tbody>
+<tr>
+<td align="center">
+
+<!-- Start Block Content -->
+<table width="550" align="center" cellspacing="0" cellpadding="0" border="0" class="content-width">
+<tbody>
+<tr>
+<td align="center">    
+<!-- Section 4 Inner Start -->
+<table width="100%" align="left" cellspacing="0" cellpadding="0" border="0" class="full-width">
+<tbody>
+
+<tr>
+<td align="left" style="line-height:16px;" [innerHtml]='article'></td>
+</tr>																																									
+<tr>
+<td class="center-stack"></td>
+</tr>
+</tbody>
+</table>	
+<!-- Section 4 Inner End -->																	
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Start Block Content -->
+</td>
+</tr>
+</tbody>
+</table>
+<!-- End Section 4 -->	
+
+<!-- Start Space -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0"
+class="full-width">
+<tbody>
+<tr>
+<td align="center"><img
+src="https://fikra.app/favicon.ico" height="35"
+alt="" /></td>
+</tr>
+<tr>
+<td height="6"></td>
+</tr>
+</tbody>
+</table>
+<!-- End Space -->
+
+<!-- Section 8 Start -->
+<table width="600" bgcolor="#666666" width="100%" cellspacing="0"
+cellpadding="0" border="0" background="https://fikra.app/fikra_admin/assets/images/bottom.png"
+style="background-repeat: no-repeat !important; background-position: center center;background-size: cover;"
+class="full-width">
+<tbody>
+<tr>
+<td align="center">
+<!-- Start Block Content -->
+<table width="550" align="center" cellspacing="0"
+cellpadding="0" border="0"
+class="content-width">
+<tbody>
+<tr>
+<td valign="top" td align="center">
+<!-- Start Column 1 -->
+<table align="center"
+cellspacing="0" cellpadding="0"
+border="0" class="full-width"
+width="100%">
+<tbody>
+    <tr>
+        <td height="40">&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size:28px;color:#ffffff; font-weight:bold; font-family: Open Sans, sans-serif;"
+            align="center">Lorem
+            Ipsum</td>
+    </tr>
+
+    <tr>
+        <td height="18">&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size:12px; font-family: Open Sans, sans-serif; line-height:15px; color:#ffffff; font-weight:bold;"
+            align="center">Lorem
+            Ipsum is simply
+            dummy text of the
+            printing and
+            typesetting
+            industry. Lorem
+            Ipsum has been the
+            industry’s standard
+            dummyLorem Ipsum is
+            simply dummy text of
+            the printing and
+            typesetting
+            industry. Lorem
+            Ipsum has been the
+            industry’s standard
+        </td>
+    </tr>
+    <tr>
+        <td height="25">&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td width="100%"
+            align="center"
+            height="18"
+            style="line-height:18px; font-size:18px;">
+            <a href="#"><i
+                    class="fab fa-facebook"
+                    style="color: #fff;"></i></a>&nbsp;&nbsp;
+            <a href="#"><i
+                    class="fab fa-instagram"
+                    style="color: #fff;"></i></a>&nbsp;&nbsp;
+            <a href="#"><i
+                    class="fab fa-twitter"
+                    style="color: #fff;"></i></a>&nbsp;&nbsp;
+            <a href="#"><i
+                    class="fab fa-youtube"
+                    style="color: #fff;"></i></a>
+        </td>
+    </tr>
+
+    <tr>
+        <td height="30">&nbsp;
+        </td>
+    </tr>
+</tbody>
+</table>
+<!-- End Column 1 -->
+</td>
+</tr>
+</tbody>
+</table>
+<!-- End Block Content -->
+
+<!-- Start Space -->
+<table width="100%" bgcolor="#ecf0f1"
+cellspacing="0" cellpadding="0" border="0"
+class="full-width">
+<tbody>
+<tr>
+<td height="28" align="center"
+style="font-family: Open Sans, sans-serif;font-size:13px; font-weight:normal; color:#000">
+&copy; 2021 Fikra. All right
+reserved
+</td>
+</tr>
+</tbody>
+</table>
+<!-- End Space -->
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- End Space -->
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
 </body>
 
 </html>

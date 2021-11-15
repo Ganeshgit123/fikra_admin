@@ -79,7 +79,7 @@ export class ClientLogosComponent implements OnInit {
         this.clientData = resu.data.creative[0].clientLogo;
         this.total = this.clientData.length
 
-        // console.log("da",this.clientData)
+        console.log("da",this.clientData)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -149,7 +149,7 @@ export class ClientLogosComponent implements OnInit {
     //  console.log("img",params)
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {
-        console.log("res",response)
+        // console.log("res",response)
 
         if (response.body.error == false) {
      
@@ -234,6 +234,7 @@ export class ClientLogosComponent implements OnInit {
   this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
   this.modalService.dismissAll();
   this.imagePreview = null;
+  this.addClientLogo.reset();
   this.ngOnInit();
   } else {
   this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')

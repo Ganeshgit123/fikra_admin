@@ -1,34 +1,47 @@
-<div class="container-fluid">    
+<div class="container-fluid">
     <div class="card">
-    <div class="card-body">
-    <div class="row">
-        <div class="col-md-12">
-            <form [formGroup]="groupUsers">
-                <div class="form-group">
-                <label>Select Users</label>
-                <ng-select [items]="selectValue" (change)="someChange($event)"
-                bindLabel="userName"
-                bindValue="userName"
-                placeholder="Select Users"
-                appendTo="body"
-                multiple="true"
-                formControlName="querys"
-                >
-                </ng-select> 
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form [formGroup]="groupUsers">
+                        <div class="form-group">
+                            <label>Select Users</label>
+                            <ng-select [items]="selectValue" (change)="someChange($event)" bindLabel="userName"
+                                bindValue="userName" placeholder="Select Users" appendTo="body" multiple="true"
+                                formControlName="querys">
+                            </ng-select>
+                        </div>
+                        <div class="row" *ngIf="queryContainer">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Enter Manual Numbers:</label>
+                                    <input #newHero class="form-control" formControlName="manualNumbersArray"
+                                        (blur)="addHero(newHero.value); newHero.value='' ">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-primary w-md waves-effect waves-light"
+                                    (click)="addHero(newHero.value)" style="margin-top: 30px;">Add</button>
+
+                                <ul>
+                                    <li *ngFor="let hero of heroes;let i = index">{{hero}} &nbsp;&nbsp;<a
+                                            class="text-danger text-info" ngbTooltip="Delete"
+                                            (click)="heroes.splice(i, 1)"><i
+                                                class="mdi mdi-trash-can font-size-18"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>SMS Content</label>
+                            <textarea class="form-control" formControlName="message"></textarea>
+                        </div>
+                        <br>
+                        <p *ngIf="showAccept === true" class="text-center"><button type="button"
+                                class="btn btn-primary w-md waves-effect waves-light" (click)="addGroupSubmit()">Send
+                                SMS</button></p>
+                    </form>
                 </div>
-                <div class="form-group" *ngIf = "queryContainer">
-                    <label for="name">Enter Manual Numbers:</label>
-                    <input type="text" class="form-control" formControlName="manualNumbersArray"/>
-                </div>
-                <div class="form-group">
-                    <label>SMS Content</label>
-                    <textarea class="form-control" formControlName="message"></textarea>
-                </div>
-                <br>
-                <p *ngIf="showAccept === true" class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addGroupSubmit()">Send SMS</button></p>
-                </form>
+            </div>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
+</div>

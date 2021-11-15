@@ -170,6 +170,4 @@ export class EditHandbookComponent implements OnInit {
   )
   }
 
-
-
 }

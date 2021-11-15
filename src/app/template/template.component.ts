@@ -138,7 +138,8 @@ export class TemplateComponent implements OnInit {
 
   previewOpen(param: any) {
     this.modalService.open(param, { centered: true, backdrop: true, size: 'xl' });
-    // console.log(this.container);
+    this.articleContent = this.contentForm.value.blogContent;
+    console.log(this.container);
     // console.log(this.contentForm);
   }
 
@@ -200,6 +201,7 @@ export class TemplateComponent implements OnInit {
       let resu = result.body;
       if (resu.error == false) {
         this.templateDetails = resu.data
+        console.log("temp",this.templateDetails)
         this.total = this.templateDetails.length
       }
     }, (error) => {
@@ -238,7 +240,7 @@ export class TemplateComponent implements OnInit {
       data: postData
     }
 
-    console.log("data",params)
+    // console.log("data",params)
 
     this.apiCall.commonPostService(params).subscribe(
       (response: any) => {

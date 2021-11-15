@@ -23,7 +23,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of reqData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
-                        <td>{{item.adminUserId.systemAdminName}}</td>
+                        <td *ngIf="item.adminUserId !== null">{{item.adminUserId.systemAdminName}}</td>
+                        <td *ngIf="item.adminUserId == null">Null</td>
                         <td>{{item.tabName}}</td>
                         <td>{{item.feildName}}</td>
                         <td>{{item.valueFrom}}</td>

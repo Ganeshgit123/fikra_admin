@@ -59,13 +59,13 @@ export class SubscribersComponent implements OnInit {
     if(sessionStorage.getItem('adminRole') !== 's_a_r'){
       let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
       this.showAccept = contentPermssion[9].write
-      console.log("prer", contentPermssion[9])
+      // console.log("prer", contentPermssion[9])
     }
   }
 
   changeTemplate(element){
     this.DataTemplete = this.templateDetails.find(ele => ele._id == element);
-    console.log("dd",this.DataTemplete)
+    // console.log("tem",this.DataTemplete)
   }
 
   fetchTemplateData() {
@@ -76,7 +76,7 @@ export class SubscribersComponent implements OnInit {
       let resu = result.body;
       if (resu.error == false) {
         this.templateDetails = resu.data
-        console.log("temp",this.templateDetails)
+        // console.log("temp",this.templateDetails)
       }
     }, (error) => {
       console.error(error);
@@ -147,31 +147,31 @@ export class SubscribersComponent implements OnInit {
     this.newsletterData.value['htmlContent']= this.htmlElement
     this.newsletterData.value['emailIds']= this.subscriberId.join(" | ")
 
-    // const postData = this.newsletterData.value;
-    // postData['createdBy'] = this.updatedby;
-    // postData['userType'] = "admin";
-    // postData['role'] = this.role;
+    const postData = this.newsletterData.value;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
 
-    // var params = {
-    //   url: 'admin/sendNewsletterToUser',
-    //   data: postData
-    // }
+    var params = {
+      url: 'admin/sendNewsletterToUser',
+      data: postData
+    }
     
-    // this.apiCall.commonPostService(params).subscribe(
-    //   (response: any) => {
-    //     if (response.body.error == false) {
-    //       this.modalService.dismissAll();
-    //       this.subscriberId = []
-    //       this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-    //     } else {
-    //       this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-    //     }
-    //   },
-    //   (error) => {
-    //     this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-    //     console.log('Error', error)
-    //   } 
-    // )
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          this.modalService.dismissAll();
+          this.subscriberId = []
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+        } else {
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
   }
 
   async onSelectAll(){

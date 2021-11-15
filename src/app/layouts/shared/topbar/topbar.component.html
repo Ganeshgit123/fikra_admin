@@ -73,7 +73,7 @@
                     </div>
                     <perfect-scrollbar style="position: relative; height: 230px;">
                         <a class="text-reset notification-item" *ngFor="let item of notificationData">
-                            <div class="media"  *ngIf="item._is_Visited_ == false">
+                            <div class="media" *ngIf="item._is_Visited_ == false">
                                 <div class="avatar-xs mr-3" (click)="visitedStatus(item._id)">
                                     <span class="avatar-title bg-primary rounded-circle font-size-16">
                                         <i class=" ri-mail-check-line"></i>
@@ -86,7 +86,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="media"  *ngIf="item._is_Visited_ == true" style="background-color: #f1f5f7;">
+                            <!-- <div class="media" *ngIf="item._is_Visited_ == true" style="background-color: #f1f5f7;">
                                 <div class="avatar-xs mr-3" (click)="visitedStatus(item._id)" >
                                     <span class="avatar-title bg-success rounded-circle font-size-16">
                                         <i class="ri-checkbox-circle-line"></i>
@@ -96,10 +96,9 @@
                                     <h6 class="mt-0 mb-1"><a href="#{{item?.redirectURL}}"> {{item.notiSub}}</a></h6>
                                     <div class="font-size-12 text-muted">
                                         <p class="mb-1">{{item.notiContent}}</p>
-                                        
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </a>   
                     </perfect-scrollbar>
                     <div class="p-2 border-top">

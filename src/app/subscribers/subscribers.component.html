@@ -43,7 +43,7 @@
             <!--Button-->
             <div *ngIf="subscriberId.length !== 0">
               <button type="button" class="btn btn-primary w-md waves-effect waves-light"
-                (click)="nesletterOpen(newsletter)">
+                (click)="nesletterOpen(newsletter)" style="margin-top: -10px;">
                 Send Newsletter
               </button>
             </div>
@@ -78,7 +78,7 @@
 
                   <div class="form-group" *ngIf="DataTemplete">
                     <label>Preview</label>
-                    <app-template-serve [DataTemplete]='DataTemplete.content' ></app-template-serve>
+                    <app-template-serve [DataTemplete]='DataTemplete' ></app-template-serve>
                   </div>
 
                   <br>

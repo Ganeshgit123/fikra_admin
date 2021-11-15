@@ -19,7 +19,7 @@ export class SmsCampaignComponent implements OnInit {
   showAccept = true;
   selectValue: string[];
   manShow = false;
-
+  heroes = [];
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
@@ -63,7 +63,7 @@ export class SmsCampaignComponent implements OnInit {
       if(resu.error == false)
       {
         this.getuserList = resu.data;
-     console.log("lpl",this.getuserList)
+    //  console.log("lpl",this.getuserList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -76,37 +76,7 @@ export class SmsCampaignComponent implements OnInit {
    }
 
   addUsersSubmit(){
-    const tagValue = this.addUsers.value.mobileNumbers
-
-    const postData = {mobileNumbers:[]};
-    postData['createdBy'] = this.updatedby;
-    postData['userType'] = "admin";
-    postData['role'] = this.role;
-    postData['message'] = this.addUsers.value.message;
-    postData['mobileNumbers'] = tagValue.join('|')
-    
-    
-    var params = {
-      url: 'admin/sendSMSToMultipleUser',
-      data: postData
-    }
-    // console.log("ppa",params)
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-        // console.log("res",response)
-        if (response.body.error == false) {
-
-          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-          this.ngOnInit();
-        } else {
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-        }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
-      } 
-    )
+   
   }
 
   // sllVal(val){
@@ -123,7 +93,45 @@ export class SmsCampaignComponent implements OnInit {
       this.queryContainer = false
     }
   }
-  addGroupSubmit(){
 
+  addHero(newHero: string) {
+    if (newHero) {
+      this.heroes.push(newHero);
+      // console.log(this.heroes)
+    }
+  }
+
+  addGroupSubmit(){
+    const tagValue = this.groupUsers.value.querys
+    const manualVal = this.heroes;
+    const postData = {};
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+    postData['message'] = this.groupUsers.value.message;
+    postData['manualNumbersArray'] = manualVal.join('|');
+    postData['querys'] = tagValue.join('|')
+
+    
+    var params = {
+      url: 'admin/sendSMSToMultipleUserWithGrouph',
+      data: postData
+    }
+    console.log("ppa",params)
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          location.reload();
+        } else {
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
   }
 }
