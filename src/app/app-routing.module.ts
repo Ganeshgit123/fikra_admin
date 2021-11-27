@@ -148,7 +148,7 @@ const routes: Routes = [
 
       {path: 'notifications',component: NotificationsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_notification_true'}},
 
-      {path: 'delete_request',component: UserDeleteListComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: ''}},
+      {path: 'delete_request',component: UserDeleteListComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_accountDeleteRequest_true'}},
 
 
 

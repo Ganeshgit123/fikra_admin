@@ -14,6 +14,7 @@ export class UserDeleteListComponent implements OnInit {
   searchTerm;
   getDeleteReqList: any=[];
   accToken = sessionStorage.getItem('access_token');
+  showAccept = true;
 
   updatedby = sessionStorage.getItem('adminId');
   role = sessionStorage.getItem('adminRole');
@@ -26,8 +27,15 @@ export class UserDeleteListComponent implements OnInit {
    this.breadCrumbItems = [{ label: 'Users List', active: true }];
 
    this._fetchData();
+   this.callRolePermission();
  }
-
+ callRolePermission(){
+  if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+    let contentPermssion = JSON.parse(sessionStorage.getItem('permission'))
+    this.showAccept = contentPermssion[14].write
+    // console.log("prer", contentPermssion[14])
+  }
+}
  _fetchData() {
 
   let params = {

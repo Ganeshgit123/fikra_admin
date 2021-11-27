@@ -21,6 +21,9 @@ export class PermissionComponent implements OnInit {
   adminUserId:any;
   changeTime:FormGroup;
   permisId: any;
+  page = 1;
+  total: any;
+  searchTerm;
 
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -80,6 +83,7 @@ export class PermissionComponent implements OnInit {
       if(resu.error == false)
       {
         this.userList = resu.data;
+        this.total = this.userList.length
         // console.log("permis",this.permissionData)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -108,7 +112,7 @@ export class PermissionComponent implements OnInit {
       if(resu.error == false)
       {
         this.permissionData = resu.data.permission;
-        // console.log("permis",this.permissionData)
+        console.log("permis",this.permissionData)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

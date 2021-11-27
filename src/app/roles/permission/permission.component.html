@@ -2,7 +2,16 @@
     <app-pagetitle title="Permissions" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
     <div class="card">
         <div class="card-body">
-            <p class="text-right"><button type="button"
+           
+            <div class="row">
+                <div class="col-md-9">
+                    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+                        class="d-inline-flex align-items-center">Search:
+                        <input type="text" class="form-control form-control-sm ml-2"
+                        aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                </div>
+                <div class="col-md-3">
+                <p class="text-right"><button type="button"
                     class="btn btn-primary w-md waves-effect waves-light"
                     (click)="viewPermission(permissionModel)">Permission</button></p>
             <ng-template #permissionModel let-modal>
@@ -24,7 +33,9 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of permissionData">
-                                    <td>{{item.permissionName}} - {{item?.permissionDesc}} </td>
+                                    <td>{{item.permissionName}} <br>
+                                        Description <i class="fas fa-info-circle " title="{{item?.description}}"
+                                        style="  color: #5c82d4; "></i></td>
                                     <td>
                                         <label class="switch">
                                             <input *ngIf="item.read == true" type="checkbox" checked
@@ -58,6 +69,8 @@
                     </div>
                 </div>
             </ng-template>
+        </div>
+            </div>
             <div class="table-responsive">
                 <table id="basic-datatable" class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
                     <thead>
@@ -73,7 +86,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of userList">
+                        <tr *ngFor="let item of userList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10;">
                             <td>{{item.systemAdminName}}</td>
                             <td>{{item.systemAdminUserName}}</td>
                             <td>
@@ -119,8 +132,21 @@
                                 </ng-template>
                             </td>
                         </tr>
+                        <tr *ngIf="(userList==null) || (userList.length == 0)">
+                            <td class="text-center" colspan="8">
+                               No Data Found
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
+                <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
             </div>
         </div>
     </div>
