@@ -1,11 +1,11 @@
 <div class="container-fluid">    
- <a routerLink="/investors"><app-pagetitle title="Investors" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
+ <a routerLink="/investors"><app-pagetitle title="Backers" [breadcrumbItems]="breadCrumbItems"></app-pagetitle></a> 
 
 <ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills nav-justified">
 <li [ngbNavItem]="1">
 <a ngbNavLink>
 <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-<span class="d-none d-sm-block">Investors Details</span>
+<span class="d-none d-sm-block">Backers Details</span>
 </a>
 <br>
 <ng-template ngbNavContent>

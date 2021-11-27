@@ -23,7 +23,7 @@ export class ViewInvestorsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Investors' },{ label: 'Investor Details', active: true }];
+    this.breadCrumbItems = [{ label: 'Backers' },{ label: 'Backers Details', active: true }];
     this.route.params.subscribe(params => this.userId = params.id);
     this._fetchData();
     this._fetchFieldData();

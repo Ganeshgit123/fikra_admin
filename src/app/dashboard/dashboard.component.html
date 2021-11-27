@@ -182,7 +182,7 @@
                         <div class="col-6">
                             <div class="text-center mt-4">
                                 <p class="mb-2 text-truncate"><i
-                                        class="mdi mdi-circle text-success font-size-10 mr-1"></i> No. of Investors
+                                        class="mdi mdi-circle text-success font-size-10 mr-1"></i> No. of Backers
                                 </p>
                             </div>
                         </div>
@@ -278,17 +278,21 @@
                                 class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
                                 <thead>
                                     <tr>
+                                        <th>No.</th>
                                         <th>Creator Name</th>
+                                        <th>Created Projects</th>
                                         <th>Email</th>
-                                        <th>Phone</th>
+                                        <!-- <th>Phone</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let creators of CreatorReduce">
+                                    <tr *ngFor="let creators of CreatorReduce; let i = index">
+                                        <td>{{i+1}}</td>
                                         <td><a routerLink="/view-creators/{{ creators._id}}">{{creators.fullName}}</a>
                                         </td>
+                                        <td>{{creators._is_Created_Project_Count_}}</td>
                                         <td>{{creators.email.slice(0, 10)}}...</td>
-                                        <td>{{creators.phoneNumber || creators.mobileNumber}}</td>
+                                        <!-- <td>{{creators.phoneNumber || creators.mobileNumber}}</td> -->
                                     </tr>
                                     <tr *ngIf="(CreatorReduce==null) || (CreatorReduce.length == 0)">
                                         <td class="text-center" colspan="11">
@@ -317,22 +321,26 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Investor - ({{highlyActiveInvestor.length || 0}})</h4>
+                            <h4 class="card-title mb-4">Backers - ({{highlyActiveInvestor.length || 0}})</h4>
                             <table id="basic-datatable"
                                 class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
                                 <thead>
                                     <tr>
-                                        <th>Creator Name</th>
+                                        <th>No.</th>
+                                        <th>Backer Name</th>
+                                        <th>Backed Projects</th>
                                         <th>Email</th>
-                                        <th>Phone</th>
+                                        <!-- <th>Phone</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let Investor of InvestorReduce">
+                                    <tr *ngFor="let Investor of InvestorReduce; let i = index">
+                                        <td>{{i+1}}</td>
                                         <td><a routerLink="/view-investors/{{ Investor._id}}">{{Investor.fullName}}</a>
                                         </td>
+                                        <td>{{Investor._is_Pledged_Count_}}</td>
                                         <td>{{Investor.email.slice(0, 10)}}...</td>
-                                        <td>{{Investor.phoneNumber || Investor.mobileNumber}}</td>
+                                        <!-- <td>{{Investor.phoneNumber || Investor.mobileNumber}}</td> -->
                                     </tr>
                                     <tr *ngIf="(InvestorReduce==null) || (InvestorReduce.length == 0)">
                                         <td class="text-center" colspan="11">

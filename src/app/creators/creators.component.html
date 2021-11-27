@@ -11,8 +11,8 @@
                                 aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
                         </div>
                         <div class="col-md-2">
-                            <p class="text-right"> <button type="button" class="btn btn-primary w-md waves-effect waves-light"
-                                (click)="exportList();">Download Email Id's</button></p>
+                            <p class="text-right"  *ngIf="majorWrite == true"> <button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                                (click)="exportList();">Export Email</button></p>
                         </div>
                     </div>
 

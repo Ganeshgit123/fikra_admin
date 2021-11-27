@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <app-pagetitle title="Users Details" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    
+    <div class="row">
+    <div class="col-12">
+    <div class="card">
+    <div class="card-body">
+    <div class="row mb-md-2">
+    <div class="col-sm-12 col-md-6">
+        <!-- <div class="form-group row">
+            <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
+            <div class="col-md-4">
+              <input class="form-control" type="date"  id="example-date-input">
+            </div>
+            <label for="example-date-input1" class="col-md-2 col-form-label text-center">End Date</label>
+            <div class="col-md-4">
+              <input class="form-control" type="date" id="example-date-input1">
+            </div>
+          </div> -->
+    </div>
+    <!-- Search -->
+    <div class="col-sm-12 col-md-4">
+    <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
+    class="d-inline-flex align-items-center">Search:
+    <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
+    aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+    </div>
+    <div class="col-sm-12 col-md-2">
+   
+    </div>
+    <!-- End search -->
+    <!-- Table -->
+    <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
+    <thead>
+    <tr>
+      <th>User Email</th>
+      <th>User Type</th>
+      <th>User Id</th>
+      <th>Request Id</th>
+      <th>Delete Reason</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of getDeleteReqList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
+      <td>{{user.userEmail}}</td>
+      <td>{{user.userType}}</td>
+      <td *ngIf="user.userType == 'investor'"><a routerLink="/view-investors/{{user.userId}}" *ngIf="user._isAccountDeleted_ == false">{{user.userId}}</a></td>
+      <td *ngIf="user.userType !== 'investor'"><a routerLink="/view-creators/{{user.userId}}" *ngIf="user._isAccountDeleted_ == false">{{user.userId}}</a></td>
+      <td>{{user._id}}</td>
+      <td>{{user.deleteReson}}</td>
+      <td>
+        <span *ngIf="user._isAccountDeleted_ == false"><a class="text-danger text-info" ngbTooltip="Delete"
+     (click)="deleteReqUser(user._id)"><i class="mdi mdi-trash-can font-size-18"></i></a></span>
+     <span *ngIf="user._isAccountDeleted_ == true">Account Deleted</span>
+      </td>
+    </tr>
+    <tr *ngIf="(getDeleteReqList==null) || (getDeleteReqList.length == 0)">
+        <td class="text-center" colspan="6">
+           No Data Found
+        </td>
+    </tr>
+    </tbody> 
+    </table>
+    <!-- Pagination -->
+    <div class="col-sm-12 col-md-12">
+      <div class="text-md-right float-md-right pagination-rounded">
+        <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+        </ngb-pagination>
+    </div>
+    </div>
+    <!-- End Pagination -->
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>

@@ -75,8 +75,8 @@
     "CREATORS": {
       "TEXT": "Creators"
     },
-    "INVESTORS": {
-      "TEXT": "Investors"
+    "BACKERS": {
+      "TEXT": "Backers"
     },
     "PROJECTS": {
       "TEXT": "Projects"
@@ -123,8 +123,8 @@
     "TAGGS": {
       "TEXT": "Tags"
     },
-    "INVESTORS_FORM": {
-      "TEXT": "Investor Form"
+    "BACKERS_FORM": {
+      "TEXT": "Backer Form"
     },
     "CREATORS_FORM": {
       "TEXT": "Creator Form"
@@ -209,6 +209,12 @@
     },
     "TRANSLATION": {
       "TEXT": "Translation"
+    },
+    "USERDELETEREQUEST": {
+      "TEXT": "Users Delete Request"
+    },
+    "MAIL_MSG": {
+      "TEXT": "Mail Msg Contents"
     },
     
     "LAYOUTS": {

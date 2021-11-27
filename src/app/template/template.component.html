@@ -496,7 +496,7 @@
                             <th>Project Two Id</th>
                             <th>Project Three Id</th>
                             <!-- <th>Url</th> -->
-                            <th>Action</th>
+                            <th *ngIf="showAccept === true">Action</th>
                         </tr>
                     </thead>
                     <tbody
@@ -509,7 +509,7 @@
                             <td>{{cont.project_Two.title}}</td>
                             <td>{{cont.project_Three.title}}</td>
                             <!-- <td>{{cont.learnMore_URL}}</td> -->
-                            <td>
+                            <td *ngIf="showAccept === true">
                                 <a class="mr-3 text-info" ngbTooltip="Edit" 
                                 (click)="clickTempData(user)">
                                     <i class="mdi mdi-pencil font-size-18"></i>

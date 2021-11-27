@@ -165,7 +165,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       },
       {
           id: 8,
-          label: 'MENUITEMS.INVESTORS.TEXT',
+          label: 'MENUITEMS.BACKERS.TEXT',
           icon: 'mdi mdi-account-cash',
           link: '/investors'
       },
@@ -181,13 +181,19 @@ export class SidebarComponent implements OnInit, AfterViewInit {
                   parentId: 9
               },
               {
-                  id: 41,
+                  id: 46,
                   label: 'MENUITEMS.BANK_REQUESTS.TEXT',
                   link: '/bank_ac_request_lists',
                   parentId: 9
               },
           ]
       },
+      {
+        id: 47,
+        label: 'MENUITEMS.USERDELETEREQUEST.TEXT',
+        icon: 'mdi mdi-delete-sweep',
+        link: '/delete_request'
+    },
       {
           id: 11,
           label: 'MENUITEMS.CMS.TEXT',
@@ -308,6 +314,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
                   link: '/special_services',
                   parentId: 25
               },
+              {
+                id: 48,
+                label: 'MENUITEMS.MAIL_MSG.TEXT',
+                link: '/mail_messages',
+                parentId: 25
+            },
           ]
       },
       {
@@ -342,7 +354,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           subItems: [
               {
                   id: 36,
-                  label: 'MENUITEMS.INVESTORS_FORM.TEXT',
+                  label: 'MENUITEMS.BACKERS_FORM.TEXT',
                   link: '/investor_form',
                   parentId: 35
               },

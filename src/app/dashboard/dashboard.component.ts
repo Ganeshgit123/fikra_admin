@@ -190,7 +190,7 @@ export class DashboardComponent implements OnInit {
               type: "donut",
             },
 
-            labels: ["No. of Creators", "No. of Investors"],
+            labels: ["No. of Creators", "No. of Backers"],
             // plotOptions: {
             //     pie: {
             //         donut: {

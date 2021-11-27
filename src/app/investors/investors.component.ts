@@ -19,6 +19,7 @@ export class InvestorsComponent implements OnInit {
  page = 1;
  total: any;
  searchTerm;
+ showAccept = true;
  investorcsvOptions: any;
 
  accToken = sessionStorage.getItem('access_token');
@@ -34,12 +35,20 @@ export class InvestorsComponent implements OnInit {
 
  ngOnInit() {
 
-   this.breadCrumbItems = [{ label: 'Invesors List', active: true }];
+   this.breadCrumbItems = [{ label: 'Backers List', active: true }];
 
    this._fetchData();
+   this.callRolePermission();
+
  }
 
- 
+ callRolePermission(){
+  if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+    let settingPermssion = JSON.parse(sessionStorage.getItem('permission'))
+    this.showAccept = settingPermssion[1].write
+    // console.log("prer", settingPermssion[1])
+  }
+}
 
  _fetchData() {
 

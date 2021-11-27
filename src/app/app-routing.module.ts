@@ -62,6 +62,8 @@ import { TransactionComponent } from './projects/transaction/transaction.compone
 import { ReportsComponent } from './reports/reports.component';
 import { ChangeRequestUserComponent } from './roles/change-request-user/change-request-user.component';
 import { TranslationsComponent } from './translations/translations.component';
+import { UserDeleteListComponent } from './user-delete-list/user-delete-list.component';
+import { MailMsgsComponent } from './settings/mail-msgs/mail-msgs.component';
 
 const routes: Routes = [
   {
@@ -117,6 +119,7 @@ const routes: Routes = [
       {path: 'tags',component: TagsComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_setting_true'}},
       {path: 'special_services',component: SpecialServicesComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_setting_true'}},
       {path: 'commission_charges',component: CommissionChargesComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_setting_true'}},
+      {path: 'mail_messages',component: MailMsgsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_setting_true'}},
 
       {path: 'subscribers',component: SubscribersComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_subscribers_true'}},
       {path: 'special_requests',component: SpecialRequestsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_specialRequest_true'}},
@@ -144,6 +147,10 @@ const routes: Routes = [
       {path: 'translation',component: TranslationsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_translation_true'}},
 
       {path: 'notifications',component: NotificationsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_notification_true'}},
+
+      {path: 'delete_request',component: UserDeleteListComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: ''}},
+
+
 
     ],
     canActivate: [AuthGuard]

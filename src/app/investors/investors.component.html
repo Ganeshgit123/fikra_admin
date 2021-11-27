@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<app-pagetitle title="Investor Details" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<app-pagetitle title="Backers Details" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
 <div class="row">
 <div class="col-12">
@@ -26,8 +26,8 @@ class="d-inline-flex align-items-center">Search:
 aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
 </div>
 <div class="col-sm-12 col-md-2">
- <p class="text-right"> <button type="button" class="btn btn-primary w-md waves-effect waves-light"
-  (click)="exportList();">Download Email Id's</button></p>
+ <p class="text-right" *ngIf="showAccept === true"> <button type="button" class="btn btn-primary w-md waves-effect waves-light"
+  (click)="exportList();">Export Email</button></p>
 </div>
 <!-- End search -->
 <!-- Table -->
@@ -52,6 +52,11 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
   <td>{{user.mobileNumber}}</td>
   <td>{{user.country}}</td>
   <td>{{user.city}}</td>
+</tr>
+<tr *ngIf="(getuserList==null) || (getuserList.length == 0)">
+  <td class="text-center" colspan="6">
+     No Data Found
+  </td>
 </tr>
 </tbody> 
 </table>

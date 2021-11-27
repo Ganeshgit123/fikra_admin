@@ -24,7 +24,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of permissionData">
-                                    <td>{{item.permissionName}}</td>
+                                    <td>{{item.permissionName}} - {{item?.permissionDesc}} </td>
                                     <td>
                                         <label class="switch">
                                             <input *ngIf="item.read == true" type="checkbox" checked
