@@ -87,7 +87,7 @@ const routes: Routes = [
       
       {path: 'creators',component: CreatorsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_creator_true'}},
       {path: 'view-creators/:id',component: ViewCreatorsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_creator_true'}},
-      {path: 'bank_ac_request_lists',component: BankAccountListsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_creator_true'}},
+      {path: 'bank_ac_request_lists/:id',component: BankAccountListsComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_creator_true'}},
 
       
       {path: 'privacy',component: PrivacyPolicyComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},

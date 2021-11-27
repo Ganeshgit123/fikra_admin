@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { ApiCallService } from '../../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router, ActivatedRoute } from '@angular/router';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-bank-account-lists',
@@ -28,16 +30,19 @@ export class BankAccountListsComponent implements OnInit {
   getVerifyBankList = [];
   verifyBankTotal: any;
   searchTerm1;
-
+  userId: any;
+  getBankDetails:any = [];
   constructor(
   private apiCall: ApiCallService,
   private formBuilder: FormBuilder,
-  private modalService: NgbModal) {
+  private modalService: NgbModal,
+  private route: ActivatedRoute,
+  ) {
  }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Requests List', active: true }];
-
+    this.route.params.subscribe(params => this.userId = params.id);
     this._fetchData();
     this.callRolePermission();
   }
@@ -78,26 +83,28 @@ export class BankAccountListsComponent implements OnInit {
   _fetchData() {
 
     let params = {
-      url: "admin/getRequestedBank",
-    }  
-    this.apiCall.userGetService(params).subscribe((result:any)=>{
-      let resu = result.body;
-      if(resu.error == false)
-      {
-        this.getRequestList = resu.data;
-        this.getReqTotal = this.getRequestList.length
-      console.log("fetch",this.getRequestList)
-      }else{
-        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      url: "admin/getBankDetailsById",
+      userId: this.userId,
+    };
+    this.apiCall.userGetService(params).subscribe(
+      (result: any) => {
+        let resu = result.body;
+        if (resu.error == false) {
+          this.getBankDetails = resu.data;
+          this.getReqTotal = this.getBankDetails.length
+          // console.log("ff",this.getBankDetails)
+        } else {
+          this.apiCall.showToast(resu.message, "Error", "errorToastr");
+        }
+      },
+      (error) => {
+        console.error(error);
       }
-    },(error)=>{
-       console.error(error);
-       
-    });
+    );
   
    }
 
-   onBankVerficationStatus(values:any,val){
+   onBankVerficationStatus(values:any,userid,bankid){
 
     if(values.currentTarget.checked === true){
       var visible = true 
@@ -106,14 +113,15 @@ export class BankAccountListsComponent implements OnInit {
      }
      const object = {}
 
-     object['userId'] = val;
-     object['_is_Bank_Account_Verifyed_'] = visible;
+     object['userId'] = userid;
+     object['bankId'] = bankid;
+     object['approved'] = visible;
      object['createdBy'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;
 
      var params = {
-      url: 'admin/adminApproveBank',
+      url: 'admin/approveBankById',
       data: object
     }
     this.apiCall.commonPostService(params).subscribe(
@@ -134,7 +142,7 @@ export class BankAccountListsComponent implements OnInit {
     )
   }
 
-  onBankVerifyRequestStatus(val,id){
+  onBankVerifyRequestStatus(val,userid,bankid){
     if(val.currentTarget.checked === true){
       var visible = true 
       var valFrom = false
@@ -154,10 +162,11 @@ export class BankAccountListsComponent implements OnInit {
    object['feildName'] = "Status";
    object['valueFrom'] = valFrom;
    object['valueTo'] = valTo;
-   object['APIURL'] = "https://fikra.app/api/admin/adminApproveBank";
+   object['APIURL'] = "https://fikra.app/api/admin/approveBankById";
    object['paramsForAPI'] = {
-     ['userId'] : id,
-     ['_is_Bank_Account_Verifyed_'] : visible,
+     ['userId'] : userid,
+     ['approved'] : visible,
+     ['bankId'] : bankid,
    };
 
     var params = {
@@ -181,6 +190,54 @@ export class BankAccountListsComponent implements OnInit {
        console.log('Error', error)
      }
    )
+  }
+
+  deleteBankReq(userid,bankid) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#34c38f",
+      cancelButtonColor: "#ff3d60",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.value) {
+        const data = {};
+        data["userId"] = userid;
+        data["bankId"] = bankid;
+        data["createdBy"] = this.updatedby;
+        data["userType"] = "admin";
+        data["role"] = this.role;
+  
+        var params = {
+          url: "admin/deleteBankById",
+          data: data,
+        };
+        // console.log("fef",params)
+        this.apiCall.commonPostService(params).subscribe(
+          (response: any) => {
+            if (response.body.error == false) {
+              // Success
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              // this.apiCall.showToast('Status Updated Successfully', 'Success', 'successToastr')
+              this.ngOnInit();
+            } else {
+              // Query Error
+              this.apiCall.showToast(
+                response.body.message,
+                "Error",
+                "errorToastr"
+              );
+            }
+          },
+          (error) => {
+            this.apiCall.showToast("Server Error !!", "Oops", "errorToastr");
+            console.log("Error", error);
+          }
+        );
+      }
+    });
   }
 
   verifiedList(creatorCorner: any){

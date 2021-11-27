@@ -170,24 +170,30 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           link: '/investors'
       },
       {
-          id: 9,
-          label: 'MENUITEMS.CREATORS.TEXT',
-          icon: 'mdi mdi-account-cog',
-          subItems: [
-              {
-                  id: 10,
-                  label: 'MENUITEMS.CREATORS_LIST.TEXT',
-                  link: '/creators',
-                  parentId: 9
-              },
-              {
-                  id: 46,
-                  label: 'MENUITEMS.BANK_REQUESTS.TEXT',
-                  link: '/bank_ac_request_lists',
-                  parentId: 9
-              },
-          ]
-      },
+        id: 8,
+        label: 'MENUITEMS.CREATORS.TEXT',
+        icon: 'mdi mdi-account-cog',
+        link: '/creators'
+    },
+      // {
+      //     id: 9,
+      //     label: 'MENUITEMS.CREATORS.TEXT',
+      //     icon: 'mdi mdi-account-cog',
+      //     subItems: [
+      //         {
+      //             id: 10,
+      //             label: 'MENUITEMS.CREATORS_LIST.TEXT',
+      //             link: '/creators',
+      //             parentId: 9
+      //         },
+      //         {
+      //             id: 46,
+      //             label: 'MENUITEMS.BANK_REQUESTS.TEXT',
+      //             link: '/bank_ac_request_lists',
+      //             parentId: 9
+      //         },
+      //     ]
+      // },
       {
         id: 47,
         label: 'MENUITEMS.USERDELETEREQUEST.TEXT',
