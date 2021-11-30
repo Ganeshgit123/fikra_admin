@@ -61,7 +61,7 @@ export class ViewProjectsComponent implements OnInit {
 
     this.fetchtagArray();
 
-    this.fetchTagList();
+    // this.fetchTagList();
     this._fetchStory();
     this.callRolePermission();
 

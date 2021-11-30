@@ -20,7 +20,9 @@ export class LoginComponent implements OnInit {
   isShow = false;
   lat : any;
   lng : any;
- 
+  showPassword = false;
+  input: any;
+
   constructor(
     private formBuilder: FormBuilder,
      private route: ActivatedRoute,
@@ -107,5 +109,4 @@ export class LoginComponent implements OnInit {
        
      })
   }
-
 }

@@ -33,8 +33,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.callRolePermission();
   }
 
-  callRolePermission(){
-    if(sessionStorage.getItem('adminRole') !== 's_a_r'){
+  callRolePermission() {
+    if (sessionStorage.getItem('adminRole') !== 's_a_r') {
       this.hide = true;
     }
   }
@@ -59,8 +59,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
    * Activate the parent dropdown
    */
   _activateMenuDropdown() {
-    this._removeAllClass('mm-active');
-    this._removeAllClass('mm-show');
+    // this._removeAllClass('mm-active');
+    // this._removeAllClass('mm-show');
     const links = document.getElementsByClassName('side-nav-link-ref');
     let menuItemEl = null;
 
@@ -80,14 +80,18 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
 
     if (menuItemEl) {
+
       menuItemEl.classList.add('active');
       const parentEl = menuItemEl.parentElement;
 
       if (parentEl) {
-        parentEl.classList.add('mm-active');
+        menuItemEl.classList.remove('active');
 
         const parent2El = parentEl.parentElement.closest('ul');
+        parent2El.classList.add('mm-active');
+
         if (parent2El && parent2El.id !== 'side-menu') {
+          
           parent2El.classList.add('mm-show');
           const parent3El = parent2El.parentElement;
 
@@ -119,62 +123,62 @@ export class SidebarComponent implements OnInit, AfterViewInit {
    * Initialize
    */
   initialize(): void {
-    
+
     this.menuItems = [
       {
-          id: 1,
-          label: 'MENUITEMS.MENU.TEXT',
-          isTitle: true
+        id: 1,
+        label: 'MENUITEMS.MENU.TEXT',
+        isTitle: true
       },
       {
-          id: 2,
-          label: 'MENUITEMS.DASHBOARDS.TEXT',
-          icon: 'ri-dashboard-line',
-          link: '/dashboard'
+        id: 2,
+        label: 'MENUITEMS.DASHBOARDS.TEXT',
+        icon: 'ri-dashboard-line',
+        link: '/dashboard'
       },
       {
-          id: 3,
-          label: 'MENUITEMS.PROJECTS.TEXT',
-          icon: 'ri-stack-fill',
-          subItems: [
-              {
-                  id: 4,
-                  label: 'MENUITEMS.PROJECTS_LIST.TEXT',
-                  link: '/projects',
-                  parentId: 3
-              },
-              {
-                  id: 5,
-                  label: 'MENUITEMS.REQUESTED_LIST.TEXT',
-                  link: '/requested_projects',
-                  parentId: 3
-              },
-              {
-                  id: 6,
-                  label: 'MENUITEMS.RECOMMENDED_LIST.TEXT',
-                  link: '/recommended_projects',
-                  parentId: 3
-              },
-              {
-                  id: 7,
-                  label: 'MENUITEMS.PROJECT_REPORTS.TEXT',
-                  link: '/project_reports',
-                  parentId: 3
-              },
-          ]
+        id: 3,
+        label: 'MENUITEMS.PROJECTS.TEXT',
+        icon: 'ri-stack-fill',
+        subItems: [
+          {
+            id: 4,
+            label: 'MENUITEMS.PROJECTS_LIST.TEXT',
+            link: '/projects',
+            parentId: 3
+          },
+          {
+            id: 5,
+            label: 'MENUITEMS.REQUESTED_LIST.TEXT',
+            link: '/requested_projects',
+            parentId: 3
+          },
+          {
+            id: 6,
+            label: 'MENUITEMS.RECOMMENDED_LIST.TEXT',
+            link: '/recommended_projects',
+            parentId: 3
+          },
+          {
+            id: 7,
+            label: 'MENUITEMS.PROJECT_REPORTS.TEXT',
+            link: '/project_reports',
+            parentId: 3
+          },
+        ]
       },
       {
-          id: 8,
-          label: 'MENUITEMS.BACKERS.TEXT',
-          icon: 'mdi mdi-account-cash',
-          link: '/investors'
+        id: 8,
+        label: 'MENUITEMS.BACKERS.TEXT',
+        icon: 'mdi mdi-account-cash',
+        link: '/investors'
       },
       {
         id: 8,
         label: 'MENUITEMS.CREATORS.TEXT',
         icon: 'mdi mdi-account-cog',
         link: '/creators'
-    },
+      },
       // {
       //     id: 9,
       //     label: 'MENUITEMS.CREATORS.TEXT',
@@ -199,231 +203,231 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         label: 'MENUITEMS.USERDELETEREQUEST.TEXT',
         icon: 'mdi mdi-delete-sweep',
         link: '/delete_request'
-    },
-      {
-          id: 11,
-          label: 'MENUITEMS.CMS.TEXT',
-          icon: 'mdi mdi-file-document-edit',
-          subItems: [
-              {
-                  id: 12,
-                  label: 'MENUITEMS.HOMEPAGE.TEXT',
-                  link: '/home_page',
-                  parentId: 11
-              },
-              {
-                  id: 13,
-                  label: 'MENUITEMS.ABOUTPAGE.TEXT',
-                  link: '/about_page',
-                  parentId: 11
-              },
-              {
-                  id: 14,
-                  label: 'MENUITEMS.STARTPROJECT.TEXT',
-                  link: '/start_project_page',
-                  parentId: 11
-              },
-              {
-                  id: 15,
-                  label: 'MENUITEMS.CREATEPROJECT.TEXT',
-                  link: '/create_project',
-                  parentId: 11
-              },
-              {
-                  id: 16,
-                  label: 'MENUITEMS.PROJECTCONTENT.TEXT',
-                  link: '/project_content',
-                  parentId: 11
-              },
-              {
-                  id: 17,
-                  label: 'MENUITEMS.CREATOR_HANDBOOK.TEXT',
-                  link: '/creator_handbook',
-                  parentId: 11
-              },
-              {
-                  id: 18,
-                  label: 'MENUITEMS.CONTACT_US.TEXT',
-                  link: '/contact',
-                  parentId: 11
-              },
-              {
-                  id: 19,
-                  label: 'MENUITEMS.CAREER.TEXT',
-                  link: '/career',
-                  parentId: 11
-              },
-              {
-                  id: 20,
-                  label: 'MENUITEMS.FAQ.TEXT',
-                  link: '/faq',
-                  parentId: 11
-              },
-              {
-                  id: 21,
-                  label: 'MENUITEMS.HELP_GUIDES.TEXT',
-                  link: '/help_guide',
-                  parentId: 11
-              },
-              {
-                  id: 22,
-                  label: 'MENUITEMS.PRIVACYPOLICY.TEXT',
-                  link: '/privacy',
-                  parentId: 11
-              },
-              {
-                  id: 23,
-                  label: 'MENUITEMS.COOKIEPOLICY.TEXT',
-                  link: '/cookie_policy',
-                  parentId: 11
-              },
-              {
-                  id: 24,
-                  label: 'MENUITEMS.TERMSOFUSE.TEXT',
-                  link: '/terms_of_use',
-                  parentId: 11
-              },
-          ]
       },
       {
-          id: 25,
-          label: 'MENUITEMS.SETTINGS.TEXT',
-          icon: 'ri-settings-5-line',
-          subItems: [
-              {
-                  id: 26,
-                  label: 'MENUITEMS.COMMISSION_CHARGES.TEXT',
-                  link: '/commission_charges',
-                  parentId: 25
-              },
-              {
-                  id: 27,
-                  label: 'MENUITEMS.CATEGORY_SUB_CATEGORY.TEXT',
-                  link: '/category_sub_category',
-                  parentId: 25
-              },
-              {
-                  id: 28,
-                  label: 'MENUITEMS.COUNTRY_CITY.TEXT',
-                  link: '/country_city',
-                  parentId: 25
-              },
-              // {
-              //     id: 29,
-              //     label: 'MENUITEMS.TAGGS.TEXT',
-              //     link: '/tags',
-              //     parentId: 25
-              // },
-              {
-                  id: 30,
-                  label: 'MENUITEMS.SPECIAL_SERVICES.TEXT',
-                  link: '/special_services',
-                  parentId: 25
-              },
-              {
-                id: 48,
-                label: 'MENUITEMS.MAIL_MSG.TEXT',
-                link: '/mail_messages',
-                parentId: 25
-            },
-          ]
+        id: 11,
+        label: 'MENUITEMS.CMS.TEXT',
+        icon: 'mdi mdi-file-document-edit',
+        subItems: [
+          {
+            id: 12,
+            label: 'MENUITEMS.HOMEPAGE.TEXT',
+            link: '/home_page',
+            parentId: 11
+          },
+          {
+            id: 13,
+            label: 'MENUITEMS.ABOUTPAGE.TEXT',
+            link: '/about_page',
+            parentId: 11
+          },
+          {
+            id: 14,
+            label: 'MENUITEMS.STARTPROJECT.TEXT',
+            link: '/start_project_page',
+            parentId: 11
+          },
+          {
+            id: 15,
+            label: 'MENUITEMS.CREATEPROJECT.TEXT',
+            link: '/create_project',
+            parentId: 11
+          },
+          {
+            id: 16,
+            label: 'MENUITEMS.PROJECTCONTENT.TEXT',
+            link: '/project_content',
+            parentId: 11
+          },
+          {
+            id: 17,
+            label: 'MENUITEMS.CREATOR_HANDBOOK.TEXT',
+            link: '/creator_handbook',
+            parentId: 11
+          },
+          {
+            id: 18,
+            label: 'MENUITEMS.CONTACT_US.TEXT',
+            link: '/contact',
+            parentId: 11
+          },
+          {
+            id: 19,
+            label: 'MENUITEMS.CAREER.TEXT',
+            link: '/career',
+            parentId: 11
+          },
+          {
+            id: 20,
+            label: 'MENUITEMS.FAQ.TEXT',
+            link: '/faq',
+            parentId: 11
+          },
+          {
+            id: 21,
+            label: 'MENUITEMS.HELP_GUIDES.TEXT',
+            link: '/help_guide',
+            parentId: 11
+          },
+          {
+            id: 22,
+            label: 'MENUITEMS.PRIVACYPOLICY.TEXT',
+            link: '/privacy',
+            parentId: 11
+          },
+          {
+            id: 23,
+            label: 'MENUITEMS.COOKIEPOLICY.TEXT',
+            link: '/cookie_policy',
+            parentId: 11
+          },
+          {
+            id: 24,
+            label: 'MENUITEMS.TERMSOFUSE.TEXT',
+            link: '/terms_of_use',
+            parentId: 11
+          },
+        ]
       },
       {
-          id: 31,
-          label: 'MENUITEMS.ROLES & PERMISSION.TEXT',
-          icon: '  fas fa-user-lock',
-          subItems: [
-              {
-                  id: 32,
-                  label: 'MENUITEMS.ROLES.TEXT',
-                  link: '/roles',
-                  parentId: 31
-              },
-              {
-                  id: 33,
-                  label: 'MENUITEMS.WRITEREQUESTS.TEXT',
-                  link: '/user_write_request',
-                  parentId: 31
-              },
-              {
-                id: 34,
-                label: 'MENUITEMS.ADMIN_USERS.TEXT',
-                link: '/admin_users',
-                parentId: 31
-            },
-          ]
+        id: 25,
+        label: 'MENUITEMS.SETTINGS.TEXT',
+        icon: 'ri-settings-5-line',
+        subItems: [
+          {
+            id: 26,
+            label: 'MENUITEMS.COMMISSION_CHARGES.TEXT',
+            link: '/commission_charges',
+            parentId: 25
+          },
+          {
+            id: 27,
+            label: 'MENUITEMS.CATEGORY_SUB_CATEGORY.TEXT',
+            link: '/category_sub_category',
+            parentId: 25
+          },
+          {
+            id: 28,
+            label: 'MENUITEMS.COUNTRY_CITY.TEXT',
+            link: '/country_city',
+            parentId: 25
+          },
+          // {
+          //     id: 29,
+          //     label: 'MENUITEMS.TAGGS.TEXT',
+          //     link: '/tags',
+          //     parentId: 25
+          // },
+          {
+            id: 30,
+            label: 'MENUITEMS.SPECIAL_SERVICES.TEXT',
+            link: '/special_services',
+            parentId: 25
+          },
+          {
+            id: 48,
+            label: 'MENUITEMS.MAIL_MSG.TEXT',
+            link: '/mail_messages',
+            parentId: 25
+          },
+        ]
       },
       {
-          id: 35,
-          label: 'MENUITEMS.SIGNUPFORM.TEXT',
-          icon: 'ri-eraser-fill',
-          subItems: [
-              {
-                  id: 36,
-                  label: 'MENUITEMS.BACKERS_FORM.TEXT',
-                  link: '/investor_form',
-                  parentId: 35
-              },
-              {
-                  id: 37,
-                  label: 'MENUITEMS.CREATORS_FORM.TEXT',
-                  link: '/creator_form',
-                  parentId: 35
-              },
-          ]
+        id: 31,
+        label: 'MENUITEMS.ROLES & PERMISSION.TEXT',
+        icon: '  fas fa-user-lock',
+        subItems: [
+          {
+            id: 32,
+            label: 'MENUITEMS.ROLES.TEXT',
+            link: '/roles',
+            parentId: 31
+          },
+          {
+            id: 33,
+            label: 'MENUITEMS.WRITEREQUESTS.TEXT',
+            link: '/user_write_request',
+            parentId: 31
+          },
+          {
+            id: 34,
+            label: 'MENUITEMS.ADMIN_USERS.TEXT',
+            link: '/admin_users',
+            parentId: 31
+          },
+        ]
       },
       {
-          id: 38,
-          label: 'MENUITEMS.SPECIAL_REQUESTS.TEXT',
-          icon: ' ri-external-link-fill',
-          link: '/special_requests'
+        id: 35,
+        label: 'MENUITEMS.SIGNUPFORM.TEXT',
+        icon: 'ri-eraser-fill',
+        subItems: [
+          {
+            id: 36,
+            label: 'MENUITEMS.BACKERS_FORM.TEXT',
+            link: '/investor_form',
+            parentId: 35
+          },
+          {
+            id: 37,
+            label: 'MENUITEMS.CREATORS_FORM.TEXT',
+            link: '/creator_form',
+            parentId: 35
+          },
+        ]
       },
       {
-          id: 39,
-          label: 'MENUITEMS.REPORTS.TEXT',
-          icon: ' ri-file-list-3-fill',
-          link: '/reports'
+        id: 38,
+        label: 'MENUITEMS.SPECIAL_REQUESTS.TEXT',
+        icon: ' ri-external-link-fill',
+        link: '/special_requests'
       },
       {
-          id: 40,
-          label: 'MENUITEMS.TEMPLATES.TEXT',
-          icon: ' ri-layout-3-line',
-          link: '/template'
+        id: 39,
+        label: 'MENUITEMS.REPORTS.TEXT',
+        icon: ' ri-file-list-3-fill',
+        link: '/reports'
       },
       {
-          id: 41,
-          label: 'MENUITEMS.SUBSCRIBERS.TEXT',
-          icon: ' ri-user-shared-fill',
-          link: '/subscribers'
+        id: 40,
+        label: 'MENUITEMS.TEMPLATES.TEXT',
+        icon: ' ri-layout-3-line',
+        link: '/template'
       },
       {
-          id: 42,
-          label: 'MENUITEMS.INVOICE_BILL.TEXT',
-          icon: 'fas fa-file-invoice',
-          link: '/bill_list'
+        id: 41,
+        label: 'MENUITEMS.SUBSCRIBERS.TEXT',
+        icon: ' ri-user-shared-fill',
+        link: '/subscribers'
       },
       {
-          id: 43,
-          label: 'MENUITEMS.SMSCAMPAIGN.TEXT',
-          icon: ' ri-message-2-line',
-          link: '/sms_campaign'
+        id: 42,
+        label: 'MENUITEMS.INVOICE_BILL.TEXT',
+        icon: 'fas fa-file-invoice',
+        link: '/bill_list'
       },
       {
-          id: 44,
-          label: 'MENUITEMS.TRANSLATION.TEXT',
-          icon: 'fas fa-language',
-          link: '/translation'
+        id: 43,
+        label: 'MENUITEMS.SMSCAMPAIGN.TEXT',
+        icon: ' ri-message-2-line',
+        link: '/sms_campaign'
       },
       {
-          id: 45,
-          label: 'MENUITEMS.NOTIFICATIONS.TEXT',
-          icon: 'ri-notification-4-line',
-          link: '/notifications'
+        id: 44,
+        label: 'MENUITEMS.TRANSLATION.TEXT',
+        icon: 'fas fa-language',
+        link: '/translation'
       },
-  ];
+      {
+        id: 45,
+        label: 'MENUITEMS.NOTIFICATIONS.TEXT',
+        icon: 'ri-notification-4-line',
+        link: '/notifications'
+      },
+    ];
 
-//   var withoutRole = this.menuItems.filter(function(value) { return value.id != '32'  });
-// console.log(withoutRole);
+    //   var withoutRole = this.menuItems.filter(function(value) { return value.id != '32'  });
+    // console.log(withoutRole);
 
 
 
