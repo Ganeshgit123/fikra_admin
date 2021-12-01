@@ -8,13 +8,9 @@
     </div>
     <div class="modal-body">
     <form [formGroup]="addStringData">
-    <div class="form-group" *ngIf = "!isEdit">
-        <label>Key Name</label>
-        <input type="text" class="form-control" formControlName="key">
-</div>
-<div class="form-group" *ngIf = "isEdit">
+<div class="form-group">
 <label>Key Name</label>
-<input type="text" class="form-control" formControlName="key" readonly>
+<input type="text" class="form-control" formControlName="key" [readonly]="isEdit">
 </div>
     <div class="form-group">
         <label>English</label>

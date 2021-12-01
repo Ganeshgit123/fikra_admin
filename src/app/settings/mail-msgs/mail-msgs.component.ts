@@ -69,6 +69,7 @@ export class MailMsgsComponent implements OnInit {
   }
 
   addNewMsg(stringModel: any){
+    this.isEdit = false;
     this.addMailContent.reset();
     this.modalService.open(stringModel, { centered: true });
 
@@ -94,6 +95,7 @@ export class MailMsgsComponent implements OnInit {
         if (response.body.error == false) {
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.modalService.dismissAll();
+          this.addMailContent.reset();
           this.ngOnInit();
         } else {
           // Query Error
@@ -138,6 +140,7 @@ export class MailMsgsComponent implements OnInit {
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.isEdit = false;
           this.modalService.dismissAll();
+          this.addMailContent.reset();
           this.ngOnInit();
         } else {
           // Query Error

@@ -70,10 +70,12 @@ export class TranslationsComponent implements OnInit {
   }
 
   addString(stringModel: any){
+    this.isEdit = false;
     this.addStringData.reset();
     this.modalService.open(stringModel, { centered: true });
 
   }
+  
 
   onSubmit(){
 
@@ -96,6 +98,7 @@ export class TranslationsComponent implements OnInit {
         if (response.body.error == false) {
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.modalService.dismissAll();
+          this.addStringData.reset();
           this.ngOnInit();
         } else {
           // Query Error
@@ -115,7 +118,8 @@ export class TranslationsComponent implements OnInit {
     this.isEdit = true;
 
     this.contentId = data['_id']
-    this.addStringData   = this.formBuilder.group({
+    
+    this.addStringData = this.formBuilder.group({
       key: [data['key']],
       en: [data['en']],
       ar: [data['ar']],
@@ -141,6 +145,7 @@ export class TranslationsComponent implements OnInit {
           this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
           this.isEdit = false;
           this.modalService.dismissAll();
+          this.addStringData.reset();
           this.ngOnInit();
         } else {
           // Query Error
