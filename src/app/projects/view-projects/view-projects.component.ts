@@ -29,7 +29,8 @@ export class ViewProjectsComponent implements OnInit {
   permName:any;
   isTimeBasedWirte:boolean;
   canWrite:boolean;
-
+  bankStatus: any;
+  
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -120,7 +121,9 @@ export class ViewProjectsComponent implements OnInit {
               this.recommend = resu.data._is_Recommeded_;
               this.feature = resu.data._is_featured_;
 
-            this.homeStatus = resu._is_On_HomeSlide_
+            this.homeStatus = resu._is_On_HomeSlide_;
+
+            this.bankStatus = resu.data._isBankAdded_;
               // console.log("roc",this.homeStatus)
           
       }else{

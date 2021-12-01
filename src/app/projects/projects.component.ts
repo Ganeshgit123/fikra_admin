@@ -111,7 +111,7 @@ export class ProjectsComponent implements OnInit {
         if (resu.error == false) {
           this.projectList = resu.data;
           this.projectSecondaryList = this.projectList;
-          this.total = this.projectList.length;
+          this.total = this.projectSecondaryList.length;
 
           this.projectSecondaryList.forEach((element) => {
             var firstDate = element.basicInfoId.launchDate;

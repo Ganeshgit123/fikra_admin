@@ -76,10 +76,9 @@
                            <td>{{proj.basicInfoId.categoryName}}</td>
                            <td>{{proj.basicInfoId.launchDate | date}}</td>
                            <!-- <td>{{proj.basicInfoId.campaignDuation | date}}</td> -->
-                           <td><a routerLink="/view-creators/{{proj.userId._id}}">{{proj.userId.userName}}</a></td>
+                           <td><a routerLink="/view-creators/{{proj?.userId?._id}}">{{proj?.userId?.userName || 'NA'}}</a></td>
                            <td>{{proj.basicInfoId.goalAmount}}</td>
-                           <td>{{proj.finalDate}} days</td>
-
+                           <td>{{proj.finalDate}} days</td> 
                            <td *ngIf="requestWrite == true">
                               <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'"
                                  (change)="onChangeProjRequestWithStatus(proj._id,$event.target.value,centerDataModal)">
@@ -108,7 +107,6 @@
                                  <p> {{proj.rejection_comment}}</p>
                               </span>
                            </td>
-
                            <td *ngIf="majorWrite == true">
                               <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'"
                                  (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
