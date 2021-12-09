@@ -1,0 +1,86 @@
+<div class="card">
+    <div class="card-body">
+        <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner>
+    <p class="text-right" *ngIf="showAccept === true">
+    <button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addRuleAccordianContent(rulesAccordianSection)">Add New</button></p>
+    <!-- Center Modal -->
+    <ng-template #rulesAccordianSection let-modal>
+    <div class="modal-header">
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="addRuleAccordianForm">
+    <div class="form-group">
+    <label>Heading (EN)</label>
+    <input type="text" class="form-control" formControlName="Header">
+    </div>
+    <div class="form-group">
+        <label>Heading (AR)</label>
+        <input type="text" class="form-control" formControlName="Header_Ar">
+        </div>
+    <div class="form-group">
+    <label>Description (EN)</label>
+    <ckeditor [editor]="Editor" formControlName="Description" (ready)="onReady($event)"></ckeditor>
+    </div>
+    <div class="form-group">
+        <label>Description (AR)</label>
+        <ckeditor [editor]="Editor" formControlName="Description_Ar" (ready)="onReady($event)"></ckeditor>
+        </div>
+        <div class="form-group">
+            <label>Upload File</label>
+            <input formControlName="downloadLink" type="file" class="form-control" id="customFile" (change)="uploadImageFile($event)">
+            </div>
+        <div>
+            </div>
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onAccordianSubmit()">Save</button></p>
+    </form>
+    </div>
+    </ng-template>
+    
+    <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+    <thead>
+    <tr>
+    <th>Heading(EN)</th>
+    <th>Heading(AR)</th>
+    <th>Description(EN)</th>
+    <th>Description(AR)</th>
+    <th>Uploaded File</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let items of ruleAccordianData |slice: (page-1) * 10 : (page-1) * 10 + 10">
+    <td>{{items.Header}}</td>
+    <td>{{items.Header_Ar}}</td>
+    <td>{{items.Description}}</td>
+    <td>{{items.Description_Ar}}</td>
+    <td><a href="{{items.downloadLink}}" target="_blank">Download</a></td>
+    <td>
+        <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewRuleAccordianData(items,rulesAccordianSection)"><i
+            class="mdi mdi-pencil font-size-18"></i></a>
+        <a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete" (click)="onDeleteAccordian(items._id)"><i
+            class="mdi mdi-trash-can font-size-18"></i></a>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+     <!-- Pagination -->
+     <div class="col-sm-12 col-md-12">
+        <div class="text-md-right float-md-right pagination-rounded">
+            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+            </ngb-pagination>
+        </div>
+    </div>
+    <!-- End Pagination -->
+    </div>
+    </div>
+    </div>

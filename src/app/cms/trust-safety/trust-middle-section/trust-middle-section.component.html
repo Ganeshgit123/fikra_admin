@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="trustImageMidContent">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Heading(EN)</label>
+                        <input type="text" class="form-control" formControlName="Header">
+                    </div>
+                    <div class="form-group">
+                        <label>Description(EN)</label>
+                        <textarea class="form-control" formControlName="Description"></textarea>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Heading(AR)</label>
+                        <input type="text" class="form-control" formControlName="Header_Ar">
+                    </div>
+                    <div class="form-group">
+                        <label>Description(AR)</label>
+                        <textarea class="form-control" formControlName="Description_Ar"></textarea>
+                        </div>
+                </div>
+                 <div class="col-md-12">
+                    <div class="img_upload">
+                        <label for="customFile">
+                        <img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
+                        <img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
+                        </label>
+                        <input formControlName="imageURL" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Heading(EN)</label>
+                        <input type="text" class="form-control" formControlName="Header2">
+                    </div>
+                    <div class="form-group">
+                        <label>Description(EN)</label>
+                        <textarea class="form-control" formControlName="Description2"></textarea>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Heading(AR)</label>
+                        <input type="text" class="form-control" formControlName="Header2_Ar">
+                    </div>
+                    <div class="form-group">
+                        <label>Description(AR)</label>
+                        <textarea class="form-control" formControlName="Description2_Ar"></textarea>
+                        </div>
+                </div>
+            </div>
+            <p *ngIf="showAccept === true" class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                    (click)="onContSubmit()">Save</button></p>
+        </form>
+    </div>
+</div>

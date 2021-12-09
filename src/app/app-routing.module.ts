@@ -64,6 +64,10 @@ import { ChangeRequestUserComponent } from './roles/change-request-user/change-r
 import { TranslationsComponent } from './translations/translations.component';
 import { UserDeleteListComponent } from './user-delete-list/user-delete-list.component';
 import { MailMsgsComponent } from './settings/mail-msgs/mail-msgs.component';
+import { WhatWeDoComponent } from './cms/what-we-do/what-we-do.component';
+import { FeesComponent } from './cms/fees/fees.component';
+import { OurRulesComponent } from './cms/our-rules/our-rules.component';
+import { TrustSafetyComponent } from './cms/trust-safety/trust-safety.component';
 
 const routes: Routes = [
   {
@@ -105,7 +109,11 @@ const routes: Routes = [
       {path: 'project_content',component: ProjectConentComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
       {path: 'create_project',component: CreateProjectComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
       {path: 'help_guide',component: HelpGuideComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
-
+      {path: 'what_we_do',component: WhatWeDoComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
+      {path: 'fees',component: FeesComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
+      {path: 'our_rules',component: OurRulesComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
+      {path: 'trust_and_safety',component: TrustSafetyComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_content_true'}},
+      
       {path: 'investor_form',component: InvestorFormComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_signUpForm_true'}},
       {path: 'creator_form',component: CreatorsFormComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_signUpForm_true'}},
       {path: 'add-investor-field',component: AddInvestorFieldComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_signUpForm_true'}},

@@ -52,7 +52,7 @@
                         <th *ngIf="showAccept === true">Action</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let item of countryList ">
+                <tbody *ngFor="let item of countryList">
 <tr *ngFor=" let cites of item.city | filter:searchTerm |slice: (page-1) * 20 : (page-1) * 20 + 20">
                     <td *ngIf="cites._isDeleted_ === false">{{item.countryName}} / {{item.countryNameAr}}</td>
                     <td *ngIf="cites._isDeleted_ === false">{{cites.cityName}}</td>

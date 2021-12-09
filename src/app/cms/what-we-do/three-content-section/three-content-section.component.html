@@ -1,0 +1,85 @@
+<div class="card">
+    <div class="card-body">
+        <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner>
+    <!-- <p class="text-right" *ngIf="showAccept === true">
+    <button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addMultiContent(multiContentSection)">Add New</button></p> -->
+    <!-- Center Modal -->
+    <ng-template #multiContentSection let-modal>
+    <div class="modal-header">
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="addMultiContentForm">
+    <div class="img_upload">
+    <label for="customFile">
+    <img class="upload-img1" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
+    <img class="upload-img1" *ngIf="imagePreview" src="{{imagePreview}}"/>
+    </label>
+    <input formControlName="imageURL" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+    </div>
+    <div class="form-group">
+    <label>Title (EN)</label>
+    <input type="text" class="form-control" formControlName="title">
+    </div>
+    <div class="form-group">
+        <label>Title (AR)</label>
+        <input type="text" class="form-control" formControlName="title_Ar">
+        </div>
+    <div class="form-group">
+    <label>Description (EN)</label>
+    <textarea class="form-control" formControlName="description"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Description (AR)</label>
+    <textarea class="form-control" formControlName="description_Ar"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Read More URL</label>
+            <input type="text" class="form-control" formControlName="readMoreURL">
+            </div>
+    <br>
+    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onMultiContentSubmit()">Save</button></p>
+    </form>
+    </div>
+    </ng-template>
+    
+    <div class="table-responsive">
+    <table id="basic-datatable"
+    class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
+    <thead>
+    <tr>
+    <th>Image URL</th>
+    <th>Title(EN)</th>
+    <th>Title(AR)</th>
+    <th>Description(EN)</th>
+    <th>Description(AR)</th>
+    <th>Read More URL</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let items of multiContentData">
+    <td><img src="{{items.imageURL}}" class="img_size"></td>
+    <td>{{items.title}}</td>
+    <td>{{items.title_Ar}}</td>
+    <td>{{items.description}}</td>
+    <td>{{items.description_Ar}}</td>
+    <td>{{items.readMoreURL}}</td>
+    <td>
+        <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewMultiContentData(items,multiContentSection)"><i
+            class="mdi mdi-pencil font-size-18"></i></a>
+        <a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete" (click)="onDeleteMultiContent(items._id)"><i
+            class="mdi mdi-trash-can font-size-18"></i></a>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>

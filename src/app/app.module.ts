@@ -130,6 +130,24 @@ import { CMSComponent } from './cms/cms.component';
 import { UserDeleteListComponent } from './user-delete-list/user-delete-list.component';
 import { MailMsgsComponent } from './settings/mail-msgs/mail-msgs.component';
 import { BankDetailsComponent } from './projects/view-projects/bank-details/bank-details.component';
+import { WhatWeDoComponent } from './cms/what-we-do/what-we-do.component';
+import { BannerSectionComponent } from './cms/what-we-do/banner-section/banner-section.component';
+import { JourneySectionComponent } from './cms/what-we-do/journey-section/journey-section.component';
+import { RightImageSectionComponent } from './cms/what-we-do/right-image-section/right-image-section.component';
+import { SubscriptionSectionComponent } from './cms/what-we-do/subscription-section/subscription-section.component';
+import { LeftVideoSectionComponent } from './cms/what-we-do/left-video-section/left-video-section.component';
+import { ThreeContentSectionComponent } from './cms/what-we-do/three-content-section/three-content-section.component';
+import { FeesComponent } from './cms/fees/fees.component';
+import { OurRulesComponent } from './cms/our-rules/our-rules.component';
+import { TrustSafetyComponent } from './cms/trust-safety/trust-safety.component';
+import { FeesBannerComponent } from './cms/fees/fees-banner/fees-banner.component';
+import { FeesAccordianComponent } from './cms/fees/fees-accordian/fees-accordian.component';
+import { RulesBannerComponent } from './cms/our-rules/rules-banner/rules-banner.component';
+import { RulesMiddleContentComponent } from './cms/our-rules/rules-middle-content/rules-middle-content.component';
+import { RulesAccordianComponent } from './cms/our-rules/rules-accordian/rules-accordian.component';
+import { TrustBannerComponent } from './cms/trust-safety/trust-banner/trust-banner.component';
+import { TrustMiddleSectionComponent } from './cms/trust-safety/trust-middle-section/trust-middle-section.component';
+import { TrustTabSectionComponent } from './cms/trust-safety/trust-tab-section/trust-tab-section.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -153,7 +171,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent,
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent,
     ContentSectionComponent, BasicInfoComponent, RewardsComponent, InvestorFormComponent,
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, EditNewBillComponent, TemplateComponent, SmsCampaignComponent, CreateProjectComponent, BasicsComponent, StoryComponent, PaymentComponent, PromotionComponent, ProjectConentComponent, RewardContentComponent, FirstTabContentComponent, SecondTabContentComponent, ThirdTabContentComponent, FourthTabContentComponent, BankAccountListsComponent, EditTemplateComponent, HelpGuideComponent, TransactionComponent, ReportsComponent, ChangeRequestUserComponent, TranslationsComponent, TemplateServeComponent, TransactionReportComponent, ModelRelatedReportComponent, RequestPageComponent, CMSComponent, UserDeleteListComponent, MailMsgsComponent, BankDetailsComponent, 
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, EditNewBillComponent, TemplateComponent, SmsCampaignComponent, CreateProjectComponent, BasicsComponent, StoryComponent, PaymentComponent, PromotionComponent, ProjectConentComponent, RewardContentComponent, FirstTabContentComponent, SecondTabContentComponent, ThirdTabContentComponent, FourthTabContentComponent, BankAccountListsComponent, EditTemplateComponent, HelpGuideComponent, TransactionComponent, ReportsComponent, ChangeRequestUserComponent, TranslationsComponent, TemplateServeComponent, TransactionReportComponent, ModelRelatedReportComponent, RequestPageComponent, CMSComponent, UserDeleteListComponent, MailMsgsComponent, BankDetailsComponent, WhatWeDoComponent, BannerSectionComponent, JourneySectionComponent, RightImageSectionComponent, SubscriptionSectionComponent, LeftVideoSectionComponent, ThreeContentSectionComponent, FeesComponent, OurRulesComponent, TrustSafetyComponent, FeesBannerComponent, FeesAccordianComponent, RulesBannerComponent, RulesMiddleContentComponent, RulesAccordianComponent, TrustBannerComponent, TrustMiddleSectionComponent, TrustTabSectionComponent,
   ],
   imports: [
     BrowserModule,

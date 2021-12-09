@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <app-pagetitle title="Fees Page" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    <div class="row">
+    <div class="col-lg-12">
+    <div class="row">
+    <div class="col-md-2">
+    <div class="card">
+    <div class="card-body">
+    <ul ngbNav #verticalNav="ngbNav" [activeId]="1" class="nav-pills flex-column">
+    <li [ngbNavItem]="1">
+    <a ngbNavLink class="mb-2">
+    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+    <span class="d-none d-sm-block">Banner Section</span>
+    </a>
+    <ng-template ngbNavContent>
+        <app-fees-banner></app-fees-banner>
+    </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+    <a ngbNavLink class="mb-2">
+    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+    <span class="d-none d-sm-block">DropDown Section</span>
+    </a>
+    <ng-template ngbNavContent>
+        <app-fees-accordian></app-fees-accordian>
+    </ng-template>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-10">
+    
+    <div [ngbNavOutlet]="verticalNav"></div>
+    
+    </div>
+    </div>
+    
+    </div><!-- End vertical nav tab -->
+    
+    </div>
+    </div>

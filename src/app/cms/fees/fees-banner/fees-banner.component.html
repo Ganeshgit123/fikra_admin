@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-body">
+        <ngx-spinner
+bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-scale-multiple">
+<p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+        <form [formGroup]="feesContent">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Banner Heading(EN)</label>
+                        <input type="text" class="form-control" formControlName="bannerHeader">
+                    </div>
+                    <div class="form-group">
+                        <label>Banner Description(EN)</label>
+                        <textarea class="form-control" formControlName="bannerDescription"></textarea>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Banner Heading(AR)</label>
+                        <input type="text" class="form-control" formControlName="bannerHeader_Ar">
+                    </div>
+                    <div class="form-group">
+                        <label>Banner Description(AR)</label>
+                        <textarea class="form-control" formControlName="bannerDescription_Ar"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="img_upload">
+                        <label for="customFile">
+                        <img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
+                        <img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
+                        </label>
+                        <input formControlName="bannerImage" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <p *ngIf="showAccept === true" class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                    (click)="onSubmit()">Save</button></p>
+        </form>
+    </div>
+</div>

@@ -216,7 +216,18 @@
     "MAIL_MSG": {
       "TEXT": "Mail Msg Contents"
     },
-    
+    "WHATWEDO": {
+      "TEXT": "What We Do"
+    },
+    "FEES": {
+      "TEXT": "Fees"
+    },
+    "OURRULES": {
+      "TEXT": "Our Rules"
+    },
+    "TRUSTANDSAFETY": {
+      "TEXT": "Trust & Safety"
+    },
     "LAYOUTS": {
       "TEXT": "Layouts",
       "LIST": {

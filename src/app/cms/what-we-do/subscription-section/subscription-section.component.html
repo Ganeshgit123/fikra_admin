@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="subscribeContent">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Title(EN)</label>
+                        <input type="text" class="form-control" formControlName="header">
+                    </div>
+                    <div class="form-group">
+                        <label>Description(EN)</label>
+                        <textarea class="form-control" formControlName="description"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>TitleEN(AR)</label>
+                        <input type="text" class="form-control" formControlName="header_Ar">
+                    </div>
+                    <div class="form-group">
+                        <label>Description(AR)</label>
+                        <textarea class="form-control" formControlName="description_Ar"></textarea>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <p *ngIf="showAccept === true" class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                    (click)="onSubmit()">Save</button></p>
+        </form>
+    </div>
+</div>

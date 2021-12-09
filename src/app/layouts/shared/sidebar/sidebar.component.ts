@@ -287,6 +287,30 @@ export class SidebarComponent implements OnInit, AfterViewInit {
             link: '/terms_of_use',
             parentId: 11
           },
+          {
+            id: 49,
+            label: 'MENUITEMS.WHATWEDO.TEXT',
+            link: '/what_we_do',
+            parentId: 11
+          },
+          {
+            id: 50,
+            label: 'MENUITEMS.FEES.TEXT',
+            link: '/fees',
+            parentId: 11
+          },
+          {
+            id: 51,
+            label: 'MENUITEMS.OURRULES.TEXT',
+            link: '/our_rules',
+            parentId: 11
+          },
+          {
+            id: 52,
+            label: 'MENUITEMS.TRUSTANDSAFETY.TEXT',
+            link: '/trust_and_safety',
+            parentId: 11
+          },
         ]
       },
       {
