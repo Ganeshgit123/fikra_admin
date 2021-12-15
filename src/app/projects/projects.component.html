@@ -63,6 +63,7 @@
                            <th>Admin Approval</th>
                            <th>Home Page Banner</th>
                            <th>Transactions</th>
+                           <th>Completed</th>
                            <th *ngIf="majorWrite === true">Action</th>
                         </tr>
                      </thead>
@@ -78,7 +79,7 @@
                            <!-- <td>{{proj.basicInfoId.campaignDuation | date}}</td> -->
                            <td><a routerLink="/view-creators/{{proj?.userId?._id}}">{{proj?.userId?.userName || 'NA'}}</a></td>
                            <td>{{proj.basicInfoId.goalAmount}}</td>
-                           <td>{{proj.finalDate}} days</td> 
+                           <td>{{proj.finalDate}}{{(proj.finalDate == 0 || proj.finalDate == 1) ? ' day' : ' days'}}</td> 
                            <td *ngIf="requestWrite == true">
                               <select class="pend_btn" *ngIf="proj.aproval_Status === 'pending'"
                                  (change)="onChangeProjRequestWithStatus(proj._id,$event.target.value,centerDataModal)">
@@ -167,7 +168,8 @@
                                   <p>Project Not Yet Completed</p>
                              </span>
                            </td>
-                                 <td>
+                           <td [style]='proj._is_succeed_ ? "color:green" : "color:red"'>{{capitalizeFirstLetter(proj._is_succeed_.toString())}}</td>
+                           <td>
                                     <a *ngIf="requestWrite == true" class="text-danger text-info" ngbTooltip="Delete"
                                  (click)="deleteReqProject(proj._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
 

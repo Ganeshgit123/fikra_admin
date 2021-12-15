@@ -157,7 +157,7 @@ export class WhyFikraComponent implements OnInit {
     )
   }
 
-  onchangeWhyFikraStatus(values:any,val){
+  onchangeWhyFikraStatus(values:any,val,del){
 
     if(values.currentTarget.checked === true){
       var visible = true 
@@ -168,7 +168,7 @@ export class WhyFikraComponent implements OnInit {
 
      object['whyId'] = val;
      object['_is_on_'] = visible;
-     object['_is_Deleted_'] = false;
+     object['_is_Deleted_'] = del;
      object['createdBy'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;

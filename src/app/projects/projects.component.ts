@@ -101,6 +101,53 @@ export class ProjectsComponent implements OnInit {
     }
   }
 
+  // daysBetween(d1, d2)
+  // {
+  //   var ndays;
+  //   var tv1 = d1.valueOf();  // msec since 1970
+  //   var tv2 = d2.valueOf();
+
+  //   ndays = (tv2 - tv1) / 1000 / 86400;
+  //   ndays = Math.round(ndays - 0.5);
+  //   return ndays;
+  // }
+
+  dateDiffInDays(a, b) {
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    // Discard the time and time-zone information.
+    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+  
+    return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+  }
+
+
+  mydiff(date1,date2,interval) {
+    var second=1000, minute=second*60, hour=minute*60, day=hour*24, week=day*7;
+    date1 = new Date(date1);
+    date2 = new Date(date2);
+    var timediff = date2 - date1;
+    if (isNaN(timediff)) return NaN;
+    switch (interval) {
+        case "years": return date2.getFullYear() - date1.getFullYear();
+        case "months": return (
+            ( date2.getFullYear() * 12 + date2.getMonth() )
+            -
+            ( date1.getFullYear() * 12 + date1.getMonth() )
+        );
+        case "weeks"  : return Math.floor(timediff / week);
+        case "days"   : return Math.floor(timediff / day); 
+        case "hours"  : return Math.floor(timediff / hour); 
+        case "minutes": return Math.floor(timediff / minute);
+        case "seconds": return Math.floor(timediff / second);
+        default: return undefined;
+    }
+  }
+
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   _fetchData() {
     let params = {
       url: "admin/listProject",
@@ -115,15 +162,9 @@ export class ProjectsComponent implements OnInit {
 
           this.projectSecondaryList.forEach((element) => {
             var firstDate = element.basicInfoId.launchDate;
-            // console.log("first",firstDate)
-            // this.launchDate =new Date(firstDate);
             this.duraDate = new Date(firstDate);
             var today = new Date();
-            var Days = Math.abs(this.duraDate - today.getTime());
-            var remainDate =
-              element._is_succeed_ || today >= element.basicInfoId.launchDate
-                ? 0
-                : Math.ceil(Days / (1000 * 60 * 60 * 24));
+            var remainDate = (element._is_succeed_ || today >= this.duraDate ) ? 0 : this.mydiff(today, this.duraDate, 'days');
             element.finalDate = remainDate;
           });
         } else {

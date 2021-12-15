@@ -79,7 +79,6 @@ export class ClientLogosComponent implements OnInit {
         this.clientData = resu.data.creative[0].clientLogo;
         this.total = this.clientData.length
 
-        // console.log("da",this.clientData)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

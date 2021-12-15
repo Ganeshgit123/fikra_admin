@@ -86,8 +86,8 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <td>{{item.solutionAr   }}</td>
 <td *ngIf="showAccept === true">
 <label class="switch">
-<input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeWhyFikraStatus($event,item._id)">
-<input *ngIf="item._is_on_ !== true" type="checkbox" unchecked (change)="onchangeWhyFikraStatus($event,item._id)">
+<input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeWhyFikraStatus($event,item._id,item._is_Deleted_)">
+<input *ngIf="item._is_on_ !== true" type="checkbox" unchecked (change)="onchangeWhyFikraStatus($event,item._id,item._is_Deleted_)">
 <span class="slider"></span>
 </label>    
 </td>
