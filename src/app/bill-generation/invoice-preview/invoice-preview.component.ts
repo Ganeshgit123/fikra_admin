@@ -86,12 +86,12 @@ export class InvoicePreviewComponent implements OnInit {
           this.paymentAmt = this.billDetails.paymentModel;
           this.discount = this.billDetails.discount;
           this.totAmt = this.billDetails.totalAmount;
-          this.billUserId = this.billDetails.userId._id || undefined;
-          this.billProjectId = this.billDetails.projectId._id || undefined;
+          this.billIncludes = resu.data.includes;
           this.userSend = this.billDetails._is_Sended_;
           this.billingId = this.billDetails._id;
           this.serviceId = this.billDetails.serviceId;
           this.finalDate = this.billDetails.dueDate;
+
 
           this.billxdate = new Date(this.billDetails.dueDate);
           this.invoicedate = new Date(this.billDetails.invoiceData);
@@ -106,7 +106,9 @@ export class InvoicePreviewComponent implements OnInit {
 
           var today = new Date();
           var Days = Math.abs(this.billxdate - today.getTime());
-          this.billAddress = resu.address;
+          this.billUserId = this.billDetails.userId._id || undefined;
+          this.billProjectId = this.billDetails.projectId._id || undefined;
+          this.billAddress = resu.address || undefined;
           this.billName = this.billAddress.fullName;
           this.addressOne = this.billAddress.Address_one;
           this.addressTwo = this.billAddress.Address_two;
@@ -115,7 +117,6 @@ export class InvoicePreviewComponent implements OnInit {
           this.pin = this.billAddress.pin;
           this.phone = this.billAddress.phone;
 
-          this.billIncludes = resu.data.includes;
 
           //  console.log("bill",this.billIncludes)
         } else {

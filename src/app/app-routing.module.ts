@@ -51,7 +51,6 @@ import { BillGenerationComponent } from './bill-generation/bill-generation.compo
 import { InvoicePreviewComponent } from './bill-generation/invoice-preview/invoice-preview.component';
 import { CommissionChargesComponent } from './settings/commission-charges/commission-charges.component';
 import { AddNewBillComponent } from './bill-generation/add-new-bill/add-new-bill.component';
-import { EditNewBillComponent } from './bill-generation/edit-new-bill/edit-new-bill.component';
 import { SmsCampaignComponent } from './sms-campaign/sms-campaign.component';
 import { ProjectConentComponent } from './cms/project-conent/project-conent.component';
 import { CreateProjectComponent } from './cms/create-project/create-project.component';
@@ -143,7 +142,6 @@ const routes: Routes = [
       {path: 'add_new_bill/:id/:user_id/:project_id',component: AddNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
       {path: 'add_new_bill/:id/:user_id/:project_id/:invoice_Id',component: AddNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
       {path: 'add_new_bill/:id/:user_id',component: AddNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
-      {path: 'edit_new_bill/:id',component: EditNewBillComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_invoice_true'}},
 
       {path: 'template',component: TemplateComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_templates_true'}},
       {path: 'edit_template/:id',component: TemplateComponent,canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_templates_true'}},

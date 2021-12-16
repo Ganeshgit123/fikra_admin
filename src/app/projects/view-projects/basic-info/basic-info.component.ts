@@ -41,7 +41,7 @@ export class BasicInfoComponent implements OnInit {
 
          this.isKeepItAll = resu.data._is_Keep_It_All_;
          this.isAllorNothing = resu.data._is_All_Nothing_;
-    //  console.log("model",this.isKeepItAll,this.isAllorNothing)
+     console.log("model",this.basicInfoArray)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

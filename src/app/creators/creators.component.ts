@@ -99,7 +99,7 @@ export class CreatorsComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
-        this.getCreateList = resu.data;
+        this.getCreateList = resu.data.reverse();
         this.total = this.getCreateList.length
       // console.log("fetch",this.getCreateList)
       }else{

@@ -34,7 +34,7 @@
                     <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
                         class="d-inline-flex align-items-center">Search:
                         <input type="text" class="form-control form-control-sm ml-2"
-                        aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
+                        aria-controls="tickets-table" [(ngModel)]="specialSearchTerm"></label></div>
                 </div>
                 <div class="col-md-4">
                 <p *ngIf="showAccept === true" class="text-right"><button type="button"
@@ -58,9 +58,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of specialReqData; index as i">
+                <tr *ngFor="let item of specialReqData| filter:specialSearchTerm|slice: (page-1) * 10 : (page-1) * 10 + 10; index as i">
                   <td>{{i+1}}</td>
-                  <td><a routerLink="/view-creators/{{ item.creatorId}}">{{item.creatorName}}<br>{{item.creatorId}}</a>
+                  <td>
+                    <a routerLink="/view-creators/{{ item.creatorId}}">{{item.creatorName}}<br>{{item.creatorId}}</a>
                   </td>
                   <td><a
                       routerLink="/special_requests/{{ item.specialRequestId}}">{{item.specialRequest}}<br>{{item.specialRequestId}}</a>
@@ -86,6 +87,14 @@
                 </tr>
               </tbody>
             </table>
+            <!-- Pagination -->
+<div class="col-sm-12 col-md-12">
+  <div class="text-md-right float-md-right pagination-rounded">
+    <ngb-pagination [collectionSize]="specialReqDataTotal" [(page)]="page" [pageSize]="10">
+    </ngb-pagination>
+</div>
+</div>
+<!-- End Pagination -->
           </div>
         </div>
 
@@ -182,7 +191,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of walletData | filter:walletSearch; index as i">
+                <tr *ngFor="let item of walletData | filter:walletSearch|slice: (page-1) * 10 : (page-1) * 10 + 10; index as i">
                   <td>{{i+1}}</td>
                   <td>{{item.userName}}</td>
                   <td>{{item.userId}}</td>
@@ -198,6 +207,14 @@
                 </tr>
               </tbody>
             </table>
+                        <!-- Pagination -->
+<div class="col-sm-12 col-md-12">
+  <div class="text-md-right float-md-right pagination-rounded">
+    <ngb-pagination [collectionSize]="walletDataTotal" [(page)]="page" [pageSize]="10">
+    </ngb-pagination>
+</div>
+</div>
+<!-- End Pagination -->
           </div>
         </div>
       </ng-template>
@@ -226,7 +243,7 @@
             <table id="financExpoTable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline">
               <thead>
                 <tr>
-                  <td>S.No</td>
+                  <th>S.No</th>
                   <th>Year</th>
                   <th>Month</th>
                   <th>Total Keep It All</th>
@@ -237,7 +254,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of financialData| filter:walletSearch;let i = index">
+                <tr *ngFor="let item of financialData| filter:finacialSearch|slice: (page-1) * 10 : (page-1) * 10 + 10; index as i">
                   <td>{{i+1}}</td>
                   <td>{{item.year}}</td>
                   <td>{{item.month}}</td>
@@ -248,19 +265,25 @@
                   <td>{{item.totalProcessingFee}}</td>
                 </tr>
                 <tr *ngIf="(financialData==null) || (financialData.length == 0)">
-                  <td class="text-center" colspan="7">
+                  <td class="text-center" colspan="8">
                     No Data Found
                   </td>
                 </tr>
               </tbody>
             </table>
+            <!-- Pagination -->
+<div class="col-sm-12 col-md-12">
+  <div class="text-md-right float-md-right pagination-rounded">
+    <ngb-pagination [collectionSize]="financeDataTotal" [(page)]="page" [pageSize]="10">
+    </ngb-pagination>
+</div>
+</div>
+<!-- End Pagination -->
           </div>
         </div>
       </ng-template>
     </li>
   </ul>
   <div [ngbNavOutlet]="justifiednav"></div>
-
-
 
 </div>

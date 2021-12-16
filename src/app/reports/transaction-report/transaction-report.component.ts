@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../../services/api-call.service';
 import * as XLSX from 'xlsx';
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-transaction-report',
@@ -16,8 +17,14 @@ export class TransactionReportComponent implements OnInit {
   fileName1= 'TransactionArchieveReport.xlsx';
   normatransSearch;
   transArchieveSearch;
+  transHistory:any;
+  page = 1;
+  total: any;
+  archieveTranstotal:any;
+  archieveTransHistory:any;
   
   constructor(private apiCall: ApiCallService,
+    private modalService: NgbModal,
     ) { }
 
   ngOnInit(): void {
@@ -32,6 +39,17 @@ export class TransactionReportComponent implements OnInit {
     }
   }
 
+  previewOpen(param: any, result: any) {
+    this.transHistory = result
+    this.modalService.open(param, { centered: true, backdrop: true, size: 'xl' });
+  }
+
+  archieveOpen(param: any, result: any) {
+    this.archieveTransHistory = result
+    this.modalService.open(param, { centered: true, backdrop: true, size: 'xl' });
+  }
+  
+
   transactionGetApiCall(value){
     if(value == 'allOrNothing' || value == 'keepItAll'){
       this.archieve = false;
@@ -45,7 +63,8 @@ export class TransactionReportComponent implements OnInit {
           {
     
           this.transactionRelData = resu.data;
-    
+      this.total = this.transactionRelData.length
+           
           }else{
             this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
             this.ngOnInit();
@@ -66,6 +85,7 @@ export class TransactionReportComponent implements OnInit {
                 if(resu.error == false)
                 {
                   this.archievedFiniceData = resu.data; 
+      this.archieveTranstotal = this.archievedFiniceData.length
             
                 }else{
                   this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

@@ -32,45 +32,92 @@
          <th>Creator Bank Name</th>
          <th>Creator Bank Account #</th>
          <th>Creator Bank IBAN #</th>
-         <th>Transferred Amount</th>
-         <th>Date</th>
-         <th>Transfer Receipt</th>
-         <th>Remaining Amount</th>
+         <th>Transaction History</th>
         </tr>
         </thead>
         <tbody>
-       <tr *ngFor="let item of transactionRelData | filter:normatransSearch; index as i">
+       <tr *ngFor="let item of transactionRelData | filter:normatransSearch|slice: (page-1) * 10 : (page-1) * 10 + 10; index as i">
           <td>{{i+1}}</td>
           <td><a routerLink="/view-projects/{{ item.projectId._id}}">{{item.projectId._id}}</a></td>
-          <td><a routerLink="/view-creators/{{item.creatorId._id}}">{{item.creatorId.userName}}</a></td>
+          <td>
+              <span *ngIf="item.creatorId == null">NA</span>
+              <span *ngIf="item.creatorId != null"><a routerLink="/view-creators/{{item.creatorId._id}}">{{item.creatorId.userName}}</a></span>
+            </td>
           <td>{{item.modelName}}</td>
           <td>Doubt</td>
           <td>{{item.creatorAmount}}</td>
-          <td>{{item.creatorId.bankName}}</td>
-          <td>{{item.creatorId.accountNumber}}</td>
-          <td>{{item.creatorId.iban}}</td>
           <td>
-               <span *ngFor="let trans of item.transactionHistory" class="text-center">
-                <p class="rep_p">{{trans.payedAmount}},</p>
-              </span>
-          </td>
+            <span *ngIf="item.creatorId == null">NA</span>
+            <span *ngIf="item.creatorId != null">{{item.creatorId.bankName}}</span>  
+        </td>
           <td>
-            <span *ngFor="let trans of item.transactionHistory" class="text-center">
-                <p class="rep_p">{{trans.dateTransfer | date}},</p>
-              </span>
+            <span *ngIf="item.creatorId == null">NA</span>
+            <span *ngIf="item.creatorId != null">{{item.creatorId.accountNumber}}</span>
+        </td>
+          <td>
+            <span *ngIf="item.creatorId == null">NA</span>
+            <span *ngIf="item.creatorId != null">{{item.creatorId.iban}}</span>
+        </td>
+          <td>
+            <button class="btn btn-primary w-md waves-effect waves-light" placement="top"
+            ngbTooltip="View Payment history" (click)='previewOpen(preview, item.transactionHistory)'>
+            View Transaction History
+          </button>
           </td>
-          <td>Doubt</td>
-          <td>{{item.payableAmount}}</td>
         </tr>
         <tr *ngIf="(transactionRelData==null) || (transactionRelData.length == 0)">
-            <td class="text-center" colspan="13">
+            <td class="text-center" colspan="10">
                No Data Found
             </td>
         </tr>
 
         </tbody>
         </table>
+        <!-- Pagination -->
+<div class="col-sm-12 col-md-12">
+    <div class="text-md-right float-md-right pagination-rounded">
+      <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="10">
+      </ngb-pagination>
+  </div>
+  </div>
+  <!-- End Pagination -->
         </div>
+          <!--Model-->
+  <ng-template #preview let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+      <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline"
+      id="excel-table">
+      <thead>
+        <tr>
+          <th class="text-center">Payment Date</th>
+          <th class="text-center">Transfer Receipt</th>
+          <th class="text-center">Payed Amount</th>
+          <th class="text-center">Remaining Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trans of transHistory">
+          <td>
+             {{trans.dateTransfer | date}}
+          </td>
+          <td><a href="{{trans.document}}" target="_blank">Download</a></td>
+          <td>{{trans.payedAmount}}</td>
+          <td>{{trans.balancePayable}}</td>
+        </tr>
+        <tr *ngIf="(transHistory==null) || (transHistory.length == 0)">
+          <td class="text-center" colspan="4">
+            No Data Found
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    </div>
+</ng-template>
+<!--Model End-->
 </div>
    
 <div class="card card-body" *ngIf ="archieve === true">
@@ -99,43 +146,89 @@
      <th>Creator Bank Name</th>
      <th>Creator Bank Account #</th>
      <th>Creator Bank IBAN #</th>
-     <th>Transferred Amount</th>
-     <th>Date</th>
-     <th>Transfer Receipt</th>
-     <th>Remaining Amount</th>
+     <th>Transaction History</th>
     </tr>
     </thead>
     <tbody>
-   <tr *ngFor="let item of archievedFiniceData | filter:transArchieveSearch; index as i">
+   <tr *ngFor="let item of archievedFiniceData | filter:transArchieveSearch|slice: (page-1) * 10 : (page-1) * 10 + 10; index as i">
     <td>{{i+1}}</td>
       <td><a routerLink="/view-projects/{{ item.projectId._id}}">{{item.projectId._id}}</a></td>
-      <td><a routerLink="/view-creators/{{item.creatorId._id}}">{{item.creatorId.userName}}</a></td>
+      <td>
+        <span *ngIf="item.creatorId == null">NA</span>
+        <span *ngIf="item.creatorId != null"><a routerLink="/view-creators/{{item.creatorId._id}}">{{item.creatorId.userName}}</a></span>
+     </td>
       <td>{{item.modelName}}</td>
       <td>Doubt</td>
       <td>{{item.creatorAmount}}</td>
-      <td>{{item.creatorId.bankName}}</td>
-      <td>{{item.creatorId.accountNumber}}</td>
-      <td>{{item.creatorId.iban}}</td>
       <td>
-           <span *ngFor="let trans of item.transactionHistory" class="text-center">
-            <p class="rep_p">{{trans.payedAmount}},</p>
-          </span>
-      </td>
+        <span *ngIf="item.creatorId == null">NA</span>
+        <span *ngIf="item.creatorId != null"> {{item.creatorId.bankName}}</span>  
+       </td>
       <td>
-          <span *ngFor="let trans of item.transactionHistory" class="text-center">
-            <p class="rep_p">{{trans.dateTransfer | date}},</p>
-          </span>
+        <span *ngIf="item.creatorId == null">NA</span>
+        <span *ngIf="item.creatorId != null"> {{item.creatorId.accountNumber}}</span>
+    </td>
+      <td>
+        <span *ngIf="item.creatorId == null">NA</span>
+        <span *ngIf="item.creatorId != null"> {{item.creatorId.iban}}</span></td>
+      <td>
+        <button class="btn btn-primary w-md waves-effect waves-light" placement="top"
+        ngbTooltip="View Payment history" (click)='archieveOpen(archievePreview, item.transactionHistory)'>
+        View Transaction History
+      </button>
       </td>
-      <td>Doubt</td>
-      <td>{{item.payableAmount}}</td>
     </tr>
     <tr *ngIf="(archievedFiniceData==null) || (archievedFiniceData.length == 0)">
-        <td class="text-center" colspan="13">
+        <td class="text-center" colspan="10">
            No Data Found
         </td>
     </tr>
 
     </tbody>
     </table>
+<!-- Pagination -->
+<div class="col-sm-12 col-md-12">
+    <div class="text-md-right float-md-right pagination-rounded">
+      <ngb-pagination [collectionSize]="archieveTranstotal" [(page)]="page" [pageSize]="10">
+      </ngb-pagination>
+  </div>
+  </div>
+  <!-- End Pagination -->
+     <!--Model-->
+  <ng-template #archievePreview let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body">
+      <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline"
+      id="excel-table">
+      <thead>
+        <tr>
+          <th class="text-center">Payment Date</th>
+          <th class="text-center">Transfer Receipt</th>
+          <th class="text-center">Payed Amount</th>
+          <th class="text-center">Remaining Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trans of archieveTransHistory">
+          <td>
+             {{trans.dateTransfer | date}}
+          </td>
+          <td><a href="{{trans.document}}" target="_blank">Download</a></td>
+          <td>{{trans.payedAmount}}</td>
+          <td>{{trans.balancePayable}}</td>
+        </tr>
+        <tr *ngIf="(archieveTransHistory==null) || (archieveTransHistory.length == 0)">
+          <td class="text-center" colspan="4">
+            No Data Found
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    </div>
+</ng-template>
+<!--Model End-->
     </div>
     </div>

@@ -60,7 +60,7 @@ export class InvestorsComponent implements OnInit {
     if(resu.error == false)
     {
       this.getfieldList = resu.fields;
-      this.getuserList = resu.data;
+      this.getuserList = resu.data.reverse();
       // console.log("dd",this.getuserList)
       this.total = this.getuserList.length
     }else{

@@ -195,18 +195,16 @@ export class WhyFikraComponent implements OnInit {
     )
   }
 
-  onDeleteWhyFikra(val,id,visible){
+  onDeleteWhyFikra(id){
     const object = {}
 
     object['whyId'] = id;
-    object['_is_on_'] = visible;
-    object['_is_Deleted_'] = val;
     object['createdBy'] = this.updatedby;
    object['userType'] = "admin";
    object['role'] = this.role;
 
     var params = {
-     url: 'admin/edit_whyFikra_Status',
+     url: 'admin/delete_whyFikra_Status',
      data: object
    }
   //  console.log("da",params)

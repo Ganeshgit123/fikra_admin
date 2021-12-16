@@ -16,7 +16,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import {
   NgbNavModule, NgbDropdownModule, NgbTooltipModule, NgbPaginationModule, NgbTypeaheadModule,
-  NgbDatepickerModule, NgbCollapseModule, NgbAccordionModule,NgbAlertModule
+  NgbDatepickerModule, NgbCollapseModule, NgbAccordionModule, NgbAlertModule
 } from '@ng-bootstrap/ng-bootstrap';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -101,7 +101,6 @@ import { BillGenerationComponent } from './bill-generation/bill-generation.compo
 import { InvoicePreviewComponent } from './bill-generation/invoice-preview/invoice-preview.component';
 import { CommissionChargesComponent } from './settings/commission-charges/commission-charges.component';
 import { AddNewBillComponent } from './bill-generation/add-new-bill/add-new-bill.component';
-import { EditNewBillComponent } from './bill-generation/edit-new-bill/edit-new-bill.component';
 import { TemplateComponent } from './template/template.component';
 import { SmsCampaignComponent } from './sms-campaign/sms-campaign.component';
 import { CreateProjectComponent } from './cms/create-project/create-project.component';
@@ -171,7 +170,19 @@ export function createTranslateLoader(http: HttpClient): any {
     ProjectQComponent, VideoSectionComponent, WhyFikraComponent, ViewCreatorsComponent, CategoriesComponent, SubCategoriesComponent,
     CountriesComponent, CitiesComponent, CountryCityComponent, TagsComponent, MiddleSectionComponent,
     ContentSectionComponent, BasicInfoComponent, RewardsComponent, InvestorFormComponent,
-    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent, EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent, BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, EditNewBillComponent, TemplateComponent, SmsCampaignComponent, CreateProjectComponent, BasicsComponent, StoryComponent, PaymentComponent, PromotionComponent, ProjectConentComponent, RewardContentComponent, FirstTabContentComponent, SecondTabContentComponent, ThirdTabContentComponent, FourthTabContentComponent, BankAccountListsComponent, EditTemplateComponent, HelpGuideComponent, TransactionComponent, ReportsComponent, ChangeRequestUserComponent, TranslationsComponent, TemplateServeComponent, TransactionReportComponent, ModelRelatedReportComponent, RequestPageComponent, CMSComponent, UserDeleteListComponent, MailMsgsComponent, BankDetailsComponent, WhatWeDoComponent, BannerSectionComponent, JourneySectionComponent, RightImageSectionComponent, SubscriptionSectionComponent, LeftVideoSectionComponent, ThreeContentSectionComponent, FeesComponent, OurRulesComponent, TrustSafetyComponent, FeesBannerComponent, FeesAccordianComponent, RulesBannerComponent, RulesMiddleContentComponent, RulesAccordianComponent, TrustBannerComponent, TrustMiddleSectionComponent, TrustTabSectionComponent,
+    CreatorsFormComponent, AddInvestorFieldComponent, EditInvestorFieldComponent, AddCreatorFieldComponent, EditCreatorFieldComponent, 
+    CreatorHandbookComponent, RequestBackProjectComponent, RecommendedProjectsComponent, ContactUsComponent, HandbookComponent, AddHandbookComponent,
+    EditHandbookComponent, SpecialServicesComponent, SubscribersComponent, SpecialRequestsComponent, CareerComponent, JobsComponent, 
+    ProjectReportsComponent, LikedProjectsComponent, NotificationsComponent, RolesComponent, PermissionComponent, AdminUsersComponent,
+    BillGenerationComponent, InvoicePreviewComponent, CommissionChargesComponent, AddNewBillComponent, TemplateComponent, SmsCampaignComponent, 
+    CreateProjectComponent, BasicsComponent, StoryComponent, PaymentComponent, PromotionComponent, ProjectConentComponent, RewardContentComponent, 
+    FirstTabContentComponent, SecondTabContentComponent, ThirdTabContentComponent, FourthTabContentComponent, BankAccountListsComponent, 
+    EditTemplateComponent, HelpGuideComponent, TransactionComponent, ReportsComponent, ChangeRequestUserComponent, TranslationsComponent, 
+    TemplateServeComponent, TransactionReportComponent, ModelRelatedReportComponent, RequestPageComponent, CMSComponent, UserDeleteListComponent,
+    MailMsgsComponent, BankDetailsComponent, WhatWeDoComponent, BannerSectionComponent, JourneySectionComponent, RightImageSectionComponent, 
+    SubscriptionSectionComponent, LeftVideoSectionComponent, ThreeContentSectionComponent, FeesComponent, OurRulesComponent, TrustSafetyComponent,
+    FeesBannerComponent, FeesAccordianComponent, RulesBannerComponent, RulesMiddleContentComponent, RulesAccordianComponent, TrustBannerComponent, 
+    TrustMiddleSectionComponent, TrustTabSectionComponent,
   ],
   imports: [
     BrowserModule,
