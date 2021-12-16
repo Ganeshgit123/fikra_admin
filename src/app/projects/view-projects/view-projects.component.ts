@@ -30,7 +30,9 @@ export class ViewProjectsComponent implements OnInit {
   isTimeBasedWirte:boolean;
   canWrite:boolean;
   bankStatus: any;
-  
+  featureFromDate: any;
+  featuretoDate:any;
+
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -120,11 +122,13 @@ export class ViewProjectsComponent implements OnInit {
               });
               this.recommend = resu.data._is_Recommeded_;
               this.feature = resu.data._is_featured_;
-
+              this.featureFromDate = resu.data._is_featured_from;
+              this.featuretoDate = resu.data._is_featured_to;
+          //  console.log("fff",resu.data)
+           
             this.homeStatus = resu._is_On_HomeSlide_;
 
             this.bankStatus = resu.data._isBankAdded_;
-              // console.log("roc",this.homeStatus)
           
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

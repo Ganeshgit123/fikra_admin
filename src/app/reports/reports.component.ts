@@ -21,13 +21,16 @@ export class ReportsComponent implements OnInit {
   fileName1 = 'specialRequestArchieveReport.xlsx';
   wallReportName = 'walletReport.xlsx';
   financialReportName = 'financialReport.xlsx';
-  searchTerm;
+  specialSearchTerm;
   page = 1;
   specialReqDataTotal:any;
   speicalArchieveSearch;
   walletSearch;
   finacialSearch;
-  
+  financeDataTotal:any;
+  walletDataTotal:any;
+  archieveSpecaiaDataTotal:any;
+
   constructor(private apiCall: ApiCallService,
   ) { }
 
@@ -105,7 +108,7 @@ export class ReportsComponent implements OnInit {
       let resu = result.body;
       if (resu.error == false) {
         this.archieveSpecialData = resu.data;
-
+        this.archieveSpecaiaDataTotal = this.archieveSpecialData.length
       } else {
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -123,6 +126,7 @@ export class ReportsComponent implements OnInit {
       let resu = result.body;
       if (resu.error == false) {
         this.financialData = resu.data;
+        this.financeDataTotal = this.financialData.length
 
       } else {
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -141,7 +145,7 @@ export class ReportsComponent implements OnInit {
       let resu = result.body;
       if (resu.error == false) {
         this.walletData = resu.data;
-
+        this.walletDataTotal = this.walletData.length
       } else {
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

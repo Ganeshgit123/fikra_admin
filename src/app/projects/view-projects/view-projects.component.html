@@ -24,9 +24,10 @@
             Recommended</button>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div *ngIf="feature == true">
           <button class="btn btn-success w-md waves-effect waves-light">Featured</button>
+         
         </div>
         <div *ngIf="feature == false">
           <button class="btn btn-primary w-md waves-effect waves-light" (click)="addFeature(centerDataModal)">Not
@@ -56,6 +57,10 @@
               </div>
             </ng-template>
       </div>
+      <div class="col-md-3">
+        <p class="text-center">Featured Project Showing Dates<br>
+          <span><b>{{featureFromDate | date }}</b></span> - <span><b>{{featuretoDate | date}}</b></span></p>
+        </div>
     </div>
   </div>
 

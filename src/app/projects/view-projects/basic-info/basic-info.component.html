@@ -3,21 +3,34 @@
 <div class="col-md-3">
 <div class="card card-body">
 <h6 class="text-center">Project Image</h6>
-<p class="text-center"><img src="{{item.projectImage}}" class="img_size"></p>
+<p class="text-center">
+    <span *ngIf = "item.projectImage === '' ">No Image Uploaded in user side</span>
+    <span *ngIf = "item.projectImage !== '' "><img src="{{item.projectImage}}" class="img_size"></span>
+</p>
+</div>
+</div>
+<div class="col-md-3">
+<div class="card card-body">
+<h6 class="text-center">Project Video</h6>
+<p class="text-center">
+    <span *ngIf = "item.projectVideo == 'undefined' ">Video is not uploaded in user side</span>
+    <span *ngIf = "item.projectVideo != 'undefined' ">
+        <video controls width='100%' autoplay   >
+            <source src="{{item.projectVideo}}" />
+        </video>
+    </span>
+</p>
 </div>
 </div>
 <div class="col-md-3">
 <div class="card card-body">
 <h6 class="text-center">Project Title</h6>
 <p class="text-center">{{item.title}}</p>
-</div>
-</div>
-<div class="col-md-3">
-<div class="card card-body">
-<h6 class="text-center">Project Sub-Title</h6>
+<h6 class="text-center">Project SubTitle</h6>
 <p class="text-center">{{item.subTitle}}</p>
 </div>
 </div>
+
 <div class="col-md-3">
 <div class="card card-body">
 <h6 class="text-center">Businees Model</h6>
