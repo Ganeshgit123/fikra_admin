@@ -59,7 +59,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of allorNothingData | filter:searchTerm;index as i">
+        <tr *ngFor="let item of allorNothingData | filter:searchTerm|slice: (page-1) * 10 : (page-1) * 10 + 10; index as i">
           <td>{{i+1}}</td>
           <td><a routerLink="/view-projects/{{ item.projectId}}">{{item.projectId}}</a></td>
           <td><a routerLink="/view-creators/{{item.creatorId}}">{{item.creatorName}}</a></td>
@@ -81,7 +81,7 @@
           <td>{{item.fikraCommission}}</td>
           <td>{{item.creatorAmount}}</td>
           <td>
-            <button class="btn btn-primary w-md waves-effect waves-light ban_con_btn" placement="top"
+            <button class="btn btn-primary w-md waves-effect waves-light" placement="top"
               ngbTooltip="View Payment history" (click)='previewOpen(preview, item.pledgedPayment)'>
               View Payments
             </button>
@@ -95,30 +95,31 @@
 
       </tbody>
     </table>
+       <!-- Pagination -->
+<div class="col-sm-12 col-md-12">
+  <div class="text-md-right float-md-right pagination-rounded">
+    <ngb-pagination [collectionSize]="dataTotal" [(page)]="page" [pageSize]="10">
+    </ngb-pagination>
+</div>
+</div>
+<!-- End Pagination -->
   </div>
   <!--Model-->
   <ng-template #preview let-modal>
     <div class="modal-header">
-        <div class="row">
-            <div class="col-md-8">
-            </div>
-            <div class="col-md-4">
-                <button type="button" class="close" (click)="modal.dismiss('Cross click')"
-                    aria-hidden="true"><span class="ri-close-line"></span></button>
-            </div>
-        </div>
-
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')"
+      aria-hidden="true"><span class="ri-close-line"></span></button>
     </div>
     <div class="modal-body">
       <table id="basic-datatable" class="table table-bordered dt-responsive text-nowrap no-footer dtr-inline"
       id="excel-table">
       <thead>
         <tr>
-          <th>Payment Method</th>
-          <th>Successful Payment Received</th>
-          <th>VAT Amount</th>
-          <th>Processing Fees</th>
-          <th>Date Received</th>
+          <th class="text-center">Payment Method</th>
+          <th class="text-center">Successful Payment Received</th>
+          <th class="text-center">VAT Amount</th>
+          <th class="text-center">Processing Fees</th>
+          <th class="text-center">Date Received</th>
         </tr>
       </thead>
       <tbody>

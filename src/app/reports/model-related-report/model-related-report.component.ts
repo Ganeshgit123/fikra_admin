@@ -15,7 +15,8 @@ export class ModelRelatedReportComponent implements OnInit {
   Payments: any;
   fileName = "BusinessModelReport.xlsx";
   searchTerm;
-
+  dataTotal;
+  page = 1;
   constructor(private apiCall: ApiCallService, private modalService: NgbModal,) {}
 
   ngOnInit(): void {
@@ -45,6 +46,7 @@ export class ModelRelatedReportComponent implements OnInit {
           let resu = result.body;
           if (resu.error == false) {
             this.allorNothingData = resu.data;
+            this.dataTotal = this.allorNothingData.length
           } else {
             this.apiCall.showToast(resu.message, "Error", "errorToastr");
           }
@@ -62,6 +64,7 @@ export class ModelRelatedReportComponent implements OnInit {
           let resu = result.body;
           if (resu.error == false) {
             this.allorNothingData = resu.data;
+            this.dataTotal = this.allorNothingData.length
           } else {
             this.apiCall.showToast(resu.message, "Error", "errorToastr");
           }
@@ -81,6 +84,7 @@ export class ModelRelatedReportComponent implements OnInit {
           let resu = result.body;
           if (resu.error == false) {
             this.allorNothingData = resu.data;
+            this.dataTotal = this.allorNothingData.length
           } else {
             this.apiCall.showToast(resu.message, "Error", "errorToastr");
           }
@@ -98,7 +102,9 @@ export class ModelRelatedReportComponent implements OnInit {
           let resu = result.body;
           if (resu.error == false) {
             this.allorNothingData = resu.data;
-            console.log("data", this.allorNothingData);
+            this.dataTotal = this.allorNothingData.length
+
+            // console.log("data", this.allorNothingData);
           } else {
             this.apiCall.showToast(resu.message, "Error", "errorToastr");
           }

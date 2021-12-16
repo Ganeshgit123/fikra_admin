@@ -27,10 +27,6 @@ export class TopbarComponent implements OnInit {
   lat : any;
   lng : any;
   intervalId:any;
-  listLang = [
-    { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
-  ];
-
   
   // tslint:disable-next-line: max-line-length
   constructor(@Inject(DOCUMENT) private document: any, private router: Router, public languageService: LanguageService, public cookiesService: CookieService,
@@ -49,8 +45,6 @@ export class TopbarComponent implements OnInit {
     };
 
     this.cookieValue = this.cookiesService.get('lang');
-    const val = this.listLang.filter(x => x.lang === this.cookieValue);
-    this.countryName = val.map(element => element.text);
     // if (val.length === 0) {
     //   if (this.flagvalue === undefined) { this.valueset = 'assets/images/flags/us.jpg'; }
     // } else {

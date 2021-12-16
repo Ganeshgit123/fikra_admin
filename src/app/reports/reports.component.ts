@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
 import { AngularCsv } from 'angular7-csv/dist/Angular-csv'
+import { DatePipe } from '@angular/common'
 
 import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.scss']
+  styleUrls: ['./reports.component.scss'],
+  providers: [DatePipe]
 })
 export class ReportsComponent implements OnInit {
   breadCrumbItems: Array<{}>;
@@ -21,7 +23,6 @@ export class ReportsComponent implements OnInit {
   showAccept = true;
   fileName = 'specialRequestReport.xlsx';
   fileName1 = 'specialRequestArchieveReport.xlsx';
-  wallReportName = 'walletReport.xlsx';
   financialReportName = 'financialReport.xlsx';
   specialSearchTerm;
   page = 1;
@@ -32,8 +33,10 @@ export class ReportsComponent implements OnInit {
   financeDataTotal:any;
   walletDataTotal:any;
   archieveSpecaiaDataTotal:any;
+  walletcsvOptions:any;
+  financialcsvOptions:any;
 
-  constructor(private apiCall: ApiCallService,
+  constructor(private apiCall: ApiCallService,private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -189,36 +192,83 @@ export class ReportsComponent implements OnInit {
     }
   }
 
-  walletReportExp(): void {
+  walletReportExp(event: any){
 
     if (this.walletData.length > 0) {
-      let element = document.getElementById('walletRepTable');
-      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-      const wb: XLSX.WorkBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-      XLSX.writeFile(wb, this.wallReportName);
-
+      this.exportWalletData(this.walletData)
     } else {
       this.apiCall.showToast("No Data Found", 'Error', 'errorToastr')
     }
   }
 
-  financiExpoReprt(): void {
+  exportWalletData(data){
+    if(data.length > 0){
+      var bulkArray = []
+      data.forEach(element => {
+        var obj = {}
+        obj['userName'] = element.userName
+        obj['userId'] = element.userId
+        obj['firstDate'] =  this.datePipe.transform(element.firstDate, 'MMM d, y');
+        obj['LastDate'] = this.datePipe.transform(element.LastDate, 'MMM d, y');
+        obj['currentBalance'] = element.currentBalance
+        obj['LastChecked'] = this.datePipe.transform(element.LastDate, 'MMM d, y');
+
+        bulkArray.push(obj)
+      })
+
+      this.walletcsvOptions = {
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalseparator: '.',
+        showLabels: true,
+        showTitle: true,
+        title: 'Wallet Report',
+        useBom: true,
+        noDownload: false,
+        headers: ["Account Name", "User Id", "First Date", "Last Date", "Current Balance", "Last Checked"]
+      };
+      new  AngularCsv(bulkArray, "Wallet Report", this.walletcsvOptions);
+
+    }
+  }
+
+  financiExpoReprt(event:any) {
     if (this.financialData.length > 0) {
-      let element = document.getElementById('financExpoTable');
-      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-      const wb: XLSX.WorkBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-      XLSX.writeFile(wb, this.financialReportName);
-
+      this.exportFinanceReportData(this.financialData)
     } else {
       this.apiCall.showToast("No Data Found", 'Error', 'errorToastr')
     }
   }
+  exportFinanceReportData(data){
+    if(data.length > 0){
+      var bulkArray = []
+      data.forEach(element => {
+        var obj = {}
+        obj['year'] = element.year
+        obj['month'] = element.month
+        obj['totalKeepitAll'] = element.totalKeepitAll
+        obj['totalAllorNothing'] = element.totalAllorNothing
+        obj['totalAmount'] = element.totalAmount
+        obj['totalVat'] = element.totalVat
+        obj['totalProcessingFee'] = element.totalProcessingFee
 
+        bulkArray.push(obj)
+      })
+
+      this.financialcsvOptions = {
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalseparator: '.',
+        showLabels: true,
+        showTitle: true,
+        title: 'Finacial Report',
+        useBom: true,
+        noDownload: false,
+        headers: ["Year", "Month", "Total Keep It All", "Total All or Nothing", "Total Amount", "Total VAT", "Total Processing Fees"]
+      };
+      new  AngularCsv(bulkArray, "Finacial Report", this.financialcsvOptions);
+
+    }
+  }
   
 }
