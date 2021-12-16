@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
+import { AngularCsv } from 'angular7-csv/dist/Angular-csv'
+
 import * as XLSX from 'xlsx';
 
 @Component({
