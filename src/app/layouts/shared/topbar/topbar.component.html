@@ -48,8 +48,16 @@
                 </div>
             </div> -->
 
-
+            <!-- <p class="dropdown-itemp"><i
+                class="ri-shut-down-line align-middle mr-1 text-danger"></i>{{adminEmail}}
+            </p> -->
             <div class="dropdown d-none d-lg-inline-block ml-1">
+                <button class="btn header-item noti-icon waves-effect" style="cursor: auto;" *ngIf="role !='s_a_r'"><i
+                    class="ri-user-follow-line align-middle mr-1" style="font-size: 18px;padding-right: 5px;"></i>{{role}}
+                    </button>
+                <button class="btn header-item noti-icon waves-effect" style="cursor: auto;"><i
+                class="ri-mail-unread-line align-middle mr-1" style="font-size: 18px;padding-right: 5px;"></i>{{adminEmail}}
+                </button>
                 <button type="button" class="btn header-item noti-icon waves-effect" (click)="fullscreen()">
                     <i class="ri-fullscreen-line"></i>
                 </button>
@@ -86,6 +94,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <!-- <div class="media" *ngIf="item._is_Visited_ == true" style="background-color: #f1f5f7;">
                                 <div class="avatar-xs mr-3" (click)="visitedStatus(item._id)" >
                                     <span class="avatar-title bg-success rounded-circle font-size-16">
@@ -115,7 +124,8 @@
                     id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-2.jpg"
                         alt="Header Avatar">
-                    <!-- <span class="d-none d-xl-inline-block ml-1">Ganesh</span> -->
+                    <span class="d-none d-xl-inline-block ml-1" *ngIf = "adminName != null">{{adminName}}</span>
+                    <span class="d-none d-xl-inline-block ml-1" *ngIf = "adminName == null">SuperAdmin</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
 

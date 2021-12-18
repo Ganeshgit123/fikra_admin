@@ -23,6 +23,8 @@ export class TopbarComponent implements OnInit {
   notificationData: any;
   updatedby: any;
   role: any;
+  adminName:any;
+  adminEmail:any;
   sessionNotiData:any;
   lat : any;
   lng : any;
@@ -37,7 +39,8 @@ export class TopbarComponent implements OnInit {
   ngOnInit(): void {
     this.updatedby = sessionStorage.getItem('adminId');
     this.role = sessionStorage.getItem('adminRole');
-
+    this.adminName = sessionStorage.getItem('adminName');
+    this.adminEmail = sessionStorage.getItem('adminEmail');
     this.element = document.documentElement;
     this.configData = {
       suppressScrollX: true,

@@ -72,7 +72,7 @@ export class ProjectQComponent implements OnInit {
         this.total = this.quesAndAnsList.length
         
         this.questionStatus = resu.data._is_question_on_;
-
+       console.log("sde",this.quesAndAnsList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -196,7 +196,7 @@ export class ProjectQComponent implements OnInit {
 
   }
 
-  onchangeQuesAnsStatus(values:any,val){
+  onchangeQuesAnsStatus(values:any,val,del){
 
     if(values.currentTarget.checked === true){
       var visible = true 
@@ -207,11 +207,11 @@ export class ProjectQComponent implements OnInit {
 
      object['questionId'] = val;
      object['_is_on_'] = visible;
-     object['_is_Deleted_'] = false;
+     object['_is_Deleted_'] = del;
      object['createdBy'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;
-
+  console.log("vv",object)
      var params = {
       url: 'admin/edit_Questions_Answers_Status',
       data: object
@@ -248,7 +248,7 @@ export class ProjectQComponent implements OnInit {
      url: 'admin/edit_Questions_Answers_Status',
      data: object
    }
-  //  console.log("da",params)
+   console.log("da",object)
    this.apiCall.commonPutService(params).subscribe(
      (response: any) => {
        if (response.body.error == false) {
