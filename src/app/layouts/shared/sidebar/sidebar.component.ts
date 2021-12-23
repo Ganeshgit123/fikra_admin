@@ -11,12 +11,15 @@ import { MenuItem } from './menu.model';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
+
 export class SidebarComponent implements OnInit, AfterViewInit {
 
   menu: any;
   hide = false;
 
   menuItems = [];
+  permissions: any = [];
+  isSuperAdmin = false;
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
 
@@ -29,6 +32,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.permissions = sessionStorage.getItem('permission')
+    this.isSuperAdmin = sessionStorage.getItem('adminRole') == 's_a_r' ? true : false;
     this.initialize();
     this.callRolePermission();
   }
@@ -124,6 +129,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
    */
   initialize(): void {
 
+    let datat = JSON.parse(this.permissions)
+
     this.menuItems = [
       {
         id: 1,
@@ -136,7 +143,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         icon: 'ri-dashboard-line',
         link: '/dashboard'
       },
-      {
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_project_')?.read) )? {
         id: 3,
         label: 'MENUITEMS.PROJECTS.TEXT',
         icon: 'ri-stack-fill',
@@ -166,45 +173,26 @@ export class SidebarComponent implements OnInit, AfterViewInit {
             parentId: 3
           },
         ]
-      },
-      {
+      }: false,
+      (this.isSuperAdmin ||  (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_investor_')?.read) )? {
         id: 8,
         label: 'MENUITEMS.BACKERS.TEXT',
         icon: 'mdi mdi-account-cash',
         link: '/investors'
-      },
-      {
+      }: false,
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_creator_')?.read)) ? {
         id: 8,
         label: 'MENUITEMS.CREATORS.TEXT',
         icon: 'mdi mdi-account-cog',
         link: '/creators'
-      },
-      // {
-      //     id: 9,
-      //     label: 'MENUITEMS.CREATORS.TEXT',
-      //     icon: 'mdi mdi-account-cog',
-      //     subItems: [
-      //         {
-      //             id: 10,
-      //             label: 'MENUITEMS.CREATORS_LIST.TEXT',
-      //             link: '/creators',
-      //             parentId: 9
-      //         },
-      //         {
-      //             id: 46,
-      //             label: 'MENUITEMS.BANK_REQUESTS.TEXT',
-      //             link: '/bank_ac_request_lists',
-      //             parentId: 9
-      //         },
-      //     ]
-      // },
-      {
+      }: false,
+      this.isSuperAdmin && {
         id: 47,
         label: 'MENUITEMS.USERDELETEREQUEST.TEXT',
         icon: 'mdi mdi-delete-sweep',
         link: '/delete_request'
       },
-      {
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_content_')?.read)) ? {
         id: 11,
         label: 'MENUITEMS.CMS.TEXT',
         icon: 'mdi mdi-file-document-edit',
@@ -312,8 +300,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
             parentId: 11
           },
         ]
-      },
-      {
+      }: false,
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_setting_')?.read) ) ? {
         id: 25,
         label: 'MENUITEMS.SETTINGS.TEXT',
         icon: 'ri-settings-5-line',
@@ -355,8 +343,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
             parentId: 25
           },
         ]
-      },
-      {
+      } : false,
+      this.isSuperAdmin && {
         id: 31,
         label: 'MENUITEMS.ROLES & PERMISSION.TEXT',
         icon: '  fas fa-user-lock',
@@ -381,7 +369,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           },
         ]
       },
-      {
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_signUpForm_')?.read)) ? {
         id: 35,
         label: 'MENUITEMS.SIGNUPFORM.TEXT',
         icon: 'ri-eraser-fill',
@@ -399,62 +387,58 @@ export class SidebarComponent implements OnInit, AfterViewInit {
             parentId: 35
           },
         ]
-      },
-      {
+      }: false,
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_specialRequest_'))?.read) ? {
         id: 38,
         label: 'MENUITEMS.SPECIAL_REQUESTS.TEXT',
         icon: ' ri-external-link-fill',
         link: '/special_requests'
-      },
-      {
+      } : false,
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_reports_')?.read)) ? {
         id: 39,
         label: 'MENUITEMS.REPORTS.TEXT',
         icon: ' ri-file-list-3-fill',
         link: '/reports'
-      },
-      {
+      } : false,
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_templates_')?.read))? {
         id: 40,
         label: 'MENUITEMS.TEMPLATES.TEXT',
         icon: ' ri-layout-3-line',
         link: '/template'
-      },
-      {
+      } : false,
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_subscribers_')?.read)) ? {
         id: 41,
         label: 'MENUITEMS.SUBSCRIBERS.TEXT',
         icon: ' ri-user-shared-fill',
         link: '/subscribers'
-      },
-      {
+      } : false,
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_invoice_')?.read)) ? {
         id: 42,
         label: 'MENUITEMS.INVOICE_BILL.TEXT',
         icon: 'fas fa-file-invoice',
         link: '/bill_list'
-      },
-      {
+      } : false,
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_smsCampaign_')?.read)) ? {
         id: 43,
         label: 'MENUITEMS.SMSCAMPAIGN.TEXT',
         icon: ' ri-message-2-line',
         link: '/sms_campaign'
-      },
-      {
+      } : false,
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_translation_')?.read)) ? {
         id: 44,
         label: 'MENUITEMS.TRANSLATION.TEXT',
         icon: 'fas fa-language',
         link: '/translation'
-      },
-      {
+      }: false,
+      (this.isSuperAdmin || (!this.isSuperAdmin && datat?.find(ele => ele.permissionId == '_notification_')?.read)) ? {
         id: 45,
         label: 'MENUITEMS.NOTIFICATIONS.TEXT',
         icon: 'ri-notification-4-line',
         link: '/notifications'
-      },
+      } : false,
     ];
 
-    //   var withoutRole = this.menuItems.filter(function(value) { return value.id != '32'  });
-    // console.log(withoutRole);
-
-
-
+    console.log(this.menuItems)
   }
 
   /**
