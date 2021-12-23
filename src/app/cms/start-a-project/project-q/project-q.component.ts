@@ -170,6 +170,7 @@ export class ProjectQComponent implements OnInit {
     data['createdBy'] = this.updatedby;
     data['userType'] = "admin";
     data['role'] = this.role;
+    data['_is_on_'] = true;
 
     var params = {
       url: 'admin/edit_Questions_Answers',
@@ -196,7 +197,7 @@ export class ProjectQComponent implements OnInit {
 
   }
 
-  onchangeQuesAnsStatus(values:any,val,del){
+  onchangeQuesAnsStatus(values:any,val){
 
     if(values.currentTarget.checked === true){
       var visible = true 
@@ -207,13 +208,12 @@ export class ProjectQComponent implements OnInit {
 
      object['questionId'] = val;
      object['_is_on_'] = visible;
-     object['_is_Deleted_'] = del;
      object['createdBy'] = this.updatedby;
     object['userType'] = "admin";
     object['role'] = this.role;
   console.log("vv",object)
      var params = {
-      url: 'admin/edit_Questions_Answers_Status',
+      url: 'admin/edit_Questions_Answers',
       data: object
     }
     this.apiCall.commonPutService(params).subscribe(
@@ -234,21 +234,19 @@ export class ProjectQComponent implements OnInit {
     )
   }
 
-  onDeleteQuesAndAnsStatus(val,id,visible){
+  onDeleteQuesAndAnsStatus(id){
     const object = {}
 
     object['questionId'] = id;
-    object['_is_on_'] = visible;
-    object['_is_Deleted_'] = val;
     object['createdBy'] = this.updatedby;
    object['userType'] = "admin";
    object['role'] = this.role;
 
     var params = {
-     url: 'admin/edit_Questions_Answers_Status',
+     url: 'admin/delete_Questions_Answers_Status',
      data: object
    }
-   console.log("da",object)
+  //  console.log("da",object)
    this.apiCall.commonPutService(params).subscribe(
      (response: any) => {
        if (response.body.error == false) {

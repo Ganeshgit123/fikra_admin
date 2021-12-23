@@ -89,7 +89,7 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <th>Question(AR)</th>
 <th>Answer(EN)</th>
 <th>Answer(AR)</th>
-<th>Status</th>
+<!-- <th>Status</th> -->
 <th *ngIf="showAccept === true">Action</th>
 </tr>
 </thead>
@@ -99,10 +99,10 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <td>{{item.questionAr}}</td>
 <td>{{item.answer}}</td>
 <td>{{item.answerAr}}</td>
-<td *ngIf="showAccept === true">
+<!-- <td *ngIf="showAccept === true">
     <label class="switch">
-        <input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeQuesAnsStatus($event,item._id,item._is_Deleted_)">
-        <input *ngIf="item._is_on_ == false" type="checkbox" unchecked (change)="onchangeQuesAnsStatus($event,item._id,item._is_Deleted_)">
+        <input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeQuesAnsStatus($event,item._id)">
+        <input *ngIf="item._is_on_ == false" type="checkbox" unchecked (change)="onchangeQuesAnsStatus($event,item._id)">
         <span class="slider"></span>
     </label>    
 </td>
@@ -111,11 +111,11 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
     <p *ngIf="item._is_on_ == true" >ON</p>
     <p *ngIf="item._is_on_ == false" >OFF</p>
 </span>
-</td>
+</td> -->
 <td *ngIf="showAccept === true">
     <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewQuesandAns(item,addQuesAns)"><i
         class="mdi mdi-pencil font-size-18"></i></a>
-    <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteQuesAndAnsStatus(true,item._id,item._is_on_)"><i
+    <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleteQuesAndAnsStatus(item._id)"><i
         class="mdi mdi-trash-can font-size-18"></i></a>
 </td>
 </tr>

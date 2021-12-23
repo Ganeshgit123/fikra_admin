@@ -3,6 +3,8 @@ import { DOCUMENT } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder} from '@angular/forms';
 
 import { LanguageService } from '../../../core/services/language.service';
 import { ApiCallService } from '../../../services/api-call.service';
@@ -23,16 +25,20 @@ export class TopbarComponent implements OnInit {
   notificationData: any;
   updatedby: any;
   role: any;
-  adminName:any;
-  adminEmail:any;
-  sessionNotiData:any;
-  lat : any;
-  lng : any;
-  intervalId:any;
-  
+  adminName: any;
+  adminEmail: any;
+  sessionNotiData: any;
+  lat: any;
+  lng: any;
+  intervalId: any;
+  passwordData : FormGroup;
+
   // tslint:disable-next-line: max-line-length
-  constructor(@Inject(DOCUMENT) private document: any, private router: Router, public languageService: LanguageService, public cookiesService: CookieService,
-    private apiCall: ApiCallService,) { }
+  constructor(@Inject(DOCUMENT) private document: any, private router: Router, public languageService: LanguageService, 
+  public cookiesService: CookieService,
+    private apiCall: ApiCallService,
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder,) { }
 
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
@@ -59,13 +65,18 @@ export class TopbarComponent implements OnInit {
       this.lng = pos.coords.longitude
       // console.log("lat",this.lat);
       // console.log("lng",this.lng);
-   });
+    });
 
-  this.intervalId = setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.fetchSessionNotifyData();
-  }, 5000);
+    }, 5000);
 
-  this.fetchNotificationData();
+    this.fetchNotificationData();
+
+    this.passwordData = this.formBuilder.group({
+      oldPass: [''],
+      newPass: [''],
+    });
 
   }
 
@@ -149,24 +160,24 @@ export class TopbarComponent implements OnInit {
     )
   }
 
-  fetchSessionNotifyData(){
+  fetchSessionNotifyData() {
     let params = {
       url: "admin/getSesstionAdmin",
     }
     this.apiCall.commonGetService(params).subscribe((result: any) => {
       let resu = result.body;
       if (resu.error == false) {
-        this.sessionNotiData = resu.notification;  
+        this.sessionNotiData = resu.notification;
       } else {
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
-        if(resu.error.msg == 'jwt expired' || resu.error.msg == 'Your token has been expired'){
+        if (resu.error.msg == 'jwt expired' || resu.error.msg == 'Your token has been expired') {
           this.apiCall.showToast("Session Expired", 'Success', 'successToastr')
           sessionStorage.clear();
           this.router.navigate(['/']);
-        } 
+        }
       }
     }, (error) => {
-      
+
       console.error(error);
     });
   }
@@ -226,14 +237,14 @@ export class TopbarComponent implements OnInit {
     this.languageService.setLanguage(lang);
   }
 
-    getPosition(): Observable<any> {
-      return Observable.create(observer => {
-        window.navigator.geolocation.getCurrentPosition(position => {
-          observer.next(position);
-          observer.complete();
-        },
-          error => observer.error(error));
-      });
+  getPosition(): Observable<any> {
+    return Observable.create(observer => {
+      window.navigator.geolocation.getCurrentPosition(position => {
+        observer.next(position);
+        observer.complete();
+      },
+        error => observer.error(error));
+    });
   }
 
 
@@ -270,5 +281,40 @@ export class TopbarComponent implements OnInit {
       }
     )
 
+  }
+
+  changePassword(passwordModal: any){
+    this.passwordData.reset();
+    this.modalService.open(passwordModal, { centered: false });
+  }
+
+  onPaswordChangeFunc(){
+    const postData = this.passwordData.value;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+    postData['adminName'] = this.adminEmail;
+
+    var params = {
+      url: 'admin/changePasswordAdmin',
+      data: postData
+    }
+    this.apiCall.commonPostService(params).subscribe(
+      (response: any) => {
+        if (response.body.error == false) {
+          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+          this.modalService.dismissAll();
+          this.passwordData.reset();
+          this.ngOnInit();
+        } else {
+          // Query Error
+          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        }
+      },
+      (error) => {
+        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+        console.log('Error', error)
+      } 
+    )
   }
 }

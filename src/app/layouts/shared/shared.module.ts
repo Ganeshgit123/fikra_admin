@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TopbarComponent } from './topbar/topbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     PerfectScrollbarModule,
     NgbDropdownModule,
     ClickOutsideModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [TopbarComponent, FooterComponent, SidebarComponent],
   providers: [LanguageService]

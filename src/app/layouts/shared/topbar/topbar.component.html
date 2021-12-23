@@ -131,6 +131,28 @@
 
                 <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
                     <!-- item-->
+                    <a class="dropdown-item text-danger" href="javascript: void(0);" (click)="changePassword(passwordModal)"><i
+                        class="ri-lock-password-line align-middle mr-1 text-danger"></i>
+                   Change Password</a>
+                   <ng-template #passwordModal let-modal>
+                    <div class="modal-header">
+                    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                    <form [formGroup]="passwordData">
+                <div class="form-group">
+                <label>Old Password</label>
+                <input type="text" class="form-control" formControlName="oldPass">
+                </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="text" class="form-control" formControlName="newPass">
+                    </div>
+                    <br>
+                    <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onPaswordChangeFunc()">Save</button></p>
+                    </form>
+                    </div>
+                    </ng-template>
                     <a class="dropdown-item text-danger" href="javascript: void(0);" (click)="logout()"><i
                             class="ri-shut-down-line align-middle mr-1 text-danger"></i>
                         {{ 'HEADER.LOGIN.LOGOUT' | translate}}</a>
