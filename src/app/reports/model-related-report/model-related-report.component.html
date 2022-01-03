@@ -26,7 +26,7 @@
     <div class="col-md-4">
       <p *ngIf="showAccept === true" class="text-right">
         <button type="button" class="btn btn-primary w-md waves-effect waves-light"
-          (click)="exportexcel()">Export</button>
+          (click)="exportexcel($event)">Export</button>
       </p>
     </div>
   </div>
@@ -129,7 +129,10 @@
               <p class="rep_p">{{trans.paymentMethod}}</p>
             </span>
           </td>
-          <td>Doubt</td>
+          <td><span class="text-center">
+            <p class="rep_p">{{trans.paymentStatus}}</p>
+          </span>
+        </td>
           <td>
             <span class="text-center">
               <p class="rep_p">{{trans.vat}}</p>

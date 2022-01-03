@@ -3,7 +3,7 @@
     <app-pagetitle title="Project" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
   </a>
   <div class="card card-body" *ngIf="majorWrite == true || requestWrite == true">
-    <div class="row">
+    <div class="row" *ngIf="projectSucceed !== true">
       <div class="col-md-3" *ngIf="majorWrite == true">
         <div *ngIf="recommend == true">
           <button class="btn btn-success w-md waves-effect waves-light"
@@ -61,6 +61,11 @@
         <p class="text-center">Featured Project Showing Dates<br>
           <span><b>{{featureFromDate | date }}</b></span> - <span><b>{{featuretoDate | date}}</b></span></p>
         </div>
+    </div>
+    <div class="row" *ngIf="projectSucceed == true">
+      <div class="col-md-12">
+       <h4 class="text-center" style="color: green;margin-bottom: 0;">Project Completed</h4>
+      </div>
     </div>
   </div>
 

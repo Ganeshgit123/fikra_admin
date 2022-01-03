@@ -438,7 +438,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       } : false,
     ];
 
-    console.log(this.menuItems)
+    // console.log(this.menuItems)
   }
 
   /**

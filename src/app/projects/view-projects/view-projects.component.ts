@@ -32,7 +32,8 @@ export class ViewProjectsComponent implements OnInit {
   bankStatus: any;
   featureFromDate: any;
   featuretoDate:any;
-
+  projectSucceed:any;
+  
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -124,6 +125,7 @@ export class ViewProjectsComponent implements OnInit {
               this.feature = resu.data._is_featured_;
               this.featureFromDate = resu.data._is_featured_from;
               this.featuretoDate = resu.data._is_featured_to;
+              this.projectSucceed = resu.data._is_succeed_;
           //  console.log("fff",resu.data)
            
             this.homeStatus = resu._is_On_HomeSlide_;

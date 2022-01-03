@@ -1,14 +1,16 @@
 <div class="container-fluid">
     <app-pagetitle title="Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Pending Project Reviews</h5>
+        </div>
+    </div>
     <div class="row" *ngIf="delayProjtotal !== 0">
-        <div class="col-md-6">
-            <div *ngFor="let proj of delayProject">
-                <h6>Pending Project Reviews</h6>
+        <div class="col-md-6" *ngFor="let proj of delayProject">
                 <ngb-alert [dismissible]="false" type="secondary">
                     Project Title : <a routerLink="/projects/">{{proj.title}}</a>&nbsp;&nbsp;
                     <span>Created Date : {{proj.createdAt | date}}</span>
                 </ngb-alert>
-            </div>
         </div>
     </div>
     <br>

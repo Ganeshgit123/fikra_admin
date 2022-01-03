@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ApiCallService } from "../../services/api-call.service";
-import * as XLSX from "xlsx";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { AngularCsv } from 'angular7-csv/dist/Angular-csv'
+import { DatePipe } from '@angular/common'
 
 
 @Component({
@@ -17,7 +18,10 @@ export class ModelRelatedReportComponent implements OnInit {
   searchTerm;
   dataTotal;
   page = 1;
-  constructor(private apiCall: ApiCallService, private modalService: NgbModal,) {}
+  modelcsvOptions: any;
+
+  constructor(private apiCall: ApiCallService, private modalService: NgbModal
+    , private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.callRolePermission();
@@ -116,20 +120,72 @@ export class ModelRelatedReportComponent implements OnInit {
     }
   }
 
-  exportexcel(): void {
+  exportexcel(event) {
     if (this.allorNothingData.length > 0) {
-      /* pass here the table id */
-      let element = document.getElementById("excel-table");
-      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-      /* generate workbook and add the worksheet */
-      const wb: XLSX.WorkBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
-      /* save to file */
-      XLSX.writeFile(wb, this.fileName);
+      this.exportModelData(this.allorNothingData)
     } else {
-      this.apiCall.showToast("No Data Found", "Error", "errorToastr");
+      this.apiCall.showToast("No Data Found", 'Error', 'errorToastr')
+    }
+
+  }
+
+  exportModelData(data) {
+    if (data.length > 0) {
+      var bulkArray = []
+
+      data.forEach(element => {
+        var obj = {}
+        obj['Project Id'] = element.projectId
+        obj['creatorName'] = element.creatorName
+        obj['lunchedDate'] = element.lunchedDate;
+        obj['endDate'] = this.datePipe.transform(element.endDate, 'MMM d, y');
+        obj['projectStatus'] = element.projectStatus
+        obj['goalAmount'] = element.goalAmount
+        obj['fundedAmount'] = element.fundedAmount
+        obj['fundedPerc'] = element.fundedPerc
+        obj['noOfPledge'] = element.noOfPledge
+        obj['bussinesModel'] = element.bussinesModel
+        obj['noOfSuccessPledge'] = element.noOfSuccessPledge
+        obj['unProcessedAmount'] = element.unProcessedAmount  
+        obj['noOfUnsuccessfullPledge'] = element.noOfUnsuccessfullPledge  
+        obj['totalAmountRecived'] = element.totalAmountRecived  
+        obj['percOfUnsuccessProcessedPayment'] = element.percOfUnsuccessProcessedPayment  
+        obj['totalVatAmount'] = element.totalVatAmount  
+        obj['totalProcssingFee'] = element.totalProcssingFee  
+        obj['fikraCommission'] = element.fikraCommission  
+        obj['creatorAmount'] = element.creatorAmount  
+        obj['paymentMethod'] =  element.pledgedPayment
+
+        // console.log("o000",element.pledgedPayment)
+
+        // element.pledgedPayment.forEach(elementss => {
+        //   var ssobj = {}
+        //   ssobj['dateRecived'] = elementss.dateRecived
+        //   pledgeArr.push(ssobj['dateRecived'])
+
+        // })
+
+        console.log("dd",  obj)
+
+        bulkArray.push(obj)
+      })
+
+      this.modelcsvOptions = {
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalseparator: '.',
+        showLabels: true,
+        showTitle: true,
+        title: 'Business Model Report',
+        useBom: true,
+        noDownload: false,
+        headers: ["Project Id", "Creator Name", "Launch Date", "End Date", "Project Status", "Goal Amount", "Funded Amount", "% funded", 
+        "No of Pledges", "Business Model","Successful No of Pledges Processed","Unprocessed Amount","No of Unsuccessful Pledges","Total Amount Received",
+      "% of unsuccessful Processed Payments", "Total VAT","Total Processing Fees","Fikra Commission","Creator Amount","Payment Method","Successful Payment Received",
+    "VAT Amount","Processing Fees","Date Received"]
+      };
+      new AngularCsv(bulkArray, "Business Model Report", this.modelcsvOptions);
+
     }
   }
 }
