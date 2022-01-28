@@ -16,7 +16,7 @@ type="ball-scale-multiple">
                     </div>
                     <div class="form-group">
                         <label>Description(EN)</label>
-                        <textarea class="form-control" formControlName="Description"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="Description" (ready)="onReady($event)"></ckeditor>
                     </div>
 
                 </div>
@@ -27,7 +27,7 @@ type="ball-scale-multiple">
                     </div>
                     <div class="form-group">
                         <label>Description(AR)</label>
-                        <textarea class="form-control" formControlName="Description_Ar"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="Description_Ar" (ready)="onReady($event)"></ckeditor>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -54,7 +54,9 @@ type="ball-scale-multiple">
                         <img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
                         <img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
                         </label>
+                        <button class="btn btn-primary del_btn" (click)=removeImg()>Delete</button>
                         <input formControlName="ImageURL" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+                        <p>Upload Image Size 903px*696px</p>
                     </div>
                 </div>
             </div>

@@ -84,7 +84,7 @@ export class BillGenerationComponent implements OnInit {
         this.billList = resu.data;
         this.total = this.billList.length
 
-        // console.log("ef",this.billList)
+        console.log("ef",this.billList)
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

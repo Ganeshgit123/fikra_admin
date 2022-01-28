@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 import { ApiCallService } from '../../../services/api-call.service';
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 @Component({
   selector: 'app-left-video-section',
@@ -8,6 +9,13 @@ import { ApiCallService } from '../../../services/api-call.service';
   styleUrls: ['./left-video-section.component.scss']
 })
 export class LeftVideoSectionComponent implements OnInit {
+  public Editor = DecoupledEditor;
+  public onReady( editor ) {
+     editor.ui.getEditableElement().parentElement.insertBefore(
+         editor.ui.view.toolbar.element,
+         editor.ui.getEditableElement()
+     );
+ }
   updatedby:any;
   role:any;
   videoSecContent:FormGroup;

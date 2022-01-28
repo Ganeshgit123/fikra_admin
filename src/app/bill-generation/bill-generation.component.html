@@ -37,9 +37,9 @@
                             <td>{{user.serviceType}}</td>
                             <td>
                                 <span *ngIf="user.serviceType === 'project'"><a
-                                        routerLink="/view-projects/{{user.projectId._id}}">{{user.projectId.title}}</a></span>
+                                        routerLink="/view-projects/{{user?.projectId?._id}}">{{user?.projectId?.title || 'NA'}}</a></span>
                                 <span *ngIf="user.serviceType === 'specialService'"><a
-                                        routerLink="/special_requests/{{user.serviceId}}">{{user.serviceId}}</a></span>
+                                        routerLink="/special_requests/{{user?.serviceId}}">{{user?.serviceId || 'NA'}}</a></span>
                             </td>
                             <td>{{user.dueAmount}}</td>
                             <td>{{user.dueDate | date}}</td>

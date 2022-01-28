@@ -9,9 +9,8 @@
                     </div>
                     <div class="form-group">
                         <label>Description(EN)</label>
-                        <textarea class="form-control" formControlName="Description"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="Description" (ready)="onReady($event)"></ckeditor>
                     </div>
-
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -20,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description(AR)</label>
-                        <textarea class="form-control" formControlName="Description_Ar"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="Description_Ar" (ready)="onReady($event)"></ckeditor>
                     </div>
                 </div>
                 <div class="col-md-4"></div>

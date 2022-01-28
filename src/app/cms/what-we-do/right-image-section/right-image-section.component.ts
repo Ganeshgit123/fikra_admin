@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 import { ApiCallService } from '../../../services/api-call.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 @Component({
   selector: 'app-right-image-section',
@@ -9,6 +10,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./right-image-section.component.scss']
 })
 export class RightImageSectionComponent implements OnInit {
+  public Editor = DecoupledEditor;
+  public onReady( editor ) {
+     editor.ui.getEditableElement().parentElement.insertBefore(
+         editor.ui.view.toolbar.element,
+         editor.ui.getEditableElement()
+     );
+ }
   updatedby:any;
   role:any;
   imagePreview = null;
@@ -78,7 +86,9 @@ constructor(private formBuilder: FormBuilder,
        
     });
   }
-
+  removeImg(){
+    this.imagePreview = "";
+  }
   uploadImageFile(event){
     const file = event.target.files && event.target.files[0];
     var valid = this.checkFileFormat(event.target.files[0]);

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 import { ApiCallService } from '../../../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 @Component({
   selector: 'app-three-content-section',
@@ -10,6 +11,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./three-content-section.component.scss']
 })
 export class ThreeContentSectionComponent implements OnInit {
+  public Editor = DecoupledEditor;
+  public onReady( editor ) {
+     editor.ui.getEditableElement().parentElement.insertBefore(
+         editor.ui.view.toolbar.element,
+         editor.ui.getEditableElement()
+     );
+ }
   updatedby:any;
   role:any;
   addMultiContentForm:FormGroup;
@@ -99,12 +107,12 @@ export class ThreeContentSectionComponent implements OnInit {
   addMultiContent(multiContentSection: any){
     this.addMultiContentForm.reset();
     this.imagePreview = null;
-    this.modalService.open(multiContentSection, { centered: true });
+    this.modalService.open(multiContentSection, { centered: true, size: 'xl' });
   }
 
   viewMultiContentData(data,multiContentSection: any){
     // console.log(data)
-    this.modalService.open(multiContentSection, { centered: true });
+    this.modalService.open(multiContentSection, { centered: true, size: 'xl' });
     this.isEdit = true;
     this.imagePreview = data['imageURL'];
     this.multiContentId = data['_id'];

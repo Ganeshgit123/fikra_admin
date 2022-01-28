@@ -56,10 +56,11 @@ export class TranslationsComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
-
         this.stringData = resu.data;
-        this.total = this.stringData.length
-
+        this.stringData.forEach(function (ord,index) {
+            ord.item = index
+        })
+         this.total = this.stringData.length
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

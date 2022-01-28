@@ -18,12 +18,13 @@
     <p class="text-center" *ngIf="!getCreatorList[item.fieldId]">NA</p>
     <p class="text-center">{{ item.fieldId == 'uploadRegistrationCertificate' || 
         item.fieldId == 'tradingLicense' || 
-        item.fieldId == 'certificateUpload' ||
+        item.fieldId == 'certificateUpload' || item.fieldId == 'dob' ||
         item.fieldId == 'profileImage' ?  null : getCreatorList[item.fieldId] }}</p>
     <p *ngIf ="(item.fieldId == 'uploadRegistrationCertificate' || 
     item.fieldId == 'tradingLicense' ||
     item.fieldId == 'certificateUpload'||
     item.fieldId == 'profileImage') && getCreatorList[item.fieldId]" class="text-center"><a href="{{ getCreatorList[item.fieldId] }}" target="_blank">Download</a></p>
+    <p *ngIf ="(item.fieldId == 'dob') && getCreatorList[item.fieldId]" class="text-center">{{ getCreatorList[item.fieldId] | date}}</p>
     </div>
     </div>
     </div>

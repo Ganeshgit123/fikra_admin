@@ -43,7 +43,7 @@ export class ViewInvestorsComponent implements OnInit {
       if(resu.error == false)
       {
         this.getInvestorList = resu.data;
-
+        console.log(this.getInvestorList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

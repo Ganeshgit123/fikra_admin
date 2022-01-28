@@ -72,7 +72,7 @@ export class RulesAccordianComponent implements OnInit {
 
         this.ruleAccordianData = response.body.data.accordian;
         this.total = this.ruleAccordianData.length;
-// console.log("dd",this.journeyBoxData)
+console.log("dd",this.ruleAccordianData)
       }else{
         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
       }
@@ -95,6 +95,7 @@ export class RulesAccordianComponent implements OnInit {
 
   addRuleAccordianContent(rulesAccordianSection: any){
     this.addRuleAccordianForm.reset();
+    this.imagePreview = null;
     this.modalService.open(rulesAccordianSection, { centered: true, size: 'xl'  });
   }
 
@@ -120,7 +121,7 @@ export class RulesAccordianComponent implements OnInit {
       this.accordianEditService(this.addRuleAccordianForm.value)
       return;
     }
-
+    if(this.fileUpload){
     var postData = new FormData();
 
     postData.append('imageToStore', this.fileUpload);
@@ -175,6 +176,37 @@ export class RulesAccordianComponent implements OnInit {
         console.log('Error', error)
       } 
     )
+    }else{
+      const postData = this.addRuleAccordianForm.value;
+    postData['downloadLink'] = this.imagePreview;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+
+    var params1 = {
+      url: 'admin/postAccordianSection_OurRule',
+      data: postData
+    }
+    this.apiCall.commonPostService(params1).subscribe(
+      (response: any) => {
+      if (response.body.error == false) {
+      
+      this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+      this.imagePreview = null;
+      this.modalService.dismissAll();
+      this.ngOnInit();
+      this.spinner.hide();
+      } else {
+      this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+      }
+      },
+      (error) => {
+      this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+      this.spinner.hide();
+      console.log('Error', error)
+      } 
+      )
+    }
   }
 
   accordianEditService(data){
@@ -239,11 +271,11 @@ export class RulesAccordianComponent implements OnInit {
       )
       }else{
         const data = this.addRuleAccordianForm.value;
-        data['downloadLink'] = this.imagePreview;
-        data['multiContentId'] = this.accordianId;
-        data['createdBy'] = this.updatedby;
-        data['userType'] = "admin";
-        data['role'] = this.role;
+              data['downloadLink'] = this.imgUrl;
+              data['accId'] = this.accordianId;
+              data['createdBy'] = this.updatedby;
+              data['userType'] = "admin";
+              data['role'] = this.role;
       
       var params1 = {
       url: 'admin/editAccordianSection_OurRule',

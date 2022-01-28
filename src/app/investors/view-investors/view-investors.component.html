@@ -14,14 +14,15 @@
     <div class="col-md-3" *ngFor="let item of pasDel">
     <div class="card card-body">
     <h6 class="text-center">{{ item.fieldName }}</h6>
-    <p class="text-center">{{ getInvestorList[item.fieldId] }}</p>
+    <p class="text-center">{{item.fieldId == 'dob' ?  null : getInvestorList[item.fieldId] }}</p>
+    <p *ngIf ="(item.fieldId == 'dob') && getInvestorList[item.fieldId]" class="text-center">{{ getInvestorList[item.fieldId] | date}}</p>
     </div>
     </div>
     </div>
 
 </ng-template>
 </li>
-<li [ngbNavItem]="2">
+<!-- <li [ngbNavItem]="2">
 <a ngbNavLink>
 <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
 <span class="d-none d-sm-block">Login History</span>
@@ -57,7 +58,7 @@
     </div>
   </div>
 </ng-template>
-</li>
+</li> -->
 <!-- <li [ngbNavItem]="3">
 <a ngbNavLink>
 <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>

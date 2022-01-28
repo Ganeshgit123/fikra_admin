@@ -61,9 +61,12 @@
     <tr  *ngFor="let items of ruleAccordianData |slice: (page-1) * 10 : (page-1) * 10 + 10">
     <td>{{items.Header}}</td>
     <td>{{items.Header_Ar}}</td>
-    <td>{{items.Description}}</td>
-    <td>{{items.Description_Ar}}</td>
-    <td><a href="{{items.downloadLink}}" target="_blank">Download</a></td>
+    <td [innerHtml]='items.Description'></td>
+    <td [innerHtml]='items.Description_Ar'></td>
+    <td *ngIf="items.downloadLink == null">NA
+    </td>
+    <td *ngIf="items.downloadLink !== null ">
+        <a href="{{items.downloadLink}}" target="_blank">Download</a></td>
     <td>
         <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewRuleAccordianData(items,rulesAccordianSection)"><i
             class="mdi mdi-pencil font-size-18"></i></a>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../../services/api-call.service';
-import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,15 +13,15 @@ export class ViewCreatorsComponent implements OnInit {
   userId: any;
   getCreatorList = [];
   getCreatorFeilds = [];
-  pasDel:any;
-  
-   constructor(private apiCall: ApiCallService,
-  private formBuilder: FormBuilder,
-  private route: ActivatedRoute,
+  pasDel: any;
+
+  constructor(private apiCall: ApiCallService,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Creators' },{ label: 'Creator Details', active: true }];
+    this.breadCrumbItems = [{ label: 'Creators' }, { label: 'Creator Details', active: true }];
     this.route.params.subscribe(params => this.userId = params.id);
     this._fetchData();
     this.fetchCreatorFieldData();
@@ -38,13 +38,13 @@ export class ViewCreatorsComponent implements OnInit {
         if (resu.error == false) {
           this.getCreatorFeilds = resu.data;
 
-          const removeItinerary = (removeId) => {
-            const res = this.getCreatorFeilds.filter(obj => obj.fieldId !== removeId);
+          const removeItinerary = (removeId, removeId1) => {
+            const res = this.getCreatorFeilds.filter(obj => obj.fieldId !== removeId && obj.fieldId !== removeId1);
             return res;
           }
-          
-          this.pasDel = removeItinerary('password')
-          // console.log("pas",this.pasDel)
+
+          this.pasDel = removeItinerary('password', 'confirmpassword');
+
         } else {
           this.apiCall.showToast(resu.message, "Error", "errorToastr");
         }
@@ -54,7 +54,7 @@ export class ViewCreatorsComponent implements OnInit {
       }
     );
   }
-  
+
   _fetchData() {
     let params = {
       url: "admin/getUserDetailsById",
@@ -66,7 +66,7 @@ export class ViewCreatorsComponent implements OnInit {
         let resu = result.body;
         if (resu.error == false) {
           this.getCreatorList = resu.data;
-          // console.log("ff",this.getCreatorList)
+          console.log("ff", this.getCreatorList)
         } else {
           this.apiCall.showToast(resu.message, "Error", "errorToastr");
         }

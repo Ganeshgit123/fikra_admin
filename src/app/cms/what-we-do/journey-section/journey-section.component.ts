@@ -161,11 +161,11 @@ export class JourneySectionComponent implements OnInit {
   }
 
   viewJourneyData(data,journeySection: any){
-    // console.log(data)
     this.modalService.open(journeySection, { centered: true });
     this.isEdit = true;
     this.imagePreview = data['icon'];
     this.journeyId = data['_id'];
+    // console.log( this.journeyId)
 
     this.addJourneyForm   = this.formBuilder.group({
       icon: [''],
@@ -265,6 +265,7 @@ export class JourneySectionComponent implements OnInit {
                   url: 'admin/editContainerSection_WWD',
                   data: data
                   }
+                  console.log("sss",params1)
                   this.apiCall.commonPostService(params1).subscribe(
                   (response: any) => {
                   if (response.body.error == false) {
@@ -309,6 +310,7 @@ export class JourneySectionComponent implements OnInit {
       url: 'admin/editContainerSection_WWD',
       data: data
       }
+      console.log("ddd",params1)
       this.apiCall.commonPostService(params1).subscribe(
       (response: any) => {
       if (response.body.error == false) {
