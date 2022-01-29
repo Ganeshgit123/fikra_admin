@@ -126,7 +126,7 @@ export class ViewProjectsComponent implements OnInit {
               this.featureFromDate = resu.data._is_featured_from;
               this.featuretoDate = resu.data._is_featured_to;
               this.projectSucceed = resu.data._is_succeed_;
-          //  console.log("fff",resu.data)
+           console.log("fff",resu.data)
            
             this.homeStatus = resu._is_On_HomeSlide_;
 

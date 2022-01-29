@@ -24,6 +24,8 @@ export class ProjectReportsComponent implements OnInit {
   canWrite:boolean;
   page = 1;
   total: any;
+  commentForm:FormGroup;
+  reportId:any;
 
    constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
@@ -38,6 +40,10 @@ export class ProjectReportsComponent implements OnInit {
 
     this.fetchReportedList();
     this.callRolePermission();
+
+    this.commentForm = this.formBuilder.group({
+      reportComment: [''],
+    });
   }
 
   callRolePermission(){
@@ -168,4 +174,37 @@ export class ProjectReportsComponent implements OnInit {
  )
   }
 
+  addComment(commentSection: any,id){
+    this.modalService.open(commentSection, { centered: true});
+    this.reportId = id;
+  }
+
+  onCommentSubmit(){
+    const postData = this.commentForm.value;
+    postData['reportId'] = this.reportId;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+
+    var params1 = {
+      url: 'admin/updateReportComment',
+      data: postData
+    }
+  this.apiCall.commonPostService(params1).subscribe(
+    (response: any) => {
+    if (response.body.error == false) {
+    
+    this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+    this.modalService.dismissAll();
+    this.ngOnInit();
+    } else {
+    this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+    }
+    },
+    (error) => {
+    this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+    console.log('Error', error)
+    } 
+    )
+  }
 }

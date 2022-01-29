@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../../services/api-call.service';
 import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-view-investors',

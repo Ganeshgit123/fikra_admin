@@ -1,15 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ApiCallService } from "../services/api-call.service";
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-} from "@angular/forms";
+import { FormGroup, FormBuilder, } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
-import { element } from "protractor";
 
 @Component({
   selector: "app-projects",
@@ -157,6 +151,7 @@ export class ProjectsComponent implements OnInit {
         let resu = result.body;
         if (resu.error == false) {
           this.projectList = resu.data;
+          console.log("list",this.projectList)
           this.projectSecondaryList = this.projectList;
           this.total = this.projectSecondaryList.length;
 
@@ -182,42 +177,42 @@ export class ProjectsComponent implements OnInit {
 
     this.projectStatus = status;
 
-    if (this.projectStatus === "rejected") {
+    if (this.projectStatus === "rejected" || this.projectStatus === "close") {
       this.modalService.open(centerDataModal, { centered: true });
-    }
-
-    const data = {};
-    data["projectId"] = this.projectId;
-    data["createdBy"] = this.updatedby;
-    data["userType"] = "admin";
-    data["role"] = this.role;
-    data["aproval_Status"] = this.projectStatus;
-
-    var params = {
-      url: "admin/adminProjectApproval",
-      data: data,
-    };
-    // console.log("fef",params)
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          // Success
-          this.apiCall.showToast(
-            "Status Updated Successfully",
-            "Success",
-            "successToastr"
-          );
-          this.ngOnInit();
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, "Error", "errorToastr");
+    }else{
+      const data = {};
+      data["projectId"] = this.projectId;
+      data["createdBy"] = this.updatedby;
+      data["userType"] = "admin";
+      data["role"] = this.role;
+      data["aproval_Status"] = this.projectStatus;
+  
+      var params = {
+        url: "admin/adminProjectApproval",
+        data: data,
+      };
+      // console.log("fef",params)
+      this.apiCall.commonPostService(params).subscribe(
+        (response: any) => {
+          if (response.body.error == false) {
+            // Success
+            this.apiCall.showToast(
+              "Status Updated Successfully",
+              "Success",
+              "successToastr"
+            );
+            this.ngOnInit();
+          } else {
+            // Query Error
+            this.apiCall.showToast(response.body.message, "Error", "errorToastr");
+          }
+        },
+        (error) => {
+          this.apiCall.showToast("Server Error !!", "Oops", "errorToastr");
+          console.log("Error", error);
         }
-      },
-      (error) => {
-        this.apiCall.showToast("Server Error !!", "Oops", "errorToastr");
-        console.log("Error", error);
-      }
-    );
+      );
+    }
   }
 
   rejectReason() {

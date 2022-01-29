@@ -16,7 +16,7 @@
                         <select class="apprve_btn" *ngIf="currentStatus === 'approved'"
                            (change)="onChangeNeedtoUpdate($event.target.value, centerDataModal)">
                            <option>{{currentStatus}}</option>
-                           <option>rejected</option>
+                           <option>close</option>
                         </select>
                         <select class="review_btn" *ngIf="currentStatus === 'under_review'"
                            (change)="onChangeNeedtoUpdate($event.target.value, centerDataModal)">
@@ -27,6 +27,7 @@
                         <select class="reject_btn" *ngIf="currentStatus === 'rejected'"
                            (change)="onChangeNeedtoUpdate($event.target.value, centerDataModal)">
                            <option>{{currentStatus}}</option>
+                           <option>approved</option>
                         </select>
                      </div>
                   </div>
@@ -56,15 +57,17 @@
                            <th>Project Title</th>
                            <th>Category / SubCategory</th>
                            <th>Business Modal</th>
+                           <th>Created Date</th>
                            <th>Launch Date</th>
                            <th>Creator</th>
                            <th>Goal Amt</th>
+                           <th>Met Goal Amt</th>
                            <th>Remaining Duration</th>
                            <th>Admin Approval</th>
                            <th>Home Page Banner</th>
                            <th>Transactions</th>
                            <th>Payed Status</th>
-                           <th *ngIf="majorWrite === true">Action</th>
+                           <!-- <th *ngIf="majorWrite === true">Action</th> -->
                         </tr>
                      </thead>
                      <tbody>
@@ -80,9 +83,12 @@
                               <span *ngIf="proj._is_Keep_It_All_ == true">Keep It All</span>
                               <span *ngIf="proj._is_All_Nothing_ == true">All or Nothing</span>
                            </td>
+                           <td>{{proj.basicInfoId.createdAt | date}}</td>
                            <td>{{proj.basicInfoId.launchDate | date}}</td>
                            <td><a routerLink="/view-creators/{{proj?.userId?._id}}">{{proj?.userId?.userName || 'NA'}}</a></td>
                            <td>{{proj.basicInfoId.goalAmount}}
+                           </td>
+                           <td>
                               <span *ngIf="proj._is_All_Nothing_ == true && proj._is_succeed_ == true">
                                  <p *ngIf="proj._is_not_meat_goal_ == true" style="color: red;">Not Met Goal</p>
                                  <p *ngIf="proj._is_not_meat_goal_ == false"  style="color: green;">Met Goal</p>
@@ -103,7 +109,7 @@
                               <select class="apprve_btn" *ngIf="proj.aproval_Status === 'approved'"
                                  (change)="onChangeProjRequestWithStatus(proj._id,$event.target.value,centerDataModal)">
                                  <option>{{proj.aproval_Status}}</option>
-                                 <option>rejected</option>
+                                 <option>close</option>
                               </select>
                               <select class="review_btn" *ngIf="proj.aproval_Status === 'under_review'"
                                  (change)="onChangeProjRequestWithStatus(proj._id,$event.target.value,centerDataModal)">
@@ -114,9 +120,13 @@
                               <select class="reject_btn" *ngIf="proj.aproval_Status === 'rejected'"
                                  (change)="onChangeProjRequestWithStatus(proj._id,$event.target.value,centerDataModal)">
                                  <option>{{proj.aproval_Status}}</option>
+                                 <option>approved</option>
                               </select>
-                              <span *ngIf="proj.aproval_Status === 'rejected' && proj.rejection_comment !== null">
-                                 <p style="margin: 10px 0;"><strong>Reject Reason:</strong></p>
+                              <span *ngIf="proj.aproval_Status === 'close'">
+                                 <p style="color: blue;">Closed</p>
+                              </span>
+                              <span *ngIf="proj.aproval_Status === 'rejected' || proj.aproval_Status === 'close' && proj.rejection_comment !== null">
+                                 <p style="margin: 10px 0;"><strong>Reason:</strong></p>
                                  <p> {{proj.rejection_comment}}</p>
                               </span>
                               <span *ngIf="proj.aproval_Status === 'completed'">
@@ -134,7 +144,7 @@
                               <select class="apprve_btn" *ngIf="proj.aproval_Status === 'approved'"
                                  (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
                                  <option>{{proj.aproval_Status}}</option>
-                                 <option>rejected</option>
+                                 <option>close</option>
                               </select>
                               <select class="review_btn" *ngIf="proj.aproval_Status === 'under_review'"
                                  (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
@@ -145,9 +155,13 @@
                               <select class="reject_btn" *ngIf="proj.aproval_Status === 'rejected'"
                                  (change)="onChangeProjStatus(proj._id,$event.target.value,centerDataModal)">
                                  <option>{{proj.aproval_Status}}</option>
+                                 <option>approved</option>
                               </select>
-                              <span *ngIf="proj.aproval_Status === 'rejected'  && proj.rejection_comment !== null ">
-                                 <p style="margin: 10px 0;"><strong>Reject Reason:</strong></p>
+                              <span *ngIf="proj.aproval_Status === 'close'">
+                                 <p style="color: blue;">Closed</p>
+                              </span>
+                              <span *ngIf="proj.aproval_Status === 'rejected' || proj.aproval_Status === 'close' && proj.rejection_comment !== null ">
+                                 <p style="margin: 10px 0;"><strong>Reason:</strong></p>
                                  <p> {{proj.rejection_comment}}</p>
                               </span>
                               <span *ngIf="proj.aproval_Status === 'completed'">
@@ -187,13 +201,13 @@
                              </span>
                            </td>
                            <td [style]='proj._fully_Payed_ ? "color:green" : "color:red"'>{{capitalizeFirstLetter(proj._fully_Payed_.toString())}}</td>
-                           <td>
+                           <!-- <td>
                                     <a *ngIf="requestWrite == true" class="text-danger text-info" ngbTooltip="Delete"
                                  (click)="deleteReqProject(proj._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
 
                               <a *ngIf="majorWrite == true" class="text-danger text-info" ngbTooltip="Delete"
                                  (click)="deleteProject(proj._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
-                           </td>
+                           </td> -->
                         </tr>
                         <tr *ngIf="(projectSecondaryList==null) || (projectSecondaryList.length == 0)">
                            <td class="text-center" colspan="11">
@@ -217,7 +231,7 @@
   
 <ng-template #centerDataModal let-modal>
    <div class="modal-header">
-      <h5 class="modal-title mt-0">Rejection Reason</h5>
+      <h5 class="modal-title mt-0">Reason</h5>
       <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
    </div>
    <div class="modal-body">
