@@ -16,9 +16,8 @@ type="ball-scale-multiple">
                     </div>
                     <div class="form-group">
                         <label>Banner Description(EN)</label>
-                        <textarea class="form-control" formControlName="bannerDescription"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="bannerDescription" (ready)="onReady($event)"></ckeditor>
                     </div>
-
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -27,7 +26,7 @@ type="ball-scale-multiple">
                     </div>
                     <div class="form-group">
                         <label>Banner Description(AR)</label>
-                        <textarea class="form-control" formControlName="bannerDescription_Ar"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="bannerDescription_Ar" (ready)="onReady($event)"></ckeditor>
                     </div>
                 </div>
                 <!-- <div class="col-md-12">

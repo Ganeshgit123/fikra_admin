@@ -96,6 +96,8 @@ export class FeesAccordianComponent implements OnInit {
 
   addAccordianContent(accordianSection: any){
     this.addAccordianForm.reset();
+    this.isEdit = false;
+    this.imagePreview = null;
     this.modalService.open(accordianSection, { centered: true, size: 'xl' });
   }
 
@@ -115,13 +117,17 @@ export class FeesAccordianComponent implements OnInit {
     })
   }
 
+  removeImg(){
+    this.imagePreview = null;
+  }
+
   onAccordianSubmit(){
 
     if(this.isEdit){
       this.accordianEditService(this.addAccordianForm.value)
       return;
     }
-
+    if(this.fileUpload){
     var postData = new FormData();
 
     postData.append('imageToStore', this.fileUpload);
@@ -176,6 +182,37 @@ export class FeesAccordianComponent implements OnInit {
         console.log('Error', error)
       } 
     )
+  }else{
+    const postData = this.addAccordianForm.value;
+    postData['downloadLink'] = this.imagePreview;
+    postData['createdBy'] = this.updatedby;
+    postData['userType'] = "admin";
+    postData['role'] = this.role;
+
+    var params1 = {
+      url: 'admin/postAccordianSection_Fees',
+      data: postData
+    }
+  this.apiCall.commonPostService(params1).subscribe(
+    (response: any) => {
+    if (response.body.error == false) {
+    
+    this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+    this.imagePreview = null;
+    this.modalService.dismissAll();
+    this.ngOnInit();
+    this.spinner.hide();
+    } else {
+    this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+    }
+    },
+    (error) => {
+    this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+    this.spinner.hide();
+    console.log('Error', error)
+    } 
+    )
+  }
   }
 
   accordianEditService(data){
@@ -211,6 +248,7 @@ export class FeesAccordianComponent implements OnInit {
                   if (response.body.error == false) {
                   
                   this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+                  this.isEdit = false;
                   this.imagePreview = null;
                   this.modalService.dismissAll();
                   this.ngOnInit();
@@ -241,10 +279,10 @@ export class FeesAccordianComponent implements OnInit {
       }else{
         const data = this.addAccordianForm.value;
         data['downloadLink'] = this.imagePreview;
-        data['multiContentId'] = this.accordianId;
-        data['createdBy'] = this.updatedby;
-        data['userType'] = "admin";
-        data['role'] = this.role;
+        data['accId'] = this.accordianId;
+                    data['createdBy'] = this.updatedby;
+                    data['userType'] = "admin";
+                    data['role'] = this.role;
       
       var params1 = {
       url: 'admin/editAccordianSection_Fees',
@@ -256,6 +294,7 @@ export class FeesAccordianComponent implements OnInit {
       
       this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
       this.imagePreview = null;
+      this.isEdit = false;
       this.modalService.dismissAll();
       this.ngOnInit();
       this.spinner.hide();

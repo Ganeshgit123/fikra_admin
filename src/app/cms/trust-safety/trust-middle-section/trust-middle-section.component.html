@@ -9,7 +9,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description(EN)</label>
-                        <textarea class="form-control" formControlName="Description"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="Description" (ready)="onReady($event)"></ckeditor>
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description(AR)</label>
-                        <textarea class="form-control" formControlName="Description_Ar"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="Description_Ar" (ready)="onReady($event)"></ckeditor>
                         </div>
                 </div>
                  <div class="col-md-12">
@@ -28,7 +28,9 @@
                         <img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
                         <img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
                         </label>
+                        <button class="btn btn-primary del_btn" (click)=removeImg()>Delete</button>
                         <input formControlName="imageURL" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
+                        <p>Upload Image Size 761px*567px</p>
                     </div>
                 </div>
             </div>
@@ -41,7 +43,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description(EN)</label>
-                        <textarea class="form-control" formControlName="Description2"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="Description2" (ready)="onReady($event)"></ckeditor>
                         </div>
                 </div>
                 <div class="col-md-6">
@@ -51,7 +53,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description(AR)</label>
-                        <textarea class="form-control" formControlName="Description2_Ar"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="Description2_Ar" (ready)="onReady($event)"></ckeditor>
                         </div>
                 </div>
             </div>

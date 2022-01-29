@@ -72,7 +72,7 @@ export class RulesAccordianComponent implements OnInit {
 
         this.ruleAccordianData = response.body.data.accordian;
         this.total = this.ruleAccordianData.length;
-console.log("dd",this.ruleAccordianData)
+// console.log("dd",this.ruleAccordianData)
       }else{
         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
       }
@@ -95,12 +95,12 @@ console.log("dd",this.ruleAccordianData)
 
   addRuleAccordianContent(rulesAccordianSection: any){
     this.addRuleAccordianForm.reset();
+    this.isEdit = false;
     this.imagePreview = null;
     this.modalService.open(rulesAccordianSection, { centered: true, size: 'xl'  });
   }
 
   viewRuleAccordianData(data,rulesAccordianSection: any){
-    // console.log(data)
     this.modalService.open(rulesAccordianSection, { centered: true, size: 'xl'  });
     this.isEdit = true;
     this.imagePreview = data['downloadLink'];
@@ -113,6 +113,10 @@ console.log("dd",this.ruleAccordianData)
       Description_Ar: [data['Description_Ar']],
       downloadLink: [data['downloadLink']],
     })
+  }
+
+  removeImg(){
+    this.imagePreview = null;
   }
 
   onAccordianSubmit(){
@@ -148,7 +152,7 @@ console.log("dd",this.ruleAccordianData)
       url: 'admin/postAccordianSection_OurRule',
       data: postData
     }
-
+    // console.log("add",params1)
     this.apiCall.commonPostService(params1).subscribe(
       (response: any) => {
         if (response.body.error == false) {
@@ -187,6 +191,7 @@ console.log("dd",this.ruleAccordianData)
       url: 'admin/postAccordianSection_OurRule',
       data: postData
     }
+    // console.log("add",params1)
     this.apiCall.commonPostService(params1).subscribe(
       (response: any) => {
       if (response.body.error == false) {
@@ -237,11 +242,13 @@ console.log("dd",this.ruleAccordianData)
                   url: 'admin/editAccordianSection_OurRule',
                   data: data
                   }
+                  // console.log("edit",params1)
                   this.apiCall.commonPostService(params1).subscribe(
                   (response: any) => {
                   if (response.body.error == false) {
                   
                   this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+                  this.isEdit = false;
                   this.imagePreview = null;
                   this.modalService.dismissAll();
                   this.ngOnInit();
@@ -271,7 +278,7 @@ console.log("dd",this.ruleAccordianData)
       )
       }else{
         const data = this.addRuleAccordianForm.value;
-              data['downloadLink'] = this.imgUrl;
+              data['downloadLink'] = this.imagePreview;
               data['accId'] = this.accordianId;
               data['createdBy'] = this.updatedby;
               data['userType'] = "admin";
@@ -281,12 +288,14 @@ console.log("dd",this.ruleAccordianData)
       url: 'admin/editAccordianSection_OurRule',
       data: data
       }
+      // console.log("edit",params1)
       this.apiCall.commonPostService(params1).subscribe(
       (response: any) => {
       if (response.body.error == false) {
       
       this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
       this.imagePreview = null;
+      this.isEdit = false;
       this.modalService.dismissAll();
       this.ngOnInit();
       this.spinner.hide();

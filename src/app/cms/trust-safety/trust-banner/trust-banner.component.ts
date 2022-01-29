@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 import { ApiCallService } from '../../../services/api-call.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 @Component({
   selector: 'app-trust-banner',
@@ -9,6 +10,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./trust-banner.component.scss']
 })
 export class TrustBannerComponent implements OnInit {
+  public Editor = DecoupledEditor;
+  public onReady( editor ) {
+     editor.ui.getEditableElement().parentElement.insertBefore(
+         editor.ui.view.toolbar.element,
+         editor.ui.getEditableElement()
+     );
+ }
   updatedby:any;
   role:any;
   imagePreview = null;

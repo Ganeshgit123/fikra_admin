@@ -36,6 +36,17 @@
             <label>Upload File</label>
             <input formControlName="downloadLink" type="file" class="form-control" id="customFile" (change)="uploadImageFile($event)">
             </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <p *ngIf="imagePreview !== null">Already Uploaded file <a href="{{imagePreview}}" target="_blank">Download</a>
+                    </p>
+                </div>
+                <div class="col-md-8">
+                    <p *ngIf="imagePreview !== null">Delete Already Uploaded file <a href="javascript:void(0)" (click)="removeImg()">Delete</a>
+                    </p>
+                </div>
+                </div>
+            <p *ngIf="imagePreview == null">No files are uploaded</p>
         <div>
             </div>
     <br>
