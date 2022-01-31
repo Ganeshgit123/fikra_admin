@@ -64,23 +64,23 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 </tr>
 </thead>
 <tbody>
-<tr  *ngFor="let item of sectionList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
-<td>{{item.secHeadName}}</td>
-<td>{{item.secHeadNameAr}}</td>
-<td>{{item.secContent}}</td>
-<td>{{item.secContentAr}}</td>
-<td><p class="text-center"><img src="{{item.secImage}}" class="img_size"></p></td>
+<tr *ngFor="let item of sectionList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
+<td>{{item?.secHeadName}}</td>
+<td>{{item?.secHeadNameAr}}</td>
+<td>{{item?.secContent}}</td>
+<td>{{item?.secContentAr}}</td>
+<td><p class="text-center"><img src="{{item?.secImage}}" class="img_size"></p></td>
 <td *ngIf="showAccept === true">
     <label class="switch">
-        <input *ngIf="item._is_Sec_On_ == true"  type="checkbox" checked (change)="onchangeContentStatus($event,item._id)">
-        <input *ngIf="item._is_Sec_On_ !== true" type="checkbox" unchecked (change)="onchangeContentStatus($event,item._id)">
+        <input *ngIf="item?._is_Sec_On_ == true"  type="checkbox" checked (change)="onchangeContentStatus($event,item._id)">
+        <input *ngIf="item?._is_Sec_On_ !== true" type="checkbox" unchecked (change)="onchangeContentStatus($event,item._id)">
         <span class="slider"></span>
     </label>
 </td>
 <td *ngIf="showAccept !== true">
 <span>
-    <p *ngIf="item._is_Sec_On_ == true" >ON</p>
-    <p *ngIf="item._is_Sec_On_ !== true" >OFF</p>
+    <p *ngIf="item?._is_Sec_On_ == true" >ON</p>
+    <p *ngIf="item?._is_Sec_On_ !== true" >OFF</p>
 </span>
 </td>
 <td *ngIf="showAccept === true">

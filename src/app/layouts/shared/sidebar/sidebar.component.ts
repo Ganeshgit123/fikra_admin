@@ -167,6 +167,30 @@ export class SidebarComponent implements OnInit, AfterViewInit {
             parentId: 3
           },
           {
+            id: 53,
+            label: 'MENUITEMS.FEATURED_LIST.TEXT',
+            link: '/featured_projects',
+            parentId: 3
+          },
+          {
+            id: 54,
+            label: 'MENUITEMS.TAKING_LIST.TEXT',
+            link: '/taking_off_projects',
+            parentId: 3
+          },
+          {
+            id: 55,
+            label: 'MENUITEMS.HOMESTRETCH_LIST.TEXT',
+            link: '/homestretch_projects',
+            parentId: 3
+          },
+          {
+            id: 56,
+            label: 'MENUITEMS.HOMEBANNER_LIST.TEXT',
+            link: '/homebanner_projects',
+            parentId: 3
+          },
+          {
             id: 7,
             label: 'MENUITEMS.PROJECT_REPORTS.TEXT',
             link: '/project_reports',

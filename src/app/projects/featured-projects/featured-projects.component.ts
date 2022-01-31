@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../../services/api-call.service';
 
 @Component({
-  selector: 'app-recommended-projects',
-  templateUrl: './recommended-projects.component.html',
-  styleUrls: ['./recommended-projects.component.scss']
+  selector: 'app-featured-projects',
+  templateUrl: './featured-projects.component.html',
+  styleUrls: ['./featured-projects.component.scss']
 })
-export class RecommendedProjectsComponent implements OnInit {
+export class FeaturedProjectsComponent implements OnInit {
   breadCrumbItems: Array<{}>;
 
   accToken = sessionStorage.getItem('access_token');
@@ -23,12 +23,11 @@ export class RecommendedProjectsComponent implements OnInit {
   searchTerm;
 
    constructor(
-  private apiCall: ApiCallService
-  ) {
+  private apiCall: ApiCallService) {
  }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Recommended List', active: true }];
+    this.breadCrumbItems = [{ label: 'Featured Project List', active: true }];
 
     this.fetchProjectData();
     this.callRolePermission();
@@ -45,7 +44,7 @@ export class RecommendedProjectsComponent implements OnInit {
   
   fetchProjectData(){
     let params = {
-      url: "admin/getRecommenedProjectsAdmin",
+      url: "admin/getFeaturedProjectsForAdmin",
     }  
     this.apiCall.commonGetService(params).subscribe((result:any)=>{
       let resu = result.body;

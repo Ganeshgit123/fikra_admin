@@ -33,6 +33,7 @@ export class ViewProjectsComponent implements OnInit {
   featureFromDate: any;
   featuretoDate:any;
   projectSucceed:any;
+  requestList:any = [];
   
   constructor(private apiCall: ApiCallService,
     private formBuilder: FormBuilder,
@@ -68,7 +69,7 @@ export class ViewProjectsComponent implements OnInit {
     // this.fetchTagList();
     this._fetchStory();
     this.callRolePermission();
-
+    this.fetchRequestList();
   }
 
   callRolePermission(){
@@ -489,6 +490,26 @@ export class ViewProjectsComponent implements OnInit {
      console.log('Error', error)
    }
  )
+  }
+
+  fetchRequestList(){
+    let params = {
+      url: "admin/getSendRequestListByprojectId",
+      projectId : this.projectId
+    }  
+    this.apiCall.projectGetService(params).subscribe((result:any)=>{
+      let resu = result.body;
+      if(resu.error == false)
+      {
+         this.requestList = resu.data;
+         console.log("req",this.requestList)
+      }else{
+        this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+      }
+    },(error)=>{
+       console.error(error);
+       
+    });
   }
 
 }

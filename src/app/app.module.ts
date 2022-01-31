@@ -147,6 +147,10 @@ import { RulesAccordianComponent } from './cms/our-rules/rules-accordian/rules-a
 import { TrustBannerComponent } from './cms/trust-safety/trust-banner/trust-banner.component';
 import { TrustMiddleSectionComponent } from './cms/trust-safety/trust-middle-section/trust-middle-section.component';
 import { TrustTabSectionComponent } from './cms/trust-safety/trust-tab-section/trust-tab-section.component';
+import { FeaturedProjectsComponent } from './projects/featured-projects/featured-projects.component';
+import { TakingOffProjectsComponent } from './projects/taking-off-projects/taking-off-projects.component';
+import { HomeStretchComponent } from './projects/home-stretch/home-stretch.component';
+import { HomeBannerComponent } from './projects/home-banner/home-banner.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -182,7 +186,7 @@ export function createTranslateLoader(http: HttpClient): any {
     MailMsgsComponent, BankDetailsComponent, WhatWeDoComponent, BannerSectionComponent, JourneySectionComponent, RightImageSectionComponent, 
     SubscriptionSectionComponent, LeftVideoSectionComponent, ThreeContentSectionComponent, FeesComponent, OurRulesComponent, TrustSafetyComponent,
     FeesBannerComponent, FeesAccordianComponent, RulesBannerComponent, RulesMiddleContentComponent, RulesAccordianComponent, TrustBannerComponent, 
-    TrustMiddleSectionComponent, TrustTabSectionComponent,
+    TrustMiddleSectionComponent, TrustTabSectionComponent, FeaturedProjectsComponent, TakingOffProjectsComponent, HomeStretchComponent, HomeBannerComponent,
   ],
   imports: [
     BrowserModule,

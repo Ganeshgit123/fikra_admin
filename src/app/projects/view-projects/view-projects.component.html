@@ -139,6 +139,7 @@
                 <span class="d-none d-sm-block">Request Back</span>
               </a>
               <ng-template ngbNavContent>
+                    <!-- Table -->
                 <form [formGroup]="commentForm">
                   <div class="form-group">
                     <label>Category Name</label>
@@ -152,12 +153,46 @@
                     <label>Comments about this project</label>
                     <textarea class="form-control" formControlName="adminComment"></textarea>
                   </div>
-                  <br>
                   <p *ngIf="majorWrite == true" class="text-center"><button
-                      class="btn btn-primary w-md waves-effect waves-light ban_con_btn" (click)="commentSubmit()">Save</button></p>
+                      class="btn btn-primary w-md waves-effect waves-light" (click)="commentSubmit()">Save</button></p>
                   <p *ngIf="requestWrite == true" class="text-center"><button
-                        class="btn btn-primary w-md waves-effect waves-light ban_con_btn" (click)="commentRequestSubmit()">Save</button></p>
+                        class="btn btn-primary w-md waves-effect waves-light" (click)="commentRequestSubmit()">Save</button></p>
                 </form>
+
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="text-center">Already Change Requested List</h5>
+<div class="table-responsive">
+  <table id="basic-datatable"
+  class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
+  <thead>
+  <tr>
+  <th>Comment</th>
+  <th>Field Need to edit</th>
+  <th>User Completion Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let proj of requestList">
+  <td>{{proj.adminComment}}</td>
+  <td>{{proj.feildNeedtoEdit}}</td>
+  <td>
+    <span>
+      <p *ngIf = "proj._isCompleted_by_user_ == false">Not Completed</p>
+      <p *ngIf = "proj._isCompleted_by_user == true" style="color: green;">Completed</p>
+  </span>
+  </td>
+  </tr>
+  <tr *ngIf="(requestList==null) || (requestList.length == 3)">
+      <td class="text-center" colspan="7">
+         No Data Found
+      </td>
+  </tr>
+  </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
               </ng-template>
             </li>
             <!-- <li [ngbNavItem]="7">

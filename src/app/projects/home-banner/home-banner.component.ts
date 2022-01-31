@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../../services/api-call.service';
 
 @Component({
-  selector: 'app-recommended-projects',
-  templateUrl: './recommended-projects.component.html',
-  styleUrls: ['./recommended-projects.component.scss']
+  selector: 'app-home-banner',
+  templateUrl: './home-banner.component.html',
+  styleUrls: ['./home-banner.component.scss']
 })
-export class RecommendedProjectsComponent implements OnInit {
+export class HomeBannerComponent implements OnInit {
   breadCrumbItems: Array<{}>;
 
   accToken = sessionStorage.getItem('access_token');
@@ -28,7 +28,7 @@ export class RecommendedProjectsComponent implements OnInit {
  }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Recommended List', active: true }];
+    this.breadCrumbItems = [{ label: 'Home Banner List', active: true }];
 
     this.fetchProjectData();
     this.callRolePermission();
@@ -45,7 +45,7 @@ export class RecommendedProjectsComponent implements OnInit {
   
   fetchProjectData(){
     let params = {
-      url: "admin/getRecommenedProjectsAdmin",
+      url: "admin/getHomeBannerProjectsForAdmin",
     }  
     this.apiCall.commonGetService(params).subscribe((result:any)=>{
       let resu = result.body;
@@ -53,18 +53,7 @@ export class RecommendedProjectsComponent implements OnInit {
       {
          this.projectList = resu.data;
         this.total = this.projectList.length
-        //  console.log("list",this.projectList)
-        this.projectList.forEach(element => {
-          var firstDate = element.basicInfoId.launchDate;
-
-          this.duraDate =new Date(firstDate);
-            var today = new Date();
-           var Days = Math.abs(this.duraDate - today.getTime());
-           var remainDate = element._is_succeed_ || (today >= element.basicInfoId.launchDate)? 0 : Math.ceil(Days / (1000 * 60 * 60 * 24)); 
-          element.finalDate = remainDate
-
-      })
-
+         console.log("list",this.projectList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }

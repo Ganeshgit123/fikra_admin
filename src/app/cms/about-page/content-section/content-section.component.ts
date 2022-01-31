@@ -69,8 +69,10 @@ export class ContentSectionComponent implements OnInit {
       if(resu.error == false)
       {
         this.sectionList = resu.data.Sections;
+        this.sectionList.forEach((element,index)=>{
+          if(element._is_Sec_Delete == true) this.sectionList.splice(index,1);
+       });
         this.total = this.sectionList.length
-        // console.log("da",this.sectionList)
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
       }
@@ -234,7 +236,7 @@ export class ContentSectionComponent implements OnInit {
     const object = {}
 
     object['sectionId'] = id;
-    object['_is_Sec_On_'] = visible;
+    object['_is_Sec_On_'] = false;
     object['_is_Sec_Delete'] = val;
     object['createdBy'] = this.updatedby;
    object['userType'] = "admin";

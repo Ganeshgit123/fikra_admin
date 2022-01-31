@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../../services/api-call.service';
 
 @Component({
-  selector: 'app-recommended-projects',
-  templateUrl: './recommended-projects.component.html',
-  styleUrls: ['./recommended-projects.component.scss']
+  selector: 'app-home-stretch',
+  templateUrl: './home-stretch.component.html',
+  styleUrls: ['./home-stretch.component.scss']
 })
-export class RecommendedProjectsComponent implements OnInit {
+export class HomeStretchComponent implements OnInit {
   breadCrumbItems: Array<{}>;
 
   accToken = sessionStorage.getItem('access_token');
@@ -28,7 +28,7 @@ export class RecommendedProjectsComponent implements OnInit {
  }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Recommended List', active: true }];
+    this.breadCrumbItems = [{ label: 'Home Stretch List', active: true }];
 
     this.fetchProjectData();
     this.callRolePermission();
@@ -45,7 +45,7 @@ export class RecommendedProjectsComponent implements OnInit {
   
   fetchProjectData(){
     let params = {
-      url: "admin/getRecommenedProjectsAdmin",
+      url: "admin/getHomeStertchProjectsForAdmin",
     }  
     this.apiCall.commonGetService(params).subscribe((result:any)=>{
       let resu = result.body;

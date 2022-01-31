@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 import { ApiCallService } from '../../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-help-guide',
@@ -28,7 +29,7 @@ export class HelpGuideComponent implements OnInit {
   total: any;
   searchTerm1;
   total1: any;
-
+  sum = 0;  
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     private modalService: NgbModal
@@ -85,6 +86,7 @@ export class HelpGuideComponent implements OnInit {
 
   addTitle(helpTilteModal: any){
     this.addNewTitle.reset();
+    this.isEdit = false;
     this.modalService.open(helpTilteModal, { centered: true });
   }
 
@@ -202,40 +204,57 @@ export class HelpGuideComponent implements OnInit {
   }
 
   deleteTitle(id){
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This title related Question and Answers also Deleted",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#34c38f",
+      cancelButtonColor: "#ff3d60",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.value) {
+        // console.log("id", id);
+        const data = {}
+
+        data['ebookId'] = id
+        data['createdBy'] = this.updatedby;
+        data['userType'] = "admin";
+        data['role'] = this.role;
     
-    const data = {}
-
-    data['ebookId'] = id
-    data['createdBy'] = this.updatedby;
-    data['userType'] = "admin";
-    data['role'] = this.role;
-
-    var params = {
-      url: 'admin/RemoveEbookTitle',
-      data: data
-    }
-
-    // console.log("par",params)
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          // Success
-          this.apiCall.showToast('Deleted Successfully', 'Success', 'successToastr')
-          this.ngOnInit();
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+        var params = {
+          url: 'admin/RemoveEbookTitle',
+          data: data
         }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
+        // console.log("fef",params)
+        this.apiCall.commonPostService(params).subscribe(
+          (response: any) => {
+            if (response.body.error == false) {
+              // Success
+              Swal.fire("Deleted!", "Your Title has been deleted.", "success");
+              // this.apiCall.showToast('Status Updated Successfully', 'Success', 'successToastr')
+              this.ngOnInit();
+            } else {
+              // Query Error
+              this.apiCall.showToast(
+                response.body.message,
+                "Error",
+                "errorToastr"
+              );
+            }
+          },
+          (error) => {
+            this.apiCall.showToast("Server Error !!", "Oops", "errorToastr");
+            console.log("Error", error);
+          }
+        );
       }
-    )
+    });
   }
 
   addQuesAns(quesAnsModal: any){
     this.addNewQuesAns.reset();
+    this.isEditQues = false;
     this.modalService.open(quesAnsModal, { centered: true });
   }
 

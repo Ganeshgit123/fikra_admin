@@ -228,6 +228,18 @@
     "TRUSTANDSAFETY": {
       "TEXT": "Trust & Safety"
     },
+    "FEATURED_LIST": {
+      "TEXT": "Featured Projects"
+    },
+    "TAKING_LIST": {
+      "TEXT": "Taking Off Projects"
+    },
+    "HOMESTRETCH_LIST": {
+      "TEXT": "Home Stretch Projects"
+    },
+    "HOMEBANNER_LIST": {
+      "TEXT": "Home Banner Projects"
+    },
     "LAYOUTS": {
       "TEXT": "Layouts",
       "LIST": {

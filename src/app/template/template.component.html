@@ -5,8 +5,7 @@
             (click)="isCollapsed = !isCollapsed">
             Add New Template
         </button>
-        <button class="btn btn-primary mo-mb-2 ml-1" *ngIf='!isCollapsed' data-toggle="collapse"
-            (click)="onClosed()">
+        <button class="btn btn-primary mo-mb-2 ml-1" *ngIf='!isCollapsed' data-toggle="collapse" (click)="onClosed()">
             Close
         </button>
     </p>
@@ -140,7 +139,8 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <button class="btn btn-primary w-md waves-effect waves-light"
-                                            (click)="addTemplate()">{{ editStatus ? 'Update Template' : 'Save the Template'}}</button>
+                                            (click)="addTemplate()">{{ editStatus ? 'Update Template' : 'Save the
+                                            Template'}}</button>
 
                                     </div>
                                     <div class="col-md-4">
@@ -220,11 +220,12 @@
                                         .cover_back img {
                                             border-top-left-radius: 15px;
                                             border-top-right-radius: 15px;
+                                            height: 180px;
                                         }
 
                                         .content_sec {
                                             padding: 20px;
-                                            border: 2px solid #70707033;
+                                            /* border: 2px solid #70707033; */
                                             border-bottom-left-radius: 15px;
                                             border-bottom-right-radius: 15px;
                                             background: #fff;
@@ -358,12 +359,14 @@
                                                                         class="img-fluid">
                                                                     <div class="content_sec">
                                                                         <h4>{{list.project_One.title}}</h4>
-                                                                        <p>{{list.project_One.basicInfoId.decription}}
-                                                                        </p>
+                                                                        <p *ngIf="list.project_One.basicInfoId.decription?.length >= 121">
+                                                                            {{ list.project_One.basicInfoId.decription.slice(0, 50) }}</p>
+                                                                    <p *ngIf="121 >= list.project_One.basicInfoId.decription?.length">
+                                                                        {{ list.project_One.basicInfoId.decription }}</p>
                                                                     </div>
                                                                 </div>
                                                                 <p>{{list.project_One_Description}}</p>
-                                                                <p class="right"><a
+                                                                <p class="text-center"><a
                                                                         href="https://fikra.app/projectview/{{list.project_One._id}}"
                                                                         target="_blank">Read
                                                                         More</a></p>
@@ -374,12 +377,14 @@
                                                                         class="img-fluid">
                                                                     <div class="content_sec">
                                                                         <h4>{{list.project_Two.title}}</h4>
-                                                                        <p>{{list.project_Two.basicInfoId.decription}}
-                                                                        </p>
+                                                                        <p *ngIf="list.project_Two.basicInfoId.decription?.length >= 121">
+                                                                            {{ list.project_Two.basicInfoId.decription.slice(0, 50) }}</p>
+                                                                    <p *ngIf="121 >= list.project_Two.basicInfoId.decription?.length">
+                                                                        {{ list.project_Two.basicInfoId.decription }}</p>
                                                                     </div>
                                                                 </div>
                                                                 <p>{{list.project_Two_Description}}</p>
-                                                                <p class="right"><a
+                                                                <p class="text-center"><a
                                                                         href="https://fikra.app/projectview/{{list.project_Two._id}}"
                                                                         target="_blank">Read
                                                                         More</a></p>
@@ -390,12 +395,14 @@
                                                                         class="img-fluid">
                                                                     <div class="content_sec">
                                                                         <h4>{{list.project_Three.title}}</h4>
-                                                                        <p>{{list.project_Three.basicInfoId.decription}}
-                                                                        </p>
+                                                                        <p *ngIf="list.project_Three.basicInfoId.decription?.length >= 121">
+                                                                            {{ list.project_Three.basicInfoId.decription.slice(0, 50) }}</p>
+                                                                    <p *ngIf="121 >= list.project_Three.basicInfoId.decription?.length">
+                                                                        {{ list.project_Three.basicInfoId.decription }}</p>
                                                                     </div>
                                                                 </div>
                                                                 <p>{{list.project_Three_Description}}</p>
-                                                                <p class="right"><a
+                                                                <p class="text-center"><a
                                                                         href="https://fikra.app/projectview/{{list.project_Three._id}}"
                                                                         target="_blank">Read
                                                                         More</a></p>
@@ -443,7 +450,7 @@
                                                     <section class="copy_right">
                                                         <p class="center"><img
                                                                 src="https://fikra.app/assets/image/copyright.svg"
-                                                                width="20px"> 2021
+                                                                width="20px"> {{currentYear}}
                                                             Fikra. All right reserved</p>
                                                     </section>
                                                 </div>
@@ -505,13 +512,12 @@
                             <td>{{user.templateName}}</td>
                             <td>{{cont.textHead}}</td>
                             <td>{{cont.textContent}}</td>
-                            <td>{{cont.project_One.title}}</td>
-                            <td>{{cont.project_Two.title}}</td>
-                            <td>{{cont.project_Three.title}}</td>
+                            <td>{{cont?.project_One?.title || 'NA'}}</td>
+                            <td>{{cont?.project_Two?.title || 'NA'}}</td>
+                            <td>{{cont?.project_Three?.title || 'NA'}}</td>
                             <!-- <td>{{cont.learnMore_URL}}</td> -->
                             <td *ngIf="showAccept === true">
-                                <a class="mr-3 text-info" ngbTooltip="Edit" 
-                                (click)="clickTempData(user)">
+                                <a class="mr-3 text-info" ngbTooltip="Edit" (click)="clickTempData(user)">
                                     <i class="mdi mdi-pencil font-size-18"></i>
                                 </a>
                                 <a class="text-danger text-info" ngbTooltip="Delete" (click)="onDeleted(user)">

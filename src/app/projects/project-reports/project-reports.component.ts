@@ -89,6 +89,7 @@ export class ProjectReportsComponent implements OnInit {
       if(resu.error == false)
       {
         this.reportedList = resu.data;
+        // console.log("fg",this.reportedList)
         this.total = this.reportedList.length
 
       }else{
@@ -206,5 +207,9 @@ export class ProjectReportsComponent implements OnInit {
     console.log('Error', error)
     } 
     )
+  }
+
+  ViewComments(commentSection: any){
+    this.modalService.open(commentSection, { centered: true });
   }
 }

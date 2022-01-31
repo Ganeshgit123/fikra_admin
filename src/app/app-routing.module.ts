@@ -67,6 +67,10 @@ import { WhatWeDoComponent } from './cms/what-we-do/what-we-do.component';
 import { FeesComponent } from './cms/fees/fees.component';
 import { OurRulesComponent } from './cms/our-rules/our-rules.component';
 import { TrustSafetyComponent } from './cms/trust-safety/trust-safety.component';
+import { FeaturedProjectsComponent } from './projects/featured-projects/featured-projects.component';
+import { TakingOffProjectsComponent } from './projects/taking-off-projects/taking-off-projects.component';
+import { HomeStretchComponent } from './projects/home-stretch/home-stretch.component';
+import { HomeBannerComponent } from './projects/home-banner/home-banner.component';
 
 const routes: Routes = [
   {
@@ -84,6 +88,10 @@ const routes: Routes = [
       {path: 'projects',component: ProjectsComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
       {path: 'requested_projects',component: RequestBackProjectComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
       {path: 'recommended_projects',component: RecommendedProjectsComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
+      {path: 'featured_projects',component: FeaturedProjectsComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
+      {path: 'taking_off_projects',component: TakingOffProjectsComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
+      {path: 'homestretch_projects',component: HomeStretchComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
+      {path: 'homebanner_projects',component: HomeBannerComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
       {path: 'view-projects/:id',component: ViewProjectsComponent,  canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
       {path: 'project_reports',component: ProjectReportsComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},
       {path: 'transactions/:id',component: TransactionComponent, canActivate: [AuthGuard,RoleGuardService],data: { expectedRole: '_project_true'}},

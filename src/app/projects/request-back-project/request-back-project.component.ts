@@ -106,7 +106,7 @@ export class RequestBackProjectComponent implements OnInit {
     url: 'admin/adminProjectDelete',
     data: data
   }
-  console.log("fef",params)
+  // console.log("fef",params)
   this.apiCall.commonPutService(params).subscribe(
     (response: any) => {
       if (response.body.error == false) {

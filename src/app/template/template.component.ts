@@ -31,6 +31,7 @@ export class UploadAdapter {
   styleUrls: ["./template.component.scss"],
 })
 export class TemplateComponent implements OnInit {
+  currentYear = new Date().getFullYear();
   breadCrumbItems: Array<{}>;
   updatedby: any;
   role: any;
