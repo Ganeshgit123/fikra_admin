@@ -1,4 +1,4 @@
-<div class="container-fluid">
+  <div class="container-fluid">
     <app-pagetitle title="Users Details" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
     
     <div class="row">
@@ -7,16 +7,6 @@
     <div class="card-body">
     <div class="row mb-md-2">
     <div class="col-sm-12 col-md-6">
-        <!-- <div class="form-group row">
-            <label for="example-date-input" class="col-md-2 col-form-label text-center">Start Date</label>
-            <div class="col-md-4">
-              <input class="form-control" type="date"  id="example-date-input">
-            </div>
-            <label for="example-date-input1" class="col-md-2 col-form-label text-center">End Date</label>
-            <div class="col-md-4">
-              <input class="form-control" type="date" id="example-date-input1">
-            </div>
-          </div> -->
     </div>
     <!-- Search -->
     <div class="col-sm-12 col-md-4">
@@ -49,7 +39,7 @@
       <td>{{user.userType}}</td>
       <td *ngIf="user.userType == 'investor'"><a routerLink="/view-investors/{{user.userId}}" *ngIf="user._isAccountDeleted_ == false">{{user.userId}}</a></td>
       <td *ngIf="user.userType !== 'investor'"><a routerLink="/view-creators/{{user.userId}}" *ngIf="user._isAccountDeleted_ == false">{{user.userId}}</a></td>
-      <td>{{user._id}}</td>
+      <td>{{user.accId}}</td>
       <td>{{user.deleteReson}}</td>
       <td *ngIf="showAccept === true">
         <span *ngIf="user._isAccountDeleted_ == false"><a class="text-danger text-info" ngbTooltip="Delete"

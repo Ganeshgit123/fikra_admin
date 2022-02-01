@@ -3,7 +3,6 @@
 
          <div class="card card-body">
             <div class="row">
-               <div class="col-md-12">
                   <div class="col-md-3">
                      <div *ngIf="currentStatus && majorWrite === true">
                         <select class="pend_btn" *ngIf="currentStatus === 'pending'"
@@ -29,9 +28,24 @@
                            <option>{{currentStatus}}</option>
                            <option>approved</option>
                         </select>
+                        <select class="review_btn" *ngIf="currentStatus === 'close'"
+                        (change)="onChangeNeedtoUpdate($event.target.value, centerDataModal)">
+                        <option>{{currentStatus}}</option>
+                     </select>
                      </div>
                   </div>
-                   <div class="col-md-9" id="tickets-table_filter" class="dataTables_filter text-md-right">
+                  <div class="col-md-3">
+                     <select class="filter_btn" (change)="onChangeFilter($event.target.value)">
+                        <option value="all">All</option>
+                           <option value="pending">pending</option>
+                           <option value="approved">approved</option>
+                           <option value="under_review">under_review</option>
+                           <option value="rejected">rejected</option>
+                           <option value="close">close</option>
+                        </select>
+                  </div>
+                  <div class="col-md-6" >
+                   <div id="tickets-table_filter" class="dataTables_filter text-md-right">
                       <label
                        class="d-inline-flex align-items-center">Search:
                        <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"

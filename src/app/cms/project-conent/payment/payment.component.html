@@ -48,10 +48,10 @@
                 aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
         </div>
         <div class="col-md-4">
-            <p class="text-right" *ngIf="showAccept === true">
+            <!-- <p class="text-right" *ngIf="showAccept === true">
                 <button type="button" class="btn btn-primary w-md waves-effect waves-light"
                     (click)="addPaymentFields(paymentField)">Add New</button>
-            </p>
+            </p> -->
             <!-- Center Modal -->
             <ng-template #paymentField let-modal>
                 <div class="modal-header">
@@ -115,8 +115,8 @@
                     <td *ngIf="showAccept === true">
                         <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewPaymentField(item,paymentField)"><i
                                 class="mdi mdi-pencil font-size-18"></i></a>
-                        <a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete"
-                            (click)="onDeletePaymentField(item._id)"><i class="mdi mdi-trash-can font-size-18"></i></a>
+                        <!-- <a href="javascript:void(0);" class="text-danger" ngbTooltip="Delete"
+                            (click)="onDeletePaymentField(item._id)"><i class="mdi mdi-trash-can font-size-18"></i></a> -->
                     </td>
                 </tr>
                 <tr *ngIf="(fieldDataList==null) || (fieldDataList.length == 0)">

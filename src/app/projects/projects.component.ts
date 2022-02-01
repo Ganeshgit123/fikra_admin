@@ -151,8 +151,8 @@ export class ProjectsComponent implements OnInit {
         let resu = result.body;
         if (resu.error == false) {
           this.projectList = resu.data;
-          console.log("list",this.projectList)
           this.projectSecondaryList = this.projectList;
+          console.log("list",this.projectSecondaryList)
           this.total = this.projectSecondaryList.length;
 
           this.projectSecondaryList.forEach((element) => {
@@ -579,7 +579,20 @@ export class ProjectsComponent implements OnInit {
     return arr;
   }
 
+  onChangeFilter(value){
+    if(value == "all"){
+      this.projectSecondaryList = this.projectList
+    }else{
+      this.projectSecondaryList = this.projectList.filter(
+        (data) => data.aproval_Status == value
+      )
+    }
+   
+    console.log("dd",this.projectSecondaryList)
+  }
+
   onInputChange(id) {
+    
     let index = this.projSelectId.indexOf(id);
     if (index > -1) {
       this.projSelectId = this.removeItemOnce(this.projSelectId, id);
@@ -631,41 +644,41 @@ export class ProjectsComponent implements OnInit {
 
     if (this.projectStatus === "rejected") {
       this.modalService.open(centerDataModal, { centered: true });
-    }
-
-    const data = {};
-    data["projectId"] = this.projSelectId?.join(' | ');
-    data["createdBy"] = this.updatedby;
-    data["userType"] = "admin";
-    data["role"] = this.role;
-    data["aproval_Status"] = this.projectStatus;
-
-    var params = {
-      url: "admin/adminProjectApprovalMultiple",
-      data: data,
-    };
-
-    console.log(data)
-
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          // Success
-          this.apiCall.showToast(
-            "Status Updated Successfully",
-            "Success",
-            "successToastr"
-          );
-          this.ngOnInit();
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, "Error", "errorToastr");
+    }else{
+      const data = {};
+      data["projectId"] = this.projSelectId?.join(' | ');
+      data["createdBy"] = this.updatedby;
+      data["userType"] = "admin";
+      data["role"] = this.role;
+      data["aproval_Status"] = this.projectStatus;
+  
+      var params = {
+        url: "admin/adminProjectApprovalMultiple",
+        data: data,
+      };
+  
+      console.log(data)
+  
+      this.apiCall.commonPostService(params).subscribe(
+        (response: any) => {
+          if (response.body.error == false) {
+            // Success
+            this.apiCall.showToast(
+              "Status Updated Successfully",
+              "Success",
+              "successToastr"
+            );
+            this.ngOnInit();
+          } else {
+            // Query Error
+            this.apiCall.showToast(response.body.message, "Error", "errorToastr");
+          }
+        },
+        (error) => {
+          this.apiCall.showToast("Server Error !!", "Oops", "errorToastr");
+          console.log("Error", error);
         }
-      },
-      (error) => {
-        this.apiCall.showToast("Server Error !!", "Oops", "errorToastr");
-        console.log("Error", error);
-      }
-    );
+      );
+    }
   }
 }

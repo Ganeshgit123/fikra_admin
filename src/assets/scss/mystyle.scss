@@ -82,6 +82,15 @@ select.apprve_btn{
   font-weight: 600;
   line-height: 1.5;
 }
+select.filter_btn{
+  background: #fff;
+  border: 2px solid #505d69 ! important;
+  color: #505d69 ! important;
+  border-radius: 10px;
+  padding: 0px 4px;
+  font-weight: 600;
+  line-height: 1.5;
+}
 select:focus{
   outline: none;
 }
