@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
 import { ApiCallService } from "../services/api-call.service";
 
 import { ChartType } from "./data";
@@ -16,6 +17,7 @@ import { ChartType } from "./data";
 export class DashboardComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
+    private router: Router,
     private apiCall: ApiCallService
   ) {}
 
@@ -571,6 +573,8 @@ export class DashboardComponent implements OnInit {
       },
       (error) => {
         console.error(error);
+        sessionStorage.clear();
+        this.router.navigate(['/']);
       }
     );
   }

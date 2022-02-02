@@ -6,11 +6,34 @@
 <div class="card">
 <div class="card-body">
 <div class="row mb-md-2">
-<div class="col-sm-12 col-md-6">
-
+  <div class="col-md-12">
+    <div class="row" style="margin-bottom: 20px;">
+<div class="col-sm-12 col-md-2">
+  <label>Country</label>
+  <br>
+  <select class="filter_btn" (change)="onChangeFilter($event.target.value,'country')">
+    <option value="">All</option>
+    <option *ngFor="let user of countryList" value="{{user.countryName}}">{{user.countryName}}</option>
+    </select>
+</div>
+<div class="col-sm-12 col-md-3">
+  <label>City</label>
+  <br>
+  <select class="filter_btn" (change)="onChangeFilter($event.target.value,'city')">
+    <option value="">All</option>
+    <option *ngFor="let user of cityList" value="{{user.cityName}}">{{user.cityName}}</option>
+    </select>
+</div>
+<div class="col-sm-12 col-md-2">
+  <label>Date of Year</label>
+  <br>
+  <select class="filter_btn" (change)="onChangeFilter($event.target.value,'year')">
+    <option value="">All</option>
+       <option value="1995">1995</option>
+    </select>
 </div>
 <!-- Search -->
-<div class="col-sm-12 col-md-4">
+<div class="col-sm-12 col-md-3">
 <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
 class="d-inline-flex align-items-center">Search:
 <input type="text" name="searchTerm" class="form-control form-control-sm ml-2"
@@ -19,6 +42,8 @@ aria-controls="tickets-table" [(ngModel)]="searchTerm"></label></div>
 <div class="col-sm-12 col-md-2">
  <p class="text-right" *ngIf="showAccept === true"> <button type="button" class="btn btn-primary w-md waves-effect waves-light"
   (click)="exportList();">Export Email</button></p>
+</div>
+</div>
 </div>
 <!-- End search -->
 <!-- Table -->
@@ -31,6 +56,7 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
   <th>Full Name</th>
   <th>Email Id</th>
   <th>Phone Number</th>
+  <th>Date of Birth</th>
   <th>Country</th>
   <th>city</th>
 </tr>
@@ -41,6 +67,7 @@ class="table table-bordered dt-responsive text-nowrap  no-footer dtr-inline">
   <td>{{user.fullName}}</td>
   <td>{{user.email}}</td>
   <td>{{user.mobileNumber}}</td>
+  <td>{{user.dob | date}}</td>
   <td>{{user.country}}</td>
   <td>{{user.city}}</td>
 </tr>

@@ -114,36 +114,35 @@ export class CreatorHandbookComponent implements OnInit {
     )
   }
 
-  // onDeleteHandbookStatus(val,id,visible){
-  //   const object = {}
+  onDeleteHandbook(id){
+    const object = {}
 
-  //   object['handBookId'] = id;
-  //   object['_is_Visible_'] = visible;
-  //   object['_is_Deleted_'] = val;
-  //   object['createdBy'] = this.updatedby;
-  //  object['userType'] = "admin";
-  //  object['role'] = this.role;
+    object['handBookId'] = id;
+    object['createdBy'] = this.updatedby;
+   object['userType'] = "admin";
+   object['role'] = this.role;
 
-  //   var params = {
-  //    url: 'admin/updateHandbookforUserStatus',
-  //    data: object
-  //  }
-  // //  console.log("da",params)
-  //  this.apiCall.commonPostService(params).subscribe(
-  //    (response: any) => {
-  //      if (response.body.error == false) {
-  //        // Success
-  //        this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
-  //        this.ngOnInit();
-  //      } else {
-  //        // Query Error
-  //        this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-  //      }
-  //    },
-  //    (error) => {
-  //      this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-  //      console.log('Error', error)
-  //    }
-  //  )
-  // }
+    var params = {
+     url: 'admin/deleteHandbookforUser',
+     data: object
+   }
+  //  console.log("da",params)
+   this.apiCall.commonPostService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
+  }
+
 }

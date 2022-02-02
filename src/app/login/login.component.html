@@ -41,7 +41,12 @@
                       <p class="text-center text_error pv10" *ngIf = "isShow"><span>{{errorMessge}}</span></p>
 
                       <div class="mt-4 text-center">
-                        <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Log In</button>
+                        <p *ngIf = "isShow">
+                          <button class="btn btn-primary w-md waves-effect waves-light" (click)=openModal(logoutModalOpen)>Click Here to Logout All Sessions</button>
+                        </p>
+                        <p *ngIf = "!isShow">
+                      <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Log In</button>
+                      </p>
                       </div>
                     </form>
                   </div>
@@ -62,4 +67,35 @@
     </div>
   </div>
 </div>
+
+<ng-template #logoutModalOpen let-modal>
+  <div class="modal-header">
+  <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
+  </div>
+  <div class="modal-body">
+  <form [formGroup]="logOutForm">
+    <div class="form-group auth-form-group-custom mb-4">
+      <i class="ri-user-2-line auti-custom-input-icon"></i>
+      <label for="email">Email</label>
+      <input type="email" formControlName="adminName" (keydown)="changeText()" class="form-control" id="email" placeholder="email@email.com" />
+      <p *ngIf="!logOutForm.controls.adminName.valid && submitted" class="text_error">Please enter a valid email id</p>
+    </div>
+    <div class="form-group auth-form-group-custom mb-4">
+      <i class="ri-lock-2-line auti-custom-input-icon"></i>
+      <label for="password">Password</label>
+      <input [type]="showModalPassword ? 'text' : 'password'" formControlName="password"  (keydown)="changeText()" class="form-control" placeholder="******" id="password" />
+      <i alt="show" class="mdi mdi-eye-outline eye_symbol" (click)="showModalPassword = !showModalPassword"
+      [class.hide]="showModalPassword"></i>
+      
+      <i alt="hide" class="mdi mdi-eye-off-outline eye_symbol" (click)="showModalPassword = !showModalPassword"
+      [class.hide]="!showModalPassword"></i>
+      <p *ngIf="!logOutForm.controls.password.valid && submitted" class="text_error">Please enter a  valid password</p>
+    </div>
+      <div>
+          </div>
+  <br>
+  <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" type="submit" (click)="onLogoutSubmit()">Save</button></p>
+  </form>
+  </div>
+  </ng-template>
 <!-- end page -->

@@ -119,6 +119,7 @@ export class ClientLogosComponent implements OnInit {
 
   addCreators(creatorCorner: any){
     this.addClientLogo.reset();
+    this.isEdit = false;
     this.imagePreview = null;
     this.modalService.open(creatorCorner, { centered: true });
 
@@ -322,7 +323,7 @@ export class ClientLogosComponent implements OnInit {
     const object = {}
   
     object['clientLogoId'] = id;
-    object['_isLogoOn_'] = visible;
+    object['_isLogoOn_'] = false;
     object['_isDeleted_'] = val;
     object['createdBy'] = this.updatedby;
    object['userType'] = "admin";

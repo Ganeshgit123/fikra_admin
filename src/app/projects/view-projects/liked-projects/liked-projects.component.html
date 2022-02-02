@@ -50,11 +50,11 @@
     </thead>
     <tbody>
     <tr *ngFor="let user of projectList">
-      <td><a routerLink="/view-investors/{{user.userId._id}}">{{user.userId.userName}}</a></td>
-      <td>{{user.userId.fullName}}</td>
-      <td>{{user.userId.email}}</td>
-      <td>{{user.userId.mobileNumber}}</td>
-      <td>{{user.userId.dob | date}}</td>
+      <td><a routerLink="/view-investors/{{user?.userId?._id}}">{{user?.userId?.userName || 'NA'}}</a></td>
+      <td>{{user?.userId?.fullName}}</td>
+      <td>{{user?.userId?.email}}</td>
+      <td>{{user?.userId?.mobileNumber}}</td>
+      <td>{{user?.userId?.dob | date}}</td>
     </tr>
     </tbody> 
     </table>

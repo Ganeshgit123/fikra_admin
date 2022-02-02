@@ -32,8 +32,8 @@
       <td><a routerLink="/view-creators/{{user?.aboutProjectId?.userId?._id}}">{{user?.aboutProjectId?.userId?.userName || 'NA'}}</a></td>
       <td><a routerLink="/view-projects/{{user?.aboutProjectId?._id}}">{{user?.aboutProjectId?.title || 'NA'}}</a></td>
       <td>
-        <button type="button" class="btn btn-primary" (click)="ViewComments(commentSection)">View</button>
-        <ng-template #commentSection let-modal>
+        <button type="button" class="btn btn-primary" (click)="ViewComments(commentShowSection)">View</button>
+        <ng-template #commentShowSection let-modal>
           <div class="modal-header">
           <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
           </div>

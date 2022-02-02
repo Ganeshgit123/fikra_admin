@@ -88,6 +88,7 @@ constructor(private formBuilder: FormBuilder,
   }
   removeImg(){
     this.imagePreview = "";
+    this.fileUpload = "";
   }
   uploadImageFile(event){
     const file = event.target.files && event.target.files[0];

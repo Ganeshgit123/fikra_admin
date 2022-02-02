@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { ApiCallService } from '../services/api-call.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +21,16 @@ export class LoginComponent implements OnInit {
   lat : any;
   lng : any;
   showPassword = false;
+  showModalPassword = false;
   input: any;
+  logOutForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
      private route: ActivatedRoute,
       private router: Router,
-      private apiCall: ApiCallService
+      private apiCall: ApiCallService,
+      private modalService: NgbModal
       ) { }
 
   ngOnInit() {
@@ -47,6 +50,11 @@ export class LoginComponent implements OnInit {
 
 
     this.loginForm = this.formBuilder.group({
+      adminName: ['',  [Validators.required, Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/)]],
+      password: ['',  [Validators.required, Validators.minLength(6),Validators.maxLength(15)]],
+    });
+
+    this.logOutForm = this.formBuilder.group({
       adminName: ['',  [Validators.required, Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/)]],
       password: ['',  [Validators.required, Validators.minLength(6),Validators.maxLength(15)]],
     });
@@ -103,12 +111,53 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('adminRole', (res.body.role.roleName));
           sessionStorage.setItem('permission', (JSON.stringify(res.body.role.permission)))
          }
+         this.modalService.dismissAll();
          this.router.navigateByUrl('/dashboard');
        } else {
          this.isShow = true;
          this.errorMessge = res.body.message;
-       }
-       
+        }
      })
+  }
+
+    openModal(logoutModalOpen){
+      this.modalService.open(logoutModalOpen, { centered: true });
+  }
+
+
+  onLogoutSubmit(){
+
+    this.submitted = true;
+
+
+    // stop here if form is invalid
+    if (this.logOutForm.invalid) {
+      return false;
+    } 
+    const postData = this.logOutForm.value;
+    this.logOutForm.value.lat = this.lat
+    this.logOutForm.value.lang = this.lng
+
+    var params1 = {
+      url: 'admin/adminloginOutAll',
+      data: postData
+    }
+    console.log("dd",params1)
+  this.apiCall.commonLogoutService(params1).subscribe(
+    (response: any) => {
+    if (response.body.error == false) {
+    
+    this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+    this.modalService.dismissAll();
+    window.location.reload();
+    } else {
+    this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+    }
+    },
+    (error) => {
+    this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+    console.log('Error', error)
+    } 
+    )
   }
 }

@@ -28,7 +28,7 @@
                         <img class="upload-img" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
                         <img class="upload-img" *ngIf="imagePreview" src="{{imagePreview}}"/>
                         </label>
-                        <button class="btn btn-primary del_btn" (click)=removeImg()>Delete</button>
+                        <button *ngIf="imagePreview" class="btn btn-primary del_btn" (click)=removeImg()>Delete</button>
                         <input formControlName="imageURL" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
                         <p>Upload Image Size 761px*567px</p>
                     </div>

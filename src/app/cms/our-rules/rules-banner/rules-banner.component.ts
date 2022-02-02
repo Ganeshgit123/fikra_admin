@@ -84,6 +84,7 @@ export class RulesBannerComponent implements OnInit {
 
   removeImg(){
     this.imagePreview = "";
+    this.fileUpload = "";
   }
 
   uploadImageFile(event){

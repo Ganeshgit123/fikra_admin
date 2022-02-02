@@ -70,6 +70,7 @@ export class CountriesComponent implements OnInit {
 
   addCountry(countryModal: any){
     this.addNewCountry.reset();
+    this.isEdit = false;
     this.modalService.open(countryModal, { centered: true });
   }
 

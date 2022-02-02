@@ -114,7 +114,8 @@ export class TrustMiddleSectionComponent implements OnInit {
     }
   }
 removeImg(){
-    this.imagePreview = null;
+    this.imagePreview = "";
+    this.fileUpload = "";
   }
 
   onContSubmit(){

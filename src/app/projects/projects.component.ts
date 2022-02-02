@@ -588,7 +588,7 @@ export class ProjectsComponent implements OnInit {
       )
     }
    
-    console.log("dd",this.projectSecondaryList)
+    // console.log("dd",this.projectSecondaryList)
   }
 
   onInputChange(id) {

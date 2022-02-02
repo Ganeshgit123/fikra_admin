@@ -76,6 +76,7 @@ export class CitiesComponent implements OnInit {
 
   addCity(cityModal: any){
     this.addNewCity.reset();
+    this.isEdit = false;
     this.modalService.open(cityModal, { centered: true });
   }
 

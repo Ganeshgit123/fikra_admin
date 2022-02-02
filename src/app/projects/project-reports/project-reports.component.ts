@@ -209,7 +209,7 @@ export class ProjectReportsComponent implements OnInit {
     )
   }
 
-  ViewComments(commentSection: any){
-    this.modalService.open(commentSection, { centered: true });
+  ViewComments(commentShowSection: any){
+    this.modalService.open(commentShowSection, { centered: true });
   }
 }

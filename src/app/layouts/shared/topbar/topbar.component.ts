@@ -177,8 +177,9 @@ export class TopbarComponent implements OnInit {
         }
       }
     }, (error) => {
-
-      console.error(error);
+      // console.error(error);
+      sessionStorage.clear();
+      this.router.navigate(['/']);
     });
   }
   /**

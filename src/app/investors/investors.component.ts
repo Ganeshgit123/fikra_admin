@@ -21,7 +21,8 @@ export class InvestorsComponent implements OnInit {
  searchTerm;
  showAccept = true;
  investorcsvOptions: any;
-
+ countryList:any = [];
+ cityList:any = [];
  accToken = sessionStorage.getItem('access_token');
 
   updatedby = sessionStorage.getItem('adminId');
@@ -37,9 +38,11 @@ export class InvestorsComponent implements OnInit {
 
    this.breadCrumbItems = [{ label: 'Backers List', active: true }];
 
-   this._fetchData();
    this.callRolePermission();
+   this.fetchCountryList();
 
+   const object = {country: '',}
+   this._fetchData(object)
  }
 
  callRolePermission(){
@@ -50,18 +53,62 @@ export class InvestorsComponent implements OnInit {
   }
 }
 
- _fetchData() {
+fetchCountryList(){
+  let params = {
+    url: "admin/getAllCountryWithCity",
+  }  
+  this.apiCall.smallGetService(params).subscribe((result:any)=>{
+    let resu = result.body;
+    if(resu.error == false)
+    {
+      this.countryList = resu.data;
+
+      this.countryList.forEach(element => {
+           this.cityList = element.city;
+      });
+      console.log("ll",this.cityList)
+    }else{
+      this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
+    }
+  },(error)=>{
+     console.error(error);
+     
+  });
+}
+
+onChangeFilter(value,type){
+  if(type == 'country'){
+    const object = { country: value,city: "",dob:"" }
+    this._fetchData(object)
+  }
+  if(type == 'city'){
+    const object = { country:"",city: value,dob:"" }
+    this._fetchData(object)
+  }
+  if(type == 'year'){
+    const object = {country:"",city: "", dob: value }
+    this._fetchData(object)
+  }
+}
+
+ _fetchData(object) {
+   
+  object['createdBy'] = this.updatedby;
+  object['userType'] = "admin";
+  object['role'] = this.role;
 
   let params = {
     url: "admin/getInvestorList",
+    data: object
   }  
-  this.apiCall.userGetService(params).subscribe((result:any)=>{
+  console.log("para",params)
+  this.apiCall.commonPostService(params).subscribe((result:any)=>{
     let resu = result.body;
     if(resu.error == false)
     {
       this.getfieldList = resu.fields;
       this.getuserList = resu.data.reverse();
-      // console.log("dd",this.getuserList)
+      console.log("dd",this.getuserList)
       this.total = this.getuserList.length
     }else{
       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -75,10 +122,15 @@ export class InvestorsComponent implements OnInit {
  }
 
  exportList(){
+  const object = {};
+  object['createdBy'] = this.updatedby;
+  object['userType'] = "admin";
+  object['role'] = this.role;
   let params = {
     url: "admin/getInvestorList",
+    data: object
   }  
-  this.apiCall.userGetService(params).subscribe((result:any)=>{
+  this.apiCall.commonPostService(params).subscribe((result:any)=>{
     let resu = result.body;
     if(resu.error == false)
     {
@@ -120,4 +172,6 @@ export class InvestorsComponent implements OnInit {
 
   }
 }
+
+
 }

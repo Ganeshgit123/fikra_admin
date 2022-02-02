@@ -340,6 +340,18 @@ export class ApiCallService {
     });
   }
 
+  commonLogoutService(params) {
+    
+    const httpHeaders = new HttpHeaders({
+      // 'Content-Type': 'application/json',
+    });
+    
+    return this.http.post(this.baseUrl + params.url, params.data , {      
+      headers: httpHeaders,
+      observe: 'response'
+    });
+  }
+
   commonPostService(params) {
     
     this.accToken = sessionStorage.getItem('access_token');

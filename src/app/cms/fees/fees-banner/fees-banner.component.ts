@@ -83,6 +83,7 @@ export class FeesBannerComponent implements OnInit {
 
   removeImg(){
     this.imagePreview = "";
+    this.fileUpload = "";
   }
 
   uploadImageFile(event){

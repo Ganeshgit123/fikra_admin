@@ -103,6 +103,7 @@ export class CreatorsCornerComponent implements OnInit {
 
   addCreators(creatorCorner: any){
     this.addCreatorData.reset();
+    this.isEdit = false;
     this.imagePreview = null;
     this.modalService.open(creatorCorner, { centered: true });
   }
@@ -288,7 +289,7 @@ export class CreatorsCornerComponent implements OnInit {
       const object = {}
   
       object['blogId'] = id;
-      object['_isVisible_'] = visible;
+      object['_isVisible_'] = false;
       object['_isDeleted_'] = val;
       object['createdBy'] = this.updatedby;
      object['userType'] = "admin";

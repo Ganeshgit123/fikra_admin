@@ -84,8 +84,9 @@ export class ContentSectionComponent implements OnInit {
 
   addContents(contentModal: any){
     this.addContenteSection.reset();
+    this.isEdit = false;
     this.imagePreview = null;
-    this.modalService.open(contentModal, { centered: true });
+    this.modalService.open(contentModal, { centered: true,size: 'xl' });
 
   }
 
@@ -141,7 +142,7 @@ export class ContentSectionComponent implements OnInit {
   }
 
   viewContent(data,contentModal: any){
-    this.modalService.open(contentModal, { centered: true });
+    this.modalService.open(contentModal, { centered: true,size: 'xl' });
     this.isEdit = true;
     this.imagePreview = data['secImage'];
     this.sectionId = data['_id'];

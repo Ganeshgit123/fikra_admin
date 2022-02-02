@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Form} from '@angular/forms';
 import { ApiCallService } from '../../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-contact-us',
@@ -29,10 +30,14 @@ export class ContactUsComponent implements OnInit {
   inquryTot:any;
   enquiryEdit = false;
   enquiryId:any;
-
+  imagePreview = null;
+  fileUpload: any;
+  imgUrl:any;
+  
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
     ) { }
 
   ngOnInit(): void {
@@ -41,15 +46,13 @@ export class ContactUsComponent implements OnInit {
     this.role = sessionStorage.getItem('adminRole');
 
     this.addBranchData = this.formBuilder.group({
-      // branchName: [''],
-      // branchNameAr: [''],
       address: [''],
       addressAr: [''],
-      lat: [''],
-      long: [''],
       email: [''],
       fax: [''],
       phone: [''],
+      branchImage: [''],
+      mapURL: [''],
     });
 
     this.addInquiryData = this.formBuilder.group({
@@ -80,10 +83,16 @@ export class ContactUsComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
-
-        this.branchData = resu.data;
-        this.total = this.branchData.length
-        // console.log("tt",this.total)
+        this.imagePreview = resu.data[0].branchImage;
+        this.addBranchData = this.formBuilder.group({
+          address: [resu.data[0].address,[]],
+          addressAr: [resu.data[0].addressAr,[]],
+          email: [resu.data[0].email,[]],
+          fax: [resu.data[0].fax,[]],
+          phone: [resu.data[0].phone,[]],
+          mapURL: [resu.data[0].mapURL,[]],
+          branchImage: ['']
+        });
 
       }else{
         this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
@@ -94,163 +103,124 @@ export class ContactUsComponent implements OnInit {
     });
   }
 
+  removeImg(){
+    this.imagePreview = "";
+  }
 
-  addBranch(branchCorner: any){
-    this.addBranchData.reset();
-    this.modalService.open(branchCorner, { centered: true });
+  uploadImageFile(event){
+    const file = event.target.files && event.target.files[0];
+    var valid = this.checkFileFormat(event.target.files[0]);
+    if(!valid) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.imagePreview = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]); 
+      this.fileUpload = file
+      // console.log("img",this.fileUpload)
+    }
+  }
 
+
+  checkFileFormat(checkFile){
+    if(checkFile.type == 'image/png' || checkFile.type == 'image/jpeg' || checkFile.type == 'image/TIF' || checkFile.type == 'image/tif' || checkFile.type == 'image/tiff'){
+      return false;
+    } else {
+      return true;
+    }
   }
 
   onSubmit(){
-
-    if(this.isEdit){
-      this.branchEditService(this.addBranchData.value)
-      return;
-    }
-
-    const postData = this.addBranchData.value;
-    postData['createdBy'] = this.updatedby;
-    postData['userType'] = "admin";
-    postData['role'] = this.role;
-
-    var params = {
-      url: 'admin/addBranch',
-      data: postData
-    }
-    // console.log("fefe",params)
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-          this.modalService.dismissAll();
-          this.ngOnInit();
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-        }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
-      } 
-    )
-  }
-
-  viewBrach(data,creatorCorner: any){
-    this.modalService.open(creatorCorner, { centered: true });
-
-    this.isEdit = true;
-
-    this.branchId = data['_id']
-    this.addBranchData   = this.formBuilder.group({
-      // branchName: [data['branchName']],
-      // branchNameAr: [data['branchNameAr']],
-      address: [data['address']],
-      addressAr: [data['addressAr']],
-      lat: [data['lat']],
-      long: [data['long']],
-      email: [data['email']],
-      fax: [data['fax']],
-      phone: [data['phone']],
-    })
-  }
-
-  branchEditService(data){
-    data['branchId'] = this.branchId
-    data['createdBy'] = this.updatedby;
-    data['userType'] = "admin";
-    data['role'] = this.role;
-
-    var params = {
+    if(this.fileUpload){
+      var postData = new FormData();
+  
+      postData.append('imageToStore', this.fileUpload);
+  
+      var params = {
+        url: 'admin/postImagetoS3',
+        data: postData
+      }
+      this.spinner.show();
+  
+      this.apiCall.commonPostService(params).subscribe(
+        (response: any) => {
+  
+          if (response.body.error == false) {
+                this.imgUrl = response.body.data.Location
+                    const data = this.addBranchData.value;
+                    data['branchImage'] = this.imgUrl;
+                    data['branchId'] = "6163dfd33e9ee3b0e3ac5818";
+                    data['createdBy'] = this.updatedby;
+                    data['userType'] = "admin";
+                    data['role'] = this.role;
+                  
+                  var params1 = {
+                  url: 'admin/updateBranch',
+                  data: data
+                  }
+                  this.apiCall.commonPostService(params1).subscribe(
+                  (response: any) => {
+                  if (response.body.error == false) {
+                  
+                  this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+                  this.imagePreview = null;
+                  this.ngOnInit();
+                  this.spinner.hide();
+                  } else {
+                  this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+                  }
+                  },
+                  (error) => {
+                  this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+                  this.spinner.hide();
+                  console.log('Error', error)
+                  } 
+                  )
+  
+              } else {
+            // Query Error
+            this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+            this.spinner.hide();
+          }
+        },
+        (error) => {
+          this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+          this.spinner.hide();
+          console.log('Error', error)
+        } 
+      )
+      }else{
+        const data = this.addBranchData.value;
+        data['branchImage'] = this.imagePreview;
+        data['branchId'] = "6163dfd33e9ee3b0e3ac5818";
+        data['createdBy'] = this.updatedby;
+        data['userType'] = "admin";
+        data['role'] = this.role;
+      
+      var params1 = {
       url: 'admin/updateBranch',
       data: data
-    }
-    this.apiCall.commonPostService(params).subscribe(
+      }
+      this.apiCall.commonPostService(params1).subscribe(
       (response: any) => {
-        if (response.body.error == false) {
-          // Success
-          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-          this.isEdit = false;
-          this.modalService.dismissAll();
-          this.ngOnInit();
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-        }
+      if (response.body.error == false) {
+      
+      this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+      this.imagePreview = null;
+      this.ngOnInit();
+      this.spinner.hide();
+      } else {
+      this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+      }
       },
       (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
+      this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+      this.spinner.hide();
+      console.log('Error', error)
+      } 
+      )
       }
-    )
-  }
-
-  onchangeBranchStatus(values:any,val){
-
-    if(values.currentTarget.checked === true){
-      var visible = true 
-     } else {
-       var visible = false
-     }
-     const object = {}
-
-     object['branchId'] = val;
-     object['_is_on_'] = visible;
-     object['createdBy'] = this.updatedby;
-    object['userType'] = "admin";
-    object['role'] = this.role;
-
-     var params = {
-      url: 'admin/updateBranchStatus',
-      data: object
-    }
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-          // Success
-          this.apiCall.showToast("Changed Successfully", 'Success', 'successToastr')
-          this.ngOnInit();
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-        }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        console.log('Error', error)
-      }
-    )
-  }
-
-  onDeleteBranch(id){
-    const object = {}
-
-    object['branchId'] = id;
-    object['createdBy'] = this.updatedby;
-   object['userType'] = "admin";
-   object['role'] = this.role;
-
-    var params = {
-     url: 'admin/removeBranch',
-     data: object
-   }
-  //  console.log("da",params)
-   this.apiCall.commonPostService(params).subscribe(
-     (response: any) => {
-       if (response.body.error == false) {
-         // Success
-         this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
-         this.ngOnInit();
-       } else {
-         // Query Error
-         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-       }
-     },
-     (error) => {
-       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-       console.log('Error', error)
-     }
-   )
+    
   }
 
   fetchContactListData(){
@@ -276,6 +246,7 @@ export class ContactUsComponent implements OnInit {
 
   addInquiry(InquiryCorner: any){
     this.addInquiryData.reset();
+    this.enquiryEdit = false;
     this.modalService.open(InquiryCorner, { centered: true });
   }
 
@@ -324,7 +295,7 @@ export class ContactUsComponent implements OnInit {
       {
 
         this.inquiryData = resu.data;
-        this.inquryTot = this.branchData.length
+        this.inquryTot = resu.data.length
         // console.log("tt",this.total)
 
       }else{
@@ -376,5 +347,36 @@ export class ContactUsComponent implements OnInit {
         console.log('Error', error)
       }
     )
+  }
+
+  onDeleteEnquiry(id){
+    const object = {}
+
+    object['enquiryId'] = id;
+    object['createdBy'] = this.updatedby;
+   object['userType'] = "admin";
+   object['role'] = this.role;
+
+    var params = {
+     url: 'admin/deleteEnquiryData',
+     data: object
+   }
+  //  console.log("da",params)
+   this.apiCall.commonPostService(params).subscribe(
+     (response: any) => {
+       if (response.body.error == false) {
+         // Success
+         this.apiCall.showToast("Deleted Successfully", 'Success', 'successToastr')
+         this.ngOnInit();
+       } else {
+         // Query Error
+         this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+       }
+     },
+     (error) => {
+       this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+       console.log('Error', error)
+     }
+   )
   }
 }
