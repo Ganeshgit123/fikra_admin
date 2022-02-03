@@ -29,7 +29,7 @@
   <br>
   <select class="filter_btn" (change)="onChangeFilter($event.target.value,'year')">
     <option value="">All</option>
-       <option value="1995">1995</option>
+    <option *ngFor="let data of yearList" value="{{data}}">{{data}}</option>
     </select>
 </div>
 <!-- Search -->

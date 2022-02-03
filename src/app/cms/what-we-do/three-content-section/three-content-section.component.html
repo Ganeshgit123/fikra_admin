@@ -39,10 +39,10 @@
         <label>Description (AR)</label>
         <ckeditor [editor]="Editor" formControlName="description_Ar" (ready)="onReady($event)"></ckeditor>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label>Read More URL</label>
             <input type="text" class="form-control" formControlName="readMoreURL">
-            </div>
+            </div> -->
     <br>
     <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onMultiContentSubmit()">Save</button></p>
     </form>
@@ -59,7 +59,7 @@
     <th>Title(AR)</th>
     <th>Description(EN)</th>
     <th>Description(AR)</th>
-    <th>Read More URL</th>
+    <!-- <th>Read More URL</th> -->
     <th>Action</th>
     </tr>
     </thead>
@@ -70,7 +70,7 @@
     <td>{{items.title_Ar}}</td>
     <td [innerHtml]='items.description'></td>
     <td [innerHtml]='items.description_Ar'></td>
-    <td>{{items.readMoreURL}}</td>
+    <!-- <td>{{items.readMoreURL}}</td> -->
     <td>
         <a class="mr-3 text-info" ngbTooltip="Edit" (click)="viewMultiContentData(items,multiContentSection)"><i
             class="mdi mdi-pencil font-size-18"></i></a>

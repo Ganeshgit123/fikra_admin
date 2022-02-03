@@ -110,6 +110,11 @@ export class FirstTabContentComponent implements OnInit {
     }
   }
 
+  removeImg(){
+    this.imagePreview = "";
+    this.fileUpload = "";
+  }
+
   onSubmit(){
 
      if(this.fileUpload){
@@ -122,14 +127,41 @@ export class FirstTabContentComponent implements OnInit {
         data: postData
       }
       this.spinner.show();
-  
+
       this.apiCall.commonPostService(params).subscribe(
         (response: any) => {
   
           if (response.body.error == false) {
                 this.imgUrl = response.body.data.Location
-                    data['image'] = this.imgUrl;
-            
+                const data = this.addBusinessModal.value;
+                data['image'] = this.imgUrl;
+                data['createdBy'] = this.updatedby;
+                data['userType'] = "admin";
+                data['role'] = this.role;
+              
+              var params1 = {
+              url: 'admin/postProjectCreationModelPage_CMS',
+              data: data
+              }
+                  // console.log("img",params1)
+                  this.apiCall.commonPostService(params1).subscribe(
+                  (response: any) => {
+                  if (response.body.error == false) {
+                  
+                  this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+                  this.imagePreview = null;
+                  this.ngOnInit();
+                  this.spinner.hide();
+                  } else {
+                  this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+                  }
+                  },
+                  (error) => {
+                  this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+                  this.spinner.hide();
+                  console.log('Error', error)
+                  } 
+                  )
               } else {
             // Query Error
             this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
@@ -142,9 +174,7 @@ export class FirstTabContentComponent implements OnInit {
           console.log('Error', error)
         } 
       )
-      }
-
-    // console.log("lol",this.imgUrl)
+      }else{
     const data = this.addBusinessModal.value;
     data['image'] = this.imagePreview;
     data['createdBy'] = this.updatedby;
@@ -175,5 +205,6 @@ export class FirstTabContentComponent implements OnInit {
   } 
   )
   }
+}
 
 }

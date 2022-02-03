@@ -123,7 +123,7 @@ export class ThreeContentSectionComponent implements OnInit {
       title_Ar: [data['title_Ar']],
       description: [data['description']],
       description_Ar: [data['description_Ar']],
-      readMoreURL: [data['readMoreURL']],
+      readMoreURL: [""],
     })
   }
 

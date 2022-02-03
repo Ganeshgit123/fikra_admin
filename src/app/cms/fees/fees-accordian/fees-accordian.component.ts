@@ -98,6 +98,7 @@ export class FeesAccordianComponent implements OnInit {
     this.addAccordianForm.reset();
     this.isEdit = false;
     this.imagePreview = null;
+    this.fileUpload = null;
     this.modalService.open(accordianSection, { centered: true, size: 'xl' });
   }
 
@@ -119,6 +120,7 @@ export class FeesAccordianComponent implements OnInit {
 
   removeImg(){
     this.imagePreview = null;
+    this.fileUpload = null;
   }
 
   onAccordianSubmit(){

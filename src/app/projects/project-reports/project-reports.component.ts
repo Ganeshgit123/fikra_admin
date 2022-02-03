@@ -88,7 +88,10 @@ export class ProjectReportsComponent implements OnInit {
       let resu = result.body;
       if(resu.error == false)
       {
+
+        resu.data.sort((x, y) => +new Date(y.createdAt) - +new Date(x.createdAt));
         this.reportedList = resu.data;
+
         // console.log("fg",this.reportedList)
         this.total = this.reportedList.length
 

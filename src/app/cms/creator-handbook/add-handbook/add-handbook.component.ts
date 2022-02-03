@@ -59,63 +59,100 @@ export class AddHandbookComponent implements OnInit {
       this.fileUpload = event.target.files[0]
   }
 
+  removeImg(){
+    this.imagePreview = "";
+    this.fileUpload = "";
+  }
 
   onSubmit(){
+    if(this.fileUpload){
+      var postData = new FormData();
+  
+      postData.append('imageToStore', this.fileUpload);
+  
+      var params = {
+        url: 'admin/postImagetoS3',
+        data: postData
+      }
+      this.spinner.show();
 
-    var postData = new FormData();
-
-    postData.append('imageToStore', this.fileUpload);
-
-    var params = {
-      url: 'admin/postImagetoS3',
-      data: postData
-    }
-    this.spinner.show();
-
-    this.apiCall.commonPostService(params).subscribe(
-      (response: any) => {
-
-        if (response.body.error == false) {
-              this.imgUrl = response.body.data.Location
-
-              const postData = this.addHandbookData.value;
-    postData['handbookImg'] = this.imgUrl;
-    postData['createdBy'] = this.updatedby;
-    postData['userType'] = "admin";
-    postData['role'] = this.role;
-
-    var params1 = {
-      url: 'admin/createHandbookforUser',
-      data: postData
-    }
-
-    this.apiCall.commonPostService(params1).subscribe(
-      (response: any) => {
-        if (response.body.error == false) {
-
-          this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
-          this.imagePreview = null;
-          this.ngOnInit();
+      this.apiCall.commonPostService(params).subscribe(
+        (response: any) => {
+  
+          if (response.body.error == false) {
+                this.imgUrl = response.body.data.Location
+                const postData = this.addHandbookData.value;
+                postData['handbookImg'] = this.imgUrl;
+                postData['createdBy'] = this.updatedby;
+                postData['userType'] = "admin";
+                postData['role'] = this.role;
+            
+                var params1 = {
+                  url: 'admin/createHandbookforUser',
+                  data: postData
+                }
+                  // console.log("img",params1)
+                  this.apiCall.commonPostService(params1).subscribe(
+                  (response: any) => {
+                  if (response.body.error == false) {
+                  
+                  this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+                  this.imagePreview = null;
+                  this.ngOnInit();
+                  this.spinner.hide();
+                  } else {
+                  this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+                  }
+                  },
+                  (error) => {
+                  this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+                  this.spinner.hide();
+                  console.log('Error', error)
+                  } 
+                  )
+              } else {
+            // Query Error
+            this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+            this.spinner.hide();
+          }
+        },
+        (error) => {
+          this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
           this.spinner.hide();
-          this.router.navigateByUrl('/creator_handbook');
-        } else {
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-          this.spinner.hide();
+          console.log('Error', error)
+        } 
+      )
+      }else{
+        const postData = this.addHandbookData.value;
+        postData['handbookImg'] = this.imagePreview;
+        postData['createdBy'] = this.updatedby;
+        postData['userType'] = "admin";
+        postData['role'] = this.role;
+    
+        var params1 = {
+          url: 'admin/createHandbookforUser',
+          data: postData
         }
-      },
-    )
-        } else {
-          // Query Error
-          this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
-          this.spinner.hide();
-        }
-      },
-      (error) => {
-        this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
-        this.spinner.hide();
-        console.log('Error', error)
-      } 
-    )
+  // console.log("img",params1)
+  this.apiCall.commonPostService(params1).subscribe(
+  (response: any) => {
+  if (response.body.error == false) {
+  
+  this.apiCall.showToast(response.body.message, 'Success', 'successToastr')
+  this.imagePreview = null;
+  this.ngOnInit();
+  this.spinner.hide();
+  } else {
+  this.apiCall.showToast(response.body.message, 'Error', 'errorToastr')
+  }
+  },
+  (error) => {
+  this.apiCall.showToast('Server Error !!', 'Oops', 'errorToastr')
+  this.spinner.hide();
+  console.log('Error', error)
+  } 
+  )
+  }
   }
 
 }

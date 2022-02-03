@@ -23,6 +23,7 @@ export class InvestorsComponent implements OnInit {
  investorcsvOptions: any;
  countryList:any = [];
  cityList:any = [];
+ yearList= [];
  accToken = sessionStorage.getItem('access_token');
 
   updatedby = sessionStorage.getItem('adminId');
@@ -42,14 +43,22 @@ export class InvestorsComponent implements OnInit {
    this.fetchCountryList();
 
    const object = {country: '',}
-   this._fetchData(object)
+   this._fetchData(object);
+   this.getAllYears();
  }
 
  callRolePermission(){
   if(sessionStorage.getItem('adminRole') !== 's_a_r'){
     let settingPermssion = JSON.parse(sessionStorage.getItem('permission'))
     this.showAccept = settingPermssion[1].write
-    // console.log("prer", settingPermssion[1])
+  }
+}
+
+getAllYears(){
+  let currentYear = new Date().getFullYear()
+  console.log(currentYear)
+  for(var i = 1900; i <= currentYear; i++){
+    this.yearList.push(i)
   }
 }
 
@@ -66,7 +75,6 @@ fetchCountryList(){
       this.countryList.forEach(element => {
            this.cityList = element.city;
       });
-      console.log("ll",this.cityList)
     }else{
       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')
     }
@@ -108,7 +116,6 @@ onChangeFilter(value,type){
     {
       this.getfieldList = resu.fields;
       this.getuserList = resu.data.reverse();
-      console.log("dd",this.getuserList)
       this.total = this.getuserList.length
     }else{
       this.apiCall.showToast(resu.message, 'Error', 'errorToastr')

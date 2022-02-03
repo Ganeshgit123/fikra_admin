@@ -97,6 +97,7 @@ export class RulesAccordianComponent implements OnInit {
     this.addRuleAccordianForm.reset();
     this.isEdit = false;
     this.imagePreview = null;
+    this.fileUpload = null;
     this.modalService.open(rulesAccordianSection, { centered: true, size: 'xl'  });
   }
 
@@ -117,6 +118,7 @@ export class RulesAccordianComponent implements OnInit {
 
   removeImg(){
     this.imagePreview = null;
+    this.fileUpload = null;
   }
 
   onAccordianSubmit(){

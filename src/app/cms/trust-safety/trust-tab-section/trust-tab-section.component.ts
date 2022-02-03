@@ -154,14 +154,18 @@ export class TrustTabSectionComponent implements OnInit {
     this.fileUpload = file
     // console.log(this.fileUpload)
   }
-  removeImg() {
-    this.imagePreview = null;
-  }
+
   addTabSectionContent(tabContentSection: any) {
     this.addTabContentForm.reset();
     this.isEdit = false;
     this.imagePreview = null;
+    this.fileUpload = null;
     this.modalService.open(tabContentSection, { centered: true, size: 'xl' });
+  }
+
+  removeImg() {
+    this.imagePreview = null;
+    this.fileUpload = null;
   }
 
   viewTabAccordianData(data, tabContentSection: any) {

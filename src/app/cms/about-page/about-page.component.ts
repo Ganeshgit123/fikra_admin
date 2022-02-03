@@ -96,6 +96,11 @@ export class AboutPageComponent implements OnInit {
       this.fileUpload = event.target.files[0]
   }
 
+  removeImg(){
+    this.imagePreview = "";
+    this.fileUpload = "";
+  }
+
   onTopUpdate(){
 
     var data:any = new FormData();

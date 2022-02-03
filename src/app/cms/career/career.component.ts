@@ -143,7 +143,11 @@ export class CareerComponent implements OnInit {
     }
   }
 
-
+  removeImg(){
+    this.imagePreview = "";
+    this.fileUpload = "";
+  }
+  
   onCarrerUpdate(){
     if(this.fileUpload){
       var postData = new FormData();

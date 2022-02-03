@@ -102,7 +102,7 @@
                            <td><a routerLink="/view-creators/{{proj?.userId?._id}}">{{proj?.userId?.userName || 'NA'}}</a></td>
                            <td>{{proj.basicInfoId.goalAmount}}
                            </td>
-                           <td>
+                           <td>{{proj._amount_Pleadged_}}<br>
                               <span *ngIf="proj._is_All_Nothing_ == true && proj._is_succeed_ == true">
                                  <p *ngIf="proj._is_not_meat_goal_ == true" style="color: red;">Not Met Goal</p>
                                  <p *ngIf="proj._is_not_meat_goal_ == false"  style="color: green;">Met Goal</p>
