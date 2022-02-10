@@ -42,7 +42,7 @@
 
                       <div class="mt-4 text-center">
                         <p *ngIf = "isShow">
-                          <button class="btn btn-primary w-md waves-effect waves-light" (click)=openModal(logoutModalOpen)>Click Here to Logout All Sessions</button>
+                          <button class="btn btn-primary w-md waves-effect waves-light" (click)=openModal(logoutModalOpen)>LOG OUT OF ALL SESSIONS</button>
                         </p>
                         <p *ngIf = "!isShow">
                       <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Log In</button>
@@ -70,6 +70,7 @@
 
 <ng-template #logoutModalOpen let-modal>
   <div class="modal-header">
+    <h5 style="margin: 0;">Log out of all sessions</h5>
   <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-hidden="true">×</button>
   </div>
   <div class="modal-body">
@@ -94,7 +95,7 @@
       <div>
           </div>
   <br>
-  <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" type="submit" (click)="onLogoutSubmit()">Save</button></p>
+  <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" type="submit" (click)="onLogoutSubmit()">LOG OUT </button></p>
   </form>
   </div>
   </ng-template>

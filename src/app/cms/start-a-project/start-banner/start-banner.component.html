@@ -1,77 +1,79 @@
 <div class="card">
-<div class="card-body">
-    <ngx-spinner
-    bdColor="rgba(51,51,51,0.8)"
-    size="medium"
-    color="#fff"
-    type="ball-scale-multiple">
-    <p style="font-size: 20px; color: white">Loading...</p>
-    </ngx-spinner>
-<label>Banner Left Side Content</label>
-<form [formGroup]="bannerLeftCont">
-<div class="row">
-<div class="col-md-6">
-<div class="form-group">
-<label>Title (EN)</label>
-<input type="text" class="form-control" formControlName="headName">
-</div>
-<div class="form-group">
-<label>Description (EN)</label>
-<input type="text" class="form-control" formControlName="description">
-</div>
-</div>
-<div class="col-md-6">
-<div class="form-group">
-<label>Title (AR)</label>
-<input type="text" class="form-control" formControlName="headNameAr">
-</div>
-<div class="form-group">
-<label>Description (AR)</label>
-<input type="text" class="form-control" formControlName="descriptionAr">
-</div>
-</div>
-<div class="col-md-4">
-<div class="form-group">
-<label>Button Name (EN)</label>
-<input type="text" class="form-control" formControlName="buttonName">
-</div>
-<div class="img_upload">
-    <label for="customFile">
-    <img class="upload-img1" *ngIf="!imagePreview"  src="assets/images/upload_img.png"/>
-    <img class="upload-img1" *ngIf="imagePreview" src="{{imagePreview}}"/>
-    </label>
-    <input formControlName="image_One" type="file" class="custom-file-input" id="customFile" (change)="uploadImageFile($event)">
-</div>
-</div>
-<div class="col-md-4">
-<div class="form-group">
-<label>Button Name (AR)</label>
-<input type="text" class="form-control" formControlName="buttonNameAr">
-</div>
-<div class="img_upload">
-    <label for="customFile1">
-    <img class="upload-img1" *ngIf="!imagePreview1"  src="assets/images/upload_img.png"/>
-    <img class="upload-img1" *ngIf="imagePreview1" src="{{imagePreview1}}"/>
-    </label>
-    <input formControlName="image_two" type="file" class="custom-file-input" id="customFile1" (change)="uploadImageFile1($event)">
-</div>
-</div>
-<div class="col-md-4">
-<div class="form-group">
-<label>Button Link</label>
-<input type="text" class="form-control" formControlName="buttonURL">
-</div>
-<div class="img_upload">
-    <label for="customFile2">
-    <img class="upload-img1" *ngIf="!imagePreview2"  src="assets/images/upload_img.png"/>
-    <img class="upload-img1" *ngIf="imagePreview2" src="{{imagePreview2}}"/>
-    </label>
-    <input formControlName="image_three" type="file" class="custom-file-input" id="customFile2" (change)="uploadImageFile2($event)">
-</div>
-</div>
-</div>
-</form>
-<br>
-<p class="text-center" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light" (click)="bannerCont()">Save</button></p>
-</div>
+    <div class="card-body">
+        <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+            <p style="font-size: 20px; color: white">Loading...</p>
+        </ngx-spinner>
+        <label>Banner Left Side Content</label>
+        <form [formGroup]="bannerLeftCont">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Title (EN)</label>
+                        <input type="text" class="form-control" formControlName="headName">
+                    </div>
+                    <div class="form-group">
+                        <label>Description (EN)</label>
+                        <input type="text" class="form-control" formControlName="description">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Title (AR)</label>
+                        <input type="text" class="form-control" formControlName="headNameAr">
+                    </div>
+                    <div class="form-group">
+                        <label>Description (AR)</label>
+                        <input type="text" class="form-control" formControlName="descriptionAr">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Button Name (EN)</label>
+                        <input type="text" class="form-control" formControlName="buttonName">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Button Name (AR)</label>
+                        <input type="text" class="form-control" formControlName="buttonNameAr">
+                    </div>
+                    <!-- <div class="img_upload">
+                        <label for="customFile1">
+                        <img class="upload-img1" *ngIf="!imagePreview1"  src="assets/images/upload_img.png"/>
+                        <img class="upload-img1" *ngIf="imagePreview1" src="{{imagePreview1}}"/>
+                        </label>
+                        <input formControlName="image_two" type="file" class="custom-file-input" id="customFile1" (change)="uploadImageFile1($event)">
+                    </div> -->
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Button Link</label>
+                        <input type="text" class="form-control" formControlName="buttonURL">
+                    </div>
+                    <!-- <div class="img_upload">
+                        <label for="customFile2">
+                        <img class="upload-img1" *ngIf="!imagePreview2"  src="assets/images/upload_img.png"/>
+                        <img class="upload-img1" *ngIf="imagePreview2" src="{{imagePreview2}}"/>
+                        </label>
+                        <input formControlName="image_three" type="file" class="custom-file-input" id="customFile2" (change)="uploadImageFile2($event)">
+                    </div> -->
+                </div>
+                <div class="col-md-12" style="text-align: center">
+                    <div class="img_upload">
+                        <label for="customFile">
+                            <img class="upload-img1" *ngIf="!imagePreview" src="assets/images/upload_img.png" />
+                            <img class="upload-img1" *ngIf="imagePreview" src="{{imagePreview}}" />
+                            <button type="button" class="close" (click)="deleteImage()" aria-hidden="true">×</button>
+                        </label>
+                        <input formControlName="image_One" type="file" class="custom-file-input" id="customFile"
+                            (change)="uploadImageFile($event)">
+                    </div>
+                    <p>Upload Image Size 1920px*300px</p>
+                </div>
+            </div>
+        </form>
+        <br>
+        <p class="text-center" *ngIf="showAccept === true"><button class="btn btn-primary w-md waves-effect waves-light"
+                (click)="bannerCont()">Save</button></p>
+    </div>
 </div>
