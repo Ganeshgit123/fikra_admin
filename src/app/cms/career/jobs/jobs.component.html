@@ -26,19 +26,19 @@
                 </div>
             <div class="form-group">
                 <label>Job Description (EN)</label>
-            <textarea class="form-control" formControlName="jobDescription"></textarea>
+                <ckeditor [editor]="Editor" formControlName="jobDescription" (ready)="onReady($event)"></ckeditor>
             </div>
             <div class="form-group">
                 <label>Job Description (AR)</label>
-            <textarea class="form-control" formControlName="jobDescriptionAr"></textarea>
+                <ckeditor [editor]="Editor" formControlName="jobDescriptionAr" (ready)="onReady($event)"></ckeditor>
             </div>
             <div class="form-group">
             <label>Job criteria (EN)</label>
-            <textarea class="form-control" formControlName="criteria"></textarea>
+            <ckeditor [editor]="Editor" formControlName="criteria" (ready)="onReady($event)"></ckeditor>
             </div>
             <div class="form-group">
                 <label>Job criteria (AR)</label>
-                <textarea class="form-control" formControlName="criteriaAr"></textarea>
+                <ckeditor [editor]="Editor" formControlName="criteriaAr" (ready)="onReady($event)"></ckeditor>
                 </div>
             <div class="form-group">
                 <label>Job Role (EN)</label>
@@ -88,10 +88,10 @@
     <tr  *ngFor="let item of jobData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
     <td>{{item.jobTitle}}</td>
     <td>{{item.jobTitleAr}}</td>
-    <td>{{item.jobDescription}}</td>
-    <td>{{item.jobDescriptionAr}}</td>
-    <td>{{item.criteria}}</td>
-    <td>{{item.criteriaAr}}</td>
+    <td [innerHtml]='item.jobDescription'></td>
+    <td [innerHtml]='item.jobDescriptionAr'></td>
+    <td [innerHtml]='item.criteria'></td>
+    <td [innerHtml]='item.criteriaAr'></td>
     <td>{{item.jobRole}}</td>
     <td>{{item.jobRoleAr}}</td>
     <td>{{item.jobVacancies}}</td>

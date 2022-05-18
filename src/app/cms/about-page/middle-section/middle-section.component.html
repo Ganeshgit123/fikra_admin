@@ -28,7 +28,7 @@
 </div>
 <div class="form-group">
     <label>Middle Description (EN)</label>
-    <textarea class="form-control" formControlName="middileContend"></textarea>
+    <ckeditor [editor]="Editor" formControlName="middileContend" (ready)="onReady($event)"></ckeditor>
 </div>
 
 </div>
@@ -39,7 +39,7 @@
         </div>
         <div class="form-group">
             <label>Middle Description (AR)</label>
-            <textarea class="form-control" formControlName="middileContendAr"></textarea>
+            <ckeditor [editor]="Editor" formControlName="middileContendAr" (ready)="onReady($event)"></ckeditor>
         </div>
 </div>
 </div>

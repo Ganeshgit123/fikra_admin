@@ -131,19 +131,19 @@
                                 </div>
                     <div class="form-group">
                     <label>Question(EN)</label>
-                    <input type="text" class="form-control" formControlName="question">
+                    <ckeditor [editor]="Editor" formControlName="question" (ready)="onReady($event)"></ckeditor>
                     </div>
                     <div class="form-group">
                         <label>Question(AR)</label>
-                        <input type="text" class="form-control" formControlName="questionAr">
+                        <ckeditor [editor]="Editor" formControlName="questionAr" (ready)="onReady($event)"></ckeditor>
                         </div>
                     <div class="form-group">
                         <label>Answer(EN)</label>
-                        <textarea class="form-control" formControlName="answer"></textarea>
+                        <ckeditor [editor]="Editor" formControlName="answer" (ready)="onReady($event)"></ckeditor>
                         </div>
                         <div class="form-group">
                             <label>Answer(AR)</label>
-                            <textarea class="form-control" formControlName="answerAr"></textarea>
+                            <ckeditor [editor]="Editor" formControlName="answerAr" (ready)="onReady($event)"></ckeditor>
                             </div>
                     <br>
                     <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addQuesAnsSubmit()">Save</button></p>
@@ -169,10 +169,10 @@
             <tbody *ngFor="let item of titleList">
             <tr *ngFor="let ques of item.question | filter:searchTerm1 |slice: (page-1) * 10 : (page-1) * 10 + 10">
             <td>{{item.title}}</td>
-            <td>{{ques.question}}</td>
-            <td>{{ques.questionAr}}</td>
-            <td>{{ques.answer}}</td>
-            <td>{{ques.answerAr}}</td>
+            <td [innerHtml]='ques.question'></td>
+            <td [innerHtml]='ques.questionAr'></td>
+            <td [innerHtml]='ques.answer'></td>
+            <td [innerHtml]='ques.answerAr'></td>
             <td *ngIf="showAccept === true">
             <label class="switch">
                 <input *ngIf="ques._is_On_ === true"  type="checkbox" checked (change)="onchangeQuesAnsStatus($event,item._id,ques._id)">

@@ -24,7 +24,7 @@
 <div class="col-md-6">
 <div class="form-group">
 <label>Quote Description (EN)</label>
-<textarea class="form-control" formControlName="quotesData"></textarea>
+<ckeditor [editor]="Editor" formControlName="quotesData" (ready)="onReady($event)"></ckeditor>
 </div>
 <div class="form-group">
 <label>Author Name (EN)</label>
@@ -34,7 +34,7 @@
 <div class="col-md-6">
 <div class="form-group">
 <label>Quote Description (AR)</label>
-<textarea class="form-control" formControlName="quotesDataAr"></textarea>
+<ckeditor [editor]="Editor" formControlName="quotesDataAr" (ready)="onReady($event)"></ckeditor>
 </div>
 <div class="form-group">
 <label>Author Profile Link</label>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 import { ApiCallService } from '../../../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 @Component({
   selector: 'app-project-q',
@@ -21,6 +22,14 @@ export class ProjectQComponent implements OnInit {
   searchTerm;
   page = 1;
   total: any;
+
+  public Editor = DecoupledEditor;
+  public onReady( editor ) {
+     editor.ui.getEditableElement().parentElement.insertBefore(
+         editor.ui.view.toolbar.element,
+         editor.ui.getEditableElement()
+     );
+ }
 
   constructor(private formBuilder: FormBuilder,
     private modalService: NgbModal,
@@ -84,7 +93,7 @@ export class ProjectQComponent implements OnInit {
 
   addQuesAndAns(addQuesAns: any){
     this.addQues.reset();
-    this.modalService.open(addQuesAns, { centered: true });
+    this.modalService.open(addQuesAns, { centered: true,size:'lg' });
   }
 
   projTitleSubmit(){
@@ -151,7 +160,7 @@ export class ProjectQComponent implements OnInit {
   }
 
   viewQuesandAns(data,addQuesAns: any){
-    this.modalService.open(addQuesAns, { centered: true });
+    this.modalService.open(addQuesAns, { centered: true,size:'lg' });
 
     this.isEdit = true;
 

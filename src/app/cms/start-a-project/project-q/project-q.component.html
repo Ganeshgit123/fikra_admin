@@ -67,11 +67,11 @@
             </div>
         <div class="form-group">
         <label>Project Answer (EN)</label>
-        <textarea class="form-control" formControlName="answer"></textarea>
+        <ckeditor [editor]="Editor" formControlName="answer" (ready)="onReady($event)"></ckeditor>
         </div>
         <div class="form-group">
             <label>Project Answer (AR)</label>
-            <textarea class="form-control" formControlName="answerAr"></textarea>
+            <ckeditor [editor]="Editor" formControlName="answerAr" (ready)="onReady($event)"></ckeditor>
             </div>
         <br>
         <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="addQuesSubmit()">Save</button></p>    
@@ -97,8 +97,8 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <tr *ngFor="let item of quesAndAnsList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
 <td>{{item.question}}</td>
 <td>{{item.questionAr}}</td>
-<td>{{item.answer}}</td>
-<td>{{item.answerAr}}</td>
+<td [innerHtml]='item.answer'></td>
+<td [innerHtml]='item.answerAr'></td>
 <!-- <td *ngIf="showAccept === true">
     <label class="switch">
         <input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeQuesAnsStatus($event,item._id)">

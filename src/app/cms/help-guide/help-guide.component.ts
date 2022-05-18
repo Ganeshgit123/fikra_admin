@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 import { ApiCallService } from '../../services/api-call.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from "sweetalert2";
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 @Component({
   selector: 'app-help-guide',
@@ -30,6 +31,15 @@ export class HelpGuideComponent implements OnInit {
   searchTerm1;
   total1: any;
   sum = 0;  
+
+  public Editor = DecoupledEditor;
+  public onReady( editor ) {
+     editor.ui.getEditableElement().parentElement.insertBefore(
+         editor.ui.view.toolbar.element,
+         editor.ui.getEditableElement()
+     );
+ }
+
   constructor(private formBuilder: FormBuilder,
     private apiCall: ApiCallService,
     private modalService: NgbModal
@@ -255,7 +265,7 @@ export class HelpGuideComponent implements OnInit {
   addQuesAns(quesAnsModal: any){
     this.addNewQuesAns.reset();
     this.isEditQues = false;
-    this.modalService.open(quesAnsModal, { centered: true });
+    this.modalService.open(quesAnsModal, { centered: true,size:'lg' });
   }
 
 
@@ -294,7 +304,7 @@ export class HelpGuideComponent implements OnInit {
   }
 
   viewQuesAns(data,quesdata,quesAnsModal: any){
-    this.modalService.open(quesAnsModal, { centered: true });
+    this.modalService.open(quesAnsModal, { centered: true,size:'lg' });
     this.isEditQues = true;
     this.titleIdQuesAns = data['_id'];
     this.quesAnsId = quesdata['_id'];

@@ -26,11 +26,11 @@
         </div>
         <div class="form-group">
         <label>Faq Description(EN)</label>
-        <textarea class="form-control" formControlName="faq_Body"></textarea>
+        <ckeditor [editor]="Editor" formControlName="faq_Body" (ready)="onReady($event)"></ckeditor>
         </div>
         <div class="form-group">
             <label>Faq Description(AR)</label>
-            <textarea class="form-control" formControlName="faq_Body_ar"></textarea>
+            <ckeditor [editor]="Editor" formControlName="faq_Body_ar" (ready)="onReady($event)"></ckeditor>
             </div>
         <br>
         <p class="text-center"><button type="button" class="btn btn-primary w-md waves-effect waves-light" (click)="onSubmit()">Save</button></p>
@@ -56,8 +56,8 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <tr  *ngFor="let item of faqData | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
 <td>{{item.faq_Header}}</td>
 <td>{{item.faq_Header_ar}}</td>
-<td>{{item.faq_Body}}</td>
-<td>{{item.faq_Body_ar}}</td>
+<td [innerHtml]='item.faq_Body'></td>
+<td [innerHtml]='item.faq_Body_ar'></td>
 <td *ngIf="showAccept === true">
     <label class="switch">
         <input *ngIf="item._is_visible_ == true"  type="checkbox" checked (change)="onchangeFaqStatus($event,item._id)">

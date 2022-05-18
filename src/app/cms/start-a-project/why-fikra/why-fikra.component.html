@@ -44,7 +44,7 @@
         </div>
         <div class="form-group">
         <label>Answer (EN)</label>
-        <textarea class="form-control" formControlName="solution"></textarea>
+        <ckeditor [editor]="Editor" formControlName="solution" (ready)="onReady($event)"></ckeditor>
         </div>
         </div>
         <div class="col-md-6">
@@ -54,7 +54,7 @@
         </div>
         <div class="form-group">
         <label>Answer (AR)</label>
-        <textarea class="form-control" formControlName="solutionAr"></textarea>
+        <ckeditor [editor]="Editor" formControlName="solutionAr" (ready)="onReady($event)"></ckeditor>
         </div>
         </div>
         </div>
@@ -82,8 +82,8 @@ class="table table-bordered dt-responsive nowrap no-footer dtr-inline">
 <tr *ngFor="let item of whyFikraList | filter:searchTerm |slice: (page-1) * 10 : (page-1) * 10 + 10">
 <td>{{item.why_Head}}</td>
 <td>{{item.why_HeadAr}}</td>
-<td>{{item.solution}}</td>
-<td>{{item.solutionAr   }}</td>
+<td [innerHtml]='item.solution'></td>
+<td [innerHtml]='item.solutionAr'></td>
 <td *ngIf="showAccept === true">
 <label class="switch">
 <input *ngIf="item._is_on_ == true"  type="checkbox" checked (change)="onchangeWhyFikraStatus($event,item._id,item._is_Deleted_)">
